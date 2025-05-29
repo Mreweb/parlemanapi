@@ -29,7 +29,9 @@ class ElectionLocationRepository implements IElectionLocationRepository {
             'election_location_id',
             'election_location.election_location_province_id',
             'election_location.election_location_title',
-            'province.province_name'
+            'province.province_name',
+            'election_location.created_at',
+            'election_location.updated_at'
         );
         $query->leftJoin('province', 'province.province_id', '=', 'election_location.election_location_province_id');
         $query->where('election_location_id', $id);

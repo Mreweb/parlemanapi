@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ElectionLocationController;
+use App\Http\Controllers\FractionController;
 use App\Http\Controllers\ParlemanPeriodController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PresidentController;
@@ -82,4 +83,13 @@ Route::prefix('commission')->group(function () {
     Route::post('/', [CommissionController::class, 'store']);
     Route::put('/', [CommissionController::class, 'update']);
     Route::delete('/{id}', [CommissionController::class, 'destroy']);
+});
+
+
+Route::prefix('fraction')->group(function () {
+    Route::get('/', [FractionController::class, 'index']);
+    Route::get('/{id}', [FractionController::class, 'show']);
+    Route::post('/', [FractionController::class, 'store']);
+    Route::put('/', [FractionController::class, 'update']);
+    Route::delete('/{id}', [FractionController::class, 'destroy']);
 });

@@ -16,7 +16,7 @@ class CommissionRepository implements ICommissionRepository {
     }
     public function findById(int $id){
         $query = CommissionEloquent::query();
-        $query->select('commission_id','commission_name');
+        $query->select('commission_id','commission_name','created_at','updated_at');
         $query->where('commission_id', $id);
         $result = $query->get()->toArray();
         return $result;

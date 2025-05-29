@@ -21,7 +21,7 @@ class ProvinceRepository implements IProvinceRepository{
     }
     public function findById(int $id){
         $query = ProvinceEloquent::query();
-        $query->select('province_id','province_name');
+        $query->select('province_id','province_name','created_at','updated_at');
         $query->where('province_id', $id);
         return $query->get()->toArray();
     }

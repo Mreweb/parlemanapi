@@ -19,7 +19,7 @@ class PresidentRepository implements IPresidentRepository{
     }
     public function findById(int $id){
         $query = PresidentEloquent::query();
-        $query->select('president_id','president_name');
+        $query->select('president_id','president_name','created_at','updated_at');
         $query->where('president_id', $id);
         $result = $query->get()->toArray();
         return $result;
