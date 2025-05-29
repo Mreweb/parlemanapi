@@ -9,7 +9,11 @@ class PersonRepository implements IPersonRepository {
 
     public function list(array $filters, int $perPage){
         $query = PersonEloquent::query();
-        $query->select('person_id','person_name','person_last_name','person_national_code','person_phone','person_email','person_gender','person_province_id','username');
+        $query->select('person_id','person_name','person_last_name',
+            'person_national_code','person_phone','person_email',
+            'person_gender','person_province_id','username',
+            'created_at','updated_at'
+        );
         if (!empty($filters['person_national_code'])) {
             $query->where('person_national_code', $filters['person_national_code']);
         }

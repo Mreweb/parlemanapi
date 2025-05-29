@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Domain\Interfaces\ICaptchaService;
+use App\Domain\Interfaces\ICaptchaRepository;
 use App\Http\Requests\CaptchaVerifyRequest;
 
 
 class Captcha{
 
     protected $captcha;
-    public function __construct(ICaptchaService $captcha){
+    public function __construct(ICaptchaRepository $captcha){
         $this->captcha = $captcha;
     }
 

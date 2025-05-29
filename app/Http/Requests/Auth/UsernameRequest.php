@@ -1,28 +1,35 @@
 <?php
 
-namespace App\Http\Requests\ElectionLocation;
+namespace App\Http\Requests\Auth;
+
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ElectionLocationRequest extends FormRequest{
+class UsernameRequest extends FormRequest{
     public function authorize(): bool{
         return true;
     }
+
     public function rules(): array{
         return [
-             'election_location_title' => ['required','string'],
-            'election_location_province_id' => ['required' , 'integer'],
-            'election_location_cities' => ['required', 'array'],
+            'username' => ['required'],
+            'password' => ['required'],
+            'captcha_id' => ['required'],
+            'captcha_code' => ['required']
         ];
     }
-    public function messages(): array{
+
+    public function messages(): array
+    {
         return [
-            'election_location_title.required' => 'عنوان حوزه انتخابیه الزامی است',
-            'election_location_province_id.required' => 'استان حوزه انتخابیه الزامی است',
-            'election_location_cities.required' => 'شهرهای حوزه انتخابیه الزامی است',
+            'username.required' => 'نام کاربری الزامی است',
+            'password.required' => 'رمز عبور الزامی است',
+            'captcha_id.required' => 'شناسه کد امنیتی الزامی است',
+            'captcha_code.required' => 'کد امنیتی الزامی است',
         ];
     }
+
     protected function failedValidation(Validator $validator){
         throw new HttpResponseException(response()->json([
             "class"=> "red",

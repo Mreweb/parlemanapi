@@ -11,7 +11,7 @@ class CityRepository implements ICityRepository {
 
     public function list(array $filters, int $perPage){
         $query = CityEloquent::query();
-        $query->select('city_id','city_name','province.province_id','province.province_name');
+        $query->select('city_id','city_name','province.province_id','province.province_name','city.created_at','city.updated_at');
         $query->leftJoin('province', 'province.province_id', '=', 'city.city_province_id');
         if (!empty($filters['city_id'])) {
             $query->where('city_id', $filters['city_id']);

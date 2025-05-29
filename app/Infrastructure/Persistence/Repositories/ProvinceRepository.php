@@ -10,7 +10,7 @@ class ProvinceRepository implements IProvinceRepository{
 
     public function list(array $filters, int $perPage){
         $query = ProvinceEloquent::query();
-        $query->select('province_id','province_name');
+        $query->select('province_id','province_name','created_at','updated_at');
         if (!empty($filters['province_id'])) {
             $query->where('province_id', $filters['province_id']);
         }

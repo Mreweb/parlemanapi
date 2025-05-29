@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Http\Requests\ElectionLocation;
+namespace App\Http\Requests\Commission;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ElectionLocationRequest extends FormRequest{
+class CommissionUpdateRequest extends FormRequest{
     public function authorize(): bool{
         return true;
     }
     public function rules(): array{
         return [
-             'election_location_title' => ['required','string'],
-            'election_location_province_id' => ['required' , 'integer'],
-            'election_location_cities' => ['required', 'array'],
+            'commission_id' => ['required'],
+            'commission_name' => ['required', 'string']
         ];
     }
     public function messages(): array{
         return [
-            'election_location_title.required' => 'عنوان حوزه انتخابیه الزامی است',
-            'election_location_province_id.required' => 'استان حوزه انتخابیه الزامی است',
-            'election_location_cities.required' => 'شهرهای حوزه انتخابیه الزامی است',
+            'commission_id.required' => 'شناسه کمیسیون الزامی است',
+            'commission_name.required' => 'نام کمیسیون الزامی است',
+            'commission_name.string' => 'نام کمیسیون باید حاوی کاراکتر باشد',
         ];
     }
     protected function failedValidation(Validator $validator){

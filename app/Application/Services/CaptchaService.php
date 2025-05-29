@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Application\Services;
-use App\Domain\Interfaces\ICaptchaService;
+use App\Domain\Interfaces\ICaptchaRepository;
 use App\Http\Requests\CaptchaVerifyRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class CaptchaService implements ICaptchaService{
+class CaptchaService implements ICaptchaRepository{
 
     /* for generating captcha*/
     public function generate(){

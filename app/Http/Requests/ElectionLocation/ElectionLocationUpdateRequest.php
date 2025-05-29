@@ -11,10 +11,10 @@ class ElectionLocationUpdateRequest extends FormRequest{
     }
     public function rules(): array{
         return [
-            'election_location_id' => ['required'],
-            'election_location_title' => ['required'],
-            'election_location_province_id' => ['required'],
-            'election_location_cities' => ['required']
+            'election_location_id' => ['required' , 'integer'],
+            'election_location_title' => ['required','string'],
+            'election_location_province_id' => ['required' , 'integer'],
+            'election_location_cities' => ['required', 'array'],
         ];
     }
     public function messages(): array{

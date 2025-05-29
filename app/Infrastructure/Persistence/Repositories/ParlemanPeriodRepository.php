@@ -2,14 +2,14 @@
 
 namespace App\Infrastructure\Persistence\Repositories;
 
-use App\Domain\Interfaces\IParlemanPeriod;
+use App\Domain\Interfaces\IParlemanPeriodRepository;
 use App\Infrastructure\Persistence\Eloquent\ParlemanPeriodEloquent;
 
-class ParlemanPeriodRepository implements IParlemanPeriod{
+class ParlemanPeriodRepository implements IParlemanPeriodRepository{
 
     public function list(array $filters, int $perPage){
         $query = ParlemanPeriodEloquent::query();
-        $query->select('period_title');
+        $query->select('period_id','period_title','created_at','updated_at');
         if (!empty($filters['period_title'])) {
             $query->where('period_title', 'like', '%' . $filters['period_title'] . '%');
         }

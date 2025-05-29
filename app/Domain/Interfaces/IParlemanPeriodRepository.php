@@ -2,8 +2,7 @@
 
 namespace App\Domain\Interfaces;
 
-interface IElectionLocation
-{
+interface IParlemanPeriodRepository{
     public function list(array $filters, int $perPage);
     public function findById(int $id);
     public function create(array $data);

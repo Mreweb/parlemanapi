@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories;
-use App\Domain\Interfaces\IElectionLocation;
+use App\Domain\Interfaces\IElectionLocationRepository;
 use App\Infrastructure\Persistence\Eloquent\ElectionLocationEloquent;
 use Illuminate\Support\Facades\DB;
 
-class ElectionLocationRepository implements IElectionLocation {
+class ElectionLocationRepository implements IElectionLocationRepository {
 
     public function list(array $filters, int $perPage){
         $query = ElectionLocationEloquent::query();
@@ -13,7 +13,9 @@ class ElectionLocationRepository implements IElectionLocation {
             'election_location_id',
             'election_location.election_location_province_id',
             'election_location.election_location_title',
-            'province.province_name'
+            'province.province_name',
+            'election_location.created_at',
+            'election_location.updated_at'
         );
         $query->leftJoin('province', 'province.province_id', '=', 'election_location.election_location_province_id');
         if (!empty($filters['election_location_title'])) {

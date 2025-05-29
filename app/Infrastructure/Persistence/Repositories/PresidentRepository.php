@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories;
-use App\Domain\Interfaces\IPresident;
+use App\Domain\Interfaces\IPresidentRepository;
 use App\Infrastructure\Persistence\Eloquent\PresidentEloquent;
 
-class PresidentRepository implements IPresident{
+class PresidentRepository implements IPresidentRepository{
 
     public function list(array $filters, int $perPage){
         $query = PresidentEloquent::query();
-        $query->select('president_id','president_name');
+        $query->select(
+            'president_id','president_name',
+            'created_at',
+            'updated_at');
         if (!empty($filters['president_name'])) {
             $query->where('president_name', 'like', '%' . $filters['president_name'] . '%');
         }

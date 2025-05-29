@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ElectionLocationController;
 use App\Http\Controllers\ParlemanPeriodController;
 use App\Http\Controllers\PersonController;
@@ -12,6 +14,11 @@ use App\Http\Controllers\Captcha;
 
 Route::get('/captcha', [Captcha::class, 'generate']);
 Route::post('/captcha/verify', [Captcha::class, 'verify']);
+
+
+Route::prefix('auth')->group(function () {
+    Route::post('/username', [Auth::class, 'loginByUsername']);
+});
 
 
 Route::prefix('provinces')->group(function () {
@@ -64,4 +71,15 @@ Route::prefix('election_location')->group(function () {
     Route::post('/', [ElectionLocationController::class, 'store']);
     Route::put('/', [ElectionLocationController::class, 'update']);
     Route::delete('/{id}', [ElectionLocationController::class, 'destroy']);
+});
+
+
+
+
+Route::prefix('commission')->group(function () {
+    Route::get('/', [CommissionController::class, 'index']);
+    Route::get('/{id}', [CommissionController::class, 'show']);
+    Route::post('/', [CommissionController::class, 'store']);
+    Route::put('/', [CommissionController::class, 'update']);
+    Route::delete('/{id}', [CommissionController::class, 'destroy']);
 });
