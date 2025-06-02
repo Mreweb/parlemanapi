@@ -5,19 +5,20 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ElectionLocationController;
 use App\Http\Controllers\FractionController;
+use App\Http\Controllers\GovPeriodController;
+use App\Http\Controllers\MinistryController;
 use App\Http\Controllers\ParlemanPeriodController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PresidentController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
- use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
 
 
 Route::get('/captcha', [Captcha::class, 'generate']);
 Route::post('/captcha/verify', [Captcha::class, 'verify']);
 
-
-Route::prefix('auth')->group(function () {
+Route::prefix('auth')->group( function () {
     Route::post('/username', [Auth::class, 'loginByUsername']);
 });
 
@@ -30,6 +31,7 @@ Route::prefix('provinces')->group(function () {
     Route::put('/', [ProvinceController::class, 'update']);
     Route::delete('/{id}', [ProvinceController::class, 'destroy']);
 });
+
 
 Route::prefix('city')->group(function () {
     Route::get('/', [CityController::class, 'index']);
@@ -64,6 +66,14 @@ Route::prefix('parleman_period')->group(function () {
     Route::delete('/{id}', [ParlemanPeriodController::class, 'destroy']);
 });
 
+Route::prefix('gov_period')->group(function () {
+    Route::get('/', [GovPeriodController::class, 'index']);
+    Route::get('/{id}', [GovPeriodController::class, 'show']);
+    Route::post('/', [GovPeriodController::class, 'store']);
+    Route::put('/', [GovPeriodController::class, 'update']);
+    Route::delete('/{id}', [GovPeriodController::class, 'destroy']);
+});
+
 
 
 Route::prefix('election_location')->group(function () {
@@ -73,8 +83,6 @@ Route::prefix('election_location')->group(function () {
     Route::put('/', [ElectionLocationController::class, 'update']);
     Route::delete('/{id}', [ElectionLocationController::class, 'destroy']);
 });
-
-
 
 
 Route::prefix('commission')->group(function () {
@@ -92,4 +100,13 @@ Route::prefix('fraction')->group(function () {
     Route::post('/', [FractionController::class, 'store']);
     Route::put('/', [FractionController::class, 'update']);
     Route::delete('/{id}', [FractionController::class, 'destroy']);
+});
+
+
+Route::prefix('ministry')->group(function () {
+    Route::get('/', [MinistryController::class, 'index']);
+    Route::get('/{id}', [MinistryController::class, 'show']);
+    Route::post('/', [MinistryController::class, 'store']);
+    Route::put('/', [MinistryController::class, 'update']);
+    Route::delete('/{id}', [MinistryController::class, 'destroy']);
 });

@@ -1,33 +1,25 @@
 <?php
 
-namespace App\Http\Requests\City;
-
+namespace App\Http\Requests\GovPeriod;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-
-class CityRequest extends FormRequest{
+class GovPeriodRequest extends FormRequest{
     public function authorize(): bool{
         return true;
     }
-
     public function rules(): array{
         return [
-            'city_name' => ['required', 'string'],
-            'city_province_id' => ['required']
+            'gov_period_name' => ['required', 'string']
         ];
     }
-
-    public function messages(): array
-    {
+    public function messages(): array{
         return [
-            'city_name.required' => 'نام شهر الزامی است',
-            'city_name.string' => 'نام شهر باید حاوی کاراکتر باشد',
-            'city_province_id.required' => 'شناسه استان الزامی است',
+            'gov_period_name.required' => 'نام دوره ریاست جمهوری الزامی است',
+            'gov_period_name.string' => 'نام دوره ریاست جمهوری باید حاوی کاراکتر باشد'
         ];
     }
-
     protected function failedValidation(Validator $validator){
         throw new HttpResponseException(response()->json([
             "class"=> "red",
