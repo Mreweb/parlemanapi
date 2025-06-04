@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ElectionLocationController;
+use App\Http\Controllers\Enums;
 use App\Http\Controllers\FractionController;
 use App\Http\Controllers\GovPeriodController;
 use App\Http\Controllers\MinistryController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/enum', [Enums::class, 'index']);
 
 Route::get('/captcha', [Captcha::class, 'generate']);
 Route::post('/captcha/verify', [Captcha::class, 'verify']);
