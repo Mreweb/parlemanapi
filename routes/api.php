@@ -13,10 +13,12 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PresidentController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
+use App\Http\Controllers\Upload;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/enum', [Enums::class, 'index']);
+Route::post('/file', [Upload::class, 'index']);
 
 Route::get('/captcha', [Captcha::class, 'generate']);
 Route::post('/captcha/verify', [Captcha::class, 'verify']);
