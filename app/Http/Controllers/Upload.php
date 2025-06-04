@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 use App\Application\Services\DBMessageService;
+use App\Application\Services\UploadService;
+use App\Http\Requests\Upload\FileRequest;
 use App\Http\Requests\Upload\UploadRequest;
-use Illuminate\Http\Request;
+use http\Env\Request;
+use Illuminate\Support\Str;
 
 
 class Upload{
+
+
+    public function __construct(private UploadService $service) {}
+
+
     /**
      * @lrd:start
      بارگذاری فایل
@@ -14,17 +22,30 @@ class Upload{
      *
      * @LRDparam file
      */
-    public function index(UploadRequest $request){
+    public function save(UploadRequest $request){
 
         $request->validated();
         $path = $request->file('file')->store('uploads', 'public');
-
-        $result = [
-            'path' => $path
+        $extension = $request->file('file')->getClientOriginalExtension();
+        $data = [
+            'media_id' => Str::uuid()->toString(),
+            'path' => $path,
+            'extension' => $extension
         ];
+        $result = $this->service->save($data);
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function get_file($id){
+        $result = $this->service->get_file($id);
+        if($result){
+            return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+        } else{
+            return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
+        }
 
     }
+
 
 
 

@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/enum', [Enums::class, 'index']);
-Route::post('/file', [Upload::class, 'index']);
+Route::post('/file', [Upload::class, 'save']);
+Route::get('/file/{id}', [Upload::class, 'get_file']);
 
 Route::get('/captcha', [Captcha::class, 'generate']);
 Route::post('/captcha/verify', [Captcha::class, 'verify']);
