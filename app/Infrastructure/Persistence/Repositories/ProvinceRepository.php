@@ -8,7 +8,7 @@ use App\Infrastructure\Persistence\Eloquent\ProvinceEloquent;
 class ProvinceRepository implements IProvinceRepository{
 
 
-    public function list(array $filters, int $perPage){
+    public function list(array $filters){
         $query = ProvinceEloquent::query();
         $query->select('province_id','province_name','created_at','updated_at');
         if (!empty($filters['province_id'])) {
@@ -17,7 +17,15 @@ class ProvinceRepository implements IProvinceRepository{
         if (!empty($filters['province_name'])) {
             $query->where('province_name', 'like', '%' . $filters['province_name'] . '%');
         }
-        return $query->get()->toArray();
+        $data['count'] = $query->count();
+        if (!empty($filters['page_index'])) {
+            $query->skip(--$filters['page_index']*$filters['page_size']);
+        }
+        if (!empty($filters['page_size'])) {
+            $query->take($filters['page_size']);
+        }
+        $data['list'] = $query->get();
+        return $data;
     }
     public function findById(int $id){
         $query = ProvinceEloquent::query();
@@ -37,7 +45,12 @@ class ProvinceRepository implements IProvinceRepository{
         return $result;
     }
     public function delete(int $id){
-        $province = ProvinceEloquent::findOrFail($id)->delete();
-        return $province;
+        $province = $this->findById($id);
+        if($province){
+            return ProvinceEloquent::findOrFail($id)->delete();
+        } else{
+            return false;
+        }
+
     }
 }

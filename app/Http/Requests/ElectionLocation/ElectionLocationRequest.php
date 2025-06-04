@@ -11,7 +11,7 @@ class ElectionLocationRequest extends FormRequest{
     }
     public function rules(): array{
         return [
-             'election_location_title' => ['required','string'],
+             'election_location_title' => ['required', 'string'  , 'max:255' , 'min:3'],
             'election_location_province_id' => ['required' , 'integer'],
             'election_location_cities' => ['required', 'array'],
         ];
@@ -19,6 +19,8 @@ class ElectionLocationRequest extends FormRequest{
     public function messages(): array{
         return [
             'election_location_title.required' => 'عنوان حوزه انتخابیه الزامی است',
+            'election_location_title.min' => 'نام حوزه انتخابیه باید بیشتر از 3 کاراکتر باشد',
+            'election_location_title.max' => 'نام حوزه انتخابیه باید کمتر از 255 کاراکتر باشد',
             'election_location_province_id.required' => 'استان حوزه انتخابیه الزامی است',
             'election_location_cities.required' => 'شهرهای حوزه انتخابیه الزامی است',
         ];
@@ -28,8 +30,8 @@ class ElectionLocationRequest extends FormRequest{
             "class"=> "red",
             "type"=> "Service.Error",
             'success' => false,
-            'message' => 'لطفا موارد الزامی را تکمیل کنید',
-            'errors' => $validator->errors()
+            'message' => 'عملیات با خطا مواجه شد',
+            'errors' => $validator->errors()->all()
         ], 422));
     }
 }

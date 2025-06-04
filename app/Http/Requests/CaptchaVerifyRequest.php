@@ -16,9 +16,9 @@ class CaptchaVerifyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'captcha_id' => ['required'],
+            'captcha_id' => ['required', 'string'],
             'captcha_code' => ['required'],
-            'otc' => ['required']
+            'otc' => ['required' , 'boolean'],
         ];
     }
 

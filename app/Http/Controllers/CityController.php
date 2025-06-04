@@ -15,20 +15,43 @@ class CityController extends Controller{
     public function __construct(private CityService $service) {}
 
     /**
-     * @LRDparam city_id string
+     * @lrd:start
+     * فهرست شهرها
+     * @lrd:end
      * @LRDparam city_name string
+     * @LRDparam page_index integer
+     * @LRDparam page_size integer
      */
     public function index(Request $request){
-        $filters = $request->only(['city_id', 'city_name']);
-        $perPage = $request->get('per_page', 10);
-        $result = $this->service->list($filters, $perPage);
+        $filters = $request->all();
+        $result = $this->service->list($filters);
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * @lrd:start
+     * نمایش شهر
+     * @lrd:end
+     */
     public function show($id){
+        if(!is_numeric($id)){
+            return response()->json( DBMessageService::get_message(null,'ErrorAction',"فرمت شناسه نامعتبر است" ) , 400, [], JSON_UNESCAPED_UNICODE);
+        }
         $result = $this->service->get($id);
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
     }
+
+
+    /**
+     * @lrd:start
+     * افزودن شهر
+     *
+     * city_name نام شهر
+     *
+     * city_province_id شناسه استان شهر
+     *
+     * @lrd:end
+     */
     public function store(CityRequest $request){
         $result = $this->service->create($request->validated());
         if($result){
@@ -37,6 +60,12 @@ class CityController extends Controller{
             return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
         }
     }
+
+    /**
+     * @lrd:start
+     * بروزرسانی شهر
+     * @lrd:end
+     */
     public function update(CityUpdateRequest $request){
         $result = $this->service->update($request->validated());
         if($result){
@@ -45,6 +74,12 @@ class CityController extends Controller{
             return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
         }
     }
+
+    /**
+     * @lrd:start
+     * حذف شهر
+     * @lrd:end
+     */
     public function destroy($id){
         $result = $this->service->delete($id);
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);

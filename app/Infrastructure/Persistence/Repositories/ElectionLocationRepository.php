@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class ElectionLocationRepository implements IElectionLocationRepository {
 
-    public function list(array $filters, int $perPage){
+    public function list(array $filters){
         $query = ElectionLocationEloquent::query();
         $query->select(
             'election_location_id',
@@ -21,7 +21,16 @@ class ElectionLocationRepository implements IElectionLocationRepository {
         if (!empty($filters['election_location_title'])) {
             $query->where('election_location_title', 'like', '%' . $filters['election_location_title'] . '%');
         }
-        return $query->get()->toArray();
+
+        $data['count'] = $query->count();
+        if (!empty($filters['page_index'])) {
+            $query->skip(--$filters['page_index']*$filters['page_size']);
+        }
+        if (!empty($filters['page_size'])) {
+            $query->take($filters['page_size']);
+        }
+        $data['list'] = $query->get();
+        return $data;
     }
     public function findById(int $id){
         $query = ElectionLocationEloquent::query();

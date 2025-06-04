@@ -14,19 +14,48 @@ class PersonRequest extends FormRequest{
 
     public function rules(): array{
         return [
-            'person_name' => ['required', 'string'],
-            'person_last_name' => ['required', 'string'],
-            'person_national_code' => ['required', 'string'],
-            'person_phone' => ['required', 'string'],
+            'person_name' => ['required', 'string'  , 'max:255' , 'min:3'],
+            'person_last_name' => ['required', 'string'  , 'max:255' , 'min:3'],
+            'person_national_code' => ['required', 'string'  , 'max:10' , 'min:10' ,'unique:person,person_national_code'],
+            'person_phone' => ['required', 'string'  , 'max:12' , 'min:10' ,'unique:person,person_phone'],
             'person_gender' => ['required', 'string'],
             'person_province_id' => ['required'],
-            'username' => ['required', 'string'],
-            'password' => ['string']
+            'username' => ['required', 'string'  , 'max:50' , 'min:3','unique:person,username'],
+            'password' => ['required', 'string'  , 'max:50' , 'min:3']
         ];
     }
 
     public function messages(): array{
-        return ['تکمیل موارد ستازه دار الزامی است'];
+        return [
+            'person_name.required' => 'نام الزامی است',
+            'person_last_name.required' => 'نام خانوادگی الزامی است',
+            'person_national_code.required' => 'کد ملی الزامی است',
+            'person_phone.required' => 'تلفن همراه الزامی است',
+            'person_gender.required' => 'جنسیت الزامی است',
+            'person_province_id.required' => 'شناسه استان الزامی است',
+            'username.required' => 'نام کاربری الزامی است',
+            'password.required' => 'رمز عبور الزامی است',
+
+            'person_name.min' => 'نام  باید بیشتر از 3 کاراکتر باشد',
+            'person_name.max' => 'نام  باید کمتر از 255 کاراکتر باشد',
+            'person_last_name.min' => 'نام خانوادگی باید بیشتر از 3 کاراکتر باشد',
+            'person_last_name.max' => 'نام خانوادگی باید کمتر از 255 کاراکتر باشد',
+
+            'person_phone.min' => 'تلفن همراه باید بیشتر از 3 کاراکتر باشد',
+            'person_phone.max' => 'تلفن همراه باید کمتر از 255 کاراکتر باشد',
+
+            'person_national_code.min' => 'کد ملی باید  برابر 10 کاراکتر باشد',
+            'person_national_code.max' => 'کد ملی باید برابر 10 کاراکتر باشد',
+            'username.min' => 'نام کاربری باید بیشتر از 3 کاراکتر باشد',
+            'username.max' => 'نام کاربری باید کمتر از 50 کاراکتر باشد',
+            'password.min' => 'رمز عبور باید بیشتر از 3 کاراکتر باشد',
+            'password.max' => 'رمز عبور باید کمتر از 50 کاراکتر باشد',
+
+            'person_national_code.unique' => 'کد ملی برای فرد دیگری ثبت شده است',
+            'person_phone.unique' => 'تلفن همراه برای فرد دیگری ثبت شده است',
+            'username.unique' => 'نام کاربری برای فرد دیگری ثبت شده است',
+
+        ];
     }
 
     protected function failedValidation(Validator $validator){
@@ -34,8 +63,8 @@ class PersonRequest extends FormRequest{
             "class"=> "red",
             "type"=> "Service.Error",
             'success' => false,
-            'message' => 'لطفا موارد الزامی را تکمیل کنید',
-            'errors' => $validator->errors()
+            'message' => 'عملیات با خطا مواجه شد',
+            'errors' => $validator->errors()->all()
         ], 422));
     }
 }

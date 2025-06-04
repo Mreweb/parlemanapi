@@ -7,8 +7,8 @@ class CityService{
 
     public function __construct(private ICityRepository $repository){}
 
-    public function list(array $filters, int $perPage){
-        return $this->repository->list($filters, $perPage);
+    public function list(array $filters){
+        return $this->repository->list($filters);
     }
 
     public function get(int $id)

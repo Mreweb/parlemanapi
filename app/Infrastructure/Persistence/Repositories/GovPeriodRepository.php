@@ -7,13 +7,21 @@ use App\Infrastructure\Persistence\Eloquent\GovPeriodEloquent;
 
 class GovPeriodRepository implements IGovPeriodRepository{
 
-    public function list(array $filters, int $perPage){
+    public function list(array $filters){
         $query = GovPeriodEloquent::query();
         $query->select('gov_period_id','gov_period_name','created_at','updated_at');
         if (!empty($filters['gov_period_name'])) {
             $query->where('gov_period_name', 'like', '%' . $filters['gov_period_name'] . '%');
         }
-        return $query->get()->toArray();
+        $data['count'] = $query->count();
+        if (!empty($filters['page_index'])) {
+            $query->skip(--$filters['page_index']*$filters['page_size']);
+        }
+        if (!empty($filters['page_size'])) {
+            $query->take($filters['page_size']);
+        }
+        $data['list'] = $query->get();
+        return $data;
     }
     public function findById(int $id){
         $query = GovPeriodEloquent::query();

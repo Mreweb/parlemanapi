@@ -11,12 +11,14 @@ class ParlemanPeriodRequest extends FormRequest{
     }
     public function rules(): array{
         return [
-            'period_title' => ['required', 'string']
+            'period_title' => ['required', 'string'  , 'max:255' , 'min:3']
         ];
     }
     public function messages(): array{
         return [
-            'period_title.required' => 'نام دوره الزامی است',
+            'period_title.required' => 'نام دوره مجلس الزامی است',
+            'period_title.min' => 'نام دوره مجلس  باید بیشتر از 3 کاراکتر باشد',
+            'period_title.max' => 'نام دوره مجلس  باید کمتر از 255 کاراکتر باشد',
             'period_title.string' => 'نام دوره باید حاوی کاراکتر باشد'
         ];
     }
@@ -25,8 +27,8 @@ class ParlemanPeriodRequest extends FormRequest{
             "class"=> "red",
             "type"=> "Service.Error",
             'success' => false,
-            'message' => 'لطفا موارد الزامی را تکمیل کنید',
-            'errors' => $validator->errors()
+            'message' => 'عملیات با خطا مواجه شد',
+            'errors' => $validator->errors()->all()
         ], 422));
     }
 }

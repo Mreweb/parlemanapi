@@ -11,12 +11,14 @@ class CommissionRequest extends FormRequest{
     }
     public function rules(): array{
         return [
-            'commission_name' => ['required', 'string']
+            'commission_name' => ['required', 'string'  , 'max:255' , 'min:3']
         ];
     }
     public function messages(): array{
         return [
             'commission_name.required' => 'نام کمیسیون الزامی است',
+            'commission_name.min' => 'نام کمیسیون باید بیشتر از 3 کاراکتر باشد',
+            'commission_name.max' => 'نام کمیسیون باید کمتر از 255 کاراکتر باشد',
             'commission_name.string' => 'نام کمیسیون باید حاوی کاراکتر باشد'
         ];
     }
@@ -25,8 +27,8 @@ class CommissionRequest extends FormRequest{
             "class"=> "red",
             "type"=> "Service.Error",
             'success' => false,
-            'message' => 'لطفا موارد الزامی را تکمیل کنید',
-            'errors' => $validator->errors()
+            'message' => 'عملیات با خطا مواجه شد',
+            'errors' => $validator->errors()->all()
         ], 422));
     }
 }

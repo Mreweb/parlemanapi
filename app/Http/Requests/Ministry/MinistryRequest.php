@@ -14,12 +14,14 @@ class MinistryRequest extends FormRequest{
 
     public function rules(): array{
         return [
-            'ministry_name' => ['required', 'string']
+            'ministry_name' => ['required', 'string'  , 'max:255' , 'min:3']
         ];
     }
     public function messages(): array{
         return [
             'ministry_name.required' => 'نام وزارتخانه الزامی است',
+            'ministry_name.min' => 'نام وزارتخانه باید بیشتر از 3 کاراکتر باشد',
+            'ministry_name.max' => 'نام وزارتخانه باید کمتر از 255 کاراکتر باشد',
             'ministry_name.string' => 'نام وزارتخانه باید حاوی کاراکتر باشد',
         ];
     }
@@ -28,8 +30,8 @@ class MinistryRequest extends FormRequest{
             "class"=> "red",
             "type"=> "Service.Error",
             'success' => false,
-            'message' => 'لطفا موارد الزامی را تکمیل کنید',
-            'errors' => $validator->errors()
+            'message' => 'عملیات با خطا مواجه شد',
+            'errors' => $validator->errors()->all()
         ], 422));
     }
 }

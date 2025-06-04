@@ -31,6 +31,11 @@ class Auth{
             return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
         }*/
     }
+    /**
+     * @lrd:start
+     * ورود با نام کاربری و رمز عبور
+     * @lrd:end
+     */
     public function loginByUsername(UsernameRequest $request){
         return $this->service->loginByUsername($request->validated());
     }

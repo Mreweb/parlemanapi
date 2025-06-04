@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../../wamp64/www/Parleman/.idea/Parleman.iml" filepath="$PROJECT_DIR$/../../../../wamp64/www/Parleman/.idea/Parleman.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/parlemanapi.iml" filepath="$PROJECT_DIR$/.idea/parlemanapi.iml" />
     </modules>
   </component>

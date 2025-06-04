@@ -4,22 +4,26 @@ namespace App\Infrastructure\Persistence\Repositories;
 
 use App\Domain\Interfaces\ICityRepository;
 use App\Infrastructure\Persistence\Eloquent\CityEloquent;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CityRepository implements ICityRepository {
 
-    public function list(array $filters, int $perPage){
+    public function list(array $filters){
         $query = CityEloquent::query();
         $query->select('city_id','city_name','province.province_id','province.province_name','city.created_at','city.updated_at');
         $query->leftJoin('province', 'province.province_id', '=', 'city.city_province_id');
-        if (!empty($filters['city_id'])) {
-            $query->where('city_id', $filters['city_id']);
-        }
         if (!empty($filters['city_name'])) {
             $query->where('city_name', 'like', '%' . $filters['city_name'] . '%');
         }
-        return $query->get()->toArray();
+
+        $data['count'] = $query->count();
+        if (!empty($filters['page_index'])) {
+            $query->skip(--$filters['page_index']*$filters['page_size']);
+        }
+        if (!empty($filters['page_size'])) {
+            $query->take($filters['page_size']);
+        }
+        $data['list'] = $query->get();
+        return $data;
     }
     public function findById(int $id){
         $query = CityEloquent::query();

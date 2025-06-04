@@ -11,12 +11,14 @@ class PresidentRequest extends FormRequest{
     }
     public function rules(): array{
         return [
-            'president_name' => ['required', 'string']
+            'president_name' => ['required', 'string'  , 'max:80' , 'min:3']
         ];
     }
     public function messages(): array{
         return [
             'province_name.required' => 'نام رئیس جمهور الزامی است',
+            'province_name.min' => 'نام رئیس جمهور  باید بیشتر از 3 کاراکتر باشد',
+            'province_name.max' => 'نام رئیس جمهور  باید کمتر از 255 کاراکتر باشد',
             'province_name.string' => 'نام رئیس جمهور باید حاوی کاراکتر باشد',
         ];
     }
@@ -25,8 +27,8 @@ class PresidentRequest extends FormRequest{
             "class"=> "red",
             "type"=> "Service.Error",
             'success' => false,
-            'message' => 'لطفا موارد الزامی را تکمیل کنید',
-            'errors' => $validator->errors()
+            'message' => 'عملیات با خطا مواجه شد',
+            'errors' => $validator->errors()->all()
         ], 422));
     }
 }

@@ -11,12 +11,14 @@ class GovPeriodRequest extends FormRequest{
     }
     public function rules(): array{
         return [
-            'gov_period_name' => ['required', 'string']
+            'gov_period_name' => ['required', 'string'  , 'max:255' , 'min:3']
         ];
     }
     public function messages(): array{
         return [
             'gov_period_name.required' => 'نام دوره ریاست جمهوری الزامی است',
+            'gov_period_name.min' => 'نام دوره ریاست جمهوری باید بیشتر از 3 کاراکتر باشد',
+            'gov_period_name.max' => 'نام دوره ریاست جمهوری باید کمتر از 255 کاراکتر باشد',
             'gov_period_name.string' => 'نام دوره ریاست جمهوری باید حاوی کاراکتر باشد'
         ];
     }
@@ -25,8 +27,8 @@ class GovPeriodRequest extends FormRequest{
             "class"=> "red",
             "type"=> "Service.Error",
             'success' => false,
-            'message' => 'لطفا موارد الزامی را تکمیل کنید',
-            'errors' => $validator->errors()
+            'message' => 'عملیات با خطا مواجه شد',
+            'errors' => $validator->errors()->all()
         ], 422));
     }
 }

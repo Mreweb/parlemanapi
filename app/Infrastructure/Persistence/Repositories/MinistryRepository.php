@@ -7,7 +7,7 @@ use App\Infrastructure\Persistence\Eloquent\PresidentEloquent;
 
 class MinistryRepository implements IMinistryRepository {
 
-    public function list(array $filters, int $perPage){
+    public function list(array $filters){
         $query = MinistryEloquent::query();
         $query->select(
             'ministry_id','ministry_name',
@@ -16,7 +16,15 @@ class MinistryRepository implements IMinistryRepository {
         if (!empty($filters['ministry_name'])) {
             $query->where('ministry_name', 'like', '%' . $filters['ministry_name'] . '%');
         }
-        return $query->get()->toArray();
+        $data['count'] = $query->count();
+        if (!empty($filters['page_index'])) {
+            $query->skip(--$filters['page_index']*$filters['page_size']);
+        }
+        if (!empty($filters['page_size'])) {
+            $query->take($filters['page_size']);
+        }
+        $data['list'] = $query->get();
+        return $data;
     }
     public function findById(int $id){
         $query = MinistryEloquent::query();

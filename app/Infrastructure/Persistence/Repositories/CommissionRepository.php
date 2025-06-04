@@ -6,13 +6,22 @@ use App\Infrastructure\Persistence\Eloquent\CommissionEloquent;
 
 class CommissionRepository implements ICommissionRepository {
 
-    public function list(array $filters, int $perPage){
+    public function list(array $filters){
         $query = CommissionEloquent::query();
         $query->select('commission_id','commission_name','created_at','updated_at');
         if (!empty($filters['commission_name'])) {
             $query->where('commission_name', 'like', '%' . $filters['commission_name'] . '%');
         }
-        return $query->get()->toArray();
+
+        $data['count'] = $query->count();
+        if (!empty($filters['page_index'])) {
+            $query->skip(--$filters['page_index']*$filters['page_size']);
+        }
+        if (!empty($filters['page_size'])) {
+            $query->take($filters['page_size']);
+        }
+        $data['list'] = $query->get();
+        return $data;
     }
     public function findById(int $id){
         $query = CommissionEloquent::query();
