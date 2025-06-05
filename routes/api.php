@@ -8,6 +8,7 @@ use App\Http\Controllers\Enums;
 use App\Http\Controllers\FractionController;
 use App\Http\Controllers\GovPeriodController;
 use App\Http\Controllers\MinistryController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ParlemanPeriodController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PresidentController;
@@ -115,4 +116,13 @@ Route::prefix('ministry')->group(function () {
     Route::post('/', [MinistryController::class, 'store']);
     Route::put('/', [MinistryController::class, 'update']);
     Route::delete('/{id}', [MinistryController::class, 'destroy']);
+});
+
+
+Route::prefix('notice')->group(function () {
+    Route::get('/', [NoticeController::class, 'index']);
+    Route::get('/{id}', [NoticeController::class, 'show']);
+    Route::post('/', [NoticeController::class, 'store']);
+    Route::put('/', [NoticeController::class, 'update']);
+    Route::delete('/{id}', [NoticeController::class, 'destroy']);
 });
