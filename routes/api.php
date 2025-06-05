@@ -14,6 +14,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PresidentController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\Upload;
 use Illuminate\Support\Facades\Route;
 
@@ -125,4 +126,12 @@ Route::prefix('notice')->group(function () {
     Route::post('/', [NoticeController::class, 'store']);
     Route::put('/', [NoticeController::class, 'update']);
     Route::delete('/{id}', [NoticeController::class, 'destroy']);
+});
+
+Route::prefix('question')->group(function () {
+    Route::get('/', [QuestionController::class, 'index']);
+    Route::get('/{id}', [QuestionController::class, 'show']);
+    Route::post('/', [QuestionController::class, 'store']);
+    Route::put('/', [QuestionController::class, 'update']);
+    Route::delete('/{id}', [QuestionController::class, 'destroy']);
 });
