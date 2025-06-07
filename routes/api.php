@@ -7,6 +7,7 @@ use App\Http\Controllers\ElectionLocationController;
 use App\Http\Controllers\Enums;
 use App\Http\Controllers\FractionController;
 use App\Http\Controllers\GovPeriodController;
+use App\Http\Controllers\InterpellationController;
 use App\Http\Controllers\MinistryController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ParlemanPeriodController;
@@ -143,4 +144,12 @@ Route::prefix('question')->group(function () {
     Route::post('/', [QuestionController::class, 'store']);
     Route::put('/', [QuestionController::class, 'update']);
     Route::delete('/{id}', [QuestionController::class, 'destroy']);
+});
+
+Route::prefix('interpellation')->group(function () {
+    Route::get('/', [InterpellationController::class, 'index']);
+    Route::get('/{id}', [InterpellationController::class, 'show']);
+    Route::post('/', [InterpellationController::class, 'store']);
+    Route::put('/', [InterpellationController::class, 'update']);
+    Route::delete('/{id}', [InterpellationController::class, 'destroy']);
 });
