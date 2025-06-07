@@ -36,7 +36,6 @@ class ProvinceRepository implements IProvinceRepository{
     public function get_cities(int $id){
         return ProvinceEloquent::find($id)->cities->toArray();
     }
-
     public function create(array $data){
         return ProvinceEloquent::create($data);
     }

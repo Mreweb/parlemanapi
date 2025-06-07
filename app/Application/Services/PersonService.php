@@ -25,6 +25,18 @@ class PersonService{
     {
         return $this->repository->update($data);
     }
+    public function update_fraction(array $data)
+    {
+        return $this->repository->update_fraction($data);
+    }
+    public function update_election(array $data)
+    {
+        return $this->repository->update_election($data);
+    }
+    public function update_commission(array $data)
+    {
+        return $this->repository->update_commission($data);
+    }
 
     public function delete(int $id)
     {

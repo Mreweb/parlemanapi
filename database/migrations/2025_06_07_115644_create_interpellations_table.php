@@ -10,7 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void{
-        Schema::create('interpellations', function (Blueprint $table) {
+        Schema::create('person_interpellations', function (Blueprint $table) {
             $table->id('interpellation_id');
             $table->string('interpellation_president_id')->comment('رئیس جمهور');
             $table->string('interpellation_person_id')->comment('شخصی که از او استیضاح شده');

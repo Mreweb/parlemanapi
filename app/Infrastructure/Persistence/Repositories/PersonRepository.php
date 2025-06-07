@@ -3,7 +3,10 @@
 namespace App\Infrastructure\Persistence\Repositories;
 use App\Application\Services\DBMessageService;
 use App\Domain\Interfaces\IPersonRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonCommissionEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonElectionEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonFractionEloquent;
 use Illuminate\Support\Facades\Crypt;
 
 class PersonRepository implements IPersonRepository {
@@ -60,7 +63,7 @@ class PersonRepository implements IPersonRepository {
     public function update(array $data){
 
         if(isset($data['password']) &&  $data['password'] != '') {
-            $data['password'] = Crypt::encryptString($data['password']);
+            $data['password'] = md5($data['password']);
             $result = PersonEloquent::where('person_id', $data['person_id'])->update(
                 [
                     'person_name' => $data['person_name'],
@@ -91,5 +94,18 @@ class PersonRepository implements IPersonRepository {
     public function delete(int $id){
         $province = PersonEloquent::findOrFail($id)->delete();
         return $province;
+    }
+
+    public function update_fraction(array $data){
+        PersonFractionEloquent::where('person_id', $data['person_id'])->delete();
+        return PersonFractionEloquent::create($data)['person_id'];
+    }
+    public function update_election(array $data){
+        PersonElectionEloquent::where('person_id', $data['person_id'])->delete();
+        return PersonElectionEloquent::create($data)['person_id'];
+    }
+    public function update_commission(array $data){
+        PersonCommissionEloquent::where('person_id', $data['person_id'])->delete();
+        return PersonCommissionEloquent::create($data)['person_id'];
     }
 }

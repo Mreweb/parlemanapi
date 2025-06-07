@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Application\Services\DBMessageService;
 use App\Application\Services\PersonService;
+use App\Http\Requests\Person\PersonCommissionRequest;
+use App\Http\Requests\Person\PersonElectionRequest;
 use App\Http\Requests\Person\PersonRequest;
 use App\Http\Requests\Person\PersonUpdateRequest;
+use App\Http\Requests\Person\PersonFractionRequest;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller{
@@ -73,5 +76,48 @@ class PersonController extends Controller{
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
 
     }
+
+
+    /**
+     * @lrd:start
+     * افزودن فراکسیون
+     * @lrd:end
+     */
+    public function update_fraction(PersonFractionRequest $request){
+        $result = $this->service->update_fraction($request->validated());
+        if($result){
+            return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+        } else{
+            return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
+        }
+    }
+
+    /**
+     * @lrd:start
+     * افزودن حوزه انتخابیه
+     * @lrd:end
+     */
+    public function update_election(PersonElectionRequest $request){
+        $result = $this->service->update_election($request->validated());
+        if($result){
+            return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+        } else{
+            return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
+        }
+    }
+    /**
+     * @lrd:start
+     * افزودن کمیسیون
+     * @lrd:end
+     */
+    public function update_commission(PersonCommissionRequest $request){
+        $result = $this->service->update_commission($request->validated());
+        if($result){
+            return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+        } else{
+            return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
+        }
+    }
+
 
 }

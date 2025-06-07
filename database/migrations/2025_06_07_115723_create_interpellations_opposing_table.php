@@ -9,7 +9,7 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void{
-        Schema::create('interpellations_opposing', function (Blueprint $table) {
+        Schema::create('person_interpellations_opposing', function (Blueprint $table) {
             $table->id('interpellations_opposing_id');
             $table->bigInteger('interpellations_opposing_person_id');
             $table->bigInteger('interpellation_id');

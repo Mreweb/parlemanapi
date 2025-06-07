@@ -55,6 +55,9 @@ Route::prefix('person')->group(function () {
     Route::get('/', [PersonController::class, 'index']);
     Route::get('/{id}', [PersonController::class, 'show']);
     Route::post('/', [PersonController::class, 'store']);
+    Route::post('/update_fraction', [PersonController::class, 'update_fraction']);
+    Route::post('/update_election', [PersonController::class, 'update_election']);
+    Route::post('/update_commission', [PersonController::class, 'update_commission']);
     Route::put('/', [PersonController::class, 'update']);
     Route::delete('/{id}', [PersonController::class, 'destroy']);
 });
@@ -91,7 +94,6 @@ Route::prefix('gov_period')->group(function () {
     Route::put('/', [GovPeriodController::class, 'update']);
     Route::delete('/{id}', [GovPeriodController::class, 'destroy']);
 });
-
 
 
 Route::prefix('election_location')->group(function () {

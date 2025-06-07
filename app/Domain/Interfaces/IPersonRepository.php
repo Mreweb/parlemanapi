@@ -10,6 +10,9 @@ interface IPersonRepository {
     public function create(array $data);
     public function update(array $data);
     public function delete(int $id);
+    public function update_fraction(array $data);
+    public function update_election(array $data);
+    public function update_commission(array $data);
 
 }
 
