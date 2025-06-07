@@ -11,6 +11,7 @@ use App\Http\Controllers\MinistryController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ParlemanPeriodController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\PresidentCabinetController;
 use App\Http\Controllers\PresidentController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
@@ -63,6 +64,14 @@ Route::prefix('president')->group(function () {
     Route::post('/', [PresidentController::class, 'store']);
     Route::put('/', [PresidentController::class, 'update']);
     Route::delete('/{id}', [PresidentController::class, 'destroy']);
+});
+
+Route::prefix('president_cabinet')->group(function () {
+    Route::get('/', [PresidentCabinetController::class, 'index']);
+    Route::get('/{id}', [PresidentCabinetController::class, 'show']);
+    Route::post('/', [PresidentCabinetController::class, 'store']);
+    Route::put('/', [PresidentCabinetController::class, 'update']);
+    Route::delete('/{id}', [PresidentCabinetController::class, 'destroy']);
 });
 
 

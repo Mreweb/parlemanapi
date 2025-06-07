@@ -5,6 +5,7 @@ use App\Application\Services\DBMessageService;
 use App\Domain\Interfaces\IAuthRepository;
 use App\Infrastructure\Persistence\Eloquent\PersonEloquent;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -39,7 +40,8 @@ class AuthRepository implements IAuthRepository {
         $query = PersonEloquent::query();
         $query->select('person_id','person_name','person_last_name','person_email','person_phone');
         $query->where('username', $data['username']);
-        $query->where('password', md5($data['password']));
+        $query->where('password',  Crypt::encryptString($data['password']) );
+
         $person =  $query->get();
         if($person->count() == 0){
             return response()->json( DBMessageService::get_message(null,'ErrorAction',"اطلاعات نامعتبر است" ) , 400, [], JSON_UNESCAPED_UNICODE);
