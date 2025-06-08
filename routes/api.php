@@ -20,6 +20,7 @@ use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RequestsController;
+use App\Http\Controllers\RulesController;
 use App\Http\Controllers\Upload;
 use Illuminate\Support\Facades\Route;
 
@@ -187,5 +188,13 @@ Route::prefix('requests')->group(function () {
     Route::post('/add_track', [RequestsController::class, 'add_track']);
     Route::put('/update_track', [RequestsController::class, 'update_track']);
     Route::delete('/delete_track/{id}', [RequestsController::class, 'delete_track']);
+
+});
+Route::prefix('rules')->group(function () {
+    Route::get('/', [RulesController::class, 'index']);
+    Route::get('/{id}', [RulesController::class, 'show']);
+    Route::post('/', [RulesController::class, 'store']);
+    Route::put('/', [RulesController::class, 'update']);
+    Route::delete('/{id}', [RulesController::class, 'destroy']);
 
 });

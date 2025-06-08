@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Application\Services\DBMessageService;
-use App\Domain\Interfaces\IAuthRepository;
-use App\Http\Requests\Auth\UsernameRequest;
 
 
 class Enums{
@@ -56,6 +53,16 @@ class Enums{
             'gender' => [
                 'male' => 'آقا',
                 'female' => 'خانم'
+            ],
+            'rule_preparation' => [
+                '300' => 'لایحه وزیران',
+                '301' => 'طرح نمایندگان مجلس'
+            ],
+            'rule_executive_branch' => [
+                '200' => 'ارتباط با دستگاه های اجرایی',
+                '201' => 'ارائه گزارش به مجلس',
+                '202' => 'ارائه گزارش به دیوان محاسبات',
+                '203' => 'سایر موارد'
             ],
             'notice_type' => [
                 '1' => 'کتبی',
