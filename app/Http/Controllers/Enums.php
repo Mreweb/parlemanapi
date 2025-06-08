@@ -44,6 +44,31 @@ class Enums{
                 "done" => 'انجام شده',
                 "undone" => 'انجام نشده'
             ],
+            'project_priority' => [
+                "priority_normal" => 'فوریت عادی',
+                "priority_step_1" => 'فوریت یک',
+                "priority_step_2" => 'فوریت دو',
+                "priority_step_3" => 'فوریت سه'
+            ],
+            'project_handle_way' => [
+                "conversation_step_1" => 'یک شوری',
+                "conversation_step_2" => 'دو شوری',
+                "conversation_step_85" => 'اصل 85'
+            ],
+            'project_topic_relevance' => [
+                "full" => 'کاملا مرتبط',
+                "middle" => 'تا حدی مرتبط',
+                "zero" => 'نامربوط'
+            ],
+            'project_government_vote' => [
+                "reject" => 'مخالف کلیات',
+                "accept" => 'موافق کلیات',
+                "editable" => 'اصلاح موارد'
+            ],
+            'project_status' => [
+                "reject" => 'عدم تایید',
+                "accept" => 'تایید شده'
+            ],
             'gender' => [
                 'male' => 'آقا',
                 'female' => 'خانم'

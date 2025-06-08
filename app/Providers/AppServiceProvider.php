@@ -19,6 +19,7 @@ use App\Domain\Interfaces\INoticeRepository;
 use App\Domain\Interfaces\IParlemanPeriodRepository;
 use App\Domain\Interfaces\IPersonRepository;
 use App\Domain\Interfaces\IPresidentRepository;
+use App\Domain\Interfaces\IProjectsRepository;
 use App\Domain\Interfaces\IProvinceRepository;
 use App\Domain\Interfaces\IQuestionRepository;
 use App\Domain\Interfaces\IUploadRepository;
@@ -35,6 +36,7 @@ use App\Infrastructure\Persistence\Repositories\NoticeRepository;
 use App\Infrastructure\Persistence\Repositories\ParlemanPeriodRepository;
 use App\Infrastructure\Persistence\Repositories\PersonRepository;
 use App\Infrastructure\Persistence\Repositories\PresidentRepository;
+use App\Infrastructure\Persistence\Repositories\ProjectsRepository;
 use App\Infrastructure\Persistence\Repositories\ProvinceRepository;
 use App\Infrastructure\Persistence\Repositories\QuestionRepository;
 use App\Infrastructure\Persistence\Repositories\UploadRepository;
@@ -62,6 +64,7 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->singleton(IProvinceRepository::class, ProvinceRepository::class);
         $this->app->singleton(IQuestionRepository::class, QuestionRepository::class);
         $this->app->singleton(IUploadRepository::class, UploadRepository::class);
+        $this->app->singleton(IProjectsRepository::class, ProjectsRepository::class);
     }
     public function boot(): void{
         Schema::defaultStringLength(220);

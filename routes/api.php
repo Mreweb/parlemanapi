@@ -15,6 +15,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PersonMeetingController;
 use App\Http\Controllers\PresidentCabinetController;
 use App\Http\Controllers\PresidentController;
+use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
 use App\Http\Controllers\QuestionController;
@@ -165,4 +166,12 @@ Route::prefix('meeting')->group(function () {
     Route::put('/update_meeting_track', [PersonMeetingController::class, 'update_meeting_track']);
     Route::put('/', [PersonMeetingController::class, 'update']);
     Route::delete('/{id}', [PersonMeetingController::class, 'destroy']);
+});
+
+Route::prefix('projects')->group(function () {
+    Route::get('/', [ProjectsController::class, 'index']);
+    Route::get('/{id}', [ProjectsController::class, 'show']);
+    Route::post('/', [ProjectsController::class, 'store']);
+    Route::put('/', [ProjectsController::class, 'update']);
+    Route::delete('/{id}', [ProjectsController::class, 'destroy']);
 });
