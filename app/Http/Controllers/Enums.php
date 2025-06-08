@@ -9,22 +9,6 @@ use App\Http\Requests\Auth\UsernameRequest;
 class Enums{
 
 
-    /**
-     * @lrd:start
-     * دریافت enum
-     *
-     * gender جنسیت
-     *
-     * notice_type نوع تذکر
-     *
-     * public_court_result نتیجه بررسی در صحن علنی مجلس
-     *
-     * commission_result نتیجه بررسی کمیسیون
-     *
-     * meeting اجلاسیه
-     *
-     * @lrd:end
-     */
     public function index(){
         return response()->json([
             'app_name' => 'معاونت پارلمانی ریاست جمهوری',
@@ -87,7 +71,7 @@ class Enums{
                 '4' => 'نمایندگان از توضیحات وزیر قانع نشدند'
             ],
             'commission_result' => [
-                '1' => ' انصراف قبل از برگزاری کمیسیون',
+                '1' => 'انصراف قبل از برگزاری کمیسیون',
                 '2' => 'نماینده قانع شد',
                 '3' => 'مهلت اقدام به مقام مربوطه داده شد',
                 '4' => 'نماینده قانع نشد'

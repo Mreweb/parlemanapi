@@ -19,6 +19,7 @@ use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\Upload;
 use Illuminate\Support\Facades\Route;
 
@@ -174,4 +175,17 @@ Route::prefix('projects')->group(function () {
     Route::post('/', [ProjectsController::class, 'store']);
     Route::put('/', [ProjectsController::class, 'update']);
     Route::delete('/{id}', [ProjectsController::class, 'destroy']);
+});
+
+Route::prefix('requests')->group(function () {
+    Route::get('/', [RequestsController::class, 'index']);
+    Route::get('/{id}', [RequestsController::class, 'show']);
+    Route::post('/', [RequestsController::class, 'store']);
+    Route::put('/', [RequestsController::class, 'update']);
+    Route::delete('/{id}', [RequestsController::class, 'destroy']);
+
+    Route::post('/add_track', [RequestsController::class, 'add_track']);
+    Route::put('/update_track', [RequestsController::class, 'update_track']);
+    Route::delete('/delete_track/{id}', [RequestsController::class, 'delete_track']);
+
 });
