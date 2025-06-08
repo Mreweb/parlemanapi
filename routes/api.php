@@ -12,6 +12,7 @@ use App\Http\Controllers\MinistryController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ParlemanPeriodController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\PersonMeetingController;
 use App\Http\Controllers\PresidentCabinetController;
 use App\Http\Controllers\PresidentController;
 use App\Http\Controllers\ProvinceController;
@@ -154,4 +155,14 @@ Route::prefix('interpellation')->group(function () {
     Route::post('/', [InterpellationController::class, 'store']);
     Route::put('/', [InterpellationController::class, 'update']);
     Route::delete('/{id}', [InterpellationController::class, 'destroy']);
+});
+
+Route::prefix('meeting')->group(function () {
+    Route::get('/', [PersonMeetingController::class, 'index']);
+    Route::get('/{id}', [PersonMeetingController::class, 'show']);
+    Route::post('/', [PersonMeetingController::class, 'store']);
+    Route::post('/add_meeting_track', [PersonMeetingController::class, 'add_meeting_track']);
+    Route::put('/update_meeting_track', [PersonMeetingController::class, 'update_meeting_track']);
+    Route::put('/', [PersonMeetingController::class, 'update']);
+    Route::delete('/{id}', [PersonMeetingController::class, 'destroy']);
 });
