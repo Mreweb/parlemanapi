@@ -20,6 +20,8 @@ use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RequestsController;
+use App\Http\Controllers\ResearchController;
+use App\Http\Controllers\RuleFortyFiveController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\RuleTTFController;
 use App\Http\Controllers\Upload;
@@ -214,4 +216,20 @@ Route::prefix('rule_234')->group(function () {
     Route::post('/', [RuleTTFController::class, 'store']);
     Route::put('/', [RuleTTFController::class, 'update']);
     Route::delete('/{id}', [RuleTTFController::class, 'destroy']);
+});
+
+Route::prefix('research')->group(function () {
+    Route::get('/', [ResearchController::class, 'index']);
+    Route::get('/{id}', [ResearchController::class, 'show']);
+    Route::post('/', [ResearchController::class, 'store']);
+    Route::put('/', [ResearchController::class, 'update']);
+    Route::delete('/{id}', [ResearchController::class, 'destroy']);
+});
+
+Route::prefix('rule_45')->group(function () {
+    Route::get('/', [RuleFortyFiveController::class, 'index']);
+    Route::get('/{id}', [RuleFortyFiveController::class, 'show']);
+    Route::post('/', [RuleFortyFiveController::class, 'store']);
+    Route::put('/', [RuleFortyFiveController::class, 'update']);
+    Route::delete('/{id}', [RuleFortyFiveController::class, 'destroy']);
 });
