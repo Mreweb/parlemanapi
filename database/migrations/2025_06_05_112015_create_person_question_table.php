@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void{
         Schema::create('person_question', function (Blueprint $table) {
             $table->integer('question_id')->autoIncrement();
-            $table->integer('person_id')->comment('شخصی که سوال کننده بوده')->nullable();
-            $table->integer('president_id')->comment('در کدام شخص ریاست جمهوری تذکر داده شده')->nullable();
-            $table->integer('gov_period_id')->comment('در کدام دوره دولت')->nullable();
-            $table->integer('parliament_period_id')->comment('در کدام دوره مجلس')->nullable();
+            $table->integer('question_person_id')->comment('شخصی که سوال کننده بوده')->nullable();
+            $table->integer('question_president_id')->comment('در کدام شخص ریاست جمهوری تذکر داده شده')->nullable();
+            $table->integer('question_gov_period_id')->comment('در کدام دوره دولت')->nullable();
+            $table->integer('question_parliament_period_id')->comment('در کدام دوره مجلس')->nullable();
             $table->string('question_meeting', 100)->comment('اجلاسیه')->nullable();
             $table->string('question_reading_date', 100)->comment('تاریخ طرح سوال')->nullable();
             $table->string('question_register_number', 100)->comment('شماره ثبت')->nullable();

@@ -20,6 +20,7 @@ class PersonRequest extends FormRequest{
             'person_phone' => ['required', 'string'  , 'max:12' , 'min:10' ,'unique:person,person_phone'],
             'person_gender' => ['required', 'string'],
             'person_province_id' => ['required'],
+            'person_role' => ['required'],
             'username' => ['required', 'string'  , 'max:50' , 'min:3','unique:person,username'],
             'password' => ['required', 'string'  , 'max:50' , 'min:3']
         ];

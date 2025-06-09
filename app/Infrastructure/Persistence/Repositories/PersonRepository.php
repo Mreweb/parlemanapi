@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories;
-use App\Application\Services\DBMessageService;
 use App\Domain\Interfaces\IPersonRepository;
 use App\Infrastructure\Persistence\Eloquent\PersonCommissionEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonElectionEloquent;
@@ -39,10 +38,9 @@ class PersonRepository implements IPersonRepository {
     }
     public function findById(int $id){
         $query = PersonEloquent::query();
-        $query->select('person_id','person_name','person_last_name','person_national_code','person_phone','person_email','person_gender','person_province_id','username','password');
+        $query->select('person_id','person_name','person_last_name','person_role','person_national_code','person_phone','person_email','person_gender','person_province_id','username','password');
         $query->where('person_id', $id);
         $data =  $query->get()->toArray()[0];
-        $data['password'] =  Crypt::decryptString($data['password']);
         return $data;
     }
     public function findByField($field, $value){
@@ -56,7 +54,7 @@ class PersonRepository implements IPersonRepository {
         if($person){
             return [];
         } else{
-            $data['password'] = Crypt::encryptString($data['password']);
+            $data['password'] = md5($data['password']);
             return PersonEloquent::create($data)['person_id'];
         }
     }

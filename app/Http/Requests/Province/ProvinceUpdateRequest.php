@@ -14,17 +14,13 @@ class ProvinceUpdateRequest extends FormRequest{
     public function rules(): array{
         return [
             'province_id' => ['required'],
-            'province_name' => ['required', 'string'],
+            'province_name' => ['required']
         ];
     }
 
     public function messages(): array
     {
-        return [
-            'province_name.required' => 'نام استان الزامی است',
-            'province_name.string' => 'نام استان باید حاوی کاراکتر باشد',
-            'province_id.required' => 'شناسه استان الزامی است',
-        ];
+        return [ '*.required' => 'لطفا موارد الزامی را تکمیل کنید' ];
     }
 
     protected function failedValidation(Validator $validator){

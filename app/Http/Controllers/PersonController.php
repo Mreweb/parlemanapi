@@ -36,6 +36,9 @@ class PersonController extends Controller{
      * @lrd:end
      */
     public function show($id){
+        if(!is_numeric($id)){
+            return response()->json( DBMessageService::get_message(null,'ErrorAction') , 400, [], JSON_UNESCAPED_UNICODE);
+        }
         $result = $this->service->get($id);
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
     }

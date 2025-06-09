@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void{
         Schema::create('rule_ttf', function (Blueprint $table) {
             $table->integer('rule_ttf_id')->autoIncrement();
-            $table->string('president_id')->comment('رئیس جمهور');
-            $table->string('person_id')->comment('نام نماینده متقاضی ماده 234');
-            $table->string('gov_period_id')->comment('شماره دولت');
-            $table->string('parliament_period_id')->comment('شماره مجلس');
+            $table->string('rule_ttf_president_id')->comment('رئیس جمهور');
+            $table->string('rule_ttf_person_id')->comment('نام نماینده متقاضی ماده 234');
+            $table->string('rule_ttf_gov_period_id')->comment('شماره دولت');
+            $table->string('rule_ttf_parliament_period_id')->comment('شماره مجلس');
             $table->string('rule_ttf_meeting')->comment('اجلاسیه');
             $table->string('rule_ttf_register_number')->comment('شماره ثبت');
             $table->string('rule_ttf_subject')->comment('شماره ثبت');

@@ -36,7 +36,7 @@ class VoteConfidenceUpdateRequest extends FormRequest{
         ];
     }
     public function messages(): array{
-        return [ 'لطفا موارد الزامی را تکمیل کنید' ];
+        return [ '*.required' => 'لطفا موارد الزامی را تکمیل کنید'];
     }
     protected function failedValidation(Validator $validator){
         throw new HttpResponseException(response()->json([

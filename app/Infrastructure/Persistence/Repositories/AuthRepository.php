@@ -38,7 +38,7 @@ class AuthRepository implements IAuthRepository {
         }
 
         $query = PersonEloquent::query();
-        $query->select('person_id','person_name','person_last_name','person_email','person_phone');
+        $query->select('person_id','person_name','person_last_name','person_email','person_phone','person_role');
         $query->where('username', $data['username']);
         $query->where('password',  md5($data['password']) );
 

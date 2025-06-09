@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('rule_forty_five', function (Blueprint $table) {
             $table->integer('rule_forty_five_id')->autoIncrement();
-            $table->string('president_id')->comment('رئیس جمهور');
-            $table->string('person_id')->comment('نام نماینده متقاضی ماده 45');
-            $table->string('gov_period_id')->comment('شماره دولت');
-            $table->string('five_parliament_period_id')->comment('شماره مجلس');
+            $table->string('rule_forty_five_president_id')->comment('رئیس جمهور');
+            $table->string('rule_forty_five_person_id')->comment('نام نماینده متقاضی ماده 45');
+            $table->string('rule_forty_five_gov_period_id')->comment('شماره دولت');
+            $table->string('rule_forty_five_parliament_period_id')->comment('شماره مجلس');
             $table->string('rule_forty_five_meeting')->comment('اجلاسیه');
             $table->string('rule_forty_five_register_number')->comment('شماره ثبت');
             $table->string('rule_forty_five_subject')->comment('شماره ثبت');

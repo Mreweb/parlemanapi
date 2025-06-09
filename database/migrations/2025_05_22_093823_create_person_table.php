@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('person_email', 100)->nullable()->comment('لایمی');
             $table->enum('person_gender',['male','female'])->nullable()->comment('جنسیت');
             $table->integer('person_province_id')->comment('استان');
-            $table->integer('person_election_id')->comment('حوزه انتخابیه');
             $table->string('person_role',40)->comment('نقش');
             $table->string('username', 100)->comment('نام کاربری');
             $table->string('password')->comment('رمز عبور');

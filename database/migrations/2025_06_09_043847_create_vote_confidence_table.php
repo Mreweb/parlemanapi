@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('person_vote_confidence', function (Blueprint $table) {
             $table->integer('vote_confidence_id')->autoIncrement();
-            $table->string('president_id')->comment('رئیس جمهور');
-            $table->string('person_id')->comment('شخصی که از او استیضاح شده');
-            $table->string('gov_period_id')->comment('شماره دولت');
-            $table->string('parliament_period_id')->comment('شماره مجلس');
+            $table->string('vote_confidence_president_id')->comment('رئیس جمهور');
+            $table->string('vote_confidence_person_id')->comment('شخصی که از او استیضاح شده');
+            $table->string('vote_confidence_gov_period_id')->comment('شماره دولت');
+            $table->string('vote_confidence_parliament_period_id')->comment('شماره مجلس');
             $table->string('vote_confidence_meeting')->comment('اجلاسیه');
             $table->string('vote_confidence_register_number')->comment('شماره ثبت');
             $table->string('vote_confidence_commission_id')->comment('کمیسیون تخصصی');

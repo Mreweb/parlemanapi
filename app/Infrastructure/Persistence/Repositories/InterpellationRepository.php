@@ -26,11 +26,11 @@ class InterpellationRepository implements IInterpellationsRepository {
             'president_name',
             'gov_period_name',
             'interpellation_public_parliament_session_number',
-            'interpellations.created_at',
-            'interpellations.updated_at');
-        $query->leftJoin('president', 'president.president_id', '=', 'interpellations.interpellation_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'interpellations.interpellation_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'interpellations.interpellation_parliament_period_id');
+            'person_interpellations.created_at',
+            'person_interpellations.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_interpellations.interpellation_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_interpellations.interpellation_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_interpellations.interpellation_parliament_period_id');
         if (!empty($filters['interpellation_axis'])) {
             $query->where('interpellation_axis', 'like', '%' . $filters['interpellation_axis'] . '%');
         }
@@ -56,22 +56,15 @@ class InterpellationRepository implements IInterpellationsRepository {
     public function findById(int $id){
         $query = InterpellationsEloquent::query();
         $query->select(
-            'interpellation_id',
-            'interpellation_axis',
-            'interpellation_president_id',
-            'interpellation_gov_period_id',
-            'interpellation_parliament_period_id',
+            'person_interpellations.*',
             'period_title',
             'president_name',
-            'gov_period_name',
-            'interpellation_public_parliament_session_number',
-            'interpellations.created_at',
-            'interpellations.updated_at');
-        $query->leftJoin('president', 'president.president_id', '=', 'interpellations.interpellation_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'interpellations.interpellation_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'interpellations.interpellation_parliament_period_id');
-        $query->leftJoin('media as media_worksheet', 'media_worksheet.media_id', '=', 'interpellations.interpellation_worksheet_media_id');
-        $query->leftJoin('media as media_worksheet_correspondence', 'media_worksheet_correspondence.media_id', '=', 'interpellations.interpellation_correspondence_worksheet_media_id');
+            'gov_period_name');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_interpellations.interpellation_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_interpellations.interpellation_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_interpellations.interpellation_parliament_period_id');
+        $query->leftJoin('media as media_worksheet', 'media_worksheet.media_id', '=', 'person_interpellations.interpellation_worksheet_media_id');
+        $query->leftJoin('media as media_worksheet_correspondence', 'media_worksheet_correspondence.media_id', '=', 'person_interpellations.interpellation_correspondence_worksheet_media_id');
          $query->where('interpellation_id', $id);
         $result = $query->get()->toArray();
         return $result;

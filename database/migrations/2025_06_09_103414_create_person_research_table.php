@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('person_research', function (Blueprint $table) {
             $table->integer('person_research_id')->autoIncrement();
-            $table->string('president_id')->comment('رئیس جمهور');
-            $table->string('person_id')->comment('نام نماینده طراح تحقیق و تفحص');
-            $table->string('gov_period_id')->comment('شماره دولت');
-            $table->string('parliament_period_id')->comment('شماره مجلس');
+            $table->string('person_research_president_id')->comment('رئیس جمهور');
+            $table->string('person_research_person_id')->comment('نام نماینده طراح تحقیق و تفحص');
+            $table->string('person_research_gov_period_id')->comment('شماره دولت');
+            $table->string('person_research_parliament_period_id')->comment('شماره مجلس');
             $table->string('person_research_meeting')->comment('اجلاسیه');
             $table->string('person_research_register_number')->comment('شماره ثبت');
             $table->string('person_research_register_date')->comment('تاریخ ثبت');

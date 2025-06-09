@@ -13,7 +13,7 @@ class ProvinceRequest extends FormRequest{
 
     public function rules(): array{
         return [
-            'province_name' => ['required', 'string'  , 'max:80' , 'min:3']
+            'province_name' => ['required', 'string'  , 'max:80' , 'min:3', 'unique:province'],
         ];
     }
 
@@ -23,6 +23,7 @@ class ProvinceRequest extends FormRequest{
             'province_name.required' => 'نام استان الزامی است',
             'province_name.min' => 'نام استان باید بیشتر از 3 کاراکتر باشد',
             'province_name.max' => 'نام استان باید کمتر از 255 کاراکتر باشد',
+            'province_name.unique' => 'نام استان تکراری است',
             'province_name.string' => 'نام استان باید حاوی کاراکتر باشد',
         ];
     }
