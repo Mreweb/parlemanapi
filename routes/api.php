@@ -21,6 +21,7 @@ use App\Http\Controllers\Captcha;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\RulesController;
+use App\Http\Controllers\RuleTTFController;
 use App\Http\Controllers\Upload;
 use App\Http\Controllers\VoteConfidenceController;
 use Illuminate\Support\Facades\Route;
@@ -205,4 +206,12 @@ Route::prefix('vote_confidence')->group(function () {
     Route::post('/', [VoteConfidenceController::class, 'store']);
     Route::put('/', [VoteConfidenceController::class, 'update']);
     Route::delete('/{id}', [VoteConfidenceController::class, 'destroy']);
+});
+
+Route::prefix('rule_234')->group(function () {
+    Route::get('/', [RuleTTFController::class, 'index']);
+    Route::get('/{id}', [RuleTTFController::class, 'show']);
+    Route::post('/', [RuleTTFController::class, 'store']);
+    Route::put('/', [RuleTTFController::class, 'update']);
+    Route::delete('/{id}', [RuleTTFController::class, 'destroy']);
 });
