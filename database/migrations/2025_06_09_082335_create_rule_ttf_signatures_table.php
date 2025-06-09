@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('rule_ttf_signatures', function (Blueprint $table) {
             $table->id('row_id');
-            $table->bigInteger('rule_ttf_supporters_person_id')->comment('نمایندگان امضا کننده');
-            $table->bigInteger('rule_ttf_id');
+            $table->integer('rule_ttf_supporters_person_id')->comment('نمایندگان امضا کننده');
+            $table->integer('rule_ttf_id');
             $table->foreign('rule_ttf_id')->references('rule_ttf_id')->on('rule_ttf')->onDelete('cascade');
             $table->timestamps();
         });

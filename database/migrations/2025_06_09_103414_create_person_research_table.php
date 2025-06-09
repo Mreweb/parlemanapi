@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_research', function (Blueprint $table) {
-            $table->id('person_research_id');
-            $table->string('person_research_president_id')->comment('رئیس جمهور');
-            $table->string('person_research_person_id')->comment('نام نماینده طراح تحقیق و تفحص');
-            $table->string('person_research_gov_period_id')->comment('شماره دولت');
-            $table->string('person_research_parliament_period_id')->comment('شماره مجلس');
+            $table->integer('person_research_id')->autoIncrement();
+            $table->string('president_id')->comment('رئیس جمهور');
+            $table->string('person_id')->comment('نام نماینده طراح تحقیق و تفحص');
+            $table->string('gov_period_id')->comment('شماره دولت');
+            $table->string('parliament_period_id')->comment('شماره مجلس');
             $table->string('person_research_meeting')->comment('اجلاسیه');
             $table->string('person_research_register_number')->comment('شماره ثبت');
             $table->string('person_research_register_date')->comment('تاریخ ثبت');
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('person_research_public_court_result')->comment('نتیجه طرح در صحن علنی');
             $table->string('person_research_team_result')->comment('نتیجه نهایی هیأت تحقیق و تفحص');
             $table->string('person_research_team_result_ministry_id')->comment('دستگاه ذیربط');
-            $table->string('person_research_contents_summary')->comment('چکیده اقدامات دستگاه مخاطب');
+            $table->longText('person_research_contents_summary')->comment('چکیده اقدامات دستگاه مخاطب');
             $table->timestamps();
             $table->softDeletes();
         });

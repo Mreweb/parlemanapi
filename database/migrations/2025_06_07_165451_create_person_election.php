@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('person_election', function (Blueprint $table) {
             $table->id('row_id');
-            $table->bigInteger('person_id');
-            $table->bigInteger('election_id');
+            $table->integer('person_id');
+            $table->integer('election_id');
             $table->timestamps();
             $table->softDeletes();
         });

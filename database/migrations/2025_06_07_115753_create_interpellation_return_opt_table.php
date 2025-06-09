@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('person_interpellation_return_opt', function (Blueprint $table) {
             $table->id('interpellation_return_opt_id');
-            $table->bigInteger('interpellation_return_opt_person_id');
-            $table->bigInteger('interpellation_id');
-            $table->foreign('interpellation_id')->references('interpellation_id')->on('interpellations')->onDelete('cascade');
+            $table->integer('interpellation_return_opt_person_id');
+            $table->integer('interpellation_id');
+            $table->foreign('interpellation_id')->references('interpellation_id')->on('person_interpellations')->onDelete('cascade');
             $table->timestamps();
         });
     }

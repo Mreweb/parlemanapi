@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void{
         Schema::create('person_meeting_track', function (Blueprint $table) {
             $table->id('row_id')->autoIncrement();
-            $table->bigInteger('meeting_track_meeting_id')->comment('شناسه ملاقات');
+            $table->integer('meeting_track_meeting_id')->comment('شناسه ملاقات');
             $table->longText('meeting_track_description')->comment('اقدام انجام شده');
             $table->foreign('meeting_track_meeting_id')->references('meeting_id')->on('person_meeting')->onDelete('cascade');
             $table->timestamps();

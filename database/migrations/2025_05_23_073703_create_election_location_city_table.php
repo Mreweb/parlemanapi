@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id('row_id');
             $table->integer('election_location_id');
             $table->integer('election_location_city_id');
+            $table->foreign('election_location_id')->references('election_location_id')->on('election_location')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

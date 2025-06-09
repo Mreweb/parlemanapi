@@ -9,20 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void{
         Schema::create('person', function (Blueprint $table) {
             $table->id('person_id');
-            $table->string('person_name')->nullable();
-            $table->string('person_last_name');
-            $table->string('person_national_code')->unique();
-            $table->string('person_phone')->unique();
-            $table->string('person_email')->nullable();
-            $table->enum('person_gender',['male','female'])->nullable();
-            $table->integer('person_province_id');
-            $table->string('username');
-            $table->string('password')->nullable();
-            $table->string('otp')->nullable();
+            $table->string('person_name', 100)->nullable()->comment('نام');
+            $table->string('person_last_name', 100)->comment('نام خانوادگی');
+            $table->string('person_national_code', 15)->unique()->comment('کد ملی');
+            $table->string('person_phone', 14)->unique()->comment('تلفن همراه');
+            $table->string('person_email', 100)->nullable()->comment('لایمی');
+            $table->enum('person_gender',['male','female'])->nullable()->comment('جنسیت');
+            $table->integer('person_province_id')->comment('استان');
+            $table->integer('person_election_id')->comment('حوزه انتخابیه');
+            $table->string('person_role',40)->comment('نقش');
+            $table->string('username', 100)->comment('نام کاربری');
+            $table->string('password')->comment('رمز عبور');
+            $table->string('otp',10)->nullable()->comment('کد یکتا');
             $table->timestamps();
             $table->softDeletes();
         });

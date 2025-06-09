@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_meeting', function (Blueprint $table) {
-            $table->id('meeting_id')->autoIncrement();
+            $table->integer('meeting_id')->autoIncrement();
             $table->string('meeting_title')->comment('شرح مصوبه');
             $table->string('meeting_description')->comment('توضیحات');
             $table->enum('meeting_status',['done','undone'])->comment('وضعیت');

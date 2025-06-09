@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('province', function (Blueprint $table) {
             $table->id('province_id')->autoIncrement();
-            $table->string('province_name');
+            $table->string('province_name', 100)->unique()->comment('نام استان');
             $table->timestamps();
             $table->softDeletes();
         });

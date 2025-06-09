@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('person_question_signature', function (Blueprint $table) {
             $table->id('row_id')->autoIncrement();
-            $table->bigInteger('question_id');
-            $table->bigInteger('question_person_id');
+            $table->integer('question_id');
+            $table->integer('question_person_id');
             $table->foreign('question_id')->references('question_id')->on('person_question')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('person_projects_related_commission', function (Blueprint $table) {
             $table->id('row_id')->autoIncrement();
-            $table->bigInteger('projects_related_commission_id')->comment('شناسه کمیسیون مرتبط');
-            $table->bigInteger('projects_project_id')->comment('شناسه طراح');
+            $table->integer('projects_related_commission_id')->comment('شناسه کمیسیون مرتبط');
+            $table->integer('projects_project_id')->comment('شناسه طراح');
             $table->timestamps();
         });
     }

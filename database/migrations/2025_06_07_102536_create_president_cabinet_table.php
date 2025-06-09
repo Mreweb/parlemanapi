@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('president_cabinet', function (Blueprint $table) {
             $table->id('row_id')->primary();
-            $table->bigInteger('president_id');
-            $table->string('cabinet');
+            $table->integer('president_id');
+            $table->string('cabinet',100);//enum gov cabinet
             $table->integer('cabinet_person_id');
             $table->timestamps();
             $table->softDeletes();

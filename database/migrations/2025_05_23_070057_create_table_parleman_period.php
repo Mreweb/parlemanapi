@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('parleman_period', function (Blueprint $table) {
             $table->id('period_id');
-            $table->string('period_title');
+            $table->string('period_title', 100);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('person_projects_participation', function (Blueprint $table) {
             $table->id('row_id')->autoIncrement();
-            $table->bigInteger('projects_participation_person_id')->comment('شناسه فرد مشارکت کننده در طرح');
-            $table->bigInteger('projects_project_id')->comment('شناسه طرح');
+            $table->integer('projects_participation_person_id')->comment('شناسه فرد مشارکت کننده در طرح');
+            $table->integer('projects_project_id')->comment('شناسه طرح');
             $table->timestamps();
         });
     }

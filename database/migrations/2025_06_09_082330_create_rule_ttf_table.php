@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void{
         Schema::create('rule_ttf', function (Blueprint $table) {
-            $table->id('rule_ttf_id')->autoIncrement();
-            $table->string('rule_ttf_president_id')->comment('رئیس جمهور');
-            $table->string('rule_ttf_person_id')->comment('نام نماینده متقاضی ماده 234');
-            $table->string('rule_ttf_gov_period_id')->comment('شماره دولت');
-            $table->string('rule_ttf_parliament_period_id')->comment('شماره مجلس');
+            $table->integer('rule_ttf_id')->autoIncrement();
+            $table->string('president_id')->comment('رئیس جمهور');
+            $table->string('person_id')->comment('نام نماینده متقاضی ماده 234');
+            $table->string('gov_period_id')->comment('شماره دولت');
+            $table->string('parliament_period_id')->comment('شماره مجلس');
             $table->string('rule_ttf_meeting')->comment('اجلاسیه');
             $table->string('rule_ttf_register_number')->comment('شماره ثبت');
             $table->string('rule_ttf_subject')->comment('شماره ثبت');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('rule_ttf_public_parliament_session_number')->comment('شماره جلسه صحن علنی');
             $table->string('rule_ttf_public_parliament_check_result')->comment('نتیجه بررسی در صحن علنی');
             $table->string('rule_ttf_ministry_id')->comment('دستگاه ذیربط');
-            $table->string('rule_ttf_summary_content')->comment('چکیده اقدامات دستگاه مخاطب');
+            $table->longText('rule_ttf_summary_content')->comment('چکیده اقدامات دستگاه مخاطب');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('person_research_team', function (Blueprint $table) {
             $table->id('row_id');
-            $table->bigInteger('person_research_team_person_id')->comment('شناسه فرد در تیم تحقیق');
-            $table->bigInteger('person_research_id');
-            $table->foreign('person_research_id')->references('person_research_id')->on('person_research_id')->onDelete('cascade');
+            $table->integer('person_research_team_person_id')->comment('شناسه فرد در تیم تحقیق');
+            $table->integer('person_research_id');
+            $table->foreign('person_research_id')->references('person_research_id')->on('person_research')->onDelete('cascade');
             $table->timestamps();
         });
     }

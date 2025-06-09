@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rule_forty_five', function (Blueprint $table) {
-            $table->id('rule_forty_five_id')->autoIncrement();
-            $table->string('rule_forty_five_president_id')->comment('رئیس جمهور');
-            $table->string('rule_forty_five_person_id')->comment('نام نماینده متقاضی ماده 45');
-            $table->string('rule_forty_five_gov_period_id')->comment('شماره دولت');
-            $table->string('rule_forty_five_parliament_period_id')->comment('شماره مجلس');
+            $table->integer('rule_forty_five_id')->autoIncrement();
+            $table->string('president_id')->comment('رئیس جمهور');
+            $table->string('person_id')->comment('نام نماینده متقاضی ماده 45');
+            $table->string('gov_period_id')->comment('شماره دولت');
+            $table->string('five_parliament_period_id')->comment('شماره مجلس');
             $table->string('rule_forty_five_meeting')->comment('اجلاسیه');
             $table->string('rule_forty_five_register_number')->comment('شماره ثبت');
             $table->string('rule_forty_five_subject')->comment('شماره ثبت');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('rule_forty_five_public_parliament_session_number')->comment('شماره جلسه صحن علنی');
             $table->string('rule_forty_five_public_parliament_check_result')->comment('نتیجه بررسی در صحن علنی');
             $table->string('rule_forty_five_ministry_id')->comment('دستگاه ذیربط');
-            $table->string('rule_forty_five_summary_content')->comment('چکیده اقدامات دستگاه مخاطب');
+            $table->longText('rule_forty_five_summary_content')->comment('چکیده اقدامات دستگاه مخاطب');
             $table->timestamps();
             $table->softDeletes();
         });

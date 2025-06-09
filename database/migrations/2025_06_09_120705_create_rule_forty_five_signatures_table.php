@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('rule_forty_five_signatures', function (Blueprint $table) {
             $table->id('row_id');
-            $table->bigInteger('rule_forty_five_supporters_person_id')->comment('نمایندگان امضا کننده');
-            $table->bigInteger('rule_forty_five_id');
+            $table->integer('rule_forty_five_supporters_person_id')->comment('نمایندگان امضا کننده');
+            $table->integer('rule_forty_five_id');
             $table->foreign('rule_forty_five_id')->references('rule_forty_five_id')->on('rule_forty_five')->onDelete('cascade');
             $table->timestamps();
         });

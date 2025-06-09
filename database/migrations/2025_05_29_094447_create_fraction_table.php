@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fraction', function (Blueprint $table) {
             $table->id('fraction_id');
-            $table->string('fraction_name');
+            $table->string('fraction_name',100);
             $table->timestamps();
             $table->softDeletes();
         });

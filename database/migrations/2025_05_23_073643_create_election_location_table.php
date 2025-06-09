@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('election_location', function (Blueprint $table) {
-            $table->id('election_location_id');
-            $table->string('election_location_title');
+            $table->integer('election_location_id')->autoIncrement();
+            $table->string('election_location_title', 100);
             $table->integer('election_location_province_id');
             $table->timestamps();
             $table->softDeletes();
