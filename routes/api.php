@@ -22,6 +22,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\Upload;
+use App\Http\Controllers\VoteConfidenceController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -196,5 +197,12 @@ Route::prefix('rules')->group(function () {
     Route::post('/', [RulesController::class, 'store']);
     Route::put('/', [RulesController::class, 'update']);
     Route::delete('/{id}', [RulesController::class, 'destroy']);
+});
 
+Route::prefix('vote_confidence')->group(function () {
+    Route::get('/', [VoteConfidenceController::class, 'index']);
+    Route::get('/{id}', [VoteConfidenceController::class, 'show']);
+    Route::post('/', [VoteConfidenceController::class, 'store']);
+    Route::put('/', [VoteConfidenceController::class, 'update']);
+    Route::delete('/{id}', [VoteConfidenceController::class, 'destroy']);
 });

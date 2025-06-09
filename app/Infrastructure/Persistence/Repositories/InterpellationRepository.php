@@ -93,7 +93,7 @@ class InterpellationRepository implements IInterpellationsRepository {
             InterpellationOpposingEloquent::create(
                 [
                     'interpellation_id' => $result->interpellation_id,
-                    'interpellations_person_id' => $signature_person_id
+                    'interpellations_opposing_person_id' => $signature_person_id
                 ]
             );
         }
