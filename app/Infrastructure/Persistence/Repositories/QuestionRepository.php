@@ -91,7 +91,7 @@ class QuestionRepository implements INoticeRepository {
         );
 
 
-        DB::table('person_question_signature')->where('question_id',$data['question_id'])->delete();
+        QuestionSignatureEloquent::where('question_id',$data['question_id'])->delete();
         foreach ($question_signature_person_ids as $signature_person_id) {
             QuestionSignatureEloquent::create(
                 [

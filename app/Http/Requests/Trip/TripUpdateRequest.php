@@ -21,9 +21,9 @@ class TripUpdateRequest extends FormRequest{
             'trip_province_id' => ['required'],
             'trip_description' => ['required'],
             'trip_subject' => ['required'],
-            'person_trip_actions' => ['required'],
-            'person_trip_approvals' => ['required'],
-            'person_trip_board_person_ids' => ['array'],
+            'person_trip_actions' => ['required','array'],
+            'person_trip_approvals' => ['required','array'],
+            'person_trip_board_person_ids' => ['array']
         ];
     }
     public function messages(): array{

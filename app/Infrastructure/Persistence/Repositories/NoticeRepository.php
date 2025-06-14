@@ -93,7 +93,7 @@ class NoticeRepository implements INoticeRepository {
         );
 
 
-        DB::table('person_notice_signature')->where('notice_id',$data['notice_id'])->delete();
+        NoticeSignatureEloquent::where('notice_id',$data['notice_id'])->delete();
         foreach ($notice_signature_person_ids as $notice_signature_person_id) {
             NoticeSignatureEloquent::create(
                 [

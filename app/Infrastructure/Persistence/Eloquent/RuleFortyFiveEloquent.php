@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RuleFortyFiveEloquent extends Model{
     use SoftDeletes;
-    protected $table = 'rule_forty_five';
+    protected $table = 'person_rule_forty_five';
     protected $primaryKey = 'rule_forty_five_id';
     protected $guarded = [];
 }
