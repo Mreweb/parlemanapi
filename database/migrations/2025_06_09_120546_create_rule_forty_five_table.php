@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rule_forty_five', function (Blueprint $table) {
+        Schema::create('person_rule_forty_five', function (Blueprint $table) {
+            $table->comment('ماده 45');
             $table->integer('rule_forty_five_id')->autoIncrement();
             $table->string('rule_forty_five_president_id')->comment('رئیس جمهور');
             $table->string('rule_forty_five_person_id')->comment('نام نماینده متقاضی ماده 45');

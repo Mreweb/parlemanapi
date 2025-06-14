@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void{
         Schema::create('person_question', function (Blueprint $table) {
+            $table->comment('سوالات');
             $table->integer('question_id')->autoIncrement();
             $table->integer('question_person_id')->comment('شخصی که سوال کننده بوده')->nullable();
             $table->integer('question_president_id')->comment('در کدام شخص ریاست جمهوری تذکر داده شده')->nullable();

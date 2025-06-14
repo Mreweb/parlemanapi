@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('president_cabinet', function (Blueprint $table) {
+            $table->comment('کابینه ریاست مجهوری');
             $table->id('row_id')->primary();
             $table->integer('president_id');
             $table->string('cabinet',100);//enum gov cabinet

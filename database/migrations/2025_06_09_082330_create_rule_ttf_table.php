@@ -10,7 +10,8 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void{
-        Schema::create('rule_ttf', function (Blueprint $table) {
+        Schema::create('person_rule_ttf', function (Blueprint $table) {
+            $table->comment('ماده 234');
             $table->integer('rule_ttf_id')->autoIncrement();
             $table->string('rule_ttf_president_id')->comment('رئیس جمهور');
             $table->string('rule_ttf_person_id')->comment('نام نماینده متقاضی ماده 234');

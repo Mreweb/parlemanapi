@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_notice_signature', function (Blueprint $table) {
+            $table->comment('امضا کنندگان تذکر نماینده');
             $table->id('row_id')->autoIncrement();
             $table->integer('notice_id');
             $table->integer('notice_person_id');

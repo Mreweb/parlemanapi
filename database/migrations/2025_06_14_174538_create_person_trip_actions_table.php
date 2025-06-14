@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_trip_actions', function (Blueprint $table) {
+            $table->comment('اقدامات سفر');
             $table->id('row_id');
             $table->integer('trip_id')->comment('شناسه سفر');
             $table->longText('action_description')->comment('توضیح اقدامات');

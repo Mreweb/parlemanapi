@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_interpellation_opt', function (Blueprint $table) {
+
+            $table->comment('نمایندگان انضراف دهنده استیضاح');
             $table->id('interpellation_opt_id');
             $table->integer('interpellation_opt_person_id');
             $table->integer('interpellation_id');

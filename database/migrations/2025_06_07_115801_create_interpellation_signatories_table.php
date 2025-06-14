@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_interpellation_signatories', function (Blueprint $table) {
+
+            $table->comment('امضا کنندگان استیضاح نماینده');
             $table->id('interpellation_signature_id');
             $table->integer('interpellation_signature_person_id');
             $table->integer('interpellation_id');

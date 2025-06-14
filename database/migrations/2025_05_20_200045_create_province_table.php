@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('province', function (Blueprint $table) {
+            $table->comment('فهرست استان ها');
             $table->id('province_id')->autoIncrement();
             $table->string('province_name', 100)->unique()->comment('نام استان');
             $table->timestamps();

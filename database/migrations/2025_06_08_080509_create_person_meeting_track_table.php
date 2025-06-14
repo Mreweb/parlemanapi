@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void{
         Schema::create('person_meeting_track', function (Blueprint $table) {
+            $table->comment('پیگیری ملاقات های نماینده');
             $table->id('row_id')->autoIncrement();
             $table->integer('meeting_track_meeting_id')->comment('شناسه ملاقات');
             $table->longText('meeting_track_description')->comment('اقدام انجام شده');

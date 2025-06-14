@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_question_signature', function (Blueprint $table) {
+            $table->comment('امضا کنندگان سوال');
             $table->id('row_id')->autoIncrement();
             $table->integer('question_id');
             $table->integer('question_person_id');

@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void{
         Schema::create('person', function (Blueprint $table) {
+            $table->comment('افراد');
             $table->id('person_id');
             $table->string('person_name', 100)->nullable()->comment('نام');
             $table->string('person_last_name', 100)->comment('نام خانوادگی');

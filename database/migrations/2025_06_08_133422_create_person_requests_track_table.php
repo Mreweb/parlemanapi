@@ -10,6 +10,7 @@ return new class extends Migration {
      */
     public function up(): void{
         Schema::create('person_requests_track', function (Blueprint $table) {
+            $table->comment('پیگیری درخواست ها');
             $table->id('row_id')->autoIncrement();
             $table->string('request_id')->comment('شناسه درخواست');
             $table->string('request_commission_title')->comment('ارجا به مبادی ذیربط');

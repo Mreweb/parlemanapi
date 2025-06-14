@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_trip_board', function (Blueprint $table) {
+            $table->comment('هیات همراه');
             $table->id('row_id');
             $table->integer('trip_id')->comment('شناسه سفر');
             $table->integer('board_person_id')->comment('شناسه فرد');

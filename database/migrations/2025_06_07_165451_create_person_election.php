@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_election', function (Blueprint $table) {
+            $table->comment('حوزه انتخابیه نماینده');
             $table->id('row_id');
             $table->integer('person_id');
             $table->integer('election_id');

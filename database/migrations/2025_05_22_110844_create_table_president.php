@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('president', function (Blueprint $table) {
+            $table->comment('ریاست جمهوری');
             $table->integer('president_id')->autoIncrement();
             $table->string('president_name', 100);
             $table->timestamps();

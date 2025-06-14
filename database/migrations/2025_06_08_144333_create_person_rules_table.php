@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_rules', function (Blueprint $table) {
+            $table->comment('قوانین مصوب شده');
             $table->id('rule_id')->autoIncrement();
             $table->string('rule_preparation')->comment('مقدمات قانون');
             $table->string('rule_executive_branch')->comment('قواعد روابط شعبه اجرایی');

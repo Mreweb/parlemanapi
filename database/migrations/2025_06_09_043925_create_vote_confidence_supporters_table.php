@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_vote_confidence_supporters', function (Blueprint $table) {
+            $table->comment('افراد حامی رای اعتماد');
             $table->id('row_id');
             $table->integer('vote_confidence_supporters_person_id')->comment('شناسه فرد حامی رای اعتماد');
             $table->integer('vote_confidence_id');

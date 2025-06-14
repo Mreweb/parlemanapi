@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ministry', function (Blueprint $table) {
+            $table->comment('وزارت خانه');
             $table->id('ministry_id');
             $table->string('ministry_name',100);
             $table->timestamps();

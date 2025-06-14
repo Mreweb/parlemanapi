@@ -10,6 +10,7 @@ return new class extends Migration {
      */
     public function up(): void{
         Schema::create('person_interpellations_opposing', function (Blueprint $table) {
+            $table->comment('مخالف های استیضاح');
             $table->id('interpellations_opposing_id');
             $table->integer('interpellations_opposing_person_id');
             $table->integer('interpellation_id');

@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_projects_related_commission', function (Blueprint $table) {
+            $table->comment('کمیسیون های مرتبط');
             $table->id('row_id')->autoIncrement();
             $table->integer('projects_related_commission_id')->comment('شناسه کمیسیون مرتبط');
             $table->integer('projects_project_id')->comment('شناسه طراح');

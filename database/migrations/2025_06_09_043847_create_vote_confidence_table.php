@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_vote_confidence', function (Blueprint $table) {
+            $table->comment('رای اعتماد');
             $table->integer('vote_confidence_id')->autoIncrement();
             $table->string('vote_confidence_president_id')->comment('رئیس جمهور');
             $table->string('vote_confidence_person_id')->comment('شخصی که از او استیضاح شده');

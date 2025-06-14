@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_interpellation_return_opt', function (Blueprint $table) {
+            $table->comment('انضراف از انصراف استیضاح');
             $table->id('interpellation_return_opt_id');
             $table->integer('interpellation_return_opt_person_id');
             $table->integer('interpellation_id');

@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('captcha', function (Blueprint $table) {
+            $table->comment('کپچا');
             $table->id();
             $table->string('captcha_id', 64);
             $table->string('captcha_code', 6);

@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void{
         Schema::create('person_interpellations', function (Blueprint $table) {
+            $table->comment('استیضاح');
             $table->integer('interpellation_id')->autoIncrement();
             $table->string('interpellation_president_id')->comment('رئیس جمهور');
             $table->string('interpellation_person_id')->comment('شخصی که از او استیضاح شده');

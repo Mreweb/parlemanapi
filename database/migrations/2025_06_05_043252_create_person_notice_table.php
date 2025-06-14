@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_notice', function (Blueprint $table) {
+            $table->comment('تذکر های نماینده');
             $table->integer('notice_id')->autoIncrement();
             $table->string('notice_person_id')->comment('شخصی که تذکر دهنده بوده')->nullable();
             $table->string('notice_president_id')->comment('در کدام شخص ریاست جمهوری تذکر داده شده')->nullable();

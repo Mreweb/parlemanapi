@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('media', function (Blueprint $table) {
+            $table->comment('فایل ها');
             $table->id('row_id');
             $table->string('media_id');
             $table->string('path');

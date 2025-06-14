@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rule_ttf_signatures', function (Blueprint $table) {
+        Schema::create('person_rule_ttf_signatures', function (Blueprint $table) {
+            $table->comment('امضا کنندگان ماده 234');
             $table->id('row_id');
             $table->integer('rule_ttf_supporters_person_id')->comment('نمایندگان امضا کننده');
             $table->integer('rule_ttf_id');
-            $table->foreign('rule_ttf_id')->references('rule_ttf_id')->on('rule_ttf')->onDelete('cascade');
+            $table->foreign('rule_ttf_id')->references('rule_ttf_id')->on('person_rule_ttf')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rule_forty_five_signatures', function (Blueprint $table) {
+        Schema::create('person_rule_forty_five_signatures', function (Blueprint $table) {
+            $table->comment('امضا کنندگان ماده 45');
             $table->id('row_id');
             $table->integer('rule_forty_five_supporters_person_id')->comment('نمایندگان امضا کننده');
             $table->integer('rule_forty_five_id');
-            $table->foreign('rule_forty_five_id')->references('rule_forty_five_id')->on('rule_forty_five')->onDelete('cascade');
+            $table->foreign('rule_forty_five_id')->references('rule_forty_five_id')->on('person_rule_forty_five')->onDelete('cascade');
             $table->timestamps();
         });
     }

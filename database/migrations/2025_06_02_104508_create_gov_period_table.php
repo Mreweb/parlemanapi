@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gov_period', function (Blueprint $table) {
+            $table->comment('شماره دولت');
             $table->id('gov_period_id');
             $table->string('gov_period_name',100);
             $table->timestamps();

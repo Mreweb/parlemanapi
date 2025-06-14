@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_research', function (Blueprint $table) {
+            $table->comment('کاربرگ تحقیق و تفحص');
             $table->integer('person_research_id')->autoIncrement();
             $table->string('person_research_president_id')->comment('رئیس جمهور');
             $table->string('person_research_person_id')->comment('نام نماینده طراح تحقیق و تفحص');

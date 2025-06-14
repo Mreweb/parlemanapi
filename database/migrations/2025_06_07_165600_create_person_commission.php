@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('person_commission', function (Blueprint $table) {
+            $table->comment('کمیسیون نماینده');
             $table->id('row_id');
             $table->integer('person_id');
             $table->integer('commission_id');
