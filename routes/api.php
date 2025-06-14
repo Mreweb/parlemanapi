@@ -24,6 +24,7 @@ use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\RuleFortyFiveController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\RuleTTFController;
+use App\Http\Controllers\TripsController;
 use App\Http\Controllers\Upload;
 use App\Http\Controllers\VoteConfidenceController;
 use Illuminate\Support\Facades\Route;
@@ -232,4 +233,12 @@ Route::prefix('rule_45')->group(function () {
     Route::post('/', [RuleFortyFiveController::class, 'store']);
     Route::put('/', [RuleFortyFiveController::class, 'update']);
     Route::delete('/{id}', [RuleFortyFiveController::class, 'destroy']);
+});
+
+Route::prefix('trips')->group(function () {
+    Route::get('/', [TripsController::class, 'index']);
+    Route::get('/{id}', [TripsController::class, 'show']);
+    Route::post('/', [TripsController::class, 'store']);
+    Route::put('/', [TripsController::class, 'update']);
+    Route::delete('/{id}', [TripsController::class, 'destroy']);
 });
