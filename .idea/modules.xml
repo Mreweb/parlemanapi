@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/parlemanapi.iml" filepath="$PROJECT_DIR$/.idea/parlemanapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../parlemanreact/.idea/parlemanreact.iml" filepath="$PROJECT_DIR$/../parlemanreact/.idea/parlemanreact.iml" />
     </modules>
   </component>
 </project>
