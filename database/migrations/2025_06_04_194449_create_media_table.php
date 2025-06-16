@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id('row_id');
             $table->string('media_id');
             $table->string('path');
+            $table->longText('base_64');
             $table->string('extension');
             $table->timestamps();
             $table->softDeletes();

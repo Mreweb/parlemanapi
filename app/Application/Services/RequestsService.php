@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\PersonRequestsRepository;
+
+use App\Infrastructure\Persistence\Repositories\PRequest\PersonRequestsRepository;
 
 class RequestsService{
 

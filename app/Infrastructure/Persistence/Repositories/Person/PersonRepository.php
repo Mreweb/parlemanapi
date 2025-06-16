@@ -14,7 +14,7 @@ class PersonRepository implements IPersonRepository {
         $query = PersonEloquent::query();
         $query->select('person_id','person_name','person_last_name',
             'person_national_code','person_phone','person_email',
-            'person_gender','person_province_id','username','password',
+            'person_gender','person_province_id','username','person_image',
             'created_at','updated_at'
         );
         if (!empty($filters['person_national_code'])) {
@@ -38,7 +38,10 @@ class PersonRepository implements IPersonRepository {
     }
     public function findById(int $id){
         $query = PersonEloquent::query();
-        $query->select('person_id','person_name','person_last_name','person_role','person_national_code','person_phone','person_email','person_gender','person_province_id','username','password');
+        $query->select('person_id'
+            ,'person_name',
+            'person_image',
+            'person_last_name','person_role','person_national_code','person_phone','person_email','person_gender','person_province_id','username');
         $query->where('person_id', $id);
         $data =  $query->get()->toArray()[0];
         return $data;
@@ -69,6 +72,7 @@ class PersonRepository implements IPersonRepository {
                     'person_national_code' => $data['person_national_code'],
                     'person_phone' => $data['person_phone'],
                     'person_gender' => $data['person_gender'],
+                    'person_image' => $data['person_image'],
                     'person_province_id' => $data['person_province_id'],
                     'username' => $data['username'],
                     'password' => $data['password']
@@ -82,6 +86,7 @@ class PersonRepository implements IPersonRepository {
                     'person_national_code' => $data['person_national_code'],
                     'person_phone' => $data['person_phone'],
                     'person_gender' => $data['person_gender'],
+                    'person_image' => $data['person_image'],
                     'person_province_id' => $data['person_province_id'],
                     'username' => $data['username']
                 ]

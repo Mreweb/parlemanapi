@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Fraction\FractionRepository;
+namespace App\Infrastructure\Persistence\Repositories\Fraction;
+
 use App\Domain\Interfaces\IFractionRepository;
 use App\Infrastructure\Persistence\Eloquent\Fraction\FractionEloquent;
 

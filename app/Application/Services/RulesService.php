@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\PersonRulesRepository;
+
+use App\Infrastructure\Persistence\Repositories\Rules\PersonRulesRepository;
 
 class RulesService{
 

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\VoteConfidenceRepository;
+
+use App\Infrastructure\Persistence\Repositories\VoteConfidence\VoteConfidenceRepository;
 
 class VoteConfidenceService{
 

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\CommissionRepository;
+
+
+use App\Infrastructure\Persistence\Repositories\Commission\CommissionRepository;
 
 class CommissionService{
 

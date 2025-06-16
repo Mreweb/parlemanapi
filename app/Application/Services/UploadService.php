@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\AuthRepository;
-use App\Infrastructure\Persistence\Repositories\UploadRepository;
+
+use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
 
 class UploadService{
 

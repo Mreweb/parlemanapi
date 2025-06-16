@@ -21,6 +21,7 @@ class PersonUpdateRequest extends FormRequest{
             'person_phone' => ['required', 'string'  , 'max:12' , 'min:10'],
             'person_gender' => ['required', 'string'],
             'person_province_id' => ['required'],
+            'person_image' => ['required'],
             'person_role' => ['required'],
             'username' => ['required', 'string'  , 'max:50' , 'min:3'],
             'password' => [ 'string'  , 'max:50' , 'min:3']
@@ -37,6 +38,7 @@ class PersonUpdateRequest extends FormRequest{
             'person_province_id.required' => 'شناسه استان الزامی است',
             'username.required' => 'نام کاربری الزامی است',
             'password.required' => 'رمز عبور الزامی است',
+            'person_image.required' => 'تصویر کاربر الزامی است',
 
             'person_name.min' => 'نام  باید بیشتر از 3 کاراکتر باشد',
             'person_name.max' => 'نام  باید کمتر از 255 کاراکتر باشد',

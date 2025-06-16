@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\PresidentCabinetRepository;
+
+use App\Infrastructure\Persistence\Repositories\President\PresidentCabinetRepository;
 
 class PresidentCabinetService{
 

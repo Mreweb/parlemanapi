@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\RuleTTFRepository;
+
+use App\Infrastructure\Persistence\Repositories\RuleTTF\RuleTTFRepository;
 
 class RuleTTFService{
 

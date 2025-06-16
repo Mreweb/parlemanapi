@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\GovPeriodRepository;
+
+use App\Infrastructure\Persistence\Repositories\GovPeriod\GovPeriodRepository;
 
 class GovPeriodService{
 

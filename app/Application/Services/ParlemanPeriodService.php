@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\ParlemanPeriodRepository;
+
+use App\Infrastructure\Persistence\Repositories\ParlemanPeriod\ParlemanPeriodRepository;
 
 class ParlemanPeriodService{
 

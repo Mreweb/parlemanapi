@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\FractionRepository;
+
+use App\Infrastructure\Persistence\Repositories\Fraction\FractionRepository;
 
 class FractionService{
 

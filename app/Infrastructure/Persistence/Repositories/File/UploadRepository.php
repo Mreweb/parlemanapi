@@ -12,10 +12,10 @@ class UploadRepository implements IUploadRepository {
     }
 
     public function get_file(string $id){
-
         $query = UploadEloquent::query();
         $query->select('*');
         $query->where('media_id', $id);
+        $query->orWhere('row_id', $id);
         return $query->get()->toArray();
 
 

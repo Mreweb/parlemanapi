@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\MinistryRepository;
+
+use App\Infrastructure\Persistence\Repositories\Ministry\MinistryRepository;
 
 class MinistryService{
 

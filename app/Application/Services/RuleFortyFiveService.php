@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\RuleFortyFiveRepository;
+
+use App\Infrastructure\Persistence\Repositories\RuleFortyFive\RuleFortyFiveRepository;
 
 class RuleFortyFiveService{
 

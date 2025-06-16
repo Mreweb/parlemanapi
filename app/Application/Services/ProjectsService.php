@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\ProjectsRepository;
+
+use App\Infrastructure\Persistence\Repositories\Projects\ProjectsRepository;
 
 class ProjectsService{
 

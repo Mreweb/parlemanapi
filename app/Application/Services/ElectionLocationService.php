@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\ElectionLocationRepository;
+
+
+use App\Infrastructure\Persistence\Repositories\Election\ElectionLocationRepository;
 
 class ElectionLocationService{
 

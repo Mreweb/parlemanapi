@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\NoticeRepository;
+
+use App\Infrastructure\Persistence\Repositories\Notice\NoticeRepository;
 
 class NoticeService{
 

@@ -2,7 +2,6 @@
 
 namespace App\Infrastructure\Persistence\Eloquent\Interpellation;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class InterpellationOpposingEloquent extends Model{
     protected $table = 'person_interpellations_opposing';

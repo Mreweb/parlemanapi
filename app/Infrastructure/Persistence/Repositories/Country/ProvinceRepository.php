@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Province;
+namespace App\Infrastructure\Persistence\Repositories\Country;
 use App\Domain\Interfaces\IProvinceRepository;
 use App\Infrastructure\Persistence\Eloquent\Country\ProvinceEloquent;
 

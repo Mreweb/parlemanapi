@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\PresidentRepository;
+
+use App\Infrastructure\Persistence\Repositories\President\PresidentRepository;
 
 class PresidentService{
 

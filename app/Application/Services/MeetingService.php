@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Application\Services;
-use App\Domain\Interfaces\IMeetingRepository;
+
+use App\Infrastructure\Persistence\Repositories\Meeting\MeetingRepository;
 
 class MeetingService{
 
-    public function __construct(private IMeetingRepository $repository){}
+    public function __construct(private MeetingRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

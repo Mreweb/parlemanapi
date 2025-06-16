@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\InterpellationRepository;
+
+use App\Infrastructure\Persistence\Repositories\Interpellation\InterpellationRepository;
 
 class InterpellationService{
 

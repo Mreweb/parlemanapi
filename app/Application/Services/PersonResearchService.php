@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\ResearchRepository;
+
+use App\Infrastructure\Persistence\Repositories\Trip\ResearchRepository;
 
 class PersonResearchService{
 

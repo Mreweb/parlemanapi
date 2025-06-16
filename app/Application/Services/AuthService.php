@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\AuthRepository;
+
+use App\Infrastructure\Persistence\Repositories\Auth\AuthRepository;
 
 class AuthService{
 

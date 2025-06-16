@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('person_gender',['male','female'])->nullable()->comment('جنسیت');
             $table->integer('person_province_id')->comment('استان');
             $table->string('person_role',40)->comment('نقش');
+            $table->longText('person_image')->comment('تصویر پروفایل');
             $table->string('username', 100)->comment('نام کاربری');
             $table->string('password')->comment('رمز عبور');
             $table->string('otp',10)->nullable()->comment('کد یکتا');
