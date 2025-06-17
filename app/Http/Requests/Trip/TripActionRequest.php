@@ -5,22 +5,14 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class TripRequest extends FormRequest{
+class TripActionRequest extends FormRequest{
     public function authorize(): bool{
         return true;
     }
     public function rules(): array{
         return [
-            'trip_president_id' => ['required'],
-            'trip_person_id' => ['required'],
-            'trip_gov_period_id' => ['required'],
-            'trip_parliament_period_id' => ['required'],
-            'trip_start_date' => ['required'],
-            'trip_end_date' => ['required'],
-            'trip_province_id' => ['required'],
-            'trip_description' => ['required'],
-            'trip_subject' => ['required'],
-            'person_trip_board_person_ids' => ['array']
+            'trip_id' => ['required'],
+            'action_description' => ['required']
         ];
     }
     public function messages(): array{

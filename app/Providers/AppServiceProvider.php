@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+
 use App\Application\Services\CaptchaService;
 use App\Application\Services\DBMessageService;
 use App\Domain\Interfaces\IAuthRepository;
@@ -27,27 +28,27 @@ use App\Domain\Interfaces\IRulesRepository;
 use App\Domain\Interfaces\IRuleTTFRepository;
 use App\Domain\Interfaces\IUploadRepository;
 use App\Domain\Interfaces\IVoteConfidenceRepository;
-use App\Infrastructure\Persistence\Repositories\AuthRepository;
-use App\Infrastructure\Persistence\Repositories\CityRepository;
-use App\Infrastructure\Persistence\Repositories\CommissionRepository;
-use App\Infrastructure\Persistence\Repositories\ElectionLocationRepository;
-use App\Infrastructure\Persistence\Repositories\FractionRepository;
-use App\Infrastructure\Persistence\Repositories\GovPeriodRepository;
-use App\Infrastructure\Persistence\Repositories\InterpellationRepository;
-use App\Infrastructure\Persistence\Repositories\MeetingRepository;
-use App\Infrastructure\Persistence\Repositories\MinistryRepository;
-use App\Infrastructure\Persistence\Repositories\NoticeRepository;
-use App\Infrastructure\Persistence\Repositories\ParlemanPeriodRepository;
-use App\Infrastructure\Persistence\Repositories\PersonRepository;
-use App\Infrastructure\Persistence\Repositories\PersonRequestsRepository;
-use App\Infrastructure\Persistence\Repositories\PersonRulesRepository;
-use App\Infrastructure\Persistence\Repositories\PresidentRepository;
-use App\Infrastructure\Persistence\Repositories\ProjectsRepository;
-use App\Infrastructure\Persistence\Repositories\ProvinceRepository;
-use App\Infrastructure\Persistence\Repositories\QuestionRepository;
-use App\Infrastructure\Persistence\Repositories\RuleTTFRepository;
-use App\Infrastructure\Persistence\Repositories\UploadRepository;
-use App\Infrastructure\Persistence\Repositories\VoteConfidenceRepository;
+use App\Infrastructure\Persistence\Repositories\Auth\AuthRepository;
+use App\Infrastructure\Persistence\Repositories\Commission\CommissionRepository;
+use App\Infrastructure\Persistence\Repositories\Country\CityRepository;
+use App\Infrastructure\Persistence\Repositories\Country\ProvinceRepository;
+use App\Infrastructure\Persistence\Repositories\Election\ElectionLocationRepository;
+use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
+use App\Infrastructure\Persistence\Repositories\Fraction\FractionRepository;
+use App\Infrastructure\Persistence\Repositories\GovPeriod\GovPeriodRepository;
+use App\Infrastructure\Persistence\Repositories\Interpellation\InterpellationRepository;
+use App\Infrastructure\Persistence\Repositories\Meeting\MeetingRepository;
+use App\Infrastructure\Persistence\Repositories\Ministry\MinistryRepository;
+use App\Infrastructure\Persistence\Repositories\Notice\NoticeRepository;
+use App\Infrastructure\Persistence\Repositories\ParlemanPeriod\ParlemanPeriodRepository;
+use App\Infrastructure\Persistence\Repositories\Person\PersonRepository;
+use App\Infrastructure\Persistence\Repositories\PRequest\PersonRequestsRepository;
+use App\Infrastructure\Persistence\Repositories\President\PresidentRepository;
+use App\Infrastructure\Persistence\Repositories\Projects\ProjectsRepository;
+use App\Infrastructure\Persistence\Repositories\Question\QuestionRepository;
+use App\Infrastructure\Persistence\Repositories\Rules\PersonRulesRepository;
+use App\Infrastructure\Persistence\Repositories\RuleTTF\RuleTTFRepository;
+use App\Infrastructure\Persistence\Repositories\VoteConfidence\VoteConfidenceRepository;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 

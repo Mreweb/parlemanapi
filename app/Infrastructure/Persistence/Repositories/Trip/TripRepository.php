@@ -76,29 +76,9 @@ class TripRepository implements ITripRepository {
         return $result;
     }
     public function create(array $data){
-        $person_trip_actions = $data['person_trip_actions'];
-        $person_trip_approvals = $data['person_trip_approvals'];
         $person_trip_board_person_ids  = $data['person_trip_board_person_ids'];
-        unset($data['person_trip_actions']);
-        unset($data['person_trip_approvals']);
         unset($data['person_trip_board_person_ids']);
         $result =  TripEloquent::create($data);
-        foreach ($person_trip_actions as $action) {
-            TripActionsEloquent::create(
-                [
-                    'trip_id' => $result->trip_id,
-                    'action_description' => $action
-                ]
-            );
-        }
-        foreach ($person_trip_approvals as $action) {
-            TripApprovalsEloquent::create(
-                [
-                    'trip_id' => $result->trip_id,
-                    'approval_description' => $action
-                ]
-            );
-        }
         foreach ($person_trip_board_person_ids as $id) {
             TripBoardEloquent::create(
                 [
@@ -111,39 +91,12 @@ class TripRepository implements ITripRepository {
 
     }
     public function update(array $data){
-
-        $person_trip_actions = $data['person_trip_actions'];
-        $person_trip_approvals = $data['person_trip_approvals'];
         $person_trip_board_person_ids  = $data['person_trip_board_person_ids'];
-        unset($data['person_trip_actions']);
-        unset($data['person_trip_approvals']);
         unset($data['person_trip_board_person_ids']);
 
         $result = TripEloquent::where('trip_id',$data['trip_id'])->update(
             $data
         );
-
-
-        TripActionsEloquent::where('trip_id',$data['trip_id'])->delete();
-        foreach ($person_trip_actions as $action) {
-            TripActionsEloquent::create(
-                [
-                    'trip_id' => $data['trip_id'],
-                    'action_description' => $action
-                ]
-            );
-        }
-
-
-        TripApprovalsEloquent::where('trip_id',$data['trip_id'])->delete();
-        foreach ($person_trip_approvals as $action) {
-            TripApprovalsEloquent::create(
-                [
-                    'trip_id' => $data['trip_id'],
-                    'approval_description' => $action
-                ]
-            );
-        }
 
         TripBoardEloquent::where('trip_id',$data['trip_id'])->delete();
         foreach ($person_trip_board_person_ids as $id) {
@@ -171,16 +124,50 @@ class TripRepository implements ITripRepository {
     {        return TripActionsEloquent::query()->select('*')->where('trip_id',$id)->get()->toArray();
 
     }
-
     public function findApprovalsById(int $id)
     {
         return TripApprovalsEloquent::query()->select('*')->where('trip_id',$id)->get()->toArray();
 
     }
-
     public function findBoardById(int $id)
     {
         return TripBoardEloquent::query()->select('board_person_id as person_id')->where('trip_id',$id)->get()->toArray();
 
+    }
+
+    public function add_approval(array $data)
+    {
+        $result = TripApprovalsEloquent::create(
+            [
+                'trip_id' => $data['trip_id'],
+                'approval_description' => $data['approval_description']
+            ]
+        );
+        return $result;
+    }
+    public function update_approval(array $data)
+    {
+        $result = TripApprovalsEloquent::where('row_id',$data['row_id'])->update(
+            $data
+        );
+        return $result;
+    }
+
+    public function add_action(array $data)
+    {
+        $result = TripActionsEloquent::create(
+            [
+                'trip_id' => $data['trip_id'],
+                'action_description' => $data['action_description']
+            ]
+        );
+        return $result;
+    }
+    public function update_action(array $data)
+    {
+        $result = TripActionsEloquent::where('row_id',$data['row_id'])->update(
+            $data
+        );
+        return $result;
     }
 }

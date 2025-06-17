@@ -12,6 +12,10 @@ interface ITripRepository {
     public function create(array $data);
     public function update(array $data);
     public function delete(int $id);
+    public function add_approval(array $data);
+    public function update_approval(array $data);
+    public function add_action(array $data);
+    public function update_action(array $data);
 
 }
 

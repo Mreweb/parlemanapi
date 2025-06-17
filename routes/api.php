@@ -241,5 +241,9 @@ Route::prefix('trips')->group(function () {
     Route::get('/{id}', [TripsController::class, 'show']);
     Route::post('/', [TripsController::class, 'store']);
     Route::put('/', [TripsController::class, 'update']);
+    Route::post('/add_action', [TripsController::class, 'add_action']);
+    Route::put('/update_action', [TripsController::class, 'update_action']);
+    Route::post('/add_approval', [TripsController::class, 'add_approval']);
+    Route::put('/update_approval', [TripsController::class, 'update_approval']);
     Route::delete('/{id}', [TripsController::class, 'destroy']);
 });

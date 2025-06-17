@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 use App\Application\Services\DBMessageService;
 use App\Application\Services\TripService;
+use App\Http\Requests\Trip\TripActionRequest;
+use App\Http\Requests\Trip\TripActionUpdateRequest;
+use App\Http\Requests\Trip\TripApprovalRequest;
+use App\Http\Requests\Trip\TripApprovalUpdateRequest;
 use App\Http\Requests\Trip\TripRequest;
 use App\Http\Requests\Trip\TripUpdateRequest;
 use Illuminate\Http\Request;
@@ -92,7 +96,61 @@ class TripsController extends Controller{
     public function destroy($id){
         $result = $this->service->delete($id);
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+    }
 
+    /**
+     * @lrd:start
+     *  افزودن مصوبات سفر
+     * @lrd:end
+     */
+    public function add_approval(TripApprovalRequest $request){
+        $result = $this->service->add_approval($request->validated());
+        if($result){
+            return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+        } else{
+            return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
+        }
+    }
+    /**
+     * @lrd:start
+     *   ویرایش مصوبات سفر
+     * @lrd:end
+     */
+    public function update_approval(TripApprovalUpdateRequest $request){
+        $result = $this->service->update_approval($request->validated());
+        if($result){
+            return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+        } else{
+            return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
+        }
+    }
+
+
+    /**
+     * @lrd:start
+     *  افزودن اقدامات سفر
+     * @lrd:end
+     */
+    public function add_action(TripActionRequest $request){
+        $result = $this->service->add_action($request->validated());
+        if($result){
+            return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+        } else{
+            return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
+        }
+    }
+    /**
+     * @lrd:start
+     *   ویرایش اقدامات سفر
+     * @lrd:end
+     */
+    public function update_action(TripActionUpdateRequest $request){
+        $result = $this->service->update_action($request->validated());
+        if($result){
+            return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+        } else{
+            return response()->json( DBMessageService::get_message(null,'ErrorAction',"عملیات با خطا مواجه شد" ) , 400, [], JSON_UNESCAPED_UNICODE);
+        }
     }
 
 }
