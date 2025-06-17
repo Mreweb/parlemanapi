@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('rule_forty_five_parliament_period_id')->comment('شماره مجلس');
             $table->string('rule_forty_five_meeting')->comment('اجلاسیه');
             $table->string('rule_forty_five_register_number')->comment('شماره ثبت');
-            $table->string('rule_forty_five_subject')->comment('شماره ثبت');
-            $table->string('rule_forty_five_summary')->comment('شماره ثبت');
-            $table->string('rule_forty_five_worksheet_id')->comment('شماره ثبت');
-            $table->string('rule_forty_five_commission_id')->comment('شماره ثبت');
-            $table->string('rule_forty_five_commission_result')->comment('شماره ثبت');
+            $table->string('rule_forty_five_subject')->comment('موضوع درخواست');
+            $table->string('rule_forty_five_summary')->comment('چکیده موضوع');
+            $table->string('rule_forty_five_worksheet_id')->comment('کاربرگ');
+            $table->string('rule_forty_five_commission_id')->comment('کمیسیون تخصصی');
+            $table->string('rule_forty_five_commission_result')->comment('نتیجه بررسی در کمیسیون');
             $table->string('rule_forty_five_public_court_date')->comment('تاریخ بررسی در صحن علنی');
             $table->string('rule_forty_five_public_parliament_session_number')->comment('شماره جلسه صحن علنی');
             $table->string('rule_forty_five_public_parliament_check_result')->comment('نتیجه بررسی در صحن علنی');

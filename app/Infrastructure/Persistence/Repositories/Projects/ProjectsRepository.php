@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\Projects;
-use App\Domain\Interfaces\INoticeRepository;
+use App\Domain\Interfaces\IProjectsRepository;
 use App\Infrastructure\Persistence\Eloquent\Project\ProjectParticipationEloquent;
 use App\Infrastructure\Persistence\Eloquent\Project\ProjectRelatedCommissionEloquent;
 use App\Infrastructure\Persistence\Eloquent\Project\ProjectsEloquent;
 use App\Infrastructure\Persistence\Eloquent\Project\ProjectSpecialCommissionEloquent;
 use Illuminate\Support\Facades\DB;
 
-class ProjectsRepository implements INoticeRepository {
+class ProjectsRepository implements IProjectsRepository {
 
     public function list(array $filters){
         $query = ProjectsEloquent::query();
@@ -74,6 +74,11 @@ class ProjectsRepository implements INoticeRepository {
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_projects.project_parliament_period_id');
          $query->where('project_id', $id);
         $result = $query->get()->toArray();
+
+        $result[0]['person_projects_participation_ids'] = $this->findParticipationById($result[0]['project_id']);
+        $result[0]['person_projects_related_commission_ids'] = $this->findParticipationById($result[0]['project_id']);
+        $result[0]['person_projects_special_commission_ids'] = $this->findParticipationById($result[0]['project_id']);
+
         return $result;
     }
     public function create(array $data){
@@ -165,5 +170,19 @@ class ProjectsRepository implements INoticeRepository {
         } else{
             return false;
         }
+    }
+
+    public function findParticipationById(int $id){
+        return ProjectParticipationEloquent::query()->select('projects_participation_person_id as person_id')->where('projects_project_id',$id)->get()->toArray();
+
+    }
+    public function findRelatedCommissionById(int $id)
+    {
+        return ProjectRelatedCommissionEloquent::query()->select('projects_related_commission_id as person_id')->where('projects_project_id',$id)->get()->toArray();
+
+    }
+    public function findSpecialById(int $id)
+    {
+        return ProjectSpecialCommissionEloquent::query()->select('projects_special_commission_id as person_id')->where('projects_project_id',$id)->get()->toArray();
     }
 }

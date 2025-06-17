@@ -5,7 +5,6 @@ use App\Domain\Interfaces\IVoteConfidenceRepository;
 use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceEloquent;
 use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceOpposingEloquent;
 use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceSupportersEloquent;
-use Illuminate\Support\Facades\DB;
 
 class VoteConfidenceRepository implements IVoteConfidenceRepository {
 
@@ -41,8 +40,12 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository {
         $query->leftJoin('president', 'president.president_id', '=', 'person_vote_confidence.vote_confidence_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_vote_confidence.vote_confidence_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_vote_confidence.vote_confidence_parliament_period_id');
-         $query->where('vote_confidence_id', $id);
+        $query->where('vote_confidence_id', $id);
         $result = $query->get()->toArray();
+
+        $result[0]['opposing_persons'] = $this->findOpposingById($result[0]['vote_confidence_id']);
+        $result[0]['supporters_persons'] = $this->findSupportersById($result[0]['vote_confidence_id']);
+
         return $result;
     }
     public function create(array $data){
@@ -113,5 +116,15 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository {
         } else{
             return false;
         }
+    }
+
+    public function findOpposingById(int $id)
+    {
+        return VoteConfidenceOpposingEloquent::query()->select('vote_confidence_opposing_person_id as person_id')->where('vote_confidence_id',$id)->get()->toArray();
+    }
+
+    public function findSupportersById(int $id)
+    {
+        return VoteConfidenceSupportersEloquent::query()->select('vote_confidence_supporters_person_id as person_id')->where('vote_confidence_id',$id)->get()->toArray();
     }
 }

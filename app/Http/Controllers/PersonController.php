@@ -45,6 +45,19 @@ class PersonController extends Controller{
 
     /**
      * @lrd:start
+     * نمایش تمامی اطلاعات کاربر
+     * @lrd:end
+     */
+    public function get_all_info($id){
+        if(!is_numeric($id)){
+            return response()->json( DBMessageService::get_message(null,'ErrorAction') , 400, [], JSON_UNESCAPED_UNICODE);
+        }
+        $result = $this->service->get_all_info($id);
+        return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * @lrd:start
      * افزودن کاربران
      * @lrd:end
      */

@@ -5,7 +5,6 @@ use App\Domain\Interfaces\IMinistryRepository;
 use App\Infrastructure\Persistence\Eloquent\Ministry\MinistryEloquent;
 
 class MinistryRepository implements IMinistryRepository {
-
     public function list(array $filters){
         $query = MinistryEloquent::query();
         $query->select(

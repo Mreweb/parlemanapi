@@ -57,14 +57,14 @@ class MeetingRepository implements IMeetingRepository {
             'meeting_tasks',
             'president_name',
             'gov_period_name',
-            'notice_session_number',
-            'person_notice.created_at',
-            'person_notice.updated_at');
+            'person_meeting.created_at',
+            'person_meeting.updated_at');
         $query->leftJoin('president', 'president.president_id', '=', 'person_meeting.meeting_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_meeting.meeting_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_meeting.meeting_parliament_period_id');
         $query->where('meeting_id', $id);
         $result = $query->get()->toArray();
+        $result[0]['track'] = $this->get_meeting_track($result[0]['meeting_id']);
         return $result;
     }
     public function create(array $data){
@@ -95,5 +95,10 @@ class MeetingRepository implements IMeetingRepository {
         } else{
             return false;
         }
+    }
+
+    public function get_meeting_track(int $id)
+    {
+        return  PersonMeetingTrackEloquent::query()->where('meeting_track_meeting_id', $id)->get()->toArray();
     }
 }

@@ -2,7 +2,8 @@
 
 namespace App\Application\Services;
 
-use App\Infrastructure\Persistence\Repositories\Trip\ResearchRepository;
+
+use App\Infrastructure\Persistence\Repositories\Research\ResearchRepository;
 
 class PersonResearchService{
 

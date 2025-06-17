@@ -10,4 +10,7 @@ class PersonCommissionEloquent extends Model{
     protected $table = 'person_commission';
     protected $primaryKey = 'row_id';
     protected $fillable = ['person_id', 'commission_id'];
+
+
+
 }

@@ -46,7 +46,7 @@ class RuleTTFController extends Controller{
      *
      *  rule_ttf_president_id رئیس جمهور
      *
-     *  rule_ttf_person_id شخصی که از او استیضاح شده
+     *  rule_ttf_person_id  نام نماینده متقاضی ماده 234
      *
      *  rule_ttf_gov_period_id دشماره دولت
      *
@@ -56,27 +56,27 @@ class RuleTTFController extends Controller{
      *
      *  rule_ttf_register_number شماره ثبت
      *
-     *  rule_ttf_subject	کمیسیون تخصصی
+     *  rule_ttf_subject  موضوع درخواست ماده 234
      *
-     *  rule_ttf_summary تاریج جلسه کمیسیون
+     *  rule_ttf_summary  موضوع
      *
-     *  rule_ttf_worksheet_id گزارش کمیسیون در صحن
+     *  rule_ttf_worksheet_id کاربرگ
      *
-     *  rule_ttf_commission_id تاریخ بررسی در صحن علنی
+     *  rule_ttf_commission_id  کمیسیون تخصصی
      *
-     *  rule_ttf_commission_result شماره جلسه صحن علنی
+     *  rule_ttf_commission_result نتیجه در کمیسیون تخصصی
      *
-     *  rule_ttf_public_court_date نتیجه بررسی در صحن علنی
+     *  rule_ttf_public_court_date  تاریخ طرح در صحن علنی
      *
-     *  rule_ttf_public_parliament_session_number نام وزیر پیشنهادی
+     *  rule_ttf_public_parliament_session_number شماره جلسه صحن علنی
      *
-     *  rule_ttf_public_parliament_check_result نام وزارتخانه
+     *  rule_ttf_public_parliament_check_result  نتیجه طرح در صحن علنی
      *
-     *  rule_ttf_ministry_id چکیده اقدامات دستگاه مخاطب
+     *  rule_ttf_ministry_id دستگاه ذیربط
      *
-     *   rule_ttf_summary_content چکیده مطالب رئیس جمهور
+     *   rule_ttf_summary_content  چکیده اقدامات دستگاه مخاطب
      *
-     *   rule_ttf_signatures_person_ids  نمایندگان مخالف رای اعتماد
+     *   rule_ttf_signatures_person_ids   نمایندگان امضا کننده
      *
      * @lrd:end
      */

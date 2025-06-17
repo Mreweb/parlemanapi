@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id('row_id')->autoIncrement();
             $table->integer('projects_participation_person_id')->comment('شناسه فرد مشارکت کننده در طرح');
             $table->integer('projects_project_id')->comment('شناسه طرح');
+            $table->foreign('projects_project_id')->references('project_id')->on('person_projects')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

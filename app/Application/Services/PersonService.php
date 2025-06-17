@@ -16,6 +16,10 @@ class PersonService{
     {
         return $this->repository->findById($id);
     }
+    public function get_all_info(int $id)
+    {
+        return $this->repository->get_all_info($id);
+    }
 
     public function create(array $data)
     {

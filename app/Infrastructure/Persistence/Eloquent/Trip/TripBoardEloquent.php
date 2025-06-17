@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class
 TripBoardEloquent extends Model{
-    use SoftDeletes;
     protected $table = 'person_trip_board';
     protected $primaryKey = 'row_id';
     protected $guarded = [];

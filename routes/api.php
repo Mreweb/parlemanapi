@@ -67,6 +67,7 @@ Route::prefix('person')->group(function () {
     Route::post('/update_fraction', [PersonController::class, 'update_fraction']);
     Route::post('/update_election', [PersonController::class, 'update_election']);
     Route::post('/update_commission', [PersonController::class, 'update_commission']);
+    Route::post('/all_info/{id}', [PersonController::class, 'get_all_info']);
     Route::put('/', [PersonController::class, 'update']);
     Route::delete('/{id}', [PersonController::class, 'destroy']);
 });

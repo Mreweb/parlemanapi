@@ -25,6 +25,10 @@ class Enums{
                 "done" => 'انجام شده',
                 "undone" => 'انجام نشده'
             ],
+            'meeting_status' => [
+                "done" => 'انجام شده',
+                "undone" => 'انجام نشده'
+            ],
             'project_priority' => [
                 "priority_normal" => 'فوریت عادی',
                 "priority_step_1" => 'فوریت یک',

@@ -4,6 +4,7 @@ namespace App\Infrastructure\Persistence\Repositories\Notice;
 use App\Domain\Interfaces\INoticeRepository;
 use App\Infrastructure\Persistence\Eloquent\Notice\NoticeEloquent;
 use App\Infrastructure\Persistence\Eloquent\Notice\NoticeSignatureEloquent;
+use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
 use Illuminate\Support\Facades\DB;
 
 class NoticeRepository implements INoticeRepository {
@@ -66,7 +67,14 @@ class NoticeRepository implements INoticeRepository {
         $query->leftJoin('media as media_answer', 'media_answer.media_id', '=', 'person_notice.notice_answer_media_id');
         $query->where('notice_id', $id);
         $result = $query->get()->toArray();
+        $result[0]['person_notice_signature'] = $this->findSinaturesById($result[0]['notice_id']);
+        $result[0]['notice_worksheet_media'] = $this->findWorksheetMedia($result[0]['notice_worksheet_media_id']);
+        $result[0]['notice_answer_media'] = $this->findAnswerWorksheetMedia($result[0]['notice_answer_media_id']);
         return $result;
+    }
+    public function findSinaturesById(int $id){
+        $query = NoticeSignatureEloquent::query();
+        return $query->select('notice_person_id as person_id')->where('notice_id', $id)->get()->toArray();
     }
     public function create(array $data){
         $notice_signature_person_ids = $data['notice_signature_person_ids'];
@@ -111,5 +119,11 @@ class NoticeRepository implements INoticeRepository {
         } else{
             return false;
         }
+    }
+    public function findWorksheetMedia(int $id){
+        return (new UploadRepository())->get_file($id);
+    }
+    public function findAnswerWorksheetMedia(int $id){
+        return (new UploadRepository())->get_file($id);
     }
 }

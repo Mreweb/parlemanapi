@@ -48,7 +48,7 @@ class RuleFortyFiveController extends Controller{
      *
      *  rule_forty_five_president_id رئیس جمهور
      *
-     *  rule_forty_five_person_id شخصی که از او استیضاح شده
+     *  rule_forty_five_person_id نام نمیانده متقاضی
      *
      *  rule_forty_five_gov_period_id دشماره دولت
      *
@@ -58,25 +58,25 @@ class RuleFortyFiveController extends Controller{
      *
      *  rule_forty_five_register_number شماره ثبت
      *
-     *  rule_forty_five_subject	کمیسیون تخصصی
+     *  rule_forty_five_subject	موضوع درخواست
      *
-     *  rule_forty_five_summary تاریج جلسه کمیسیون
+     *  rule_forty_five_summary چکیده موضوع
      *
-     *  rule_forty_five_worksheet_id گزارش کمیسیون در صحن
+     *  rule_forty_five_worksheet_id کاربرگ
      *
-     *  rule_forty_five_commission_id تاریخ بررسی در صحن علنی
+     *  rule_forty_five_commission_id کمیسیون تخصصی
      *
-     *  rule_forty_five_commission_result شماره جلسه صحن علنی
+     *  rule_forty_five_commission_result  چکیده گزارش دستگاه در کمیسیون تخصصی
      *
-     *  rule_forty_five_public_court_date نتیجه بررسی در صحن علنی
+     *   rule_forty_five_public_parliament_session_number  شماره جلسه صحن علنی
      *
-     *  rule_forty_five_public_parliament_session_number نام وزیر پیشنهادی
+     *  rule_forty_five_public_court_date تاریخ بررسی در صحن علنی
      *
-     *  rule_forty_five_public_parliament_check_result نام وزارتخانه
+     *  rule_forty_five_public_parliament_check_result  چکیده گزارش دستگاه در صحن علنی
      *
-     *  rule_forty_five_ministry_id چکیده اقدامات دستگاه مخاطب
+     *  rule_forty_five_ministry_id دستگاه ذیربط
      *
-     *   rule_forty_five_summary_content چکیده مطالب رئیس جمهور
+     *   rule_forty_five_summary_content  چکیده اقدامات دستگاه مخاطب
      *
      *   rule_forty_five_signatures_person_ids  نمایندگان مخالف رای اعتماد
      *

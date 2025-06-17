@@ -5,8 +5,19 @@ use App\Domain\Interfaces\IPersonRepository;
 use App\Infrastructure\Persistence\Eloquent\Commission\PersonCommissionEloquent;
 use App\Infrastructure\Persistence\Eloquent\Election\PersonElectionEloquent;
 use App\Infrastructure\Persistence\Eloquent\Fraction\PersonFractionEloquent;
+use App\Infrastructure\Persistence\Eloquent\Interpellation\InterpellationsEloquent;
+use App\Infrastructure\Persistence\Eloquent\Meeting\PersonMeetingEloquent;
+use App\Infrastructure\Persistence\Eloquent\Notice\NoticeEloquent;
 use App\Infrastructure\Persistence\Eloquent\Person\PersonEloquent;
-use Illuminate\Support\Facades\Crypt;
+use App\Infrastructure\Persistence\Eloquent\PRequests\PersonRequestEloquent;
+use App\Infrastructure\Persistence\Eloquent\Project\ProjectsEloquent;
+use App\Infrastructure\Persistence\Eloquent\Question\QuestionEloquent;
+use App\Infrastructure\Persistence\Eloquent\Research\PersonResearchEloquent;
+use App\Infrastructure\Persistence\Eloquent\RuleFortyFive\RuleFortyFiveEloquent;
+use App\Infrastructure\Persistence\Eloquent\Rules\PersonRulesEloquent;
+use App\Infrastructure\Persistence\Eloquent\RuleTTF\RuleTTFEloquent;
+use App\Infrastructure\Persistence\Eloquent\Trip\TripEloquent;
+use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceEloquent; 
 
 class PersonRepository implements IPersonRepository {
 
@@ -98,7 +109,6 @@ class PersonRepository implements IPersonRepository {
         $province = PersonEloquent::findOrFail($id)->delete();
         return $province;
     }
-
     public function update_fraction(array $data){
         PersonFractionEloquent::where('person_id', $data['person_id'])->delete();
         return PersonFractionEloquent::create($data)['person_id'];
@@ -110,5 +120,79 @@ class PersonRepository implements IPersonRepository {
     public function update_commission(array $data){
         PersonCommissionEloquent::where('person_id', $data['person_id'])->delete();
         return PersonCommissionEloquent::create($data)['person_id'];
+    }
+
+    private function get_person_commission($id){
+        return PersonCommissionEloquent::query()
+            ->join('commission', 'person_commission.commission_id', '=', 'commission.commission_id')
+            ->where('person_commission.person_id', $id)
+            ->get()->toArray();
+    }
+    private function get_person_election($id){
+        return PersonElectionEloquent::query()
+            ->join('election_location', 'person_election.election_id', '=', 'election_location.election_location_id')
+            ->where('person_election.person_id', $id)
+            ->get()->toArray();
+    }
+    private function get_person_fraction($id){
+        return PersonFractionEloquent::query()
+            ->join('fraction', 'fraction.fraction_id', '=', 'person_fraction.fraction_id')
+            ->where('person_fraction.person_id', $id)
+            ->get()->toArray();
+    }
+    private function get_person_interpellations($id){
+        return InterpellationsEloquent::query()->where('interpellation_person_id', $id)->get()->toArray();
+    }
+    private function get_person_meeting($id){
+        return PersonMeetingEloquent::query()->where('meeting_person_id', $id)->get()->toArray();
+    }
+    private function get_person_notice($id){
+        return NoticeEloquent::query()->where('notice_person_id', $id)->get()->toArray();
+    }
+    private function get_person_projects($id){
+        return ProjectsEloquent::query()->where('project_person_id', $id)->get()->toArray();
+    }
+    private function get_person_question($id){
+        return QuestionEloquent::query()->where('question_person_id', $id)->get()->toArray();
+    }
+    private function get_person_requests($id){
+        return PersonRequestEloquent::query()->where('request_person_id', $id)->get()->toArray();
+    }
+    private function get_person_research($id){
+        return PersonResearchEloquent::query()->where('person_research_person_id', $id)->get()->toArray();
+    }
+    private function get_person_rules($id){
+        return PersonRulesEloquent::query()->where('rule_person_id', $id)->get()->toArray();
+    }
+    private function get_person_rule_forty_five($id){
+        return RuleFortyFiveEloquent::query()->where('rule_forty_five_person_id', $id)->get()->toArray();
+    }
+    private function get_person_rule_ttf($id){
+        return RuleTTFEloquent::query()->where('rule_ttf_person_id', $id)->get()->toArray();
+    }
+    private function get_person_trip($id){
+        return TripEloquent::query()->where('trip_person_id', $id)->get()->toArray();
+    }
+    private function get_person_vote_confidence($id){
+        return VoteConfidenceEloquent::query()->where('vote_confidence_person_id', $id)->get()->toArray();
+    }
+    public function get_all_info(int $id){
+        $result['person_info'] = $this->findById($id);
+        $result['person_commission'] = $this->get_person_commission($id);
+        $result['person_election'] = $this->get_person_election($id);
+        $result['person_fraction'] = $this->get_person_fraction($id);
+        $result['person_interpellations'] = $this->get_person_interpellations($id);
+        $result['person_meeting'] = $this->get_person_meeting($id);
+        $result['person_notice'] = $this->get_person_notice($id);
+        $result['person_projects'] = $this->get_person_projects($id);
+        $result['person_question'] = $this->get_person_question($id);
+        $result['person_requests'] = $this->get_person_requests($id);
+        $result['person_research'] = $this->get_person_research($id);
+        $result['person_rules'] = $this->get_person_rules($id);
+        $result['person_rule_forty_five'] = $this->get_person_rule_forty_five($id);
+        $result['person_rule_ttf'] = $this->get_person_rule_ttf($id);
+        $result['person_trip'] = $this->get_person_trip($id);
+        $result['person_vote_confidence'] = $this->get_person_vote_confidence($id);
+        return $result;
     }
 }

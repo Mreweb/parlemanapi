@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\Question;
-use App\Domain\Interfaces\INoticeRepository;
+use App\Domain\Interfaces\IQuestionRepository;
 use App\Infrastructure\Persistence\Eloquent\Question\QuestionEloquent;
 use App\Infrastructure\Persistence\Eloquent\Question\QuestionSignatureEloquent;
+use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
 use Illuminate\Support\Facades\DB;
 
-class QuestionRepository implements INoticeRepository {
+class QuestionRepository implements IQuestionRepository {
 
     public function list(array $filters){
         $query = QuestionEloquent::query();
@@ -64,6 +65,8 @@ class QuestionRepository implements INoticeRepository {
         $query->leftJoin('media as media_worksheet', 'media_worksheet.media_id', '=', 'person_question.question_answer_media_id');
          $query->where('question_id', $id);
         $result = $query->get()->toArray();
+        $result[0]['notice_worksheet_media'] = $this->findWorksheetMediaById($result[0]['question_worksheet_media_id']);
+        $result[0]['signature_person_ids'] = $this->findSignaturesById($result[0]['question_id']);
         return $result;
     }
     public function create(array $data){
@@ -109,5 +112,13 @@ class QuestionRepository implements INoticeRepository {
         } else{
             return false;
         }
+    }
+
+    public function findWorksheetMediaById(int $id){
+        return (new UploadRepository())->get_file($id);
+    }
+
+    public function findSignaturesById(int $id){
+        return QuestionSignatureEloquent::query()->select('question_person_id as person_id')->where('question_id',$id)->get()->toArray();
     }
 }

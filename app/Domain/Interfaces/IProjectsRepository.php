@@ -9,6 +9,9 @@ interface IProjectsRepository {
     public function create(array $data);
     public function update(array $data);
     public function delete(int $id);
+    public function findParticipationById(int $id);
+    public function findRelatedCommissionById(int $id);
+    public function findSpecialById(int $id);
 
 }
 

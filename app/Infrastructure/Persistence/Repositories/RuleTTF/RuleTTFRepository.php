@@ -4,16 +4,16 @@ namespace App\Infrastructure\Persistence\Repositories\RuleTTF;
 use App\Domain\Interfaces\IRuleTTFRepository;
 use App\Infrastructure\Persistence\Eloquent\RuleTTF\RuleTTFEloquent;
 use App\Infrastructure\Persistence\Eloquent\RuleTTF\RuleTTFSignaturesEloquent;
-use Illuminate\Support\Facades\DB;
+use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
 
 class RuleTTFRepository implements IRuleTTFRepository {
 
     public function list(array $filters){
         $query = RuleTTFEloquent::query();
-        $query->select('rule_ttf.*');
-        $query->leftJoin('president', 'president.president_id', '=', 'rule_ttf.rule_ttf_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'rule_ttf.rule_ttf_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'rule_ttf.rule_ttf_parliament_period_id');
+        $query->select('person_rule_ttf.*');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_rule_ttf.rule_ttf_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_rule_ttf.rule_ttf_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_rule_ttf.rule_ttf_parliament_period_id');
 
         if (!empty($filters['rule_ttf_president_id'])) {
             $query->where('rule_ttf_president_id', 'like', '%' . $filters['rule_ttf_president_id'] . '%');
@@ -21,8 +21,8 @@ class RuleTTFRepository implements IRuleTTFRepository {
         if (!empty($filters['rule_ttf_gov_period_id'])) {
             $query->where('rule_ttf_gov_period_id', 'like', '%' . $filters['rule_ttf_gov_period_id'] . '%');
         }
-        if (!empty($filters['rule_ttf'])) {
-            $query->where('rule_ttf', 'like', '%' . $filters['rule_ttf'] . '%');
+        if (!empty($filters['rule_ttf_parliament_period_id'])) {
+            $query->where('rule_ttf_parliament_period_id', 'like', '%' . $filters['rule_ttf_parliament_period_id'] . '%');
         }
         $data['count'] = $query->count();
         if (!empty($filters['page_index'])) {
@@ -36,12 +36,16 @@ class RuleTTFRepository implements IRuleTTFRepository {
     }
     public function findById(int $id){
         $query = RuleTTFEloquent::query();
-        $query->select('rule_ttf.*');
-        $query->leftJoin('president', 'president.president_id', '=', 'rule_ttf.rule_ttf_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'rule_ttf.rule_ttf_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'rule_ttf.rule_ttf_parliament_period_id');
-         $query->where('rule_ttf_id', $id);
+        $query->select('person_rule_ttf.*');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_rule_ttf.rule_ttf_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_rule_ttf.rule_ttf_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_rule_ttf.rule_ttf_parliament_period_id');
+        $query->where('rule_ttf_id', $id);
         $result = $query->get()->toArray();
+
+        $result[0]['worksheet'] =$this->findWorkSheetById($result[0]['rule_ttf_id']);
+        $result[0]['persons'] =$this->findSignaturesById($result[0]['rule_ttf_id']);
+
         return $result;
     }
     public function create(array $data){
@@ -89,4 +93,13 @@ class RuleTTFRepository implements IRuleTTFRepository {
             return false;
         }
     }
+
+    public function findWorkSheetById(int $id){
+        return (new UploadRepository())->get_file($id);
+    }
+    public function findSignaturesById(int $id){
+        return RuleTTFSignaturesEloquent::query()->select('rule_ttf_supporters_person_id as person_id')->where('rule_ttf_id',$id)->get()->toArray();
+
+    }
+
 }

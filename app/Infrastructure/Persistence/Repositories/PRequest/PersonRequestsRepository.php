@@ -32,6 +32,7 @@ class PersonRequestsRepository implements IRequestsRepository {
         $query->select('*');
         $query->where('request_id', $id);
         $result = $query->get()->toArray();
+        $result[0]['tracks'] = $this->getTracById($id);
         return $result;
     }
     public function create(array $data){
@@ -73,5 +74,10 @@ class PersonRequestsRepository implements IRequestsRepository {
             return false;
         }
     }
+    public function getTracById(int $id)
+    {
+        return PersonRequestTrackEloquent::where('request_id',$id)->get()->toArray();
+    }
+
 
 }

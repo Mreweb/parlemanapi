@@ -4,15 +4,16 @@ namespace App\Infrastructure\Persistence\Repositories\RuleFortyFive;
 use App\Domain\Interfaces\IRuleFortyFiveRepository;
 use App\Infrastructure\Persistence\Eloquent\RuleFortyFive\RuleFortyFiveEloquent;
 use App\Infrastructure\Persistence\Eloquent\RuleFortyFive\RuleFortyFiveSignaturesEloquent;
+use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
 
 class RuleFortyFiveRepository implements IRuleFortyFiveRepository {
 
     public function list(array $filters){
         $query = RuleFortyFiveEloquent::query();
-        $query->select('rule_forty_five.*');
-        $query->leftJoin('president', 'president.president_id', '=', 'rule_forty_five.rule_forty_five_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'rule_forty_five.rule_forty_five_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'rule_forty_five.rule_forty_five_parliament_period_id');
+        $query->select('person_rule_forty_five.*');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_rule_forty_five.rule_forty_five_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_rule_forty_five.rule_forty_five_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_rule_forty_five.rule_forty_five_parliament_period_id');
 
         if (!empty($filters['rule_forty_five_president_id'])) {
             $query->where('rule_forty_five_president_id', 'like', '%' . $filters['rule_forty_five_president_id'] . '%');
@@ -35,12 +36,14 @@ class RuleFortyFiveRepository implements IRuleFortyFiveRepository {
     }
     public function findById(int $id){
         $query = RuleFortyFiveEloquent::query();
-        $query->select('rule_forty_five.*');
-        $query->leftJoin('president', 'president.president_id', '=', 'rule_forty_five.rule_forty_five_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'rule_forty_five.rule_forty_five_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'rule_forty_five.rule_forty_five_parliament_period_id');
+        $query->select('person_rule_forty_five.*');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_rule_forty_five.rule_forty_five_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_rule_forty_five.rule_forty_five_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_rule_forty_five.rule_forty_five_parliament_period_id');
          $query->where('rule_forty_five_id', $id);
         $result = $query->get()->toArray();
+        $result[0]['worksheet'] = $this->findWorkSheetById($result[0]['rule_forty_five_worksheet_id']);
+        $result[0]['persons'] = $this->findSignaturesById($result[0]['rule_forty_five_id']);
         return $result;
     }
     public function create(array $data){
@@ -87,5 +90,13 @@ class RuleFortyFiveRepository implements IRuleFortyFiveRepository {
         } else{
             return false;
         }
+    }
+
+    public function findWorkSheetById(int $id){
+        return (new UploadRepository())->get_file($id);
+    }
+
+    public function findSignaturesById(int $id){
+        return RuleFortyFiveSignaturesEloquent::query()->select('rule_forty_five_supporters_person_id as person_id')->where('rule_forty_five_id',$id)->get()->toArray();
     }
 }

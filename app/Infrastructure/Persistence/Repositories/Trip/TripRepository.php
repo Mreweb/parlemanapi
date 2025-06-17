@@ -70,6 +70,9 @@ class TripRepository implements ITripRepository {
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_trip.trip_parliament_period_id');
         $query->where('trip_id', $id);
         $result = $query->get()->toArray();
+        $result[0]['actions'] = $this->findActionsById($result[0]['trip_id']);
+        $result[0]['approvals'] = $this->findApprovalsById($result[0]['trip_id']);
+        $result[0]['boards'] = $this->findBoardById($result[0]['trip_id']);
         return $result;
     }
     public function create(array $data){
@@ -162,5 +165,22 @@ class TripRepository implements ITripRepository {
         } else{
             return false;
         }
+    }
+
+    public function findActionsById(int $id)
+    {        return TripActionsEloquent::query()->select('*')->where('trip_id',$id)->get()->toArray();
+
+    }
+
+    public function findApprovalsById(int $id)
+    {
+        return TripApprovalsEloquent::query()->select('*')->where('trip_id',$id)->get()->toArray();
+
+    }
+
+    public function findBoardById(int $id)
+    {
+        return TripBoardEloquent::query()->select('board_person_id as person_id')->where('trip_id',$id)->get()->toArray();
+
     }
 }

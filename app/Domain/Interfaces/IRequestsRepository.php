@@ -10,6 +10,7 @@ interface IRequestsRepository {
     public function update(array $data);
     public function delete(int $id);
     public function add_track(array $data);
+    public function getTracById(int $id);
     public function update_track(array $data);
     public function delete_track(int $id);
 

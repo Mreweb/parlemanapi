@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('rule_ttf_parliament_period_id')->comment('شماره مجلس');
             $table->string('rule_ttf_meeting')->comment('اجلاسیه');
             $table->string('rule_ttf_register_number')->comment('شماره ثبت');
-            $table->string('rule_ttf_subject')->comment('شماره ثبت');
-            $table->string('rule_ttf_summary')->comment('شماره ثبت');
-            $table->string('rule_ttf_worksheet_id')->comment('شماره ثبت');
-            $table->string('rule_ttf_commission_id')->comment('شماره ثبت');
-            $table->string('rule_ttf_commission_result')->comment('شماره ثبت');
+            $table->string('rule_ttf_subject')->comment('موضوع درخواست ماده 234');
+            $table->string('rule_ttf_summary')->comment('چکیده موضوع');
+            $table->string('rule_ttf_worksheet_id')->comment('کاربرگ');
+            $table->string('rule_ttf_commission_id')->comment('کمیسیون تخصصی');
+            $table->string('rule_ttf_commission_result')->comment('نتیجه در کمیسیون تخصصی');
             $table->string('rule_ttf_public_court_date')->comment('تاریخ بررسی در صحن علنی');
             $table->string('rule_ttf_public_parliament_session_number')->comment('شماره جلسه صحن علنی');
             $table->string('rule_ttf_public_parliament_check_result')->comment('نتیجه بررسی در صحن علنی');

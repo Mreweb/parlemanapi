@@ -63,4 +63,9 @@ class MeetingTrackRepository implements IMeetingRepository {
     {
         // TODO: Implement update_meeting_track() method.
     }
+
+    public function get_meeting_track(int $id)
+    {
+        // Just For Compatible with Meeting Interface
+    }
 }
