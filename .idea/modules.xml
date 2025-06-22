@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../../wamp64/www/ParlemanReact/.idea/ParlemanReact.iml" filepath="$PROJECT_DIR$/../../../../wamp64/www/ParlemanReact/.idea/ParlemanReact.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/parlemanapi.iml" filepath="$PROJECT_DIR$/.idea/parlemanapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/../parlemanreact/.idea/parlemanreact.iml" filepath="$PROJECT_DIR$/../parlemanreact/.idea/parlemanreact.iml" />
     </modules>

@@ -56,7 +56,7 @@ class QuestionRepository implements IQuestionRepository {
             'president_name',
             'gov_period_name',
             'question_check_public_parliament_number',
-            'media_worksheet.path as notice_worksheet_media',
+            'media_worksheet.path as question_worksheet_media',
             'person_question.created_at',
             'person_question.updated_at');
         $query->leftJoin('president', 'president.president_id', '=', 'person_question.question_president_id');
@@ -65,7 +65,7 @@ class QuestionRepository implements IQuestionRepository {
         $query->leftJoin('media as media_worksheet', 'media_worksheet.media_id', '=', 'person_question.question_answer_media_id');
          $query->where('question_id', $id);
         $result = $query->get()->toArray();
-        $result[0]['notice_worksheet_media'] = $this->findWorksheetMediaById($result[0]['question_worksheet_media_id']);
+        $result[0]['question_worksheet_media'] = $this->findWorksheetMediaById($result[0]['question_worksheet_media_id']);
         $result[0]['signature_person_ids'] = $this->findSignaturesById($result[0]['question_id']);
         return $result;
     }

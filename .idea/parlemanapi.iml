@@ -145,5 +145,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="parlemanreact" />
+    <orderEntry type="module" module-name="ParlemanReact" />
   </component>
 </module>

@@ -18,6 +18,7 @@ class CityController extends Controller{
      * @lrd:start
      * فهرست شهرها
      * @lrd:end
+     * @LRDparam province_id integer
      * @LRDparam city_name string
      * @LRDparam page_index integer
      * @LRDparam page_size integer

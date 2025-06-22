@@ -18,6 +18,10 @@ class ElectionLocationRepository implements IElectionLocationRepository {
             'election_location.updated_at'
         );
         $query->leftJoin('province', 'province.province_id', '=', 'election_location.election_location_province_id');
+
+        if (!empty($filters['province_id'])) {
+            $query->where('election_location_province_id',  $filters['province_id']);
+        }
         if (!empty($filters['election_location_title'])) {
             $query->where('election_location_title', 'like', '%' . $filters['election_location_title'] . '%');
         }

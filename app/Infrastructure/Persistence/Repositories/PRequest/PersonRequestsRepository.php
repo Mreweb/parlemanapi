@@ -12,8 +12,14 @@ class PersonRequestsRepository implements IRequestsRepository {
         $query->select(
             'request_id',
             'request_title',
-            'created_at',
-            'updated_at');
+            'period_title',
+            'president_name',
+            'gov_period_name',
+            'person_requests.created_at',
+            'person_requests.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_requests.request_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_requests.request_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_requests.request_parliament_period_id');
         if (!empty($filters['request_title'])) {
             $query->where('request_title', 'like', '%' . $filters['request_title'] . '%');
         }

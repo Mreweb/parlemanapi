@@ -10,7 +10,10 @@ class RuleTTFRepository implements IRuleTTFRepository {
 
     public function list(array $filters){
         $query = RuleTTFEloquent::query();
-        $query->select('person_rule_ttf.*');
+        $query->select('person_rule_ttf.*',
+            'period_title',
+            'president_name',
+            'gov_period_name');
         $query->leftJoin('president', 'president.president_id', '=', 'person_rule_ttf.rule_ttf_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_rule_ttf.rule_ttf_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_rule_ttf.rule_ttf_parliament_period_id');

@@ -12,7 +12,10 @@ class ResearchRepository implements IResearchRepository {
 
     public function list(array $filters){
         $query = PersonResearchEloquent::query();
-        $query->select('person_research.*');
+        $query->select('person_research.*',
+            'period_title',
+            'president_name',
+            'gov_period_name');
         $query->leftJoin('president', 'president.president_id', '=', 'person_research.person_research_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_research.person_research_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_research.person_research_parliament_period_id');

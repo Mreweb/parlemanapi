@@ -55,16 +55,7 @@ class ProjectsRepository implements IProjectsRepository {
     public function findById(int $id){
         $query = ProjectsEloquent::query();
         $query->select(
-            'project_id',
-            'project_title',
-            'project_register_number',
-            'project_create_date',
-            'project_priority',
-            'project_handle_way',
-            'project_topic_relevance',
-            'project_government_vote',
-            'project_status',
-            'project_end_date',
+            'person_projects.*',
             'president_name',
             'gov_period_name',
             'person_projects.created_at',

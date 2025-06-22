@@ -10,8 +10,11 @@ class CityRepository implements ICityRepository {
         $query = CityEloquent::query();
         $query->select('city_id','city_name','province.province_id','province.province_name','city.created_at','city.updated_at');
         $query->leftJoin('province', 'province.province_id', '=', 'city.city_province_id');
+        if (!empty($filters['province_id'])) {
+            $query->where('province_id',  $filters['province_id']);
+        }
         if (!empty($filters['city_name'])) {
-            $query->where('city_name', 'like', '%' . $filters['city_name'] . '%');
+            $query->where('city_name', '=', '%' . $filters['city_name'] . '%');
         }
 
         $data['count'] = $query->count();

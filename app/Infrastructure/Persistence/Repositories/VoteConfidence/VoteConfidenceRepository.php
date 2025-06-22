@@ -10,7 +10,10 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository {
 
     public function list(array $filters){
         $query = VoteConfidenceEloquent::query();
-        $query->select('person_vote_confidence.*');
+        $query->select('person_vote_confidence.*',
+            'period_title',
+            'president_name',
+            'gov_period_name');
         $query->leftJoin('president', 'president.president_id', '=', 'person_vote_confidence.vote_confidence_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_vote_confidence.vote_confidence_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_vote_confidence.vote_confidence_parliament_period_id');

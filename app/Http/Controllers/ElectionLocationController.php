@@ -16,6 +16,7 @@ class ElectionLocationController extends Controller{
      * @lrd:start
      * فهرست حوزه انتخابیه
      * @lrd:end
+     * @LRDparam province_id integer
      * @LRDparam election_location_title string
      * @LRDparam page_index integer
      * @LRDparam page_size integer

@@ -47,12 +47,14 @@ class AuthRepository implements IAuthRepository {
         } else{
             $key = env('JWT_SECRET');
             $payload = $person->toArray()[0];
-            $payload['token_create_date'] = Carbon::now();
+            //$payload['token_create_date'] = Carbon::now();
+            $payload['token_create_date'] = time();
+            $payload['token_expire_time'] = time()+env('TOKEN_EXPIRE_TIME');
             $jwt = JWT::encode($payload, $key, 'HS256');
             return response()->json( DBMessageService::get_message(
                 [
-                    'token'=> $jwt,
-                    'decoded'=> JWT::decode($jwt, new Key($key, 'HS256'))
+                    'token'=> $jwt
+                    //'decoded'=> JWT::decode($jwt, new Key($key, 'HS256'))
                 ],
                 'SuccessAction',"ورود با موفقیت انجام شد" ) , 201, [], JSON_UNESCAPED_UNICODE);
         }

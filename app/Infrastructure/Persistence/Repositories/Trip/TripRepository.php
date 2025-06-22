@@ -53,13 +53,7 @@ class TripRepository implements ITripRepository {
     public function findById(int $id){
         $query = TripEloquent::query();
         $query->select(
-            'trip_id',
-            'trip_subject',
-            'trip_description',
-            'trip_province_id',
-            'trip_end_date',
-            'trip_start_date',
-            'trip_end_date',
+            'person_trip.*',
             'period_title',
             'president_name',
             'gov_period_name',
