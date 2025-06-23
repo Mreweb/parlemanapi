@@ -67,8 +67,8 @@ class InterpellationRepository implements IInterpellationsRepository {
         $result = $query->get()->toArray();
 
 
-        $result[0]['interpellation_worksheet_media_id'] = $this->findWorksheetMediaPersonById($result[0]['interpellation_worksheet_media_id']);
-        $result[0]['interpellation_correspondence_worksheet_media_id'] = $this->findCorrespondenceWorksheetMediaPersonById($result[0]['interpellation_correspondence_worksheet_media_id']);
+        $result[0]['worksheet'] = $this->findWorksheetMediaPersonById($result[0]['interpellation_worksheet_media_id']);
+        $result[0]['correspondence_worksheet'] = $this->findCorrespondenceWorksheetMediaPersonById($result[0]['interpellation_correspondence_worksheet_media_id']);
         $result[0]['interpellations_opposing_person_ids'] = $this->findOpposingPersonById($result[0]['interpellation_id']);
         $result[0]['interpellation_supporters_person_ids'] = $this->findSupportersPersonById($result[0]['interpellation_id']);
         $result[0]['interpellation_opt_person_ids'] = $this->findOptPersonById($result[0]['interpellation_id']);
