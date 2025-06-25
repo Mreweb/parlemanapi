@@ -25,7 +25,15 @@ class ParlemanPeriodController extends Controller{
         $result = $this->service->list($filters);
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
     }
-
+    /**
+     * @lrd:start
+     * فهرست همه
+     * @lrd:end
+     */
+    public function all(){
+        $result = $this->service->all();
+        return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+    }
     /**
      * @lrd:start
      * نمایش دوره های مجلس

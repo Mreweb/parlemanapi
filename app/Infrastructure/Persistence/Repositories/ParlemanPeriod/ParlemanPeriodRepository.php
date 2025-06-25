@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Persistence\Repositories\ParlemanPeriod;
 
+use App\Application\Services\CacheService;
 use App\Domain\Interfaces\IParlemanPeriodRepository;
 use App\Infrastructure\Persistence\Eloquent\Period\ParlemanPeriodEloquent;
 
@@ -23,6 +24,18 @@ class ParlemanPeriodRepository implements IParlemanPeriodRepository{
         $data['list'] = $query->get();
         return $data;
     }
+    public function all(){
+        $query = ParlemanPeriodEloquent::query();
+        $query->select('period_id','period_title','created_at','updated_at');
+        $data['list'] = $query->get();
+        if(CacheService::has_data('all_parleman_periods')){
+            $data = CacheService::get_data('all_parleman_periods');
+            $data['from_cache'] = true;
+            return $data;
+        }
+        CacheService::set_data('all_parleman_periods',$data);
+        return $data;
+    }
     public function findById(int $id){
         $query = ParlemanPeriodEloquent::query();
         $query->select('period_id','period_title','created_at','updated_at');
@@ -31,15 +44,18 @@ class ParlemanPeriodRepository implements IParlemanPeriodRepository{
         return $result;
     }
     public function create(array $data){
+        CacheService::forget_data('all_parleman_periods');
         return ParlemanPeriodEloquent::create($data);
     }
     public function update(array $data){
+        CacheService::forget_data('all_parleman_periods');
         $result = ParlemanPeriodEloquent::where('period_id',$data['period_id'])->update(['period_title'=>$data['period_title']]);
         return $result;
     }
     public function delete(int $id){
         $city = $this->findById($id);
         if($city){
+            CacheService::forget_data('all_parleman_periods');
             return ParlemanPeriodEloquent::findOrFail($id)->delete();
         } else{
             return false;

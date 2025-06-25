@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\Commission;
+use App\Application\Services\CacheService;
 use App\Domain\Interfaces\ICommissionRepository;
 use App\Infrastructure\Persistence\Eloquent\Commission\CommissionEloquent;
 
@@ -23,6 +24,18 @@ class CommissionRepository implements ICommissionRepository {
         $data['list'] = $query->get();
         return $data;
     }
+    public function all(){
+        $query = CommissionEloquent::query();
+        $query->select('commission_id','commission_name','created_at','updated_at');
+        $data['list'] = $query->get();
+        if(CacheService::has_data('all_commissions')){
+            $data = CacheService::get_data('all_commissions');
+            $data['from_cache'] = true;
+            return $data;
+        }
+        CacheService::set_data('all_commissions',$data);
+        return $data;
+    }
     public function findById(int $id){
         $query = CommissionEloquent::query();
         $query->select('commission_id','commission_name','created_at','updated_at');
@@ -31,15 +44,18 @@ class CommissionRepository implements ICommissionRepository {
         return $result;
     }
     public function create(array $data){
+        CacheService::forget_data('all_commissions');
         return CommissionEloquent::create($data);
     }
     public function update(array $data){
+        CacheService::forget_data('all_commissions');
         $result = CommissionEloquent::where('commission_id',$data['commission_id'])->update(['commission_name'=>$data['commission_name']]);
         return $result;
     }
     public function delete(int $id){
         $city = $this->findById($id);
         if($city){
+            CacheService::forget_data('all_commissions');
             return CommissionEloquent::findOrFail($id)->delete();
         } else{
             return false;

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\President;
+use App\Application\Services\CacheService;
 use App\Domain\Interfaces\IPresidentRepository;
 use App\Infrastructure\Persistence\Eloquent\President\PresidentEloquent;
 
@@ -25,6 +26,21 @@ class PresidentRepository implements IPresidentRepository{
         $data['list'] = $query->get();
         return $data;
     }
+    public function all(){
+        $query = PresidentEloquent::query();
+        $query->select(
+            'president_id','president_name',
+            'created_at',
+            'updated_at');
+        $data['list'] = $query->get();
+        if(CacheService::has_data('all_presidents')){
+            $data = CacheService::get_data('all_presidents');
+            $data['from_cache'] = true;
+            return $data;
+        }
+        CacheService::set_data('all_presidents',$data);
+        return $data;
+    }
     public function findById(int $id){
         $query = PresidentEloquent::query();
         $query->select('president_id','president_name','created_at','updated_at');
@@ -33,15 +49,18 @@ class PresidentRepository implements IPresidentRepository{
         return $result;
     }
     public function create(array $data){
+        CacheService::forget_data('all_presidents');
         return PresidentEloquent::create($data);
     }
     public function update(array $data){
+        CacheService::forget_data('all_presidents');
         $result = PresidentEloquent::where('president_id',$data['president_id'])->update(['president_name'=>$data['president_name']]);
         return $result;
     }
     public function delete(int $id){
         $city = $this->findById($id);
         if($city){
+            CacheService::forget_data('all_presidents');
             return PresidentEloquent::findOrFail($id)->delete();
         } else{
             return false;

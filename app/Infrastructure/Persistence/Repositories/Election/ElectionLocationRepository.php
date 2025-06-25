@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\Election;
+use App\Application\Services\CacheService;
 use App\Domain\Interfaces\IElectionLocationRepository;
 use App\Infrastructure\Persistence\Eloquent\Election\ElectionLocationEloquent;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +35,26 @@ class ElectionLocationRepository implements IElectionLocationRepository {
             $query->take($filters['page_size']);
         }
         $data['list'] = $query->get();
+        return $data;
+    }
+    public function all(){
+        $query = ElectionLocationEloquent::query();
+        $query->select(
+            'election_location_id',
+            'election_location.election_location_province_id',
+            'election_location.election_location_title',
+            'province.province_name',
+            'election_location.created_at',
+            'election_location.updated_at'
+        );
+        $query->leftJoin('province', 'province.province_id', '=', 'election_location.election_location_province_id');
+        $data['list'] = $query->get();
+        if(CacheService::has_data('all_elections')){
+            $data = CacheService::get_data('all_elections');
+            $data['from_cache'] = true;
+            return $data;
+        }
+        CacheService::set_data('all_elections',$data);
         return $data;
     }
     public function findById(int $id){
@@ -71,6 +92,7 @@ class ElectionLocationRepository implements IElectionLocationRepository {
                 'election_location_city_id' => $item
             ]);
         }
+        CacheService::forget_data('all_elections');
         return $data;
 
     }
@@ -87,11 +109,13 @@ class ElectionLocationRepository implements IElectionLocationRepository {
                 'election_location_city_id' => $item
             ]);
         }
+        CacheService::forget_data('all_elections');
         return $result;
     }
     public function delete(int $id){
         $city = $this->findById($id);
         if($city){
+            CacheService::forget_data('all_elections');
             return ElectionLocationEloquent::findOrFail($id)->delete();
         } else{
             return false;

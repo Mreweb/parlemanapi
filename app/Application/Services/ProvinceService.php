@@ -12,6 +12,9 @@ class ProvinceService{
     public function list(array $filters){
         return $this->repository->list($filters);
     }
+    public function all(){
+        return $this->repository->all();
+    }
 
     public function get(int $id)
     {

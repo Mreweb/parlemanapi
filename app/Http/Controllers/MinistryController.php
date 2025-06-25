@@ -27,6 +27,15 @@ class MinistryController extends Controller{
 
     /**
      * @lrd:start
+     * فهرست همه
+     * @lrd:end
+     */
+    public function all(){
+        $result = $this->service->all();
+        return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
+    }
+    /**
+     * @lrd:start
      * ویرایش وزارتخانه
      * @lrd:end
      */

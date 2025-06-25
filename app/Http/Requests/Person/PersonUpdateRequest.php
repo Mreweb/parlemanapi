@@ -21,10 +21,10 @@ class PersonUpdateRequest extends FormRequest{
             'person_phone' => ['required', 'string'  , 'max:12' , 'min:10'],
             'person_gender' => ['required', 'string'],
             'person_province_id' => ['required'],
-            'person_image' => ['required'],
+            'person_image' => [''],
             'person_role' => ['required'],
             'username' => ['required', 'string'  , 'max:50' , 'min:3'],
-            'password' => [ 'string'  , 'max:50' , 'min:3']
+            'password' => [ '']
         ];
     }
 

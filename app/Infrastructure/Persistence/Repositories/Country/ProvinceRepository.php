@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\Country;
+use App\Application\Services\CacheService;
 use App\Domain\Interfaces\IProvinceRepository;
 use App\Infrastructure\Persistence\Eloquent\Country\ProvinceEloquent;
 
@@ -26,6 +27,18 @@ class ProvinceRepository implements IProvinceRepository{
         $data['list'] = $query->get();
         return $data;
     }
+    public function all(){
+        $query = ProvinceEloquent::query();
+        $query->select('province_id','province_name','created_at','updated_at');
+        $data['list'] = $query->get();
+        if(CacheService::has_data('all_province')){
+            $data = CacheService::get_data('all_province');
+            $data['from_cache'] = true;
+            return $data;
+        }
+        CacheService::set_data('all_province',$data);
+        return $data;
+    }
     public function findById(int $id){
         $query = ProvinceEloquent::query();
         $query->select('province_id','province_name','created_at','updated_at');
@@ -36,19 +49,23 @@ class ProvinceRepository implements IProvinceRepository{
         return ProvinceEloquent::find($id)->cities->toArray();
     }
     public function create(array $data){
+        CacheService::forget_data('all_province');
         return ProvinceEloquent::create($data);
     }
     public function update(array $data){
+        CacheService::forget_data('all_province');
         $result = ProvinceEloquent::where('province_id',$data['province_id'])->update(['province_name'=>$data['province_name']]);
         return $result;
     }
     public function delete(int $id){
         $province = $this->findById($id);
         if($province){
+            CacheService::forget_data('all_province');
             return ProvinceEloquent::findOrFail($id)->delete();
         } else{
             return false;
         }
 
     }
+
 }

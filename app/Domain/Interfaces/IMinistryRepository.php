@@ -5,6 +5,7 @@ namespace App\Domain\Interfaces;
 interface IMinistryRepository{
 
     public function list(array $filters);
+    public function all();
     public function findById(int $id);
     public function create(array $data);
     public function update(array $data);

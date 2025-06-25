@@ -5,6 +5,7 @@ namespace App\Domain\Interfaces;
 interface IProvinceRepository {
 
     public function list(array $filters);
+    public function all();
     public function findById(int $id);
     public function get_cities(int $id);
     public function create(array $data);

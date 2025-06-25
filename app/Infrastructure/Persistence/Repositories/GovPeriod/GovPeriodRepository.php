@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Persistence\Repositories\GovPeriod;
 
+use App\Application\Services\CacheService;
 use App\Domain\Interfaces\IGovPeriodRepository;
 use App\Infrastructure\Persistence\Eloquent\Period\GovPeriodEloquent;
 
@@ -23,6 +24,21 @@ class GovPeriodRepository implements IGovPeriodRepository{
         $data['list'] = $query->get();
         return $data;
     }
+    public function all(){
+        $query = GovPeriodEloquent::query();
+        $query->select('gov_period_id','gov_period_name','created_at','updated_at');
+        if (!empty($filters['gov_period_name'])) {
+            $query->where('gov_period_name', 'like', '%' . $filters['gov_period_name'] . '%');
+        }
+        $data['list'] = $query->get();
+        if(CacheService::has_data('all_gov_period')){
+            $data = CacheService::get_data('all_gov_period');
+            $data['from_cache'] = true;
+            return $data;
+        }
+        CacheService::set_data('all_gov_period',$data);
+        return $data;
+    }
     public function findById(int $id){
         $query = GovPeriodEloquent::query();
         $query->select('gov_period_id','gov_period_name','created_at','updated_at');
@@ -31,15 +47,18 @@ class GovPeriodRepository implements IGovPeriodRepository{
         return $result;
     }
     public function create(array $data){
+        CacheService::forget_data('all_gov_period');
         return GovPeriodEloquent::create($data);
     }
     public function update(array $data){
+        CacheService::forget_data('all_gov_period');
         $result = GovPeriodEloquent::where('gov_period_id',$data['gov_period_id'])->update(['gov_period_name'=>$data['gov_period_name']]);
         return $result;
     }
     public function delete(int $id){
         $city = $this->findById($id);
         if($city){
+            CacheService::forget_data('all_gov_period');
             return GovPeriodEloquent::findOrFail($id)->delete();
         } else{
             return false;

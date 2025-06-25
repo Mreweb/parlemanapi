@@ -28,6 +28,7 @@ use App\Http\Controllers\TripsController;
 use App\Http\Controllers\Upload;
 use App\Http\Controllers\VoteConfidenceController;
 use App\Http\Middleware\JWTAuthCheck;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,12 +40,15 @@ Route::prefix('auth')->group( function () {
 });
 
 
+
 Route::middleware(JWTAuthCheck::class)->group(callback: function () {
     Route::get('/enum', [Enums::class, 'index']);
     Route::post('/file', [Upload::class, 'save']);
     Route::get('/file/{id}', [Upload::class, 'get_file']);
+
     Route::prefix('provinces')->group(function () {
         Route::get('/', [ProvinceController::class, 'index']);
+        Route::get('/all', [ProvinceController::class, 'all']);
         Route::get('/{id}', [ProvinceController::class, 'show']);
         Route::get('/cities/{id}', [ProvinceController::class, 'cities']);
         Route::post('/', [ProvinceController::class, 'store']);
@@ -74,6 +78,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
 
     Route::prefix('president')->group(function () {
         Route::get('/', [PresidentController::class, 'index']);
+        Route::get('/all', [PresidentController::class, 'all']);
         Route::get('/{id}', [PresidentController::class, 'show']);
         Route::post('/', [PresidentController::class, 'store']);
         Route::put('/', [PresidentController::class, 'update']);
@@ -90,6 +95,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
 
     Route::prefix('parleman_period')->group(function () {
         Route::get('/', [ParlemanPeriodController::class, 'index']);
+        Route::get('/all', [ParlemanPeriodController::class, 'all']);
         Route::get('/{id}', [ParlemanPeriodController::class, 'show']);
         Route::post('/', [ParlemanPeriodController::class, 'store']);
         Route::put('/', [ParlemanPeriodController::class, 'update']);
@@ -98,6 +104,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
 
     Route::prefix('gov_period')->group(function () {
         Route::get('/', [GovPeriodController::class, 'index']);
+        Route::get('/all', [GovPeriodController::class, 'all']);
         Route::get('/{id}', [GovPeriodController::class, 'show']);
         Route::post('/', [GovPeriodController::class, 'store']);
         Route::put('/', [GovPeriodController::class, 'update']);
@@ -106,6 +113,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
 
     Route::prefix('election_location')->group(function () {
         Route::get('/', [ElectionLocationController::class, 'index']);
+        Route::get('/all', [ElectionLocationController::class, 'all']);
         Route::get('/{id}', [ElectionLocationController::class, 'show']);
         Route::post('/', [ElectionLocationController::class, 'store']);
         Route::put('/', [ElectionLocationController::class, 'update']);
@@ -114,6 +122,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
 
     Route::prefix('commission')->group(function () {
         Route::get('/', [CommissionController::class, 'index']);
+        Route::get('/all', [CommissionController::class, 'all']);
         Route::get('/{id}', [CommissionController::class, 'show']);
         Route::post('/', [CommissionController::class, 'store']);
         Route::put('/', [CommissionController::class, 'update']);
@@ -122,6 +131,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
 
     Route::prefix('fraction')->group(function () {
         Route::get('/', [FractionController::class, 'index']);
+        Route::get('/all', [FractionController::class, 'all']);
         Route::get('/{id}', [FractionController::class, 'show']);
         Route::post('/', [FractionController::class, 'store']);
         Route::put('/', [FractionController::class, 'update']);
@@ -130,6 +140,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
 
     Route::prefix('ministry')->group(function () {
         Route::get('/', [MinistryController::class, 'index']);
+        Route::get('/all', [MinistryController::class, 'all']);
         Route::get('/{id}', [MinistryController::class, 'show']);
         Route::post('/', [MinistryController::class, 'store']);
         Route::put('/', [MinistryController::class, 'update']);
