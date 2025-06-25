@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('person_rule_forty_five', function (Blueprint $table) {
             $table->comment('ماده 45');
-            $table->integer('rule_forty_five_id')->autoIncrement();
-            $table->string('rule_forty_five_president_id')->comment('رئیس جمهور');
-            $table->string('rule_forty_five_person_id')->comment('نام نماینده متقاضی ماده 45');
-            $table->string('rule_forty_five_gov_period_id')->comment('شماره دولت');
-            $table->string('rule_forty_five_parliament_period_id')->comment('شماره مجلس');
+            $table->id('rule_forty_five_id')->autoIncrement();
+            $table->string('rule_forty_five_president_id')->comment('رئیس جمهور')->index("f_pr_id");
+            $table->string('rule_forty_five_person_id')->comment('نام نماینده متقاضی ماده 45')->index("f_pr_person_id");
+            $table->string('rule_forty_five_gov_period_id')->comment('شماره دولت')->index("f_pr_gov_period_id");
+            $table->string('rule_forty_five_parliament_period_id')->comment('شماره مجلس')->index("f_pr_parliament_period_id");
             $table->string('rule_forty_five_meeting')->comment('اجلاسیه');
             $table->string('rule_forty_five_register_number')->comment('شماره ثبت');
             $table->string('rule_forty_five_subject')->comment('موضوع درخواست');
-            $table->string('rule_forty_five_summary')->comment('چکیده موضوع');
+            $table->longText('rule_forty_five_summary')->comment('چکیده موضوع');
             $table->string('rule_forty_five_worksheet_id')->comment('کاربرگ');
             $table->string('rule_forty_five_commission_id')->comment('کمیسیون تخصصی');
             $table->string('rule_forty_five_commission_result')->comment('نتیجه بررسی در کمیسیون');

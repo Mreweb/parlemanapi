@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('person_trip', function (Blueprint $table) {
             $table->comment('سفرهای نماینده');
-            $table->integer('trip_id')->autoIncrement();
-            $table->string('trip_president_id')->comment('رئیس جمهور');
-            $table->string('trip_person_id')->comment('نام نماینده متقاضی ماده 45');
-            $table->string('trip_gov_period_id')->comment('شماره دولت');
-            $table->string('trip_parliament_period_id')->comment('شماره مجلس');
+            $table->id('trip_id')->autoIncrement();
+            $table->string('trip_president_id')->comment('رئیس جمهور')->index();
+            $table->string('trip_person_id')->comment('نام نماینده متقاضی ماده 45')->index();
+            $table->string('trip_gov_period_id')->comment('شماره دولت')->index();
+            $table->string('trip_parliament_period_id')->comment('شماره مجلس')->index();
             $table->string('trip_start_date')->comment('تاریخ شروع سفر');
             $table->string('trip_end_date')->comment('تاریخ پایان سفر');
             $table->string('trip_province_id')->comment('استان مقصد');
-            $table->string('trip_description')->comment('توضیحات');
+            $table->longText('trip_description')->comment('توضیحات');
             $table->string('trip_subject')->comment('موضوع سفر');
             $table->timestamps();
             $table->softDeletes();

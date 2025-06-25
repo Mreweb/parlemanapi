@@ -23,10 +23,10 @@ return new class extends Migration
             $table->enum('project_government_vote',['reject','accept','editable'])->comment('تاریخ');
             $table->enum('project_status',['reject','accept'])->comment('تاریخ');
             $table->string('project_end_date')->comment('اقدامات');
-            $table->string('project_person_id')->comment('نماینده درخواست کننده	');
-            $table->string('project_president_id')->comment('رئیس جمهور	');
-            $table->string('project_gov_period_id')->comment('شماره دولت');
-            $table->string('project_parliament_period_id')->comment('دوره مجلس');
+            $table->string('project_person_id')->comment('نماینده درخواست کننده	')->index();
+            $table->string('project_president_id')->comment('رئیس جمهور	')->index();
+            $table->string('project_gov_period_id')->comment('شماره دولت')->index();
+            $table->string('project_parliament_period_id')->comment('دوره مجلس')->index();
             $table->timestamps();
             $table->softDeletes();
         });

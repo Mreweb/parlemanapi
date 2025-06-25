@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('person_trip_board', function (Blueprint $table) {
             $table->comment('هیات همراه');
             $table->id('row_id');
-            $table->integer('trip_id')->comment('شناسه سفر');
+            $table->unsignedBigInteger('trip_id')->comment('شناسه سفر')->index();
             $table->integer('board_person_id')->comment('شناسه فرد');
             $table->foreign('trip_id')->references('trip_id')->on('person_trip')->onDelete('cascade');
             $table->timestamps();

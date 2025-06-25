@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('commission', function (Blueprint $table) {
             $table->comment('کمیسیون ها');
-            $table->id('commission_id');
+            $table->id('commission_id')->autoIncrement();
             $table->string('commission_name',100);
             $table->timestamps();
             $table->softDeletes();

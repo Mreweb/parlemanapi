@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('person_notice_signature', function (Blueprint $table) {
             $table->comment('امضا کنندگان تذکر نماینده');
             $table->id('row_id')->autoIncrement();
-            $table->integer('notice_id');
-            $table->integer('notice_person_id');
+            $table->unsignedBigInteger('notice_id');
+            $table->integer('notice_person_id')->index();
             $table->foreign('notice_id')->references('notice_id')->on('person_notice')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('election_location_city', function (Blueprint $table) {
             $table->comment('شهرهای حوزه انتخابیه');
-            $table->id('row_id');
-            $table->integer('election_location_id');
-            $table->integer('election_location_city_id');
+            $table->id('row_id')->autoIncrement();
+            $table->unsignedBigInteger('election_location_id');
+            $table->unsignedBigInteger('election_location_city_id')->index();
             $table->foreign('election_location_id')->references('election_location_id')->on('election_location')->onDelete('cascade');
 
             $table->timestamps();

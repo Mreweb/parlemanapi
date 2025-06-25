@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('person_research', function (Blueprint $table) {
             $table->comment('کاربرگ تحقیق و تفحص');
-            $table->integer('person_research_id')->autoIncrement();
-            $table->string('person_research_president_id')->comment('رئیس جمهور');
-            $table->string('person_research_person_id')->comment('نام نماینده طراح تحقیق و تفحص');
-            $table->string('person_research_gov_period_id')->comment('شماره دولت');
-            $table->string('person_research_parliament_period_id')->comment('شماره مجلس');
+            $table->id('person_research_id')->autoIncrement();
+            $table->string('person_research_president_id')->comment('رئیس جمهور')->index();
+            $table->string('person_research_person_id')->comment('نام نماینده طراح تحقیق و تفحص')->index();
+            $table->string('person_research_gov_period_id')->comment('شماره دولت')->index();
+            $table->string('person_research_parliament_period_id')->comment('شماره مجلس')->index();
             $table->string('person_research_meeting')->comment('اجلاسیه');
             $table->string('person_research_register_number')->comment('شماره ثبت');
             $table->string('person_research_register_date')->comment('تاریخ ثبت');
             $table->string('person_research_subject')->comment('موضوع تحقیق');
-            $table->string('person_research_summary')->comment('چکیده تحقیق');
+            $table->longText('person_research_summary')->comment('چکیده تحقیق');
             $table->string('person_research_worksheet_media_id')->comment('کاربرگ تحقیق');
             $table->string('person_research_commission_id')->comment('کمیسیون تخصصی');
-            $table->string('person_research_commission_result')->comment('نتیجه در کمیسیون تخصصی');
+            $table->longText('person_research_commission_result')->comment('نتیجه در کمیسیون تخصصی');
             $table->string('person_research_commission_number')->comment('شماره جلسه صحن علنی');
             $table->string('person_research_public_court_date')->comment('تاریخ طرح در صحن علنی');
             $table->string('person_research_public_court_result')->comment('نتیجه طرح در صحن علنی');

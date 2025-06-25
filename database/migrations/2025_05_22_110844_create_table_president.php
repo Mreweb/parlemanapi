@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('president', function (Blueprint $table) {
             $table->comment('ریاست جمهوری');
-            $table->integer('president_id')->autoIncrement();
+            $table->id('president_id')->autoIncrement();
             $table->string('president_name', 100);
             $table->timestamps();
             $table->softDeletes();

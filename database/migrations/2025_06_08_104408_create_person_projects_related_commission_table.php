@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('person_projects_related_commission', function (Blueprint $table) {
             $table->comment('کمیسیون های مرتبط');
             $table->id('row_id')->autoIncrement();
-            $table->integer('projects_related_commission_id')->comment('شناسه کمیسیون مرتبط');
-            $table->integer('projects_project_id')->comment('شناسه طراح');
+            $table->integer('projects_related_commission_id')->comment('شناسه کمیسیون مرتبط')->index("p_r_c_id");
+            $table->unsignedBigInteger('projects_project_id')->comment('شناسه طراح')->index("p_p_id");
             $table->foreign('projects_project_id')->references('project_id')->on('person_projects')->onDelete('cascade');
 
             $table->timestamps();

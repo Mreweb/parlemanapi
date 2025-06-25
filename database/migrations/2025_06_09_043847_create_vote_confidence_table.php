@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('person_vote_confidence', function (Blueprint $table) {
             $table->comment('رای اعتماد');
-            $table->integer('vote_confidence_id')->autoIncrement();
-            $table->string('vote_confidence_president_id')->comment('رئیس جمهور');
-            $table->string('vote_confidence_person_id')->comment('شخصی که از او استیضاح شده');
-            $table->string('vote_confidence_gov_period_id')->comment('شماره دولت');
-            $table->string('vote_confidence_parliament_period_id')->comment('شماره مجلس');
+            $table->id('vote_confidence_id')->autoIncrement();
+            $table->string('vote_confidence_president_id')->comment('رئیس جمهور')->index("vc_pr_id");
+            $table->string('vote_confidence_person_id')->comment('شخصی که از او استیضاح شده')->index("vc_p_id");
+            $table->string('vote_confidence_gov_period_id')->comment('شماره دولت')->index("vc_g_per_id");
+            $table->string('vote_confidence_parliament_period_id')->comment('شماره مجلس')->index("v_c_p_per_id");
             $table->string('vote_confidence_meeting')->comment('اجلاسیه');
             $table->string('vote_confidence_register_number')->comment('شماره ثبت');
             $table->string('vote_confidence_commission_id')->comment('کمیسیون تخصصی');
             $table->string('vote_confidence_commission_meeting_date')->comment('تاریج جلسه کمیسیون');
-            $table->string('vote_confidence_commission_report')->comment('گزارش  کمیسیون در صحن');
+            $table->longText('vote_confidence_commission_report')->comment('گزارش  کمیسیون در صحن');
             $table->string('vote_confidence_public_court_date')->comment('تاریخ بررسی در صحن علنی');
             $table->string('vote_confidence_public_parliament_session_number')->comment('شماره جلسه صحن علنی');
             $table->string('vote_confidence_public_parliament_check_result')->comment('نتیجه بررسی در صحن علنی');

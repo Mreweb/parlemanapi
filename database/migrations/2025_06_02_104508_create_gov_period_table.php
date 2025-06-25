@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gov_period', function (Blueprint $table) {
             $table->comment('شماره دولت');
-            $table->id('gov_period_id');
+            $table->id('gov_period_id')->autoIncrement();
             $table->string('gov_period_name',100);
             $table->timestamps();
             $table->softDeletes();

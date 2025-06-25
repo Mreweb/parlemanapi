@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void{
         Schema::create('person_rule_ttf', function (Blueprint $table) {
             $table->comment('ماده 234');
-            $table->integer('rule_ttf_id')->autoIncrement();
-            $table->string('rule_ttf_president_id')->comment('رئیس جمهور');
-            $table->string('rule_ttf_person_id')->comment('نام نماینده متقاضی ماده 234');
-            $table->string('rule_ttf_gov_period_id')->comment('شماره دولت');
-            $table->string('rule_ttf_parliament_period_id')->comment('شماره مجلس');
+            $table->id('rule_ttf_id')->autoIncrement();
+            $table->string('rule_ttf_president_id')->comment('رئیس جمهور')->index();
+            $table->string('rule_ttf_person_id')->comment('نام نماینده متقاضی ماده 234')->index();
+            $table->string('rule_ttf_gov_period_id')->comment('شماره دولت')->index();
+            $table->string('rule_ttf_parliament_period_id')->comment('شماره مجلس')->index();
             $table->string('rule_ttf_meeting')->comment('اجلاسیه');
             $table->string('rule_ttf_register_number')->comment('شماره ثبت');
             $table->string('rule_ttf_subject')->comment('موضوع درخواست ماده 234');
-            $table->string('rule_ttf_summary')->comment('چکیده موضوع');
+            $table->longText('rule_ttf_summary')->comment('چکیده موضوع');
             $table->string('rule_ttf_worksheet_id')->comment('کاربرگ');
             $table->string('rule_ttf_commission_id')->comment('کمیسیون تخصصی');
             $table->string('rule_ttf_commission_result')->comment('نتیجه در کمیسیون تخصصی');

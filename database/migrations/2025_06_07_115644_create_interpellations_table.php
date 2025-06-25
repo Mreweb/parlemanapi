@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void{
         Schema::create('person_interpellations', function (Blueprint $table) {
             $table->comment('استیضاح');
-            $table->integer('interpellation_id')->autoIncrement();
-            $table->string('interpellation_president_id')->comment('رئیس جمهور');
-            $table->string('interpellation_person_id')->comment('شخصی که از او استیضاح شده');
-            $table->string('interpellation_gov_period_id')->comment('شماره دولت');
-            $table->string('interpellation_parliament_period_id')->comment('شماره مجلس');
+            $table->id('interpellation_id')->autoIncrement();
+            $table->string('interpellation_president_id')->comment('رئیس جمهور')->index();
+            $table->string('interpellation_person_id')->comment('شخصی که از او استیضاح شده')->index();
+            $table->string('interpellation_gov_period_id')->comment('شماره دولت')->index();
+            $table->string('interpellation_parliament_period_id')->comment('شماره مجلس')->index();
             $table->string('interpellation_meeting')->comment('اجلاسیه');
             $table->string('interpellation_register_number')->comment('شماره ثبت');
             $table->string('interpellation_axis')->comment('محور استیضاح:');

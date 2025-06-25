@@ -15,8 +15,8 @@ return new class extends Migration
 
             $table->comment('کمیسیون تحصصی طرح');
             $table->id('row_id')->autoIncrement();
-            $table->integer('projects_special_commission_id')->comment('شناسه کمیسیون تخصصی');
-            $table->integer('projects_project_id')->comment('شناسه طراح');
+            $table->integer('projects_special_commission_id')->comment('شناسه کمیسیون تخصصی')->index("p_s_c_id");
+            $table->unsignedBigInteger('projects_project_id')->comment('شناسه طراح')->index("p_p_id");
             $table->foreign('projects_project_id')->references('project_id')->on('person_projects')->onDelete('cascade');
 
             $table->timestamps();

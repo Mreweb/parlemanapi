@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('person_commission', function (Blueprint $table) {
             $table->comment('کمیسیون نماینده');
             $table->id('row_id');
-            $table->integer('person_id');
-            $table->integer('commission_id');
+            $table->unsignedBigInteger('person_id');
+            $table->unsignedBigInteger('commission_id');
             $table->timestamps();
             $table->softDeletes();
         });

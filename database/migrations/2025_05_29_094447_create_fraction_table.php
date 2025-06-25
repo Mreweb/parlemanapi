@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fraction', function (Blueprint $table) {
             $table->comment('فراکسیون ها');
-            $table->id('fraction_id');
+            $table->id('fraction_id')->autoIncrement();
             $table->string('fraction_name',100);
             $table->timestamps();
             $table->softDeletes();

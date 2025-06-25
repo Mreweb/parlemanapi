@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('person_meeting', function (Blueprint $table) {
             $table->comment('ملاقات های نماینده');
-            $table->integer('meeting_id')->autoIncrement();
+            $table->id('meeting_id')->autoIncrement();
             $table->string('meeting_title')->comment('شرح مصوبه');
-            $table->string('meeting_description')->comment('توضیحات');
+            $table->longText('meeting_description')->comment('توضیحات');
             $table->enum('meeting_status',['done','undone'])->comment('وضعیت');
             $table->string('meeting_end_date')->comment('تاریخ خاتمه');
             $table->string('meeting_tasks')->comment('اقدامات انجام شده	');
-            $table->string('meeting_person_id')->comment('نماینده درخواست کننده	');
-            $table->string('meeting_president_id')->comment('رئیس جمهور	');
-            $table->string('meeting_gov_period_id')->comment('شماره دولت');
-            $table->string('meeting_parliament_period_id')->comment('دوره مجلس');
+            $table->string('meeting_person_id')->comment('نماینده درخواست کننده	')->index();
+            $table->string('meeting_president_id')->comment('رئیس جمهور	')->index();
+            $table->string('meeting_gov_period_id')->comment('شماره دولت')->index();
+            $table->string('meeting_parliament_period_id')->comment('دوره مجلس')->index();
             $table->timestamps();
             $table->softDeletes();
         });

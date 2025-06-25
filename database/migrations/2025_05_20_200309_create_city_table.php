@@ -11,9 +11,9 @@ return new class extends Migration {
     public function up(): void{
         Schema::create('city', function (Blueprint $table) {
             $table->comment('فهرست شهرها');
-            $table->integer('city_id')->autoIncrement();
+            $table->id('city_id')->autoIncrement();
             $table->string('city_name', 100)->comment('نام شهر');
-            $table->integer('city_province_id')->comment('شناسه استان');
+            $table->integer('city_province_id')->comment('شناسه استان')->index();
             $table->timestamps();
             $table->softDeletes();
         });

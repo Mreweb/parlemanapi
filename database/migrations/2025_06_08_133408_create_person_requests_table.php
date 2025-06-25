@@ -21,10 +21,10 @@ return new class extends Migration
             $table->longText('request_description')->comment('شرح درخواست');
             $table->longText('request_command')->comment('دستور لازم');
             $table->string('request_serial')->comment('شماره درخواست');
-            $table->string('request_person_id')->comment('نماینده درخواست کننده');
-            $table->string('request_president_id')->comment('رئیس جمهور');
-            $table->string('request_gov_period_id')->comment('شماره دولت');
-            $table->string('request_parliament_period_id')->comment('دوره مجلس');
+            $table->string('request_person_id')->comment('نماینده درخواست کننده')->index();
+            $table->string('request_president_id')->comment('رئیس جمهور')->index();
+            $table->string('request_gov_period_id')->comment('شماره دولت')->index();
+            $table->string('request_parliament_period_id')->comment('دوره مجلس')->index();
             $table->timestamps();
             $table->softDeletes();
         });

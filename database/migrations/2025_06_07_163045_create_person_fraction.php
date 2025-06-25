@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('person_fraction', function (Blueprint $table) {
             $table->comment('فراکسیون نماینده');
             $table->id('row_id');
-            $table->integer('person_id');
-            $table->integer('fraction_id');
+            $table->unsignedBigInteger('person_id');
+            $table->unsignedBigInteger('fraction_id');
             $table->timestamps();
             $table->softDeletes();
         });

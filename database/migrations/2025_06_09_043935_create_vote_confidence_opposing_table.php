@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('person_vote_confidence_opposing', function (Blueprint $table) {
             $table->comment('مخالفان رای اعتماد');
             $table->id('row_id');
-            $table->integer('vote_confidence_opposing_person_id')->comment('شناسه فرد مخالف رای اعتماد');
-            $table->integer('vote_confidence_id');
+            $table->integer('vote_confidence_opposing_person_id')->comment('شناسه فرد مخالف رای اعتماد')->index("v_c_o_p_id");
+            $table->unsignedBigInteger('vote_confidence_id')->index();
             $table->foreign('vote_confidence_id')->references('vote_confidence_id')->on('person_vote_confidence')->onDelete('cascade');
             $table->timestamps();
         });

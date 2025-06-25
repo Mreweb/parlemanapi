@@ -15,8 +15,8 @@ return new class extends Migration
 
             $table->comment('امضا کنندگان استیضاح نماینده');
             $table->id('interpellation_signature_id');
-            $table->integer('interpellation_signature_person_id');
-            $table->integer('interpellation_id');
+            $table->unsignedBigInteger('interpellation_signature_person_id')->index("signature_person_id");
+            $table->unsignedBigInteger('interpellation_id')->index();
             $table->foreign('interpellation_id')->references('interpellation_id')->on('person_interpellations')->onDelete('cascade');
             $table->timestamps();
         });

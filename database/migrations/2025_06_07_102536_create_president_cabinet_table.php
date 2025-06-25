@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('president_cabinet', function (Blueprint $table) {
             $table->comment('کابینه ریاست مجهوری');
             $table->id('row_id')->primary();
-            $table->integer('president_id');
+            $table->unsignedBigInteger('president_id')->index();
             $table->string('cabinet',100);//enum gov cabinet
-            $table->integer('cabinet_person_id');
+            $table->unsignedBigInteger('cabinet_person_id')->index();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('president_id')->references('president_id')->on('president')->onDelete('cascade');

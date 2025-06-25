@@ -12,7 +12,7 @@ return new class extends Migration {
         Schema::create('person_requests_track', function (Blueprint $table) {
             $table->comment('پیگیری درخواست ها');
             $table->id('row_id')->autoIncrement();
-            $table->string('request_id')->comment('شناسه درخواست');
+            $table->unsignedBigInteger('request_id')->comment('شناسه درخواست');
             $table->string('request_commission_title')->comment('ارجا به مبادی ذیربط');
             $table->string('request_subject_title')->comment('سوابق موضوع');
             $table->string('request_subject_description')->comment('شرح پیگیری');

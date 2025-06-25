@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->comment('فایل ها');
-            $table->id('row_id');
+            $table->id('row_id')->autoIncrement();
             $table->string('media_id');
             $table->string('path');
             $table->longText('base_64');

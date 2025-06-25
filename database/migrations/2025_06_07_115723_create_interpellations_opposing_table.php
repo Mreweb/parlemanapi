@@ -12,8 +12,8 @@ return new class extends Migration {
         Schema::create('person_interpellations_opposing', function (Blueprint $table) {
             $table->comment('مخالف های استیضاح');
             $table->id('interpellations_opposing_id');
-            $table->integer('interpellations_opposing_person_id');
-            $table->integer('interpellation_id');
+            $table->unsignedBigInteger('interpellations_opposing_person_id')->index("opposing_person_id");
+            $table->unsignedBigInteger('interpellation_id')->index();
             $table->foreign('interpellation_id')->references('interpellation_id')->on('person_interpellations')->onDelete('cascade');
             $table->timestamps();
         });

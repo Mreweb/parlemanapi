@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('person_notice', function (Blueprint $table) {
             $table->comment('تذکر های نماینده');
-            $table->integer('notice_id')->autoIncrement();
-            $table->string('notice_person_id')->comment('شخصی که تذکر دهنده بوده')->nullable();
-            $table->string('notice_president_id')->comment('در کدام شخص ریاست جمهوری تذکر داده شده')->nullable();
-            $table->string('notice_gov_period_id')->comment('در کدام دوره دولت')->nullable();
-            $table->string('notice_parliament_period_id')->comment('در کدام دوره مجلس')->nullable();
+            $table->id('notice_id')->autoIncrement();
+            $table->integer('notice_person_id')->comment('شخصی که تذکر دهنده بوده')->nullable()->index();
+            $table->integer('notice_president_id')->comment('در کدام شخص ریاست جمهوری تذکر داده شده')->nullable()->index();
+            $table->integer('notice_gov_period_id')->comment('در کدام دوره دولت')->nullable()->index();
+            $table->integer('notice_parliament_period_id')->comment('در کدام دوره مجلس')->nullable()->index();
             $table->string('notice_meeting')->comment('اجلاسیه')->nullable();
             $table->enum('notice_type',[1,2,3,4,5])->comment('نوع تذکر')->nullable();
             $table->string('notice_reading_date', 100)->comment('تاریخ قرائت')->nullable();

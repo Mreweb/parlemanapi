@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('person_research_signatures', function (Blueprint $table) {
             $table->comment('امضا کنندگان تحقیق و تفحص');
             $table->id('row_id');
-            $table->integer('person_research_signature_person_id')->comment('شناسه فرد امضا کننده تحقیق');
-            $table->integer('person_research_id');
+            $table->integer('person_research_signature_person_id')->comment('شناسه فرد امضا کننده تحقیق')->index("r_s_p_id");
+            $table->unsignedBigInteger('person_research_id');
             $table->foreign('person_research_id')->references('person_research_id')->on('person_research')->onDelete('cascade');
             $table->timestamps();
         });

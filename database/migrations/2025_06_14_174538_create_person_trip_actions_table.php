@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('person_trip_actions', function (Blueprint $table) {
             $table->comment('اقدامات سفر');
             $table->id('row_id');
-            $table->integer('trip_id')->comment('شناسه سفر');
+            $table->unsignedBigInteger('trip_id')->comment('شناسه سفر')->index();
             $table->longText('action_description')->comment('توضیح اقدامات');
             $table->foreign('trip_id')->references('trip_id')->on('person_trip')->onDelete('cascade');
             $table->timestamps();

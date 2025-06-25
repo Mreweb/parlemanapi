@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('parleman_period', function (Blueprint $table) {
             $table->comment('دوره های مجلس');
-            $table->id('period_id');
+            $table->id('period_id')->autoIncrement();
             $table->string('period_title', 100);
             $table->timestamps();
             $table->softDeletes();

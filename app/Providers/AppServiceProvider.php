@@ -78,6 +78,7 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->singleton(IRulesRepository::class, PersonRulesRepository::class);
         $this->app->singleton(IVoteConfidenceRepository::class, VoteConfidenceRepository::class);
         $this->app->singleton(IRuleTTFRepository::class, RuleTTFRepository::class);
+        $this->app->singleton(IRuleTTFRepository::class, RuleTTFRepository::class);
     }
     public function boot(): void{
         Schema::defaultStringLength(250);
