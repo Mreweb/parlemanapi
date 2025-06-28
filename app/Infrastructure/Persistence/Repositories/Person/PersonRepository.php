@@ -17,7 +17,7 @@ use App\Infrastructure\Persistence\Eloquent\RuleFortyFive\RuleFortyFiveEloquent;
 use App\Infrastructure\Persistence\Eloquent\Rules\PersonRulesEloquent;
 use App\Infrastructure\Persistence\Eloquent\RuleTTF\RuleTTFEloquent;
 use App\Infrastructure\Persistence\Eloquent\Trip\TripEloquent;
-use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceEloquent; 
+use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceEloquent;
 
 class PersonRepository implements IPersonRepository {
 
@@ -33,6 +33,9 @@ class PersonRepository implements IPersonRepository {
         }
         if (!empty($filters['person_phone'])) {
             $query->where('person_phone', $filters['person_phone']);
+        }
+        if (!empty($filters['person_province_id'])) {
+            $query->where('person_province_id', $filters['person_province_id']);
         }
         if (!empty($filters['person_last_name'])) {
             $query->where('person_last_name', 'like', '%' . $filters['person_last_name'] . '%');

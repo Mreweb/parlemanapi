@@ -66,13 +66,17 @@ class RuleFortyFiveController extends Controller{
      *
      *  rule_forty_five_commission_id کمیسیون تخصصی
      *
-     *  rule_forty_five_commission_result  چکیده گزارش دستگاه در کمیسیون تخصصی
+     *  rule_forty_five_commission_result  نتیجه در کمیسیون تخصصی
+     *
+     *  rule_forty_five_commission_content  چکیده گزارش دستگاه در کمیسیون تخصصی
      *
      *   rule_forty_five_public_parliament_session_number  شماره جلسه صحن علنی
      *
      *  rule_forty_five_public_court_date تاریخ بررسی در صحن علنی
      *
-     *  rule_forty_five_public_parliament_check_result  چکیده گزارش دستگاه در صحن علنی
+     *  rule_forty_five_public_parliament_check_result  نتیجه در صحن علنی
+     *
+     *  rule_forty_five_public_parliament_content  چکیده گزارش  در صحن علنی
      *
      *  rule_forty_five_ministry_id دستگاه ذیربط
      *

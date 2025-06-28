@@ -22,9 +22,11 @@ class RuleFortyFiveRequest extends FormRequest{
             'rule_forty_five_worksheet_id' => ['required'],
             'rule_forty_five_commission_id' => ['required'],
             'rule_forty_five_commission_result' => ['required'],
+            'rule_forty_five_commission_content' => ['required'],
             'rule_forty_five_public_court_date' => ['required'],
             'rule_forty_five_public_parliament_session_number' => ['required'],
             'rule_forty_five_public_parliament_check_result' => ['required'],
+            'rule_forty_five_public_parliament_content' => ['required'],
             'rule_forty_five_ministry_id' => ['required'],
             'rule_forty_five_summary_content' => ['required'],
             'rule_forty_five_signatures_person_ids' => ['array']

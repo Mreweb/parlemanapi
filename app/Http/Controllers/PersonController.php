@@ -22,6 +22,7 @@ class PersonController extends Controller{
      * @LRDparam person_national_code string
      * @LRDparam person_phone string
      * @LRDparam person_last_name string
+     * @LRDparam person_province_id string
      * @LRDparam page_index integer
      * @LRDparam page_size integer
      */

@@ -25,9 +25,11 @@ return new class extends Migration
             $table->string('rule_forty_five_worksheet_id')->comment('کاربرگ');
             $table->string('rule_forty_five_commission_id')->comment('کمیسیون تخصصی');
             $table->string('rule_forty_five_commission_result')->comment('نتیجه بررسی در کمیسیون');
+            $table->longText('rule_forty_five_commission_content')->comment('چکیده اقدامات در کمیسیون');
             $table->string('rule_forty_five_public_court_date')->comment('تاریخ بررسی در صحن علنی');
             $table->string('rule_forty_five_public_parliament_session_number')->comment('شماره جلسه صحن علنی');
             $table->string('rule_forty_five_public_parliament_check_result')->comment('نتیجه بررسی در صحن علنی');
+            $table->longText('rule_forty_five_public_parliament_content')->comment('چکیده اقدامات در صحن علنی');
             $table->string('rule_forty_five_ministry_id')->comment('دستگاه ذیربط');
             $table->longText('rule_forty_five_summary_content')->comment('چکیده اقدامات دستگاه مخاطب');
             $table->timestamps();

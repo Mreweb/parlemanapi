@@ -16,6 +16,7 @@ class VoteConfidenceRequest extends FormRequest{
             'vote_confidence_gov_period_id' => ['required'],
             'vote_confidence_parliament_period_id' => ['required'],
             'vote_confidence_meeting' => ['required'],
+            'vote_confidence_date' => ['required'],
             'vote_confidence_register_number' => ['required'],
             'vote_confidence_commission_id' => ['required'],
             'vote_confidence_commission_meeting_date' => ['required'],

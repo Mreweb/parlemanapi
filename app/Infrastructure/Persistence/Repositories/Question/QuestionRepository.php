@@ -66,6 +66,7 @@ class QuestionRepository implements IQuestionRepository {
          $query->where('question_id', $id);
         $result = $query->get()->toArray();
         $result[0]['question_worksheet_media'] = $this->findWorksheetMediaById($result[0]['question_worksheet_media_id']);
+        $result[0]['question_answer_media_id'] = $this->findWorksheetMediaById($result[0]['question_answer_media_id']);
         $result[0]['signature_person_ids'] = $this->findSignaturesById($result[0]['question_id']);
         return $result;
     }

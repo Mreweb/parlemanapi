@@ -9,6 +9,7 @@ class PresidentCabinetRepository implements IPresidentCabinetRepository{
     public function list(array $filters){
         $query = PresidentCabinetEloquent::query();
         $query->select(
+            'president_cabinet.row_id',
             'president.president_id',
             'cabinet',
             'cabinet_person_id',
@@ -30,6 +31,7 @@ class PresidentCabinetRepository implements IPresidentCabinetRepository{
     public function findById(int $id){
         $query = PresidentCabinetEloquent::query();
         $query->select(
+            'president_cabinet.row_id',
             'president_cabinet.president_id',
             'cabinet',
             'cabinet_person_id',

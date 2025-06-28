@@ -58,6 +58,8 @@ class VoteConfidenceController extends Controller{
      *
      *  vote_confidence_commission_id	کمیسیون تخصصی
      *
+     *  vote_confidence_date تاریج ثبت
+     *
      *  vote_confidence_commission_meeting_date تاریج جلسه کمیسیون
      *
      *  vote_confidence_commission_report گزارش کمیسیون در صحن
