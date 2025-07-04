@@ -8,6 +8,8 @@ use App\Http\Controllers\Enums;
 use App\Http\Controllers\FractionController;
 use App\Http\Controllers\GovPeriodController;
 use App\Http\Controllers\InterpellationController;
+use App\Http\Controllers\MediaDeputyGovernorController;
+use App\Http\Controllers\MeetingDeputyGovernorController;
 use App\Http\Controllers\MinistryController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ParlemanPeriodController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\RuleFortyFiveController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\RuleTTFController;
+use App\Http\Controllers\SessionDeputyGovernorController;
 use App\Http\Controllers\TripsController;
 use App\Http\Controllers\TripsDeputyGovernorController;
 use App\Http\Controllers\Upload;
@@ -265,6 +268,40 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::post('/add_approval', [TripsDeputyGovernorController::class, 'add_approval']);
         Route::put('/update_approval', [TripsDeputyGovernorController::class, 'update_approval']);
         Route::delete('/{id}', [TripsDeputyGovernorController::class, 'destroy']);
+    });
+
+    Route::prefix('meeting_deputy_governor')->group(function () {
+        Route::get('/', [MeetingDeputyGovernorController::class, 'index']);
+        Route::get('/{id}', [MeetingDeputyGovernorController::class, 'show']);
+        Route::post('/', [MeetingDeputyGovernorController::class, 'store']);
+        Route::put('/', [MeetingDeputyGovernorController::class, 'update']);
+        Route::post('/add_action', [MeetingDeputyGovernorController::class, 'add_action']);
+        Route::put('/update_action', [MeetingDeputyGovernorController::class, 'update_action']);
+        Route::post('/add_approval', [MeetingDeputyGovernorController::class, 'add_approval']);
+        Route::put('/update_approval', [MeetingDeputyGovernorController::class, 'update_approval']);
+        Route::delete('/{id}', [MeetingDeputyGovernorController::class, 'destroy']);
+    });
+    Route::prefix('session_deputy_governor')->group(function () {
+        Route::get('/', [SessionDeputyGovernorController::class, 'index']);
+        Route::get('/{id}', [SessionDeputyGovernorController::class, 'show']);
+        Route::post('/', [SessionDeputyGovernorController::class, 'store']);
+        Route::put('/', [SessionDeputyGovernorController::class, 'update']);
+        Route::post('/add_action', [SessionDeputyGovernorController::class, 'add_action']);
+        Route::put('/update_action', [SessionDeputyGovernorController::class, 'update_action']);
+        Route::post('/add_approval', [SessionDeputyGovernorController::class, 'add_approval']);
+        Route::put('/update_approval', [SessionDeputyGovernorController::class, 'update_approval']);
+        Route::delete('/{id}', [SessionDeputyGovernorController::class, 'destroy']);
+    });
+    Route::prefix('media_deputy_governor')->group(function () {
+        Route::get('/', [MediaDeputyGovernorController::class, 'index']);
+        Route::get('/{id}', [MediaDeputyGovernorController::class, 'show']);
+        Route::post('/', [MediaDeputyGovernorController::class, 'store']);
+        Route::put('/', [MediaDeputyGovernorController::class, 'update']);
+        Route::post('/add_action', [MediaDeputyGovernorController::class, 'add_action']);
+        Route::put('/update_action', [MediaDeputyGovernorController::class, 'update_action']);
+        Route::post('/add_approval', [MediaDeputyGovernorController::class, 'add_approval']);
+        Route::put('/update_approval', [MediaDeputyGovernorController::class, 'update_approval']);
+        Route::delete('/{id}', [MediaDeputyGovernorController::class, 'destroy']);
     });
 
 
