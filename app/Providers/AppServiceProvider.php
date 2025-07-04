@@ -26,6 +26,8 @@ use App\Domain\Interfaces\IQuestionRepository;
 use App\Domain\Interfaces\IRequestsRepository;
 use App\Domain\Interfaces\IRulesRepository;
 use App\Domain\Interfaces\IRuleTTFRepository;
+use App\Domain\Interfaces\ITripDeputyGovernorRepository;
+use App\Domain\Interfaces\ITripRepository;
 use App\Domain\Interfaces\IUploadRepository;
 use App\Domain\Interfaces\IVoteConfidenceRepository;
 use App\Infrastructure\Persistence\Repositories\Auth\AuthRepository;
@@ -48,6 +50,8 @@ use App\Infrastructure\Persistence\Repositories\Projects\ProjectsRepository;
 use App\Infrastructure\Persistence\Repositories\Question\QuestionRepository;
 use App\Infrastructure\Persistence\Repositories\Rules\PersonRulesRepository;
 use App\Infrastructure\Persistence\Repositories\RuleTTF\RuleTTFRepository;
+use App\Infrastructure\Persistence\Repositories\Trip\TripRepository;
+use App\Infrastructure\Persistence\Repositories\TripDeputyGovernor\TripDeputyGovernorRepository;
 use App\Infrastructure\Persistence\Repositories\VoteConfidence\VoteConfidenceRepository;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -79,6 +83,8 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->singleton(IVoteConfidenceRepository::class, VoteConfidenceRepository::class);
         $this->app->singleton(IRuleTTFRepository::class, RuleTTFRepository::class);
         $this->app->singleton(IRuleTTFRepository::class, RuleTTFRepository::class);
+        $this->app->singleton(ITripRepository::class, TripRepository::class);
+        $this->app->singleton(ITripDeputyGovernorRepository::class, TripDeputyGovernorRepository::class);
     }
     public function boot(): void{
         Schema::defaultStringLength(250);

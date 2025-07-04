@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('person_trip_board', function (Blueprint $table) {
-            $table->comment('هیات همراه');
+        Schema::create('person_deputy_governor_trip_board', function (Blueprint $table) {
+            $table->comment('هیات همراه سفرهای استانی معاون استان');
             $table->id('row_id');
             $table->unsignedBigInteger('trip_id')->comment('شناسه سفر')->index();
             $table->integer('board_person_id')->comment('شناسه فرد');
-            $table->foreign('trip_id')->references('trip_id')->on('person_trip')->onDelete('cascade');
+            $table->foreign('trip_id')->references('trip_id')->on('person_deputy_governor_trip')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_person_trip_board');
+        Schema::dropIfExists('person_deputy_governor_trip_board');
     }
 };

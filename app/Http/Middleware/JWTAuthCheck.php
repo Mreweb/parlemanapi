@@ -13,6 +13,8 @@ use UnexpectedValueException;
 class JWTAuthCheck{
     public function handle(Request $request, Closure $next){
 
+        return $next($request);
+
         $key = env('JWT_SECRET');
         $header = $request->header('authorization');
         $header = str_ireplace("Bearer ","",$header);

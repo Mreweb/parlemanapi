@@ -25,6 +25,7 @@ use App\Http\Controllers\RuleFortyFiveController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\RuleTTFController;
 use App\Http\Controllers\TripsController;
+use App\Http\Controllers\TripsDeputyGovernorController;
 use App\Http\Controllers\Upload;
 use App\Http\Controllers\VoteConfidenceController;
 use App\Http\Middleware\JWTAuthCheck;
@@ -253,4 +254,18 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [TripsController::class, 'update_approval']);
         Route::delete('/{id}', [TripsController::class, 'destroy']);
     });
+
+    Route::prefix('trip_deputy_governor')->group(function () {
+        Route::get('/', [TripsDeputyGovernorController::class, 'index']);
+        Route::get('/{id}', [TripsDeputyGovernorController::class, 'show']);
+        Route::post('/', [TripsDeputyGovernorController::class, 'store']);
+        Route::put('/', [TripsDeputyGovernorController::class, 'update']);
+        Route::post('/add_action', [TripsDeputyGovernorController::class, 'add_action']);
+        Route::put('/update_action', [TripsDeputyGovernorController::class, 'update_action']);
+        Route::post('/add_approval', [TripsDeputyGovernorController::class, 'add_approval']);
+        Route::put('/update_approval', [TripsDeputyGovernorController::class, 'update_approval']);
+        Route::delete('/{id}', [TripsDeputyGovernorController::class, 'destroy']);
+    });
+
+
 });
