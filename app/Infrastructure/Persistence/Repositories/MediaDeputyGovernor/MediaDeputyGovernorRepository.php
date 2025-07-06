@@ -21,8 +21,8 @@ class MediaDeputyGovernorRepository implements IMediaDeputyGovernorRepository {
             'period_title',
             'president_name',
             'gov_period_name',
-            'person_deputy_governor_trip.created_at',
-            'person_deputy_governor_trip.updated_at');
+            'person_deputy_governor_media.created_at',
+            'person_deputy_governor_media.updated_at');
         $query->leftJoin('president', 'president.president_id', '=', 'person_deputy_governor_media.media_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_deputy_governor_media.media_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_deputy_governor_media.media_parliament_period_id');

@@ -21,6 +21,7 @@ use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Captcha;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\RuleFortyFiveController;
@@ -32,7 +33,6 @@ use App\Http\Controllers\TripsDeputyGovernorController;
 use App\Http\Controllers\Upload;
 use App\Http\Controllers\VoteConfidenceController;
 use App\Http\Middleware\JWTAuthCheck;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 
@@ -303,6 +303,11 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [MediaDeputyGovernorController::class, 'update_approval']);
         Route::delete('/{id}', [MediaDeputyGovernorController::class, 'destroy']);
     });
+
+    Route::prefix('report')->group(function () {
+        Route::get('/data_count', [ReportController::class, 'data_count']);
+    });
+
 
 
 });

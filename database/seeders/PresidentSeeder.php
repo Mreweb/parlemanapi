@@ -17,7 +17,7 @@ class PresidentSeeder extends Seeder
         $data = array(
             array('president_name' => 'محمود احمدی ‌نژاد'),
             array('president_name' => 'حسن روحانی'),
-            array('president_name' => 'آیت الله رئیسی'),
+            array('president_name' => 'شهید آیت الله رئیسی'),
             array('president_name' => 'مسعود پزشکیان')
         );
         foreach($data as $value){
