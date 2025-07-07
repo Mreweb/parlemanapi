@@ -67,8 +67,8 @@ class ProjectsRepository implements IProjectsRepository {
         $result = $query->get()->toArray();
 
         $result[0]['person_projects_participation_ids'] = $this->findParticipationById($result[0]['project_id']);
-        $result[0]['person_projects_related_commission_ids'] = $this->findParticipationById($result[0]['project_id']);
-        $result[0]['person_projects_special_commission_ids'] = $this->findParticipationById($result[0]['project_id']);
+        $result[0]['person_projects_related_commission_ids'] = $this->findRelatedCommissionById($result[0]['project_id']);
+        $result[0]['person_projects_special_commission_ids'] = $this->findSpecialById($result[0]['project_id']);
 
         return $result;
     }
@@ -169,11 +169,11 @@ class ProjectsRepository implements IProjectsRepository {
     }
     public function findRelatedCommissionById(int $id)
     {
-        return ProjectRelatedCommissionEloquent::query()->select('projects_related_commission_id as person_id')->where('projects_project_id',$id)->get()->toArray();
+        return ProjectRelatedCommissionEloquent::query()->select('projects_related_commission_id as commission_id')->where('projects_project_id',$id)->get()->toArray();
 
     }
     public function findSpecialById(int $id)
     {
-        return ProjectSpecialCommissionEloquent::query()->select('projects_special_commission_id as person_id')->where('projects_project_id',$id)->get()->toArray();
+        return ProjectSpecialCommissionEloquent::query()->select('projects_special_commission_id as commission_id')->where('projects_project_id',$id)->get()->toArray();
     }
 }

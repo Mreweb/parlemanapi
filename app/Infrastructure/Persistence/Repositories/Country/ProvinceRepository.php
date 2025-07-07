@@ -28,14 +28,14 @@ class ProvinceRepository implements IProvinceRepository{
         return $data;
     }
     public function all(){
-        $query = ProvinceEloquent::query();
-        $query->select('province_id','province_name','created_at','updated_at');
-        $data['list'] = $query->get();
         if(CacheService::has_data('all_province')){
             $data = CacheService::get_data('all_province');
             $data['from_cache'] = true;
             return $data;
         }
+        $query = ProvinceEloquent::query();
+        $query->select('province_id','province_name','created_at','updated_at');
+        $data['list'] = $query->get();
         CacheService::set_data('all_province',$data);
         return $data;
     }

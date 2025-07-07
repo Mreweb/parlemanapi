@@ -25,17 +25,17 @@ class GovPeriodRepository implements IGovPeriodRepository{
         return $data;
     }
     public function all(){
+        if(CacheService::has_data('all_gov_period')){
+            $data = CacheService::get_data('all_gov_period');
+            $data['from_cache'] = true;
+            return $data;
+        }
         $query = GovPeriodEloquent::query();
         $query->select('gov_period_id','gov_period_name','created_at','updated_at');
         if (!empty($filters['gov_period_name'])) {
             $query->where('gov_period_name', 'like', '%' . $filters['gov_period_name'] . '%');
         }
         $data['list'] = $query->get();
-        if(CacheService::has_data('all_gov_period')){
-            $data = CacheService::get_data('all_gov_period');
-            $data['from_cache'] = true;
-            return $data;
-        }
         CacheService::set_data('all_gov_period',$data);
         return $data;
     }

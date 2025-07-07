@@ -25,14 +25,14 @@ class ParlemanPeriodRepository implements IParlemanPeriodRepository{
         return $data;
     }
     public function all(){
-        $query = ParlemanPeriodEloquent::query();
-        $query->select('period_id','period_title','created_at','updated_at');
-        $data['list'] = $query->get();
         if(CacheService::has_data('all_parleman_periods')){
             $data = CacheService::get_data('all_parleman_periods');
             $data['from_cache'] = true;
             return $data;
         }
+        $query = ParlemanPeriodEloquent::query();
+        $query->select('period_id','period_title','created_at','updated_at');
+        $data['list'] = $query->get();
         CacheService::set_data('all_parleman_periods',$data);
         return $data;
     }

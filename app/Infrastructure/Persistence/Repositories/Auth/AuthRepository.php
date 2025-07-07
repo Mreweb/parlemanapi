@@ -45,7 +45,7 @@ class AuthRepository implements IAuthRepository {
         if($person->count() == 0){
             return response()->json( DBMessageService::get_message(null,'ErrorAction',"اطلاعات نامعتبر است" ) , 400, [], JSON_UNESCAPED_UNICODE);
         } else{
-            $key = env('JWT_SECRET');
+            $key = "2r0InITOevKfz9jZg7jeaG1tQmf67uTtmSTwqreuxzReDoXgDGgscDTEcmmlLwZT";
             $payload = $person->toArray()[0];
             //$payload['token_create_date'] = Carbon::now();
             $payload['token_create_date'] = time();

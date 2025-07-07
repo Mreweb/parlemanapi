@@ -26,17 +26,17 @@ class FractionRepository implements IFractionRepository {
 
     }
     public function all(){
+        if(CacheService::has_data('all_fractions')){
+            $data = CacheService::get_data('all_fractions');
+            $data['from_cache'] = true;
+            return $data;
+        }
         $query = FractionEloquent::query();
         $query->select('fraction_id','fraction_name','created_at','updated_at');
         if (!empty($filters['fraction_name'])) {
             $query->where('fraction_name', 'like', '%' . $filters['fraction_name'] . '%');
         }
         $data['list'] = $query->get();
-        if(CacheService::has_data('all_fractions')){
-            $data = CacheService::get_data('all_fractions');
-            $data['from_cache'] = true;
-            return $data;
-        }
         CacheService::set_data('all_fractions',$data);
         return $data;
 

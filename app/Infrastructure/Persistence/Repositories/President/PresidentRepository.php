@@ -27,17 +27,17 @@ class PresidentRepository implements IPresidentRepository{
         return $data;
     }
     public function all(){
+        if(CacheService::has_data('all_presidents')){
+            $data = CacheService::get_data('all_presidents');
+            $data['from_cache'] = true;
+            return $data;
+        }
         $query = PresidentEloquent::query();
         $query->select(
             'president_id','president_name',
             'created_at',
             'updated_at');
         $data['list'] = $query->get();
-        if(CacheService::has_data('all_presidents')){
-            $data = CacheService::get_data('all_presidents');
-            $data['from_cache'] = true;
-            return $data;
-        }
         CacheService::set_data('all_presidents',$data);
         return $data;
     }
