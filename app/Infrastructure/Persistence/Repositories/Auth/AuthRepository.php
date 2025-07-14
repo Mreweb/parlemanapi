@@ -11,10 +11,7 @@ use Firebase\JWT\Key;
 
 class AuthRepository implements IAuthRepository {
 
-
-    public function otp(){
-
-    }
+    public function otp(){ }
 
     public function verifyOtp(){
 
