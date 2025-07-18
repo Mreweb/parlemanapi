@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Domain\Interfaces\ICache;
+namespace App\Application\Services\Utility\Cache;
+use App\Domain\Interfaces\Utility\Cache\ICache;
 use Illuminate\Support\Facades\Cache;
 
 class CacheService implements ICache {

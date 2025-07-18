@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\MeetingDeputyGovernor\MeetingDeputyGovernorRepository;
+namespace App\Application\Services\BossErea\MeetingDeputy;
+
+use App\Domain\Interfaces\BossErea\MeetingDeputy\IMeetingDeputyGovernorRepository;
 
 class MeetingDeputyGovernorService{
 
-    public function __construct(private MeetingDeputyGovernorRepository $repository){}
+    public function __construct(private IMeetingDeputyGovernorRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

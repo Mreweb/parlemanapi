@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Notice;
-use App\Domain\Interfaces\INoticeRepository;
-use App\Infrastructure\Persistence\Eloquent\Notice\NoticeEloquent;
-use App\Infrastructure\Persistence\Eloquent\Notice\NoticeSignatureEloquent;
-use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\Notice;
+use App\Domain\Interfaces\PersonArea\Notice\INoticeRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Notice\NoticeEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Notice\NoticeSignatureEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
 use Illuminate\Support\Facades\DB;
 
 class NoticeRepository implements INoticeRepository {

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Question;
-use App\Domain\Interfaces\IQuestionRepository;
-use App\Infrastructure\Persistence\Eloquent\Question\QuestionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Question\QuestionSignatureEloquent;
-use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
-use Illuminate\Support\Facades\DB;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\Question;
+use App\Domain\Interfaces\PersonArea\Question\IQuestionRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Question\QuestionEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Question\QuestionSignatureEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
 
 class QuestionRepository implements IQuestionRepository {
 

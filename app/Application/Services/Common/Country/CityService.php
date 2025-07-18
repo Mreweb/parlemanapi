@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\Country\CityRepository;
+namespace App\Application\Services\Common\Country;
+
+use App\Domain\Interfaces\Common\Country\ICityRepository;
 
 class CityService{
 
-    public function __construct(private CityRepository $repository){}
+    public function __construct(private ICityRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

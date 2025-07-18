@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\PersonArea\Person;
 
-use App\Infrastructure\Persistence\Repositories\Person\PersonRepository;
+use App\Domain\Interfaces\PersonArea\Person\IPersonRepository;
 
 class PersonService{
 
-    public function __construct(private PersonRepository $repository){}
+    public function __construct(private IPersonRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

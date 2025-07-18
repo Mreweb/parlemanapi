@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Eloquent\MeetingDeputyGovernor;
+namespace App\Infrastructure\Persistence\Eloquent\BossErea\MeetingDeputyGovernor;
 use Illuminate\Database\Eloquent\Model;
 
 class

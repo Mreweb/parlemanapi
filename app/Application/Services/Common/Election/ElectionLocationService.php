@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\Common\Election;
 
-
-use App\Infrastructure\Persistence\Repositories\Election\ElectionLocationRepository;
+use App\Domain\Interfaces\Common\Election\IElectionLocationRepository;
 
 class ElectionLocationService{
 
-    public function __construct(private ElectionLocationRepository $repository){}
+    public function __construct(private IElectionLocationRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

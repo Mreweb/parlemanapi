@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\President;
-use App\Application\Services\CacheService;
-use App\Domain\Interfaces\IPresidentRepository;
-use App\Infrastructure\Persistence\Eloquent\President\PresidentEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\President;
+use App\Application\Services\Utility\Cache\CacheService;
+use App\Domain\Interfaces\Common\President\IPresidentRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\President\PresidentEloquent;
 
 class PresidentRepository implements IPresidentRepository{
 

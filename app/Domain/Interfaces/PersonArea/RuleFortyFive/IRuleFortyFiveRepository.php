@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Interfaces;
+namespace App\Domain\Interfaces\PersonArea\RuleFortyFive;
 
 interface IRuleFortyFiveRepository {
 

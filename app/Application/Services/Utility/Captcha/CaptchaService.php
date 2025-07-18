@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Application\Services;
-use App\Domain\Interfaces\ICaptchaRepository;
-use App\Http\Requests\CaptchaVerifyRequest;
+namespace App\Application\Services\Utility\Captcha;
+use App\Application\Services\Utility\DBMessageService;
+use App\Domain\Interfaces\Utility\Captcha\ICaptchaRepository;
+use App\Http\Requests\Utility\Captcha\CaptchaVerifyRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

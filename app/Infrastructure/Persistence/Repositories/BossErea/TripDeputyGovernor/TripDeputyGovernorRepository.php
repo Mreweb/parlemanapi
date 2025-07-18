@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\TripDeputyGovernor;
-use App\Domain\Interfaces\ITripDeputyGovernorRepository;
-use App\Infrastructure\Persistence\Eloquent\TripDeputyGovernor\TripDeputyGovernorActionsEloquent;
-use App\Infrastructure\Persistence\Eloquent\TripDeputyGovernor\TripDeputyGovernorApprovalsEloquent;
-use App\Infrastructure\Persistence\Eloquent\TripDeputyGovernor\TripDeputyGovernorBoardEloquent;
-use App\Infrastructure\Persistence\Eloquent\TripDeputyGovernor\TripDeputyGovernorEloquent;
+namespace App\Infrastructure\Persistence\Repositories\BossErea\TripDeputyGovernor;
+
+use App\Domain\Interfaces\BossErea\TripDeputy\ITripDeputyGovernorRepository;
+use App\Infrastructure\Persistence\Eloquent\BossErea\TripDeputyGovernor\TripDeputyGovernorBoardEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\TripDeputyGovernor\TripDeputyGovernorEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\TripDeputyGovernorActions\TripDeputyGovernorActionsEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\TripDeputyGovernorApprovals\TripDeputyGovernorApprovalsEloquent;
 
 class TripDeputyGovernorRepository implements ITripDeputyGovernorRepository {
 

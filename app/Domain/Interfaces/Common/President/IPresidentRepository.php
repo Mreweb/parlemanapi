@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Interfaces;
+namespace App\Domain\Interfaces\Common\President;
 
 interface IPresidentRepository{
 

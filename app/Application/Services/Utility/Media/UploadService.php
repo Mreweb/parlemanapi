@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
+namespace App\Application\Services\Utility\Media;
+use App\Domain\Interfaces\Utility\Media\IUploadRepository;
 
 class UploadService{
 
-    public function __construct(private UploadRepository $repository){}
+    public function __construct(private IUploadRepository $repository){}
 
     public function save(array $data){
         return $this->repository->save($data);

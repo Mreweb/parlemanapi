@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\RuleFortyFive;
-use App\Domain\Interfaces\IRuleFortyFiveRepository;
-use App\Infrastructure\Persistence\Eloquent\RuleFortyFive\RuleFortyFiveEloquent;
-use App\Infrastructure\Persistence\Eloquent\RuleFortyFive\RuleFortyFiveSignaturesEloquent;
-use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\RuleFortyFive;
+
+use App\Domain\Interfaces\PersonArea\RuleFortyFive\IRuleFortyFiveRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\RuleFortyFive\RuleFortyFiveEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\RuleFortyFive\RuleFortyFiveSignaturesEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
 
 class RuleFortyFiveRepository implements IRuleFortyFiveRepository {
 

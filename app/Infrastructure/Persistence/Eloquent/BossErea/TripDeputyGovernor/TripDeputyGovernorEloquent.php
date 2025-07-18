@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Eloquent\TripDeputyGovernor;
+namespace App\Infrastructure\Persistence\Eloquent\BossErea\TripDeputyGovernor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

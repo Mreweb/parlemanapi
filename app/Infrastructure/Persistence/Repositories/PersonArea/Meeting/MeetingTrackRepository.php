@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Meeting;
-use App\Domain\Interfaces\IMeetingRepository;
-use App\Infrastructure\Persistence\Eloquent\Meeting\PersonMeetingTrackEloquent;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\Meeting;
+
+use App\Domain\Interfaces\PersonArea\Meeting\IMeetingRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Meeting\PersonMeetingTrackEloquent;
 
 class MeetingTrackRepository implements IMeetingRepository {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Research;
+namespace App\Http\Requests\PersonArea\Research;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\SessionDeputyGovernor\SessionDeputyGovernorRepository;
+namespace App\Application\Services\BossErea\SessionDeputy;
+
+use App\Domain\Interfaces\BossErea\SessionDeputy\ISessionDeputyGovernorRepository;
 
 class SessionDeputyGovernorService{
 
-    public function __construct(private SessionDeputyGovernorRepository $repository){}
+    public function __construct(private ISessionDeputyGovernorRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

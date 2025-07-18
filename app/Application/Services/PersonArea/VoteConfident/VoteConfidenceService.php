@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\VoteConfidence\VoteConfidenceRepository;
+namespace App\Application\Services\PersonArea\VoteConfident;
+use App\Domain\Interfaces\PersonArea\VoteConfident\IVoteConfidenceRepository;
 
 class VoteConfidenceService{
 
-    public function __construct(private VoteConfidenceRepository $repository){}
+    public function __construct(private IVoteConfidenceRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

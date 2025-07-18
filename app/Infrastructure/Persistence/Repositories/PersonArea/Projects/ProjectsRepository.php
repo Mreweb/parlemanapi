@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Projects;
-use App\Domain\Interfaces\IProjectsRepository;
-use App\Infrastructure\Persistence\Eloquent\Project\ProjectParticipationEloquent;
-use App\Infrastructure\Persistence\Eloquent\Project\ProjectRelatedCommissionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Project\ProjectsEloquent;
-use App\Infrastructure\Persistence\Eloquent\Project\ProjectSpecialCommissionEloquent;
-use Illuminate\Support\Facades\DB;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\Projects;
+use App\Domain\Interfaces\PersonArea\Projects\IProjectsRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectParticipationEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectRelatedCommissionEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectsEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectSpecialCommissionEloquent;
 
 class ProjectsRepository implements IProjectsRepository {
 

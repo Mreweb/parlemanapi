@@ -1,48 +1,45 @@
 <?php
 
-use App\Http\Controllers\Auth;
-use App\Http\Controllers\CityController;
-use App\Http\Controllers\CommissionController;
-use App\Http\Controllers\ElectionLocationController;
-use App\Http\Controllers\Enums;
-use App\Http\Controllers\FractionController;
-use App\Http\Controllers\GovPeriodController;
-use App\Http\Controllers\InterpellationController;
-use App\Http\Controllers\MediaDeputyGovernorController;
-use App\Http\Controllers\MeetingDeputyGovernorController;
-use App\Http\Controllers\MinistryController;
-use App\Http\Controllers\NoticeController;
-use App\Http\Controllers\ParlemanPeriodController;
-use App\Http\Controllers\PersonController;
-use App\Http\Controllers\PersonMeetingController;
-use App\Http\Controllers\PresidentCabinetController;
-use App\Http\Controllers\PresidentController;
-use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\ProvinceController;
-use App\Http\Controllers\Captcha;
-use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\RequestsController;
-use App\Http\Controllers\ResearchController;
-use App\Http\Controllers\RuleFortyFiveController;
-use App\Http\Controllers\RulesController;
-use App\Http\Controllers\RuleTTFController;
-use App\Http\Controllers\SessionDeputyGovernorController;
-use App\Http\Controllers\TripsController;
-use App\Http\Controllers\TripsDeputyGovernorController;
-use App\Http\Controllers\Upload;
-use App\Http\Controllers\VoteConfidenceController;
+use App\Http\Controllers\Auth\Auth;
+use App\Http\Controllers\BossErea\MediaDeputy\MediaDeputyGovernorController;
+use App\Http\Controllers\BossErea\MeetingDeputy\MeetingDeputyGovernorController;
+use App\Http\Controllers\BossErea\SessionDeputy\SessionDeputyGovernorController;
+use App\Http\Controllers\BossErea\TripDeputy\TripsDeputyGovernorController;
+use App\Http\Controllers\Common\Commission\CommissionController;
+use App\Http\Controllers\Common\Country\CityController;
+use App\Http\Controllers\Common\Country\ProvinceController;
+use App\Http\Controllers\Common\Election\ElectionLocationController;
+use App\Http\Controllers\Common\Fraction\FractionController;
+use App\Http\Controllers\Common\GovPeriod\GovPeriodController;
+use App\Http\Controllers\Common\Ministry\MinistryController;
+use App\Http\Controllers\Common\PerlemanPeriod\ParlemanPeriodController;
+use App\Http\Controllers\Common\President\PresidentController;
+use App\Http\Controllers\Common\PresidentCabinet\PresidentCabinetController;
+use App\Http\Controllers\PersonArea\Interpellation\InterpellationController;
+use App\Http\Controllers\PersonArea\Meeting\PersonMeetingController;
+use App\Http\Controllers\PersonArea\Notice\NoticeController;
+use App\Http\Controllers\PersonArea\Person\PersonController;
+use App\Http\Controllers\PersonArea\PersonResearch\ResearchController;
+use App\Http\Controllers\PersonArea\Projects\ProjectsController;
+use App\Http\Controllers\PersonArea\Question\QuestionController;
+use App\Http\Controllers\PersonArea\Requests\RequestsController;
+use App\Http\Controllers\PersonArea\RuleFortyFive\RuleFortyFiveController;
+use App\Http\Controllers\PersonArea\Rules\RulesController;
+use App\Http\Controllers\PersonArea\RuleTTF\RuleTTFController;
+use App\Http\Controllers\PersonArea\Trip\TripsController;
+use App\Http\Controllers\PersonArea\VoteConfident\VoteConfidenceController;
+use App\Http\Controllers\Utility\Captcha\Captcha;
+use App\Http\Controllers\Utility\Enums;
+use App\Http\Controllers\Utility\Media\Upload;
+use App\Http\Controllers\Utility\Report\ReportController;
 use App\Http\Middleware\JWTAuthCheck;
 use Illuminate\Support\Facades\Route;
-
-
 
 Route::get('/captcha', [Captcha::class, 'generate']);
 Route::post('/captcha/verify', [Captcha::class, 'verify']);
 Route::prefix('auth')->group( function () {
     Route::post('/username', [Auth::class, 'loginByUsername']);
 });
-
 
 
 Route::middleware(JWTAuthCheck::class)->group(callback: function () {
@@ -59,7 +56,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [ProvinceController::class, 'update']);
         Route::delete('/{id}', [ProvinceController::class, 'destroy']);
     });
-
     Route::prefix('city')->group(function () {
         Route::get('/', [CityController::class, 'index']);
         Route::get('/{id}', [CityController::class, 'show']);
@@ -67,7 +63,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [CityController::class, 'update']);
         Route::delete('/{id}', [CityController::class, 'destroy']);
     });
-
     Route::prefix('person')->group(function () {
         Route::get('/', [PersonController::class, 'index']);
         Route::get('/{id}', [PersonController::class, 'show']);
@@ -79,7 +74,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [PersonController::class, 'update']);
         Route::delete('/{id}', [PersonController::class, 'destroy']);
     });
-
     Route::prefix('president')->group(function () {
         Route::get('/', [PresidentController::class, 'index']);
         Route::get('/all', [PresidentController::class, 'all']);
@@ -88,7 +82,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [PresidentController::class, 'update']);
         Route::delete('/{id}', [PresidentController::class, 'destroy']);
     });
-
     Route::prefix('president_cabinet')->group(function () {
         Route::get('/', [PresidentCabinetController::class, 'index']);
         Route::get('/{id}', [PresidentCabinetController::class, 'show']);
@@ -96,7 +89,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [PresidentCabinetController::class, 'update']);
         Route::delete('/{id}', [PresidentCabinetController::class, 'destroy']);
     });
-
     Route::prefix('parleman_period')->group(function () {
         Route::get('/', [ParlemanPeriodController::class, 'index']);
         Route::get('/all', [ParlemanPeriodController::class, 'all']);
@@ -105,7 +97,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [ParlemanPeriodController::class, 'update']);
         Route::delete('/{id}', [ParlemanPeriodController::class, 'destroy']);
     });
-
     Route::prefix('gov_period')->group(function () {
         Route::get('/', [GovPeriodController::class, 'index']);
         Route::get('/all', [GovPeriodController::class, 'all']);
@@ -114,7 +105,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [GovPeriodController::class, 'update']);
         Route::delete('/{id}', [GovPeriodController::class, 'destroy']);
     });
-
     Route::prefix('election_location')->group(function () {
         Route::get('/', [ElectionLocationController::class, 'index']);
         Route::get('/all', [ElectionLocationController::class, 'all']);
@@ -123,7 +113,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [ElectionLocationController::class, 'update']);
         Route::delete('/{id}', [ElectionLocationController::class, 'destroy']);
     });
-
     Route::prefix('commission')->group(function () {
         Route::get('/', [CommissionController::class, 'index']);
         Route::get('/all', [CommissionController::class, 'all']);
@@ -132,7 +121,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [CommissionController::class, 'update']);
         Route::delete('/{id}', [CommissionController::class, 'destroy']);
     });
-
     Route::prefix('fraction')->group(function () {
         Route::get('/', [FractionController::class, 'index']);
         Route::get('/all', [FractionController::class, 'all']);
@@ -141,7 +129,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [FractionController::class, 'update']);
         Route::delete('/{id}', [FractionController::class, 'destroy']);
     });
-
     Route::prefix('ministry')->group(function () {
         Route::get('/', [MinistryController::class, 'index']);
         Route::get('/all', [MinistryController::class, 'all']);
@@ -150,7 +137,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [MinistryController::class, 'update']);
         Route::delete('/{id}', [MinistryController::class, 'destroy']);
     });
-
     Route::prefix('notice')->group(function () {
         Route::get('/', [NoticeController::class, 'index']);
         Route::get('/{id}', [NoticeController::class, 'show']);
@@ -158,7 +144,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [NoticeController::class, 'update']);
         Route::delete('/{id}', [NoticeController::class, 'destroy']);
     });
-
     Route::prefix('question')->group(function () {
         Route::get('/', [QuestionController::class, 'index']);
         Route::get('/{id}', [QuestionController::class, 'show']);
@@ -166,7 +151,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [QuestionController::class, 'update']);
         Route::delete('/{id}', [QuestionController::class, 'destroy']);
     });
-
     Route::prefix('interpellation')->group(function () {
         Route::get('/', [InterpellationController::class, 'index']);
         Route::get('/{id}', [InterpellationController::class, 'show']);
@@ -174,7 +158,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [InterpellationController::class, 'update']);
         Route::delete('/{id}', [InterpellationController::class, 'destroy']);
     });
-
     Route::prefix('meeting')->group(function () {
         Route::get('/', [PersonMeetingController::class, 'index']);
         Route::get('/{id}', [PersonMeetingController::class, 'show']);
@@ -184,7 +167,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [PersonMeetingController::class, 'update']);
         Route::delete('/{id}', [PersonMeetingController::class, 'destroy']);
     });
-
     Route::prefix('projects')->group(function () {
         Route::get('/', [ProjectsController::class, 'index']);
         Route::get('/{id}', [ProjectsController::class, 'show']);
@@ -192,7 +174,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [ProjectsController::class, 'update']);
         Route::delete('/{id}', [ProjectsController::class, 'destroy']);
     });
-
     Route::prefix('requests')->group(function () {
         Route::get('/', [RequestsController::class, 'index']);
         Route::get('/{id}', [RequestsController::class, 'show']);
@@ -205,7 +186,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::delete('/delete_track/{id}', [RequestsController::class, 'delete_track']);
 
     });
-
     Route::prefix('rules')->group(function () {
         Route::get('/', [RulesController::class, 'index']);
         Route::get('/{id}', [RulesController::class, 'show']);
@@ -213,7 +193,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [RulesController::class, 'update']);
         Route::delete('/{id}', [RulesController::class, 'destroy']);
     });
-
     Route::prefix('vote_confidence')->group(function () {
         Route::get('/', [VoteConfidenceController::class, 'index']);
         Route::get('/{id}', [VoteConfidenceController::class, 'show']);
@@ -221,7 +200,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [VoteConfidenceController::class, 'update']);
         Route::delete('/{id}', [VoteConfidenceController::class, 'destroy']);
     });
-
     Route::prefix('rule_234')->group(function () {
         Route::get('/', [RuleTTFController::class, 'index']);
         Route::get('/{id}', [RuleTTFController::class, 'show']);
@@ -229,7 +207,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [RuleTTFController::class, 'update']);
         Route::delete('/{id}', [RuleTTFController::class, 'destroy']);
     });
-
     Route::prefix('research')->group(function () {
         Route::get('/', [ResearchController::class, 'index']);
         Route::get('/{id}', [ResearchController::class, 'show']);
@@ -237,7 +214,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [ResearchController::class, 'update']);
         Route::delete('/{id}', [ResearchController::class, 'destroy']);
     });
-
     Route::prefix('rule_45')->group(function () {
         Route::get('/', [RuleFortyFiveController::class, 'index']);
         Route::get('/{id}', [RuleFortyFiveController::class, 'show']);
@@ -245,7 +221,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [RuleFortyFiveController::class, 'update']);
         Route::delete('/{id}', [RuleFortyFiveController::class, 'destroy']);
     });
-
     Route::prefix('trips')->group(function () {
         Route::get('/', [TripsController::class, 'index']);
         Route::get('/{id}', [TripsController::class, 'show']);
@@ -257,7 +232,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [TripsController::class, 'update_approval']);
         Route::delete('/{id}', [TripsController::class, 'destroy']);
     });
-
     Route::prefix('trip_deputy_governor')->group(function () {
         Route::get('/', [TripsDeputyGovernorController::class, 'index']);
         Route::get('/{id}', [TripsDeputyGovernorController::class, 'show']);
@@ -269,7 +243,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [TripsDeputyGovernorController::class, 'update_approval']);
         Route::delete('/{id}', [TripsDeputyGovernorController::class, 'destroy']);
     });
-
     Route::prefix('meeting_deputy_governor')->group(function () {
         Route::get('/', [MeetingDeputyGovernorController::class, 'index']);
         Route::get('/{id}', [MeetingDeputyGovernorController::class, 'show']);
@@ -311,3 +284,4 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
 
 
 });
+

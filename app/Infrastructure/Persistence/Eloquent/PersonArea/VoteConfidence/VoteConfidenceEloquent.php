@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Eloquent\VoteConfidence;
+namespace App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\PRequest;
-use App\Domain\Interfaces\IRequestsRepository;
-use App\Infrastructure\Persistence\Eloquent\PRequests\PersonRequestEloquent;
-use App\Infrastructure\Persistence\Eloquent\PRequests\PersonRequestTrackEloquent;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\PRequest;
+
+use App\Domain\Interfaces\PersonArea\Requests\IRequestsRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\PRequests\PersonRequestEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\PRequests\PersonRequestTrackEloquent;
 
 class PersonRequestsRepository implements IRequestsRepository {
 

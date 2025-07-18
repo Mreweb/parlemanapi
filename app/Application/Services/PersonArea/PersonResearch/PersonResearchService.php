@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\PersonArea\PersonResearch;
 
 
-use App\Infrastructure\Persistence\Repositories\Research\ResearchRepository;
+use App\Domain\Interfaces\PersonArea\PersonResearch\IResearchRepository;
 
 class PersonResearchService{
 
-    public function __construct(private ResearchRepository $repository){}
+    public function __construct(private IResearchRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

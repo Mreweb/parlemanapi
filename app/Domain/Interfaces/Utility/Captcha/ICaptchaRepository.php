@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Domain\Interfaces;
-use App\Http\Requests\CaptchaVerifyRequest;
+namespace App\Domain\Interfaces\Utility\Captcha;
+use App\Http\Requests\Utility\Captcha\CaptchaVerifyRequest;
 
 interface ICaptchaRepository {
     public function generate();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Upload;
+namespace App\Http\Requests\Utility\Media;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\Ministry\MinistryRepository;
+namespace App\Application\Services\Common\Ministry;
+use App\Domain\Interfaces\Common\Ministry\IMinistryRepository;
 
 class MinistryService{
 
-    public function __construct(private MinistryRepository $repository){}
+    public function __construct(private IMinistryRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\President\PresidentCabinetRepository;
+namespace App\Application\Services\Common\PresidentCabinet;
+use App\Domain\Interfaces\Common\PresidentCabinet\IPresidentCabinetRepository;
 
 class PresidentCabinetService{
 
-    public function __construct(private PresidentCabinetRepository $repository){}
+    public function __construct(private IPresidentCabinetRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

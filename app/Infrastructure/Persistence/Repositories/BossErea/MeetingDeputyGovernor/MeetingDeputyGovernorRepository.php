@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\MeetingDeputyGovernor;
-use App\Domain\Interfaces\IMeetingDeputyGovernorRepository;
-use App\Infrastructure\Persistence\Eloquent\MeetingDeputyGovernor\MeetingDeputyGovernorActionsEloquent;
-use App\Infrastructure\Persistence\Eloquent\MeetingDeputyGovernor\MeetingDeputyGovernorApprovalsEloquent;
-use App\Infrastructure\Persistence\Eloquent\MeetingDeputyGovernor\MeetingDeputyGovernorBoardEloquent;
-use App\Infrastructure\Persistence\Eloquent\MeetingDeputyGovernor\MeetingDeputyGovernorEloquent;
+namespace App\Infrastructure\Persistence\Repositories\BossErea\MeetingDeputyGovernor;
+
+use App\Domain\Interfaces\BossErea\MeetingDeputy\IMeetingDeputyGovernorRepository;
+use App\Infrastructure\Persistence\Eloquent\BossErea\MeetingDeputyGovernor\MeetingDeputyGovernorActionsEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\MeetingDeputyGovernor\MeetingDeputyGovernorApprovalsEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\MeetingDeputyGovernor\MeetingDeputyGovernorBoardEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\MeetingDeputyGovernor\MeetingDeputyGovernorEloquent;
 
 class MeetingDeputyGovernorRepository implements IMeetingDeputyGovernorRepository {
 

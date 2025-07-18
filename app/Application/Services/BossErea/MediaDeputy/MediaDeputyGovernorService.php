@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\MediaDeputyGovernor\MediaDeputyGovernorRepository;
+namespace App\Application\Services\BossErea\MediaDeputy;
+use App\Domain\Interfaces\BossErea\MediaDeputy\IMediaDeputyGovernorRepository;
 
 class MediaDeputyGovernorService{
 
-    public function __construct(private MediaDeputyGovernorRepository $repository){}
+    public function __construct(private IMediaDeputyGovernorRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

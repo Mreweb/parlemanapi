@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Election;
-use App\Application\Services\CacheService;
-use App\Domain\Interfaces\IElectionLocationRepository;
-use App\Infrastructure\Persistence\Eloquent\Election\ElectionLocationEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\Election;
+use App\Application\Services\Utility\Cache\CacheService;
+use App\Domain\Interfaces\Common\Election\IElectionLocationRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\Election\ElectionLocationEloquent;
 use Illuminate\Support\Facades\DB;
 
 class ElectionLocationRepository implements IElectionLocationRepository {

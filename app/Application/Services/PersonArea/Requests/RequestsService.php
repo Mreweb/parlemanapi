@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\PRequest\PersonRequestsRepository;
+namespace App\Application\Services\PersonArea\Requests;
+use App\Domain\Interfaces\PersonArea\Requests\IRequestsRepository;
 
 class RequestsService{
 
-    public function __construct(private PersonRequestsRepository $repository){}
+    public function __construct(private IRequestsRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

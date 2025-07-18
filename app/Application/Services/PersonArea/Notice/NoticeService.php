@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\Notice\NoticeRepository;
+namespace App\Application\Services\PersonArea\Notice;
+use App\Domain\Interfaces\PersonArea\Notice\INoticeRepository;
 
 class NoticeService{
 
-    public function __construct(private NoticeRepository $repository){}
+    public function __construct(private INoticeRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

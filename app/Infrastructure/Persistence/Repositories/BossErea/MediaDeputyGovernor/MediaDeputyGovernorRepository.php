@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\MediaDeputyGovernor;
-use App\Domain\Interfaces\IMediaDeputyGovernorRepository;
-use App\Infrastructure\Persistence\Eloquent\MediaDeputyGovernor\MediaDeputyGovernorActionsEloquent;
-use App\Infrastructure\Persistence\Eloquent\MediaDeputyGovernor\MediaDeputyGovernorApprovalsEloquent;
-use App\Infrastructure\Persistence\Eloquent\MediaDeputyGovernor\MediaDeputyGovernorBoardEloquent;
-use App\Infrastructure\Persistence\Eloquent\MediaDeputyGovernor\MediaDeputyGovernorEloquent;
+namespace App\Infrastructure\Persistence\Repositories\BossErea\MediaDeputyGovernor;
+
+use App\Domain\Interfaces\BossErea\MediaDeputy\IMediaDeputyGovernorRepository;
+use App\Infrastructure\Persistence\Eloquent\BossErea\MediaDeputyGovernor\MediaDeputyGovernorActionsEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\MediaDeputyGovernor\MediaDeputyGovernorApprovalsEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\MediaDeputyGovernor\MediaDeputyGovernorBoardEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\MediaDeputyGovernor\MediaDeputyGovernorEloquent;
 
 class MediaDeputyGovernorRepository implements IMediaDeputyGovernorRepository {
 

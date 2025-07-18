@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Commission;
-use App\Application\Services\CacheService;
-use App\Domain\Interfaces\ICommissionRepository;
-use App\Infrastructure\Persistence\Eloquent\Commission\CommissionEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\Commission;
+use App\Application\Services\Utility\Cache\CacheService;
+use App\Domain\Interfaces\Common\Commission\ICommissionRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\Commission\CommissionEloquent;
 
 class CommissionRepository implements ICommissionRepository {
 

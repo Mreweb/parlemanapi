@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\PersonArea\Question;
 
-use App\Infrastructure\Persistence\Repositories\Question\QuestionRepository;
+
+use App\Domain\Interfaces\PersonArea\Question\IQuestionRepository;
 
 class QuestionService{
 
-    public function __construct(private QuestionRepository $repository){}
+    public function __construct(private IQuestionRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

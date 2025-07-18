@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\Interpellation\InterpellationRepository;
+namespace App\Application\Services\PersonArea\Interpellation;
+use App\Domain\Interfaces\PersonArea\Interpellation\IInterpellationsRepository;
 
 class InterpellationService{
 
-    public function __construct(private InterpellationRepository $repository){}
+    public function __construct(private IInterpellationsRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

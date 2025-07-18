@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\Common\PerlemanPeriod;
 
-use App\Infrastructure\Persistence\Repositories\ParlemanPeriod\ParlemanPeriodRepository;
+
+use App\Domain\Interfaces\Common\PerlemanPeriod\IParlemanPeriodRepository;
 
 class ParlemanPeriodService{
 
-    public function __construct(private ParlemanPeriodRepository $repository){}
+    public function __construct(private IParlemanPeriodRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

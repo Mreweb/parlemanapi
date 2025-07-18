@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\Common\Fraction;
 
-use App\Infrastructure\Persistence\Repositories\Fraction\FractionRepository;
+use App\Domain\Interfaces\Common\Fraction\IFractionRepository;
 
 class FractionService{
 
-    public function __construct(private FractionRepository $repository){}
+    public function __construct(private IFractionRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

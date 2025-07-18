@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Country;
-use App\Domain\Interfaces\ICityRepository;
-use App\Infrastructure\Persistence\Eloquent\Country\CityEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\Country;
+
+use App\Domain\Interfaces\Common\Country\ICityRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\Country\CityEloquent;
 
 class CityRepository implements ICityRepository {
 

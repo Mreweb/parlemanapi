@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\RuleTTF\RuleTTFRepository;
+namespace App\Application\Services\PersonArea\RuleTTF;
+use App\Domain\Interfaces\PersonArea\RuleTTF\IRuleTTFRepository;
 
 class RuleTTFService{
 
-    public function __construct(private RuleTTFRepository $repository){}
+    public function __construct(private IRuleTTFRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Country;
-use App\Application\Services\CacheService;
-use App\Domain\Interfaces\IProvinceRepository;
-use App\Infrastructure\Persistence\Eloquent\Country\ProvinceEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\Country;
+use App\Application\Services\Utility\Cache\CacheService;
+use App\Domain\Interfaces\Common\Country\IProvinceRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\Country\ProvinceEloquent;
 
 class ProvinceRepository implements IProvinceRepository{
 

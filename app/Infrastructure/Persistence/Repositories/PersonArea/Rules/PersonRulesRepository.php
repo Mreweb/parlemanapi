@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Rules;
-use App\Domain\Interfaces\IRulesRepository;
-use App\Infrastructure\Persistence\Eloquent\Rules\PersonRulesEloquent;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\Rules;
+use App\Domain\Interfaces\PersonArea\Rules\IRulesRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Rules\PersonRulesEloquent;
 
 class PersonRulesRepository implements IRulesRepository{
 

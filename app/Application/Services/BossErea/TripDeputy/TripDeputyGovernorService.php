@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\TripDeputyGovernor\TripDeputyGovernorRepository;
+namespace App\Application\Services\BossErea\TripDeputy;
+use App\Domain\Interfaces\BossErea\TripDeputy\ITripDeputyGovernorRepository;
 
 class TripDeputyGovernorService{
 
-    public function __construct(private TripDeputyGovernorRepository $repository){}
+    public function __construct(private ITripDeputyGovernorRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

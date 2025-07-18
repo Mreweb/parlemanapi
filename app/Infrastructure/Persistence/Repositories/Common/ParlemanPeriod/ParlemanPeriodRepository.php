@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\ParlemanPeriod;
-
-use App\Application\Services\CacheService;
-use App\Domain\Interfaces\IParlemanPeriodRepository;
-use App\Infrastructure\Persistence\Eloquent\Period\ParlemanPeriodEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\ParlemanPeriod;
+use App\Application\Services\Utility\Cache\CacheService;
+use App\Domain\Interfaces\Common\PerlemanPeriod\IParlemanPeriodRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\Period\ParlemanPeriodEloquent;
 
 class ParlemanPeriodRepository implements IParlemanPeriodRepository{
 

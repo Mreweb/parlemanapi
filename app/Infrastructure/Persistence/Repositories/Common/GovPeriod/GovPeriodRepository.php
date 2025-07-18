@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\GovPeriod;
-
-use App\Application\Services\CacheService;
-use App\Domain\Interfaces\IGovPeriodRepository;
-use App\Infrastructure\Persistence\Eloquent\Period\GovPeriodEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\GovPeriod;
+use App\Application\Services\Utility\Cache\CacheService;
+use App\Domain\Interfaces\Common\GovPeriod\IGovPeriodRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\Period\GovPeriodEloquent;
 
 class GovPeriodRepository implements IGovPeriodRepository{
 

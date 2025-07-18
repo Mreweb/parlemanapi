@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\President;
-use App\Domain\Interfaces\IPresidentCabinetRepository;
-use App\Infrastructure\Persistence\Eloquent\President\PresidentCabinetEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\PresidentCabinet;
+
+use App\Domain\Interfaces\Common\PresidentCabinet\IPresidentCabinetRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\President\PresidentCabinetEloquent;
 
 class PresidentCabinetRepository implements IPresidentCabinetRepository{
 

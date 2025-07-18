@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\Common\Country;
 
-
-use App\Infrastructure\Persistence\Repositories\Country\ProvinceRepository;
+use App\Domain\Interfaces\Common\Country\IProvinceRepository;
 
 class ProvinceService{
 
-    public function __construct(private ProvinceRepository $repository){}
+    public function __construct(private IProvinceRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

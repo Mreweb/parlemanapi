@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Person;
-use App\Domain\Interfaces\IPersonRepository;
-use App\Infrastructure\Persistence\Eloquent\Commission\PersonCommissionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Election\PersonElectionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Fraction\PersonFractionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Interpellation\InterpellationsEloquent;
-use App\Infrastructure\Persistence\Eloquent\Meeting\PersonMeetingEloquent;
-use App\Infrastructure\Persistence\Eloquent\Notice\NoticeEloquent;
-use App\Infrastructure\Persistence\Eloquent\Person\PersonEloquent;
-use App\Infrastructure\Persistence\Eloquent\PRequests\PersonRequestEloquent;
-use App\Infrastructure\Persistence\Eloquent\Project\ProjectsEloquent;
-use App\Infrastructure\Persistence\Eloquent\Question\QuestionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Research\PersonResearchEloquent;
-use App\Infrastructure\Persistence\Eloquent\RuleFortyFive\RuleFortyFiveEloquent;
-use App\Infrastructure\Persistence\Eloquent\Rules\PersonRulesEloquent;
-use App\Infrastructure\Persistence\Eloquent\RuleTTF\RuleTTFEloquent;
-use App\Infrastructure\Persistence\Eloquent\Trip\TripEloquent;
-use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceEloquent;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\Person;
+
+
+use App\Domain\Interfaces\PersonArea\Person\IPersonRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\Commission\PersonCommissionEloquent;
+use App\Infrastructure\Persistence\Eloquent\Common\Election\PersonElectionEloquent;
+use App\Infrastructure\Persistence\Eloquent\Common\Fraction\PersonFractionEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Interpellation\InterpellationsEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Meeting\PersonMeetingEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Notice\NoticeEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Person\PersonEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\PRequests\PersonRequestEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectsEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Question\QuestionEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Research\PersonResearchEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\RuleFortyFive\RuleFortyFiveEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Rules\PersonRulesEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\RuleTTF\RuleTTFEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceEloquent;
 
 class PersonRepository implements IPersonRepository {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Eloquent\RuleFortyFive;
+namespace App\Infrastructure\Persistence\Eloquent\PersonArea\RuleFortyFive;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

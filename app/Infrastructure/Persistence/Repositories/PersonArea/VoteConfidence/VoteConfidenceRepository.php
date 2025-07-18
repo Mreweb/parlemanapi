@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\VoteConfidence;
-use App\Domain\Interfaces\IVoteConfidenceRepository;
-use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceEloquent;
-use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceOpposingEloquent;
-use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceSupportersEloquent;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\VoteConfidence;
+
+use App\Domain\Interfaces\PersonArea\VoteConfident\IVoteConfidenceRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceOpposingEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceSupportersEloquent;
 
 class VoteConfidenceRepository implements IVoteConfidenceRepository {
 

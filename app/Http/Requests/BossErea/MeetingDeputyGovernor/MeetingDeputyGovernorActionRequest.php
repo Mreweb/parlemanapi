@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\MeetingDeputyGovernor;
+namespace App\Http\Requests\BossErea\MeetingDeputyGovernor;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;

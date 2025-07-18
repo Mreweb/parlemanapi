@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Trip;
-use App\Domain\Interfaces\ITripRepository;
-use App\Infrastructure\Persistence\Eloquent\Trip\TripActionsEloquent;
-use App\Infrastructure\Persistence\Eloquent\Trip\TripApprovalsEloquent;
-use App\Infrastructure\Persistence\Eloquent\Trip\TripBoardEloquent;
-use App\Infrastructure\Persistence\Eloquent\Trip\TripEloquent;
-use Illuminate\Support\Facades\DB;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\Trip;
+use App\Domain\Interfaces\PersonArea\Trip\ITripRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripActionsEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripApprovalsEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripBoardEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripEloquent;
 
 class TripRepository implements ITripRepository {
 

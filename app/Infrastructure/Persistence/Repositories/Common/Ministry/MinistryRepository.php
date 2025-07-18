@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Ministry;
-use App\Application\Services\CacheService;
-use App\Domain\Interfaces\IMinistryRepository;
-use App\Infrastructure\Persistence\Eloquent\Ministry\MinistryEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\Ministry;
+use App\Application\Services\Utility\Cache\CacheService;
+use App\Domain\Interfaces\Common\Ministry\IMinistryRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\Ministry\MinistryEloquent;
 
 class MinistryRepository implements IMinistryRepository {
     public function list(array $filters){

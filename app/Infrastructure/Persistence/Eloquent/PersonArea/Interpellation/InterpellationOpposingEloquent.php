@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Eloquent\Interpellation;
+namespace App\Infrastructure\Persistence\Eloquent\PersonArea\Interpellation;
 use Illuminate\Database\Eloquent\Model;
 
 class InterpellationOpposingEloquent extends Model{

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Province;
+namespace App\Http\Requests\Common\Country\Province;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;

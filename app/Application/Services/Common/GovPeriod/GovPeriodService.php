@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\Common\GovPeriod;
 
-use App\Infrastructure\Persistence\Repositories\GovPeriod\GovPeriodRepository;
+use App\Domain\Interfaces\Common\GovPeriod\IGovPeriodRepository;
 
 class GovPeriodService{
 
-    public function __construct(private GovPeriodRepository $repository){}
+    public function __construct(private IGovPeriodRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

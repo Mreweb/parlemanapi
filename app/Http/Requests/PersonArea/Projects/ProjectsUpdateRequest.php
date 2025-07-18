@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Projects;
+namespace App\Http\Requests\PersonArea\Projects;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;

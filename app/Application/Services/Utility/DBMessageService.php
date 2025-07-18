@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Application\Services;
+namespace App\Application\Services\Utility;
+use App\Domain\Interfaces\Utility\IDBMessage;
 
-
-use App\Domain\Interfaces\IDBMessage;
 class DBMessageService implements IDBMessage {
     public static function get_message($items = null, $type = "SuccessAction", $content = ""){
-
         $DBMessages = [
             'SuccessAction' => [
                 'class' => "green",

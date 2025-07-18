@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-
-use App\Infrastructure\Persistence\Repositories\Commission\CommissionRepository;
+namespace App\Application\Services\Common\Commission;
+use App\Domain\Interfaces\Common\Commission\ICommissionRepository;
 
 class CommissionService{
 
-    public function __construct(private CommissionRepository $repository){}
+    public function __construct(private ICommissionRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

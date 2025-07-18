@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\File;
-use App\Domain\Interfaces\IUploadRepository;
-use App\Infrastructure\Persistence\Eloquent\File\UploadEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Utility\Media\File;
+
+use App\Domain\Interfaces\Utility\Media\IUploadRepository;
+use App\Infrastructure\Persistence\Eloquent\Utility\Media\File\UploadEloquent;
 
 class UploadRepository implements IUploadRepository {
 

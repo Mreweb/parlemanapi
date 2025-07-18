@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Research;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\Research;
 
-use App\Domain\Interfaces\IResearchRepository;
-use App\Infrastructure\Persistence\Eloquent\Research\PersonResearchEloquent;
-use App\Infrastructure\Persistence\Eloquent\Research\PersonResearchSignaturesEloquent;
-use App\Infrastructure\Persistence\Eloquent\Research\PersonResearchTeamEloquent;
-use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
+use App\Domain\Interfaces\PersonArea\PersonResearch\IResearchRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Research\PersonResearchEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Research\PersonResearchSignaturesEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Research\PersonResearchTeamEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
 
 class ResearchRepository implements IResearchRepository {
 

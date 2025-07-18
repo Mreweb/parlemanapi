@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Interfaces;
+namespace App\Domain\Interfaces\Utility\Report;
 
 interface IReportRepository {
     public function search(array $filters);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Meeting;
+namespace App\Http\Requests\PersonArea\Meeting;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;

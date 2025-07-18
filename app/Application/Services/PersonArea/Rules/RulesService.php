@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-
-use App\Infrastructure\Persistence\Repositories\Rules\PersonRulesRepository;
+namespace App\Application\Services\PersonArea\Rules;
+use App\Domain\Interfaces\PersonArea\Rules\IRulesRepository;
 
 class RulesService{
 
-    public function __construct(private PersonRulesRepository $repository){}
+    public function __construct(private IRulesRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

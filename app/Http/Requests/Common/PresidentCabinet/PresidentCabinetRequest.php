@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\PresidentCabinet;
+namespace App\Http\Requests\Common\PresidentCabinet;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;

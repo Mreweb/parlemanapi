@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Interpellation;
-use App\Domain\Interfaces\IInterpellationsRepository;
-use App\Infrastructure\Persistence\Eloquent\Interpellation\InterpellationOpposingEloquent;
-use App\Infrastructure\Persistence\Eloquent\Interpellation\InterpellationOptEloquent;
-use App\Infrastructure\Persistence\Eloquent\Interpellation\InterpellationReturnOptEloquent;
-use App\Infrastructure\Persistence\Eloquent\Interpellation\InterpellationsEloquent;
-use App\Infrastructure\Persistence\Eloquent\Interpellation\InterpellationsSignatoriesEloquent;
-use App\Infrastructure\Persistence\Eloquent\Interpellation\InterpellationsSupportersEloquent;
-use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\Interpellation;
+use App\Domain\Interfaces\PersonArea\Interpellation\IInterpellationsRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Interpellation\InterpellationOpposingEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Interpellation\InterpellationOptEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Interpellation\InterpellationReturnOptEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Interpellation\InterpellationsEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Interpellation\InterpellationsSignatoriesEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Interpellation\InterpellationsSupportersEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Question\QuestionEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
 
 class InterpellationRepository implements IInterpellationsRepository {
 

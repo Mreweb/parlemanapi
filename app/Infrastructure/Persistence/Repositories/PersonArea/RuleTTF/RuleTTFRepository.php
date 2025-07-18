@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\RuleTTF;
-use App\Domain\Interfaces\IRuleTTFRepository;
-use App\Infrastructure\Persistence\Eloquent\RuleTTF\RuleTTFEloquent;
-use App\Infrastructure\Persistence\Eloquent\RuleTTF\RuleTTFSignaturesEloquent;
-use App\Infrastructure\Persistence\Repositories\File\UploadRepository;
+namespace App\Infrastructure\Persistence\Repositories\PersonArea\RuleTTF;
+use App\Domain\Interfaces\PersonArea\RuleTTF\IRuleTTFRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\RuleTTF\RuleTTFEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\RuleTTF\RuleTTFSignaturesEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
 
 class RuleTTFRepository implements IRuleTTFRepository {
 

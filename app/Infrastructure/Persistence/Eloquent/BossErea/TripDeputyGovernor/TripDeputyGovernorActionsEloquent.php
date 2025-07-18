@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Eloquent\TripDeputyGovernor;
+namespace App\Infrastructure\Persistence\Eloquent\BossErea\TripDeputyGovernorActions;
 use Illuminate\Database\Eloquent\Model;
 
 class

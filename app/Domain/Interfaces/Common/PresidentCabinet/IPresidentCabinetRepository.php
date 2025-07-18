@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Interfaces;
+namespace App\Domain\Interfaces\Common\PresidentCabinet;
 
 interface IPresidentCabinetRepository{
     public function list(array $filters);

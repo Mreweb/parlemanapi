@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\Auth;
-use App\Application\Services\DBMessageService;
-use App\Domain\Interfaces\IAuthRepository;
-use App\Infrastructure\Persistence\Eloquent\Person\PersonEloquent;
+use App\Application\Services\Utility\DBMessageService;
+use App\Domain\Interfaces\Auth\IAuthRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Person\PersonEloquent;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 
 class AuthRepository implements IAuthRepository {
 

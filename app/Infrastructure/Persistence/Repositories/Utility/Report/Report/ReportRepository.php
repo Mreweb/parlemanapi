@@ -1,24 +1,20 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Report;
+namespace App\Infrastructure\Persistence\Repositories\Utility\Report\Report;
 
-use App\Domain\Interfaces\IReportRepository;
-use App\Infrastructure\Persistence\Eloquent\Commission\PersonCommissionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Election\PersonElectionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Fraction\PersonFractionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Interpellation\InterpellationsEloquent;
-use App\Infrastructure\Persistence\Eloquent\Meeting\PersonMeetingEloquent;
-use App\Infrastructure\Persistence\Eloquent\Notice\NoticeEloquent;
-use App\Infrastructure\Persistence\Eloquent\Person\PersonEloquent;
-use App\Infrastructure\Persistence\Eloquent\PRequests\PersonRequestEloquent;
-use App\Infrastructure\Persistence\Eloquent\Project\ProjectsEloquent;
-use App\Infrastructure\Persistence\Eloquent\Question\QuestionEloquent;
-use App\Infrastructure\Persistence\Eloquent\Research\PersonResearchEloquent;
-use App\Infrastructure\Persistence\Eloquent\RuleFortyFive\RuleFortyFiveEloquent;
-use App\Infrastructure\Persistence\Eloquent\Rules\PersonRulesEloquent;
-use App\Infrastructure\Persistence\Eloquent\RuleTTF\RuleTTFEloquent;
-use App\Infrastructure\Persistence\Eloquent\Trip\TripEloquent;
-use App\Infrastructure\Persistence\Eloquent\VoteConfidence\VoteConfidenceEloquent;
+
+use App\Domain\Interfaces\Utility\Report\IReportRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Meeting\PersonMeetingEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Notice\NoticeEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\PRequests\PersonRequestEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectsEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Question\QuestionEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Research\PersonResearchEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\RuleFortyFive\RuleFortyFiveEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Rules\PersonRulesEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\RuleTTF\RuleTTFEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceEloquent;
 
 class ReportRepository implements IReportRepository{
 

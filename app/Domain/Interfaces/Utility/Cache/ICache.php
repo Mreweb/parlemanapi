@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Interfaces;
+namespace App\Domain\Interfaces\Utility\Cache;
 
 interface ICache{
     static function get_data($key);

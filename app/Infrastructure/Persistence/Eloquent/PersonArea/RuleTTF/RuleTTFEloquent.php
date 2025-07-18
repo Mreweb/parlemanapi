@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Eloquent\RuleTTF;
+namespace App\Infrastructure\Persistence\Eloquent\PersonArea\RuleTTF;
 use Illuminate\Database\Eloquent\Model;
 
 class RuleTTFEloquent extends Model{

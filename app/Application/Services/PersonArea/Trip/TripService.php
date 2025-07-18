@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Application\Services;
-use App\Infrastructure\Persistence\Repositories\Trip\TripRepository;
+namespace App\Application\Services\PersonArea\Trip;
+use App\Domain\Interfaces\PersonArea\Trip\ITripRepository;
 
 class TripService{
 
-    public function __construct(private TripRepository $repository){}
+    public function __construct(private ITripRepository $repository){}
 
     public function list(array $filters){
         return $this->repository->list($filters);

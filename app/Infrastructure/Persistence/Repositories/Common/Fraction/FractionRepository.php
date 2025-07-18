@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\Fraction;
-
-use App\Application\Services\CacheService;
-use App\Domain\Interfaces\IFractionRepository;
-use App\Infrastructure\Persistence\Eloquent\Fraction\FractionEloquent;
+namespace App\Infrastructure\Persistence\Repositories\Common\Fraction;
+use App\Application\Services\Utility\Cache\CacheService;
+use App\Domain\Interfaces\Common\Fraction\IFractionRepository;
+use App\Infrastructure\Persistence\Eloquent\Common\Fraction\FractionEloquent;
 
 class FractionRepository implements IFractionRepository {
 

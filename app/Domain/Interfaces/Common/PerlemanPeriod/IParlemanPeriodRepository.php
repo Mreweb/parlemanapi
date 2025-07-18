@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Interfaces;
+namespace App\Domain\Interfaces\Common\PerlemanPeriod;
 
 interface IParlemanPeriodRepository{
     public function list(array $filters);

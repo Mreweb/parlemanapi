@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repositories\SessionDeputyGovernor;
-use App\Domain\Interfaces\ISessionDeputyGovernorRepository;
-use App\Infrastructure\Persistence\Eloquent\SessionDeputyGovernor\SessionDeputyGovernorActionsEloquent;
-use App\Infrastructure\Persistence\Eloquent\SessionDeputyGovernor\SessionDeputyGovernorApprovalsEloquent;
-use App\Infrastructure\Persistence\Eloquent\SessionDeputyGovernor\SessionDeputyGovernorBoardEloquent;
-use App\Infrastructure\Persistence\Eloquent\SessionDeputyGovernor\SessionDeputyGovernorEloquent;
+namespace App\Infrastructure\Persistence\Repositories\BossErea\SessionDeputyGovernor;
+
+use App\Domain\Interfaces\BossErea\SessionDeputy\ISessionDeputyGovernorRepository;
+use App\Infrastructure\Persistence\Eloquent\BossErea\SessionDeputyGovernor\SessionDeputyGovernorActionsEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\SessionDeputyGovernor\SessionDeputyGovernorApprovalsEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\SessionDeputyGovernor\SessionDeputyGovernorBoardEloquent;
+use App\Infrastructure\Persistence\Eloquent\BossErea\SessionDeputyGovernor\SessionDeputyGovernorEloquent;
 
 class SessionDeputyGovernorRepository implements ISessionDeputyGovernorRepository {
 
