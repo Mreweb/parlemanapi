@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('person_enactment_type', function (Blueprint $table) {
+            $table->comment('نوع درخواست');
+            $table->id('row_id')->autoIncrement();
+            $table->string('enactment_type')->comment('نوع درخواست');
+            $table->longText('enactment_detail')->comment('داده های جیسون نوع درخواست');
+            $table->unsignedBigInteger('enactment_id')->comment('شناسه لایحه');
+            $table->foreign('enactment_id')->references('enactment_id')->on('person_enactment')->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('person_enactment_type');
+    }
+};
