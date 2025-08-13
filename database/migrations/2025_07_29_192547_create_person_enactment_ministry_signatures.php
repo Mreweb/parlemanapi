@@ -10,6 +10,7 @@ return new class extends Migration {
      */
     public function up(): void{
         Schema::create('person_enactment_ministry_signatures', function (Blueprint $table) {
+            $table->comment('وزرای امضا کننده');
             $table->id();
             $table->unsignedBigInteger('enactment_id')->comment('شناسه لایحه')->index();
             $table->integer('enactment_person_id')->comment('مرجع پیشنهاد دهنده');

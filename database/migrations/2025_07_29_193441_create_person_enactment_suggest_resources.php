@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void{
         Schema::create('person_enactment_suggest_resources', function (Blueprint $table) {
+            $table->comment('دستگاه های پیشنهاد دهنده');
             $table->id('row_id');
             $table->unsignedBigInteger('enactment_id')->comment('شناسه لایحه')->index();
             $table->integer('suggester')->comment('مرجع پیشنهاد دهنده');

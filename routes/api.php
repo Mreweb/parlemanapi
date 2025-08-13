@@ -15,6 +15,7 @@ use App\Http\Controllers\Common\Ministry\MinistryController;
 use App\Http\Controllers\Common\PerlemanPeriod\ParlemanPeriodController;
 use App\Http\Controllers\Common\President\PresidentController;
 use App\Http\Controllers\Common\PresidentCabinet\PresidentCabinetController;
+use App\Http\Controllers\PersonArea\Enactment\EnactmentController;
 use App\Http\Controllers\PersonArea\Interpellation\InterpellationController;
 use App\Http\Controllers\PersonArea\Meeting\PersonMeetingController;
 use App\Http\Controllers\PersonArea\Notice\NoticeController;
@@ -40,7 +41,6 @@ Route::post('/captcha/verify', [Captcha::class, 'verify']);
 Route::prefix('auth')->group( function () {
     Route::post('/username', [Auth::class, 'loginByUsername']);
 });
-
 
 Route::middleware(JWTAuthCheck::class)->group(callback: function () {
     Route::get('/enum', [Enums::class, 'index']);
@@ -276,6 +276,15 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [MediaDeputyGovernorController::class, 'update_approval']);
         Route::delete('/{id}', [MediaDeputyGovernorController::class, 'destroy']);
     });
+    Route::prefix('enactment')->group(function () {
+        Route::get('/', [EnactmentController::class, 'index']);
+        Route::get('/{id}', [EnactmentController::class, 'show']);
+        Route::post('/', [EnactmentController::class, 'store']);
+        Route::put('/', [EnactmentController::class, 'update']);
+        Route::delete('/{id}', [EnactmentController::class, 'destroy']);
+    });
+
+
 
     Route::prefix('report')->group(function () {
         Route::get('/data_count', [ReportController::class, 'data_count']);

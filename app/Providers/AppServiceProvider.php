@@ -18,6 +18,7 @@ use App\Domain\Interfaces\Common\Ministry\IMinistryRepository;
 use App\Domain\Interfaces\Common\PerlemanPeriod\IParlemanPeriodRepository;
 use App\Domain\Interfaces\Common\President\IPresidentRepository;
 use App\Domain\Interfaces\Common\PresidentCabinet\IPresidentCabinetRepository;
+use App\Domain\Interfaces\PersonArea\Enactment\IEnactmentRepository;
 use App\Domain\Interfaces\PersonArea\Interpellation\IInterpellationsRepository;
 use App\Domain\Interfaces\PersonArea\Meeting\IMeetingRepository;
 use App\Domain\Interfaces\PersonArea\Notice\INoticeRepository;
@@ -50,6 +51,7 @@ use App\Infrastructure\Persistence\Repositories\Common\Ministry\MinistryReposito
 use App\Infrastructure\Persistence\Repositories\Common\ParlemanPeriod\ParlemanPeriodRepository;
 use App\Infrastructure\Persistence\Repositories\Common\President\PresidentRepository;
 use App\Infrastructure\Persistence\Repositories\Common\PresidentCabinet\PresidentCabinetRepository;
+use App\Infrastructure\Persistence\Repositories\PersonArea\Enactment\EnactmentRepository;
 use App\Infrastructure\Persistence\Repositories\PersonArea\Interpellation\InterpellationRepository;
 use App\Infrastructure\Persistence\Repositories\PersonArea\Meeting\MeetingRepository;
 use App\Infrastructure\Persistence\Repositories\PersonArea\Notice\NoticeRepository;
@@ -103,6 +105,7 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->singleton(ISessionDeputyGovernorRepository::class, SessionDeputyGovernorRepository::class);
         $this->app->singleton(IMeetingDeputyGovernorRepository::class, MeetingDeputyGovernorRepository::class);
         $this->app->singleton(IReportRepository::class, ReportRepository::class);
+        $this->app->singleton(IEnactmentRepository::class, EnactmentRepository::class);
     }
     public function boot(): void{
         Schema::defaultStringLength(250);

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('person_enactment_deputy_actions', function (Blueprint $table) {
+        Schema::create('person_enactment_type_deputy_actions', function (Blueprint $table) {
             $table->comment('اقدامات معاونت');
             $table->id('row_id')->autoIncrement();
             $table->longText('enactment_detail')->comment('داده های جیسون اقدامات معاونت امور تقنینی');

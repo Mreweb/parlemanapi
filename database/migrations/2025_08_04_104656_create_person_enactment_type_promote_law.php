@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('person_enactment_workflow_commission', function (Blueprint $table) {
-            $table->comment('فرآیند بررسی در کمیسیون');
+        Schema::create('person_enactment_type_promote_law', function (Blueprint $table) {
+            $table->comment('ابلاغ قانون');
             $table->id('row_id')->autoIncrement();
-            $table->longText('enactment_detail')->comment('داده های جیسون فرآیند بررسی در کمیسیون');
+            $table->longText('enactment_detail')->comment('داده های جیسون ابلاغ قانون');
             $table->unsignedBigInteger('enactment_id')->comment('شناسه لایحه');
             $table->foreign('enactment_id')->references('enactment_id')->on('person_enactment')->onDelete('cascade');
             $table->timestamps();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('person_enactment_check_workflow');
+        Schema::dropIfExists('person_enactment_promote_law');
     }
 };

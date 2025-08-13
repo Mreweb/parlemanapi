@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('person_enactment_workflow_public_court', function (Blueprint $table) {
+        Schema::create('person_enactment_type_workflow_public_court', function (Blueprint $table) {
             $table->comment('فرآیند بررسی در صحن علی مجلس');
             $table->id('row_id')->autoIncrement();
             $table->longText('enactment_detail')->comment('داده های جیسون فرآیند بررسی در صحن');

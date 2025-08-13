@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('person_enactment_guardian_council', function (Blueprint $table) {
+        Schema::create('person_enactment_type_guardian_council', function (Blueprint $table) {
             $table->comment('ابلاغ مصوبه به شورای نگهبان');
             $table->id('row_id')->autoIncrement();
             $table->longText('enactment_detail')->comment('داده های جیسون ابلغ مصوبه به شورای نگهبان');

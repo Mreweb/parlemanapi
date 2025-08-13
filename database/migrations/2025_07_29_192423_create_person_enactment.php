@@ -11,9 +11,9 @@ return new class extends Migration {
     public function up(): void{
         Schema::create('person_enactment', function (Blueprint $table) {
             $table->comment('شناسنامه لایحه');
-            $table->unsignedBigInteger('enactment_id')->primary();
+            $table->unsignedBigInteger('enactment_id')->primary()->autoIncrement();
             $table->string('enactment_person_id')->comment('نام نماینده لایحه')->index();
-            $table->string('enactment_title')->comment('عنوان طرح');
+            $table->string('enactment_title')->comment('عنوان لایحه');
             $table->string('enactment_content')->comment('متن لایحه');
             $table->string('enactment_prev_title')->comment('عنوان قبل');
             $table->string('enactment_date')->comment('تاریخ اعلام وصول')->index();
@@ -24,7 +24,6 @@ return new class extends Migration {
             $table->string('enactment_president_letter_date')->comment('تاریخ نامه رئیس جمهور به مجلس');
             $table->string('enactment_president_deputy_letter_number')->comment('شماره نامه معاون رئیس جمهور به مجلس');
             $table->string('enactment_president_deputy_letter_date')->comment('تاریخ نامه معاون رئیس جمهور به مجلس');
-            $table->string('enactment_ministry')->comment('دستگاه پیشنهاد دهنده');
             $table->string('enactment_priority')->comment('نحوه اعلام وصول');
             $table->string('enactment_register_number')->comment('شماره ثبت');
             $table->string('enactment_print_number')->comment('شماره چاپ');
