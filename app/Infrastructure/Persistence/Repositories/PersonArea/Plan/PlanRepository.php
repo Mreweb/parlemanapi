@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\PersonArea\Plan;
-use App\Domain\Interfaces\PersonArea\plan\IplanRepository;
+use App\Domain\Interfaces\PersonArea\plan\IPlanRepository;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Plan\PlanBill85ReviewEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Plan\PlanDeputyActionsEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Plan\PlanEloquent;
@@ -17,7 +17,7 @@ use App\Infrastructure\Persistence\Eloquent\PersonArea\Plan\PlanTypeEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Plan\PlanWorkflowCommissionEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Plan\PlanSilenceEloquent;
 
-class PlanRepository implements IplanRepository {
+class PlanRepository implements IPlanRepository {
 
     public function list(array $filters){
         $query = PlanEloquent::query();
