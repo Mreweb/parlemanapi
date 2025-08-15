@@ -21,6 +21,7 @@ use App\Http\Controllers\PersonArea\Meeting\PersonMeetingController;
 use App\Http\Controllers\PersonArea\Notice\NoticeController;
 use App\Http\Controllers\PersonArea\Person\PersonController;
 use App\Http\Controllers\PersonArea\PersonResearch\ResearchController;
+use App\Http\Controllers\PersonArea\Plan\PlanController;
 use App\Http\Controllers\PersonArea\Projects\ProjectsController;
 use App\Http\Controllers\PersonArea\Question\QuestionController;
 use App\Http\Controllers\PersonArea\Requests\RequestsController;
@@ -283,14 +284,16 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [EnactmentController::class, 'update']);
         Route::delete('/{id}', [EnactmentController::class, 'destroy']);
     });
-
-
-
+    Route::prefix('plan')->group(function () {
+        Route::get('/', [PlanController::class, 'index']);
+        Route::get('/{id}', [PlanController::class, 'show']);
+        Route::post('/', [PlanController::class, 'store']);
+        Route::put('/', [PlanController::class, 'update']);
+        Route::delete('/{id}', [PlanController::class, 'destroy']);
+    });
     Route::prefix('report')->group(function () {
         Route::get('/data_count', [ReportController::class, 'data_count']);
     });
-
-
 
 });
 
