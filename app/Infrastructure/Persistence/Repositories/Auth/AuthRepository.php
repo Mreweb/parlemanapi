@@ -1,24 +1,19 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\Auth;
-use App\Application\Services\DBMessageService;
-use App\Domain\Interfaces\IAuthRepository;
-use App\Infrastructure\Persistence\Eloquent\Person\PersonEloquent;
+use App\Application\Services\Utility\DBMessageService;
+use App\Domain\Interfaces\Auth\IAuthRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Person\PersonEloquent;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 
 class AuthRepository implements IAuthRepository {
 
+    public function otp(){ }
 
-    public function otp(){
-
-    }
-
-    public function verifyOtp(){
-
-    }
+    public function verifyOtp(){}
 
     public function loginByUsername(array $data){
 
@@ -47,7 +42,9 @@ class AuthRepository implements IAuthRepository {
         } else{
             $key = "2r0InITOevKfz9jZg7jeaG1tQmf67uTtmSTwqreuxzReDoXgDGgscDTEcmmlLwZT";
             $payload = $person->toArray()[0];
-            //$payload['token_create_date'] = Carbon::now();
+            foreach ($payload as $key=>$value) {
+                $payload[$key] = encrypt($payload[$key]);
+            }
             $payload['token_create_date'] = time();
             $payload['token_expire_time'] = time()+env('TOKEN_EXPIRE_TIME');
             $jwt = JWT::encode($payload, $key, 'HS256');
@@ -59,8 +56,5 @@ class AuthRepository implements IAuthRepository {
                 'SuccessAction',"ورود با موفقیت انجام شد" ) , 201, [], JSON_UNESCAPED_UNICODE);
         }
 
-
-
     }
-
 }

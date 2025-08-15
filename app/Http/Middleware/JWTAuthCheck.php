@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Application\Services\DBMessageService;
+use App\Application\Services\Utility\DBMessageService;
 use Closure;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;

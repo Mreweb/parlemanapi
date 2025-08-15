@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Application\Services\PersonArea\Person;
+
+use App\Domain\Interfaces\PersonArea\Person\IPersonRepository;
+
+class PersonService{
+
+    public function __construct(private IPersonRepository $repository){}
+
+    public function list(array $filters){
+        return $this->repository->list($filters);
+    }
+
+    public function get(int $id)
+    {
+        return $this->repository->findById($id);
+    }
+    public function get_all_info(int $id)
+    {
+        return $this->repository->get_all_info($id);
+    }
+
+    public function create(array $data)
+    {
+        return $this->repository->create($data);
+    }
+
+    public function update(array $data)
+    {
+        return $this->repository->update($data);
+    }
+    public function update_fraction(array $data)
+    {
+        return $this->repository->update_fraction($data);
+    }
+    public function update_election(array $data)
+    {
+        return $this->repository->update_election($data);
+    }
+    public function update_commission(array $data)
+    {
+        return $this->repository->update_commission($data);
+    }
+
+    public function delete(int $id)
+    {
+        return $this->repository->delete($id);
+    }
+}

@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Domain\Interfaces\Common\Country;
+
+interface IProvinceRepository {
+
+    public function list(array $filters);
+    public function all();
+    public function findById(int $id);
+    public function get_cities(int $id);
+    public function create(array $data);
+    public function update(array $data);
+    public function delete(int $id);
+
+}
+
+
+?>
