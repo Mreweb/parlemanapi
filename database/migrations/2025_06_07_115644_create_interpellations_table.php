@@ -41,6 +41,10 @@ return new class extends Migration
             $table->longText('interpellation_governors_opinion')->comment('نظر استانداران در رصد آراء نمایندگان');
             $table->longText('interpellation_governors_actions')->comment('اقدامات استانداران در رفع استیضاح');
             $table->longText('interpellation_deputies_actions')->comment('اقدامات معاونین امور مجلس در رفع استیضاح');
+            $table->longText('interpellation_total_count')->comment('کل آرا');
+            $table->longText('interpellation_ok_count')->comment('تعداد موافق');
+            $table->longText('interpellation_nok_count')->comment('تعداد مخالف');
+            $table->longText('interpellation_refused_count')->comment('تعداد ممتنع');
             $table->timestamps();
             $table->softDeletes();
         });

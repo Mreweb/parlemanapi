@@ -3,14 +3,19 @@
 namespace App\Infrastructure\Persistence\Repositories\PersonArea\Research;
 
 use App\Domain\Interfaces\PersonArea\PersonResearch\IResearchRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\Research\PersonResearchAttachmentEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Research\PersonResearchEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Research\PersonResearchSignaturesEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Research\PersonResearchTeamEloquent;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceAttachmentEloquent;
 use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
+use Illuminate\Support\Facades\DB;
 
-class ResearchRepository implements IResearchRepository {
+class ResearchRepository implements IResearchRepository
+{
 
-    public function list(array $filters){
+    public function list(array $filters)
+    {
         $query = PersonResearchEloquent::query();
         $query->select('person_research.*',
             'period_title',
@@ -31,7 +36,7 @@ class ResearchRepository implements IResearchRepository {
         }
         $data['count'] = $query->count();
         if (!empty($filters['page_index'])) {
-            $query->skip(--$filters['page_index']*$filters['page_size']);
+            $query->skip(--$filters['page_index'] * $filters['page_size']);
         }
         if (!empty($filters['page_size'])) {
             $query->take($filters['page_size']);
@@ -39,7 +44,9 @@ class ResearchRepository implements IResearchRepository {
         $data['list'] = $query->get();
         return $data;
     }
-    public function findById(int $id){
+
+    public function findById(int $id)
+    {
         $query = PersonResearchEloquent::query();
         $query->select('person_research.*');
         $query->leftJoin('president', 'president.president_id', '=', 'person_research.person_research_president_id');
@@ -50,87 +57,132 @@ class ResearchRepository implements IResearchRepository {
         $result[0]['signatures_persons'] = $this->findSignaturesById($result[0]['person_research_id']);
         $result[0]['team_persons'] = $this->findTeamById($result[0]['person_research_id']);
         $result[0]['worksheet'] = $this->findWorkSheetById($result[0]['person_research_worksheet_media_id']);
+        $result[0]['attachment'] = $this->findAttachmentById($result[0]['person_research_worksheet_media_id']);
         return $result;
     }
-    public function create(array $data){
-        $person_research_team_person_id = $data['person_research_team_person_ids'];
-        $person_research_signatures_person_ids = $data['person_research_signatures_person_ids'];
-        unset($data['person_research_team_person_ids']);
-        unset($data['person_research_signatures_person_ids']);
 
-        $result =  PersonResearchEloquent::create($data);
-        foreach ($person_research_team_person_id as $signature_person_id) {
-            PersonResearchTeamEloquent::create(
-                [
-                    'person_research_id' => $result->person_research_id ,
-                    'person_research_team_person_id' => $signature_person_id
-                ]
-            );
-        }
+    public function create(array $data)
+    {
+        return DB::transaction(function () use ($data) {
 
-        foreach ($person_research_signatures_person_ids as $signature_person_id) {
-            PersonResearchSignaturesEloquent::create(
-                [
-                    'person_research_id' => $result->person_research_id ,
-                    'person_research_signature_person_id' => $signature_person_id
-                ]
-            );
-        }
-        return $result;
+            $person_research_team_person_id = $data['person_research_team_person_ids'];
+            $person_research_signatures_person_ids = $data['person_research_signatures_person_ids'];
+            $person_research_attachments = $data['person_research_attachments'];
+            unset($data['person_research_team_person_ids']);
+            unset($data['person_research_signatures_person_ids']);
+
+            $result = PersonResearchEloquent::create($data);
+            foreach ($person_research_team_person_id as $signature_person_id) {
+                PersonResearchTeamEloquent::create(
+                    [
+                        'person_research_id' => $result->person_research_id,
+                        'person_research_team_person_id' => $signature_person_id
+                    ]
+                );
+            }
+            foreach ($person_research_signatures_person_ids as $signature_person_id) {
+                PersonResearchSignaturesEloquent::create(
+                    [
+                        'person_research_id' => $result->person_research_id,
+                        'person_research_signature_person_id' => $signature_person_id
+                    ]
+                );
+            }
+            foreach ($person_research_attachments as $attachment) {
+                PersonResearchAttachmentEloquent::create(
+                    [
+                        'person_research_id' => $result->person_research_id,
+                        'person_research_attachment_title' => $attachment['attachment_title'],
+                        'person_research_attachment_src' => $attachment['attachment_src'],
+                    ]
+                );
+            }
+            return $result;
+
+        });
 
     }
-    public function update(array $data){
 
-        $person_research_team_person_id = $data['person_research_team_person_ids'];
-        $person_research_signatures_person_ids = $data['person_research_signatures_person_ids'];
-        unset($data['person_research_team_person_ids']);
-        unset($data['person_research_signatures_person_ids']);
+    public function update(array $data)
+    {
+
+        return DB::transaction(function () use ($data) {
+            $person_research_team_person_id = $data['person_research_team_person_ids'];
+            $person_research_signatures_person_ids = $data['person_research_signatures_person_ids'];
+            $person_research_attachments = $data['person_research_attachments'];
+            unset($data['person_research_team_person_ids']);
+            unset($data['person_research_signatures_person_ids']);
 
 
-        $result = PersonResearchEloquent::where('person_research_id',$data['person_research_id'])->update(
-            $data
-        );
-
-        PersonResearchTeamEloquent::where('person_research_id',$data['person_research_id'])->delete();
-        foreach ($person_research_team_person_id as $signature_person_id) {
-            PersonResearchTeamEloquent::create(
-                [
-                    'person_research_id' => $data['person_research_id'],
-                    'person_research_team_person_id' => $signature_person_id
-                ]
+            $result = PersonResearchEloquent::where('person_research_id', $data['person_research_id'])->update(
+                $data
             );
-        }
 
-        PersonResearchSignaturesEloquent::where('person_research_id',$data['person_research_id'])->delete();
-        foreach ($person_research_signatures_person_ids as $signature_person_id) {
-            PersonResearchSignaturesEloquent::create(
-                [
-                    'person_research_id' => $data['person_research_id'],
-                    'person_research_signature_person_id' => $signature_person_id
-                ]
-            );
-        }
+            PersonResearchTeamEloquent::where('person_research_id', $data['person_research_id'])->delete();
+            foreach ($person_research_team_person_id as $signature_person_id) {
+                PersonResearchTeamEloquent::create(
+                    [
+                        'person_research_id' => $data['person_research_id'],
+                        'person_research_team_person_id' => $signature_person_id
+                    ]
+                );
+            }
 
-        return $result;
+            PersonResearchSignaturesEloquent::where('person_research_id', $data['person_research_id'])->delete();
+            foreach ($person_research_signatures_person_ids as $signature_person_id) {
+                PersonResearchSignaturesEloquent::create(
+                    [
+                        'person_research_id' => $data['person_research_id'],
+                        'person_research_signature_person_id' => $signature_person_id
+                    ]
+                );
+            }
+
+            PersonResearchAttachmentEloquent::where('person_research_id', $data['person_research_id'])->delete();
+            foreach ($person_research_attachments as $attachment) {
+                PersonResearchAttachmentEloquent::create(
+                    [
+                        'person_research_id' => $result->person_research_id,
+                        'person_research_attachment_title' => $attachment['attachment_title'],
+                        'person_research_attachment_src' => $attachment['attachment_src'],
+                    ]
+                );
+            }
+
+            return $result;
+        });
     }
-    public function delete(int $id){
+
+    public function delete(int $id)
+    {
         $city = $this->findById($id);
-        if($city){
+        if ($city) {
             return PersonResearchEloquent::findOrFail($id)->delete();
-        } else{
+        } else {
             return false;
         }
     }
+
     public function findSignaturesById(int $id)
-    {        return PersonResearchSignaturesEloquent::query()->select('person_research_signature_person_id as person_id')->where('person_research_id',$id)->get()->toArray();
+    {
+        return PersonResearchSignaturesEloquent::query()->select('person_research_signature_person_id as person_id')->where('person_research_id', $id)->get()->toArray();
 
     }
+
     public function findTeamById(int $id)
     {
-        return PersonResearchTeamEloquent::query()->select('person_research_team_person_id as person_id')->where('person_research_id',$id)->get()->toArray();
+        return PersonResearchTeamEloquent::query()->select('person_research_team_person_id as person_id')->where('person_research_id', $id)->get()->toArray();
 
     }
-    public function findWorkSheetById(int $id){
+
+    public function findAttachmentById(int $id)
+    {
+        return PersonResearchAttachmentEloquent::query()->select('*')->where('person_research_id', $id)->get()->toArray();
+
+    }
+
+    public function findWorkSheetById(int $id)
+    {
         return (new UploadRepository())->get_file($id);
     }
 }

@@ -35,6 +35,10 @@ return new class extends Migration
             $table->longText('vote_confidence_contents_summary')->comment('چکیده مطالب وزیر مورد رای اعتماد');
             $table->longText('vote_confidence_supporters_summary')->comment('چکیده مطالب موافقین رای اعتماد');
             $table->longText('vote_confidence_opposing_summary')->comment('چکیده مطالب مخالفین رای اعتماد');
+            $table->longText('vote_confidence_total_count')->comment('کل آرا');
+            $table->longText('vote_confidence_ok_count')->comment('تعداد موافق');
+            $table->longText('vote_confidence_nok_count')->comment('تعداد مخالف');
+            $table->longText('vote_confidence_refused_count')->comment('تعداد ممتنع');
             $table->timestamps();
             $table->softDeletes();
         });

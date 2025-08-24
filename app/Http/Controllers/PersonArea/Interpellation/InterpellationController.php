@@ -110,6 +110,14 @@ class InterpellationController extends Controller{
      *
      *  interpellation_signatures_person_ids نمایندگان انصراف دهنده از انصراف
      *
+     *  interpellation_total_count تعداد آرا کل
+     *
+     *  interpellation_ok_count تعداد آرا موافق
+     *
+     *  interpellation_nok_count تعداد آرا مخالف
+     *
+     *  interpellation_refused_count تعداد آرا ممتنع
+     *
      *  interpellation_attachments  آرایه فایل های کاربرگ { "attachment_title":"title_1", "attachment_src":"src_1"}
      *
      * @lrd:end

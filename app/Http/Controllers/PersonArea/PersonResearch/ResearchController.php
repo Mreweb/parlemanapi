@@ -85,6 +85,8 @@ class ResearchController extends Controller{
      *
      *  person_research_signatures_person_ids آرایه افراد  حمایت کنندگاه تحقیق
      *
+     *  person_research_attachments  آرایه فایل های کاربرگ { "attachment_title":"title_1", "attachment_src":"src_1"}
+     *
      * @lrd:end
      */
     public function store(ResearchRequest $request){

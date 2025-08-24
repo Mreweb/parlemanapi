@@ -163,6 +163,7 @@ class InterpellationRepository implements IInterpellationsRepository
     public function update(array $data){
 
         return DB::transaction(function () use ($data) {
+
             $interpellations_opposing_person_ids = $data['interpellations_opposing_person_ids'];
             $interpellation_supporters_person_ids = $data['interpellation_supporters_person_ids'];
             $interpellation_opt_person_ids = $data['interpellation_opt_person_ids'];

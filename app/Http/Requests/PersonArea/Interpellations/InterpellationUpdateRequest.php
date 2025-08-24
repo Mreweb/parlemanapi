@@ -40,11 +40,16 @@ class InterpellationUpdateRequest extends FormRequest{
             'interpellation_governors_opinion' => ['required'],
             'interpellation_governors_actions' => ['required'],
             'interpellation_deputies_actions' => ['required'],
+            'interpellations_total_count' => ['required'],
+            'interpellations_ok_count' => ['required'],
+            'interpellations_nok_count' => ['required'],
+            'interpellations_refused_count' => ['required'],
             'interpellations_opposing_person_ids' => ['array'],
             'interpellation_supporters_person_ids' => ['array'],
             'interpellation_opt_person_ids' => ['array'],
             'interpellation_return_opt_person_ids' => ['array'],
-            'interpellation_signatures_person_ids' => ['array']
+            'interpellation_signatures_person_ids' => ['array'],
+            'interpellation_attachments' => ['array'] //{ "attachment_title":"title_1", "attachment_src":"title_2"}
         ];
     }
     public function messages(): array{
