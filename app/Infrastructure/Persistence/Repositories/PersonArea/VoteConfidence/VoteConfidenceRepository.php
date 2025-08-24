@@ -3,13 +3,17 @@
 namespace App\Infrastructure\Persistence\Repositories\PersonArea\VoteConfidence;
 
 use App\Domain\Interfaces\PersonArea\VoteConfident\IVoteConfidenceRepository;
+use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceAttachmentEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceOpposingEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceSupportersEloquent;
+use Illuminate\Support\Facades\DB;
 
-class VoteConfidenceRepository implements IVoteConfidenceRepository {
+class VoteConfidenceRepository implements IVoteConfidenceRepository
+{
 
-    public function list(array $filters){
+    public function list(array $filters)
+    {
         $query = VoteConfidenceEloquent::query();
         $query->select('person_vote_confidence.*',
             'period_title',
@@ -30,7 +34,7 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository {
         }
         $data['count'] = $query->count();
         if (!empty($filters['page_index'])) {
-            $query->skip(--$filters['page_index']*$filters['page_size']);
+            $query->skip(--$filters['page_index'] * $filters['page_size']);
         }
         if (!empty($filters['page_size'])) {
             $query->take($filters['page_size']);
@@ -38,7 +42,9 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository {
         $data['list'] = $query->get();
         return $data;
     }
-    public function findById(int $id){
+
+    public function findById(int $id)
+    {
         $query = VoteConfidenceEloquent::query();
         $query->select('person_vote_confidence.*');
         $query->leftJoin('president', 'president.president_id', '=', 'person_vote_confidence.vote_confidence_president_id');
@@ -49,86 +55,121 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository {
 
         $result[0]['opposing_persons'] = $this->findOpposingById($result[0]['vote_confidence_id']);
         $result[0]['supporters_persons'] = $this->findSupportersById($result[0]['vote_confidence_id']);
+        $result[0]['attachments'] = $this->findAttachmentsById($result[0]['vote_confidence_id']);
 
         return $result;
     }
-    public function create(array $data){
-        $vote_confidence_opposing_person_ids = $data['vote_confidence_opposing_person_ids'];
-        $vote_confidence_supporters_person_ids = $data['vote_confidence_supporters_person_ids'];
-        unset($data['vote_confidence_opposing_person_ids']);
-        unset($data['vote_confidence_supporters_person_ids']);
 
-        $result =  VoteConfidenceEloquent::create($data);
-        foreach ($vote_confidence_opposing_person_ids as $signature_person_id) {
-            VoteConfidenceOpposingEloquent::create(
-                [
-                    'vote_confidence_id' => $result->vote_confidence_id ,
-                    'vote_confidence_opposing_person_id' => $signature_person_id
-                ]
-            );
-        }
-
-        foreach ($vote_confidence_supporters_person_ids as $signature_person_id) {
-            VoteConfidenceSupportersEloquent::create(
-                [
-                    'vote_confidence_id' => $result->vote_confidence_id ,
-                    'vote_confidence_supporters_person_id' => $signature_person_id
-                ]
-            );
-        }
-        return $result;
+    public function create(array $data)
+    {
+        DB::transaction(function () use ($data) {
+            $vote_confidence_opposing_person_ids = $data['vote_confidence_opposing_person_ids'];
+            $vote_confidence_supporters_person_ids = $data['vote_confidence_supporters_person_ids'];
+            $vote_confidence_attachments = $data['vote_confidence_attachments'];
+            unset($data['vote_confidence_opposing_person_ids']);
+            unset($data['vote_confidence_supporters_person_ids']);
+            unset($data['vote_confidence_attachments']);
+            $result = VoteConfidenceEloquent::create($data);
+            foreach ($vote_confidence_opposing_person_ids as $signature_person_id) {
+                VoteConfidenceOpposingEloquent::create(
+                    [
+                        'vote_confidence_id' => $result->vote_confidence_id,
+                        'vote_confidence_opposing_person_id' => $signature_person_id
+                    ]
+                );
+            }
+            foreach ($vote_confidence_supporters_person_ids as $signature_person_id) {
+                VoteConfidenceSupportersEloquent::create(
+                    [
+                        'vote_confidence_id' => $result->vote_confidence_id,
+                        'vote_confidence_supporters_person_id' => $signature_person_id
+                    ]
+                );
+            }
+            foreach ($vote_confidence_attachments as $attachment) {
+                VoteConfidenceAttachmentEloquent::create(
+                    [
+                        'vote_confidence_id' => $result->vote_confidence_id,
+                        'vote_confidence_attachment_title' => $attachment['attachment_title'],
+                        'vote_confidence_attachment_src' => $attachment['attachment_src'],
+                    ]
+                );
+            }
+            return $result;
+        });
 
     }
+
     public function update(array $data){
 
-        $vote_confidence_opposing_person_ids = $data['vote_confidence_opposing_person_ids'];
-        $vote_confidence_supporters_person_ids = $data['vote_confidence_supporters_person_ids'];
-        unset($data['vote_confidence_opposing_person_ids']);
-        unset($data['vote_confidence_supporters_person_ids']);
+        DB::transaction(function () use ($data) {
+            $vote_confidence_opposing_person_ids = $data['vote_confidence_opposing_person_ids'];
+            $vote_confidence_supporters_person_ids = $data['vote_confidence_supporters_person_ids'];
+            $vote_confidence_attachments = $data['vote_confidence_attachments'];
+            unset($data['vote_confidence_opposing_person_ids']);
+            unset($data['vote_confidence_supporters_person_ids']);
+            unset($data['vote_confidence_attachments']);
 
-        $result = VoteConfidenceEloquent::where('vote_confidence_id',$data['vote_confidence_id'])->update(
-            $data
-        );
-
-
-        VoteConfidenceOpposingEloquent::where('vote_confidence_id',$data['vote_confidence_id'])->delete();
-        foreach ($vote_confidence_opposing_person_ids as $signature_person_id) {
-            VoteConfidenceOpposingEloquent::create(
-                [
-                    'vote_confidence_id' => $data['vote_confidence_id'] ,
-                    'vote_confidence_opposing_person_id' => $signature_person_id
-                ]
+            $result = VoteConfidenceEloquent::where('vote_confidence_id', $data['vote_confidence_id'])->update(
+                $data
             );
-        }
 
-        VoteConfidenceSupportersEloquent::where('vote_confidence_id',$data['vote_confidence_id'])->delete();
-        foreach ($vote_confidence_supporters_person_ids as $signature_person_id) {
-            VoteConfidenceSupportersEloquent::create(
-                [
-                    'vote_confidence_id' => $data['vote_confidence_id'] ,
-                    'vote_confidence_supporters_person_id' => $signature_person_id
-                ]
-            );
-        }
+            VoteConfidenceOpposingEloquent::where('vote_confidence_id', $data['vote_confidence_id'])->delete();
+            foreach ($vote_confidence_opposing_person_ids as $signature_person_id) {
+                VoteConfidenceOpposingEloquent::create(
+                    [
+                        'vote_confidence_id' => $data['vote_confidence_id'],
+                        'vote_confidence_opposing_person_id' => $signature_person_id
+                    ]
+                );
+            }
+            VoteConfidenceSupportersEloquent::where('vote_confidence_id', $data['vote_confidence_id'])->delete();
+            foreach ($vote_confidence_supporters_person_ids as $signature_person_id) {
+                VoteConfidenceSupportersEloquent::create(
+                    [
+                        'vote_confidence_id' => $data['vote_confidence_id'],
+                        'vote_confidence_supporters_person_id' => $signature_person_id
+                    ]
+                );
+            }
+            VoteConfidenceAttachmentEloquent::where('vote_confidence_id', $data['vote_confidence_id'])->delete();
+            foreach ($vote_confidence_attachments as $attachment) {
+                VoteConfidenceAttachmentEloquent::create(
+                    [
+                        'vote_confidence_id' => $result->vote_confidence_id,
+                        'vote_confidence_attachment_title' => $attachment['attachment_title'],
+                        'vote_confidence_attachment_src' => $attachment['attachment_src'],
+                    ]
+                );
+            }
 
-        return $result;
+            return $result;
+        });
     }
-    public function delete(int $id){
+
+    public function delete(int $id)
+    {
         $city = $this->findById($id);
-        if($city){
+        if ($city) {
             return VoteConfidenceEloquent::findOrFail($id)->delete();
-        } else{
+        } else {
             return false;
         }
     }
 
     public function findOpposingById(int $id)
     {
-        return VoteConfidenceOpposingEloquent::query()->select('vote_confidence_opposing_person_id as person_id')->where('vote_confidence_id',$id)->get()->toArray();
+        return VoteConfidenceOpposingEloquent::query()->select('vote_confidence_opposing_person_id as person_id')->where('vote_confidence_id', $id)->get()->toArray();
     }
 
     public function findSupportersById(int $id)
     {
-        return VoteConfidenceSupportersEloquent::query()->select('vote_confidence_supporters_person_id as person_id')->where('vote_confidence_id',$id)->get()->toArray();
+        return VoteConfidenceSupportersEloquent::query()->select('vote_confidence_supporters_person_id as person_id')->where('vote_confidence_id', $id)->get()->toArray();
     }
+
+    public function findAttachmentsById(int $id)
+    {
+        return VoteConfidenceAttachmentEloquent::query()->select('*')->where('vote_confidence_id', $id)->get()->toArray();
+    }
+
 }

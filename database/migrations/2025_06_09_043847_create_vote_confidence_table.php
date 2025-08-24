@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('vote_confidence_meeting')->comment('اجلاسیه');
             $table->string('vote_confidence_register_number')->comment('شماره ثبت');
             $table->string('vote_confidence_date')->comment('تاریج ثبت');
+            $table->string('vote_confidence_receipt_date')->comment('تاریج وصول رای اعتماد');
             $table->string('vote_confidence_commission_id')->comment('کمیسیون تخصصی');
             $table->string('vote_confidence_commission_meeting_date')->comment('تاریج جلسه کمیسیون');
             $table->longText('vote_confidence_commission_report')->comment('گزارش  کمیسیون در صحن');

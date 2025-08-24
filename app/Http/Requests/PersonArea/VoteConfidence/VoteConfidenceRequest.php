@@ -17,6 +17,7 @@ class VoteConfidenceRequest extends FormRequest{
             'vote_confidence_parliament_period_id' => ['required'],
             'vote_confidence_meeting' => ['required'],
             'vote_confidence_date' => ['required'],
+            'vote_confidence_receipt_date' => ['required'],
             'vote_confidence_register_number' => ['required'],
             'vote_confidence_commission_id' => ['required'],
             'vote_confidence_commission_meeting_date' => ['required'],
@@ -31,8 +32,13 @@ class VoteConfidenceRequest extends FormRequest{
             'vote_confidence_contents_summary' => ['required'],
             'vote_confidence_supporters_summary' => ['required'],
             'vote_confidence_opposing_summary' => ['required'],
+            'vote_confidence_total_count' => ['required'],
+            'vote_confidence_ok_count' => ['required'],
+            'vote_confidence_nok_count' => ['required'],
+            'vote_confidence_refused_count' => ['required'],
             'vote_confidence_opposing_person_ids' => ['array'],
-            'vote_confidence_supporters_person_ids' => ['array']
+            'vote_confidence_supporters_person_ids' => ['array'],
+            'vote_confidence_attachments' => ['array'] //{ "attachment_title":"title_1", "attachment_src":"title_2"}
         ];
     }
     public function messages(): array{

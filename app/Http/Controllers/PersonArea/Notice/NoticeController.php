@@ -69,6 +69,8 @@ class NoticeController extends Controller{
      *
      *  notice_reading_date تاریخ قرائت
      *
+     *  notice_public_court_reading_date تاریخ قرائت در صحن
+     *
      *  notice_register_number شماره ثبت
      *
      *   notice_session_number شماره جلسه علنی صحن مجلس
@@ -84,8 +86,6 @@ class NoticeController extends Controller{
      *   notice_ministry_id دستگاه تذکر
      *
      *   notice_designer_person_id طراح تذکر
-     *
-     *   notice_designer_person_election_id حوزه انتخابیه طراح تذکر
      *
      *   notice_answer_media_id پاسخ تذکر
      *

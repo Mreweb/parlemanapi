@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\Common\Country;
-
 use App\Domain\Interfaces\Common\Country\ICityRepository;
 use App\Infrastructure\Persistence\Eloquent\Common\Country\CityEloquent;
 
 class CityRepository implements ICityRepository {
-
     public function list(array $filters){
         $query = CityEloquent::query();
         $query->select('city_id','city_name','province.province_id','province.province_name','city.created_at','city.updated_at');
@@ -29,12 +27,16 @@ class CityRepository implements ICityRepository {
         return $data;
     }
     public function findById(int $id){
-        $query = CityEloquent::query();
-        $query->select('city_id','city_name','province.province_id','province.province_name');
-        $query->leftJoin('province', 'province.province_id', '=', 'city.city_province_id');
-        $query->where('city_id', $id);
-        $result = $query->get()->toArray();
-        return $result;
+//        $query = CityEloquent::query();
+//        $query->select('city_id','city_name','province.province_id','province.province_name');
+//        $query->leftJoin('province', 'province.province_id', '=', 'city.city_province_id');
+//        $query->where('city_id', $id);
+//        $result = $query->get()->toArray();
+//        $query = CityEloquent::findOrFail($id)->with('province')->toArray();
+//        return $result;
+
+        return CityEloquent::with('province')->where('city_id',$id)->get()->toArray();
+
     }
     public function create(array $data){
         return CityEloquent::create($data);

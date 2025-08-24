@@ -1,0 +1,6 @@
+<?php
+
+//custom unit test
+test('example', function () {
+    expect(true)->toBeTrue();
+});

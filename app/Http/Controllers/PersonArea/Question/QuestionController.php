@@ -55,9 +55,9 @@ class QuestionController extends Controller{
      * @lrd:start
      * افزودن سوال
      *
-     *  question_person_id شخصی که تذکر دهنده بوده
+     *  question_person_id شخصی که سوال دهنده بوده
      *
-     *  question_president_id در کدام شخص ریاست جمهوری تذکر داده شده
+     *  question_president_id در کدام شخص ریاست جمهوری سوال داده شده
      *
      *  question_gov_period_id در کدام دوره دولت
      *
@@ -71,13 +71,15 @@ class QuestionController extends Controller{
      *
      *  question_check_public_parliament_number شماره جلسه علنی صحن مجلس
      *
-     *  question_subject عنوان تذکر
+     *  question_subject عنوان سوال
      *
-     *  question_summary چکیده تذکر
+     *  question_area قلمرو سوال
      *
-     *  question_worksheet_media_id فایل کاربرگ تذکر
+     *  question_summary چکیده سوال
      *
-     *  question_to_person_id مخاطب تذکر
+     *  question_worksheet_media_id فایل کاربرگ سوال
+     *
+     *  question_to_person_id مخاطب سوال
      *
      *  question_commission_id کمیسیون تخصصی
      *

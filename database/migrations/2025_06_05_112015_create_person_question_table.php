@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('question_reading_date', 100)->comment('تاریخ طرح سوال')->nullable();
             $table->string('question_register_number', 100)->comment('شماره ثبت')->nullable();
             $table->string('question_subject', 100)->comment('محور سوال');
+            $table->string('question_area', 100)->comment('قلمرو سوال');
             $table->longText('question_summary')->comment('چکیده سوال')->nullable();
             $table->string('question_worksheet_media_id', 100)->comment('کاربرگ سوال')->nullable();
             $table->integer('question_to_person_id')->comment('مخاطب سوال')->nullable();

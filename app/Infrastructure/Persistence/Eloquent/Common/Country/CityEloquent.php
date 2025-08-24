@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Eloquent\Common\Country;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -12,6 +11,6 @@ class CityEloquent extends Model{
     protected $primaryKey = 'city_id';
     protected $fillable = ['city_name', 'city_province_id'];
     public function province(){
-        return $this->belongsTo(ProvinceEloquent::class, 'province_id', 'city_province_id');
+        return $this->belongsTo(ProvinceEloquent::class);
     }
 }

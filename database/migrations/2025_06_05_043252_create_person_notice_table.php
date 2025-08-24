@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('notice_meeting')->comment('اجلاسیه')->nullable();
             $table->enum('notice_type',[1,2,3,4,5])->comment('نوع تذکر')->nullable();
             $table->string('notice_reading_date', 100)->comment('تاریخ قرائت')->nullable();
+            $table->string('notice_public_court_reading_date', 100)->comment('تاریخ قرائت در صحن')->nullable();
             $table->string('notice_register_number', 100)->comment('شماره ثبت')->nullable();
             $table->string('notice_session_number', 100)->comment('شماره جلسه علنی صحن مجلس')->nullable();
             $table->string('notice_subject', 100)->comment('عنوان تذکر');
@@ -29,7 +30,6 @@ return new class extends Migration
             $table->integer('notice_to_person_id')->comment('مخاطب تذکر')->nullable();
             $table->integer('notice_ministry_id')->comment('دستگاه تذکر')->nullable();
             $table->integer('notice_designer_person_id')->comment('طراح تذکر')->nullable();
-            $table->integer('notice_designer_person_election_id')->comment('حوزه انتخابیه طراح تذکر')->nullable();
             $table->string('notice_answer_media_id', 100)->comment('پاسخ تذکر')->nullable();
             $table->longText('notice_to_person_actions')->comment('چکیده اقدامات دستگاه مخاطب تذکر')->nullable();
             $table->timestamps();

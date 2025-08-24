@@ -61,6 +61,8 @@ class VoteConfidenceController extends Controller{
      *
      *  vote_confidence_date تاریج ثبت
      *
+     *  vote_confidence_receipt_date تاریخ وصول رای اعتماد
+     *
      *  vote_confidence_commission_meeting_date تاریج جلسه کمیسیون
      *
      *  vote_confidence_commission_report گزارش کمیسیون در صحن
@@ -88,6 +90,16 @@ class VoteConfidenceController extends Controller{
      *   vote_confidence_opposing_person_ids  نمایندگان موافق رای اعتماد
      *
      *   vote_confidence_supporters_person_id نمایندگان مخالف رای اعتماد
+     *
+     *   vote_confidence_total_count تعداد آرا کل
+     *
+     *   vote_confidence_ok_count تعداد آرا موافق
+     *
+     *   vote_confidence_nok_count تعداد آرا مخالف
+     *
+     *   vote_confidence_refused_count تعداد آرا ممتنع
+     *
+     *   vote_confidence_attachments  آرایه فایل های کاربرگ { "attachment_title":"title_1", "attachment_src":"src_1"}
      *
      * @lrd:end
      */

@@ -19,6 +19,7 @@ class QuestionRequest extends FormRequest{
             'question_reading_date' => ['required'],
             'question_register_number' => ['required'],
             'question_subject' => ['required'],
+            'question_area' => ['required'],
             'question_summary' => ['required'],
             'question_worksheet_media_id' => ['required'],
             'question_to_person_id' => ['required'],

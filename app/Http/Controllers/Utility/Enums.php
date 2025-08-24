@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Utility;
+
 use App\Http\Controllers\Controller;
 
-class Enums extends Controller {
+class Enums extends Controller
+{
 
-    public function index(){
+    public function index()
+    {
         return response()->json([
             'app_name' => 'معاونت پارلمانی ریاست جمهوری',
             'yes_no' => [
@@ -76,8 +79,8 @@ class Enums extends Controller {
             ],
             'public_court_result' => [
                 '1' => 'قبل از رسیدگی در صحن نماینده انصراف داد',
-                '2'=> 'نماینده از توضیحات وزیر قانع شد',
-                '3'=> 'نمایندگان از توضیحات وزیر قانع شدند',
+                '2' => 'نماینده از توضیحات وزیر قانع شد',
+                '3' => 'نمایندگان از توضیحات وزیر قانع شدند',
                 '4' => 'نمایندگان از توضیحات وزیر قانع نشدند'
             ],
             'commission_result' => [
@@ -91,6 +94,21 @@ class Enums extends Controller {
                 '2' => 'دوم',
                 '3' => 'سوم',
                 '4' => 'چهارم'
+            ],
+            'question_area' => [
+                '1' => 'ملی',
+                '2' => 'منطقه ای',
+            ],
+            'question_commission_result' => [
+                '1' => 'انصراف قبل از برگزاری کمیسیون',
+                '2' => 'نماینده قانع شد',
+                '3' => 'مهلت اقدام به مقام مربوطه داده شد',
+                '4' => 'نماینده قانع نشد',
+                '5' => 'وارد بودن سوال به علت عدم حضور وزیر'
+            ],
+            'vote_confident_public_court_result' => [
+                '1' => 'رای آورد',
+                '2' => 'رای نیاورد'
             ],
             'deputy' => [
                 '1' => 'معاون اول ریاست جمهوری',
@@ -107,13 +125,13 @@ class Enums extends Controller {
                 '13' => 'معاون رئیس جمهور و رئیس سازمان حفاظت محیط زیست',
                 '14' => 'معاون رئیس جمهور در امور توسعه روستایی و مناطق محروم کشور',
             ],
-            'other_position' =>[
+            'other_position' => [
                 '1' => 'رئیس دفتر رئیس جمهور',
                 '2' => 'دبیر هیئت دولت',
                 '3' => 'سرپرست وزارت امور اقتصادی و دارایی',
                 '4' => 'سخنگوی دولت',
             ],
-            'enactment_type' =>[
+            'enactment_type' => [
                 '1' => 'تقاضای سلب فوریت ماده 158',
                 '2' => 'تقاضای سلب فوریت ماده 100',
                 '3' => 'تقاضای بررسی خارج از نوبت تبصره 1 ماده 100',
@@ -124,10 +142,11 @@ class Enums extends Controller {
                 '8' => 'نقاضای اعمال ماده 130'
             ],
             'roles' => [
-                'admin' => 'ادمین',
-                'ministry_boss' => 'وزارتخانه',
-                'editor' => 'کارگزار',
-                'user' => 'کاربر'
+                'admin' => 'مدیر سامانه',
+                'editor' => 'کارگزار سامانه',
+                'ministry_admin' => 'ادمین وزارتخانه',
+                'parliament_person' => 'نماینده',
+                'ministry' => 'وزیر'
             ],
             'gov_cabinet' => [
                 '100' => 'معاون اول ریاست جمهوری',
