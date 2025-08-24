@@ -31,6 +31,7 @@ class NoticeUpdateRequest extends FormRequest{
             'notice_answer_media_id' => ['required'],
             'notice_to_person_actions' => ['required'],
             'notice_signature_person_ids' => ['array'],
+            'attachments' => ['array']
         ];
     }
     public function messages(): array{

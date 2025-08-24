@@ -75,9 +75,11 @@ class RuleTTFController extends Controller{
      *
      *  rule_ttf_ministry_id دستگاه ذیربط
      *
-     *   rule_ttf_summary_content  چکیده اقدامات دستگاه مخاطب
+     *  rule_ttf_summary_content  چکیده اقدامات دستگاه مخاطب
      *
-     *   rule_ttf_signatures_person_ids   نمایندگان امضا کننده
+     *  rule_ttf_signatures_person_ids   نمایندگان امضا کننده
+     *
+     *  attachments آرایه ای از پیوست ها
      *
      * @lrd:end
      */

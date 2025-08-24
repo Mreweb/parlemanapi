@@ -99,7 +99,7 @@ class VoteConfidenceController extends Controller{
      *
      *   vote_confidence_refused_count تعداد آرا ممتنع
      *
-     *   vote_confidence_attachments  آرایه فایل های کاربرگ { "attachment_title":"title_1", "attachment_src":"src_1"}
+     *   attachments آرایه ای از پیوست ها
      *
      * @lrd:end
      */

@@ -20,7 +20,8 @@ class MeetingUpdateRequest extends FormRequest{
             'meeting_person_id' => ['required'],
             'meeting_president_id' => ['required'],
             'meeting_gov_period_id' => ['required'],
-            'meeting_parliament_period_id' => ['required']
+            'meeting_parliament_period_id' => ['required'],
+            'attachments' => ['array']
         ];
     }
     public function messages(): array{

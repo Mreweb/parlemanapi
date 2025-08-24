@@ -65,6 +65,8 @@ class TripsController extends Controller{
      *
      *  trip_subject موضوع سفر
      *
+     *  attachments آرایه ای از پیوست ها
+     *
      * @lrd:end
      */
 

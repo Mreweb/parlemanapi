@@ -34,6 +34,7 @@ class QuestionRequest extends FormRequest{
             'question_answer_media_id' => ['required'],
             'question_to_person_actions' => ['required'],
             'question_signature_person_ids' => ['array'],
+            'attachments' => ['array']
         ];
     }
     public function messages(): array{

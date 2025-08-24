@@ -31,8 +31,8 @@ class ResearchRequest extends FormRequest{
             'person_research_contents_summary' => ['required'],
             'person_research_team_person_ids' => ['array'],
             'person_research_signatures_person_ids' => ['array'],
-            'person_research_attachments' => ['array'] //{ "attachment_title":"title_1", "attachment_src":"title_2"}
-        ];
+            'attachments' => ['array']
+         ];
     }
     public function messages(): array{
         return [ '*.required' => 'لطفا موارد الزامی را تکمیل کنید'];

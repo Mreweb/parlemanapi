@@ -18,10 +18,14 @@ class RequestsRequest extends FormRequest{
             'request_description' => ['required'],
             'request_command' => ['required'],
             'request_serial' => ['required'],
+            'request_deputy_action_serial' => ['required'],
+            'request_ministry' => ['required'],
+            'request_deputy_answer_serial' => ['required'],
             'request_person_id' => ['required'],
             'request_president_id' => ['required'],
             'request_gov_period_id' => ['required'],
-            'request_parliament_period_id' => ['required']
+            'request_parliament_period_id' => ['required'],
+            'attachments' => ['array']
         ];
     }
     public function messages(): array{

@@ -4,6 +4,8 @@ namespace App\Infrastructure\Persistence\Repositories\PersonArea\Meeting;
 use App\Domain\Interfaces\PersonArea\Meeting\IMeetingRepository;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Meeting\PersonMeetingEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Meeting\PersonMeetingTrackEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
+use Illuminate\Support\Facades\DB;
 
 class MeetingRepository implements IMeetingRepository {
 
@@ -65,18 +67,34 @@ class MeetingRepository implements IMeetingRepository {
         $query->where('meeting_id', $id);
         $result = $query->get()->toArray();
         $result[0]['track'] = $this->get_meeting_track($result[0]['meeting_id']);
+        $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['meeting_id'], (new PersonMeetingEloquent()->getTable()));
         return $result;
     }
     public function create(array $data){
-        $result =  PersonMeetingEloquent::create($data);
-        return $result;
+
+        return DB::transaction(function () use ($data) {
+            $attachments = $data['attachments'];
+            unset($data['attachments']);
+            $result =  PersonMeetingEloquent::create($data);
+            (new UploadRepository())->add_attachments($attachments, (new PersonMeetingEloquent()->getTable()), $result->meeting_id);
+            return $result;
+        });
 
     }
     public function update(array $data){
-        $result = PersonMeetingEloquent::where('meeting_id',$data['meeting_id'])->update(
-            $data
-        );
-        return $result;
+
+        return DB::transaction(function () use ($data) {
+            $attachments = $data['attachments'];
+            unset($data['attachments']);
+
+            $result = PersonMeetingEloquent::where('meeting_id',$data['meeting_id'])->update(
+                $data
+            );
+            (new UploadRepository())->add_attachments($attachments, (new PersonMeetingEloquent()->getTable()), $data['meeting_id']);
+            return $result;
+        });
+
+
     }
     public function add_meeting_track(array $data){
         $result = PersonMeetingTrackEloquent::create($data);

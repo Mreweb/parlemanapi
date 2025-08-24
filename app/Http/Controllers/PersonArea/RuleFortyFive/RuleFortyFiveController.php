@@ -79,9 +79,11 @@ class RuleFortyFiveController extends Controller{
      *
      *  rule_forty_five_ministry_id دستگاه ذیربط
      *
-     *   rule_forty_five_summary_content  چکیده اقدامات دستگاه مخاطب
+     *  rule_forty_five_summary_content  چکیده اقدامات دستگاه مخاطب
      *
-     *   rule_forty_five_signatures_person_ids  نمایندگان مخالف رای اعتماد
+     *  rule_forty_five_signatures_person_ids  نمایندگان مخالف رای اعتماد
+     *
+     *  attachments آرایه ای از پیوست ها
      *
      * @lrd:end
      */

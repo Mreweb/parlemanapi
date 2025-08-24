@@ -63,6 +63,8 @@ class RulesController extends Controller{
      *
      *  rule_parliament_period_id دوره مجلس
      *
+     *  attachments آرایه ای از پیوست ها
+     *
      * @lrd:end
      */
 

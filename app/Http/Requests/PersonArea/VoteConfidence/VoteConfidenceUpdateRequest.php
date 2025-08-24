@@ -39,8 +39,8 @@ class VoteConfidenceUpdateRequest extends FormRequest{
             'vote_confidence_refused_count' => ['required'],
             'vote_confidence_opposing_person_ids' => ['array'],
             'vote_confidence_supporters_person_ids' => ['array'],
-            'vote_confidence_attachments' => ['array'] //{ "attachment_title":"title_1", "attachment_src":"title_2"}
-        ];
+            'attachments' => ['array']
+         ];
     }
     public function messages(): array{
         return [ '*.required' => 'لطفا موارد الزامی را تکمیل کنید'];

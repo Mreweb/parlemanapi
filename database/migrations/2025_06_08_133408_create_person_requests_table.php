@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,7 +19,10 @@ return new class extends Migration
             $table->string('request_phone')->comment('تلفن تماس');
             $table->longText('request_description')->comment('شرح درخواست');
             $table->longText('request_command')->comment('دستور لازم');
-            $table->string('request_serial')->comment('شماره درخواست');
+            $table->string('request_serial')->comment('شماره درخواست/نامه');
+            $table->string('request_deputy_action_serial')->comment('شماره نامه اقدام معاونت');
+            $table->string('request_ministry')->comment('گیرنده نامه');
+            $table->string('request_deputy_answer_serial')->comment('شماره نامه پاسخ دستگاه');
             $table->string('request_person_id')->comment('نماینده درخواست کننده')->index();
             $table->string('request_president_id')->comment('رئیس جمهور')->index();
             $table->string('request_gov_period_id')->comment('شماره دولت')->index();

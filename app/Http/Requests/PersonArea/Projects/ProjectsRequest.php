@@ -26,7 +26,8 @@ class ProjectsRequest extends FormRequest{
             'project_parliament_period_id' => ['required'],
             'person_projects_participation_ids' => ['array'],
             'person_projects_related_commission_ids' => ['array'],
-            'person_projects_special_commission_ids' => ['array']
+            'person_projects_special_commission_ids' => ['array'],
+            'attachments' => ['array']
         ];
     }
     public function messages(): array{

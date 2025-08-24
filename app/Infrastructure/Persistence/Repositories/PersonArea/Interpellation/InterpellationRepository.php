@@ -14,8 +14,7 @@ use App\Infrastructure\Persistence\Eloquent\PersonArea\Question\QuestionEloquent
 use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
 use Illuminate\Support\Facades\DB;
 
-class InterpellationRepository implements IInterpellationsRepository
-{
+class InterpellationRepository implements IInterpellationsRepository{
 
     public function list(array $filters)
     {
@@ -69,8 +68,6 @@ class InterpellationRepository implements IInterpellationsRepository
         $query->leftJoin('president', 'president.president_id', '=', 'person_interpellations.interpellation_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_interpellations.interpellation_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_interpellations.interpellation_parliament_period_id');
-        $query->leftJoin('media as media_worksheet', 'media_worksheet.media_id', '=', 'person_interpellations.interpellation_worksheet_media_id');
-        $query->leftJoin('media as media_worksheet_correspondence', 'media_worksheet_correspondence.media_id', '=', 'person_interpellations.interpellation_correspondence_worksheet_media_id');
         $query->where('interpellation_id', $id);
         $result = $query->get()->toArray();
 
@@ -83,6 +80,8 @@ class InterpellationRepository implements IInterpellationsRepository
         $result[0]['interpellation_return_opt_person_ids'] = $this->findReturnOptPersonById($result[0]['interpellation_id']);
         $result[0]['interpellation_signatures_person_ids'] = $this->findSignaturesPersonById($result[0]['interpellation_id']);
 
+        $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['interpellation_id'], (new InterpellationsEloquent()->getTable()));
+
 
         return $result;
     }
@@ -90,18 +89,18 @@ class InterpellationRepository implements IInterpellationsRepository
     public function create(array $data){
 
         return DB::transaction(function () use ($data) {
-            $interpellations_opposing_person_ids = $data['interpellations_opposing_person_ids'];
+            $interpellations_opposing_person_ids = $data['interpellation_opposing_person_ids'];
             $interpellation_supporters_person_ids = $data['interpellation_supporters_person_ids'];
             $interpellation_opt_person_ids = $data['interpellation_opt_person_ids'];
             $interpellation_return_opt_person_ids = $data['interpellation_return_opt_person_ids'];
             $interpellation_signatures_person_ids = $data['interpellation_signatures_person_ids'];
-            $interpellation_attachments = $data['interpellation_attachments'];
-            unset($data['interpellations_opposing_person_ids']);
+            unset($data['interpellation_opposing_person_ids']);
             unset($data['interpellation_supporters_person_ids']);
             unset($data['interpellation_opt_person_ids']);
             unset($data['interpellation_return_opt_person_ids']);
             unset($data['interpellation_signatures_person_ids']);
-            unset($data['interpellation_attachments']);
+            $attachments = $data['attachments'];
+            unset($data['attachments']);
             $result = InterpellationsEloquent::create($data);
 
             foreach ($interpellations_opposing_person_ids as $signature_person_id) {
@@ -144,16 +143,8 @@ class InterpellationRepository implements IInterpellationsRepository
                     ]
                 );
             }
-            foreach ($interpellation_attachments as $attachment) {
-                InterpellationAttachmentEloquent::create(
-                    [
-                        'interpellation_id' => $result->interpellation_id,
-                        'interpellation_attachment_title' => $attachment['attachment_title'],
-                        'interpellation_attachment_src' => $attachment['attachment_src'],
-                    ]
-                );
-            }
 
+            (new UploadRepository())->add_attachments($attachments, (new InterpellationsEloquent()->getTable()), $result->interpellation_id);
             return $result;
 
         });
@@ -164,18 +155,18 @@ class InterpellationRepository implements IInterpellationsRepository
 
         return DB::transaction(function () use ($data) {
 
-            $interpellations_opposing_person_ids = $data['interpellations_opposing_person_ids'];
+            $interpellations_opposing_person_ids = $data['interpellation_opposing_person_ids'];
             $interpellation_supporters_person_ids = $data['interpellation_supporters_person_ids'];
             $interpellation_opt_person_ids = $data['interpellation_opt_person_ids'];
             $interpellation_return_opt_person_ids = $data['interpellation_return_opt_person_ids'];
             $interpellation_signatures_person_ids = $data['interpellation_signatures_person_ids'];
-            $interpellation_attachments = $data['interpellation_attachments'];
-            unset($data['interpellations_opposing_person_ids']);
+            $attachments = $data['attachments'];
+            unset($data['attachments']);
+            unset($data['interpellation_opposing_person_ids']);
             unset($data['interpellation_supporters_person_ids']);
             unset($data['interpellation_opt_person_ids']);
             unset($data['interpellation_return_opt_person_ids']);
             unset($data['interpellation_signatures_person_ids']);
-            unset($data['interpellation_attachments']);
 
             $result = InterpellationsEloquent::where('interpellation_id', $data['interpellation_id'])->update(
                 $data
@@ -228,17 +219,8 @@ class InterpellationRepository implements IInterpellationsRepository
                 );
             }
 
-            InterpellationAttachmentEloquent::where('interpellation_id', $data['interpellation_id'])->delete();
-            foreach ($interpellation_attachments as $attachment) {
-                InterpellationAttachmentEloquent::create(
-                    [
-                        'interpellation_id' => $result->interpellation_id,
-                        'interpellation_attachment_title' => $attachment['attachment_title'],
-                        'interpellation_attachment_src' => $attachment['attachment_src'],
-                    ]
-                );
-            }
 
+            (new UploadRepository())->add_attachments($attachments, (new InterpellationsEloquent()->getTable()),  $data['interpellation_id']);
             return $result;
         });
     }

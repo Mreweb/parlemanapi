@@ -114,6 +114,8 @@ class PlanController extends Controller{
      *
      *  slience تقاضای مسکوت ماندن
      *
+     *  attachments آرایه ای از پیوست ها
+     *
      * @lrd:end
      */
 

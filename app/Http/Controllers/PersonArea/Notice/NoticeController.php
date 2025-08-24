@@ -93,6 +93,8 @@ class NoticeController extends Controller{
      *
      *   notice_signature_person_ids آرایه افراد امضا گنندگان تذکر
      *
+     *   attachments آرایه ای از پیوست ها
+     *
      * @lrd:end
      */
     public function store(NoticeRequest $request){

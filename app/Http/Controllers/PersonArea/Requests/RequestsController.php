@@ -68,6 +68,12 @@ class RequestsController extends Controller{
      *
      *  request_serial شماره درخواست
      *
+     *  request_deputy_action_serial شماره نامه اقدام معاونت
+     *
+     *  request_ministry گیرنده نامه
+     *
+     *  request_deputy_answer_serial شماره نامه پاسخ دستگاه
+     *
      *  request_person_id نماینده درخواست کننده
      *
      *  request_president_id رئیس جمهور
@@ -75,6 +81,8 @@ class RequestsController extends Controller{
      *  request_gov_period_id شماره دولت
      *
      *  request_parliament_period_id دوره مجلس
+     *
+     *  attachments آرایه ای از پیوست ها
      *
      * @lrd:end
      */

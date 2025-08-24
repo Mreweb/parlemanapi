@@ -1,14 +1,18 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\PersonArea\Question;
+
 use App\Domain\Interfaces\PersonArea\Question\IQuestionRepository;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Question\QuestionEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Question\QuestionSignatureEloquent;
 use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
+use Illuminate\Support\Facades\DB;
 
-class QuestionRepository implements IQuestionRepository {
+class QuestionRepository implements IQuestionRepository
+{
 
-    public function list(array $filters){
+    public function list(array $filters)
+    {
         $query = QuestionEloquent::query();
         $query->select(
             'question_id',
@@ -39,7 +43,7 @@ class QuestionRepository implements IQuestionRepository {
         }
         $data['count'] = $query->count();
         if (!empty($filters['page_index'])) {
-            $query->skip(--$filters['page_index']*$filters['page_size']);
+            $query->skip(--$filters['page_index'] * $filters['page_size']);
         }
         if (!empty($filters['page_size'])) {
             $query->take($filters['page_size']);
@@ -47,7 +51,9 @@ class QuestionRepository implements IQuestionRepository {
         $data['list'] = $query->get();
         return $data;
     }
-    public function findById(int $id){
+
+    public function findById(int $id)
+    {
         $query = QuestionEloquent::query();
         $query->select(
             'person_question.*',
@@ -62,63 +68,83 @@ class QuestionRepository implements IQuestionRepository {
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_question.question_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_question.question_parliament_period_id');
         $query->leftJoin('media as media_worksheet', 'media_worksheet.media_id', '=', 'person_question.question_answer_media_id');
-         $query->where('question_id', $id);
+        $query->where('question_id', $id);
         $result = $query->get()->toArray();
         $result[0]['question_worksheet_media'] = $this->findWorksheetMediaById($result[0]['question_worksheet_media_id']);
         $result[0]['question_answer_media_id'] = $this->findWorksheetMediaById($result[0]['question_answer_media_id']);
         $result[0]['signature_person_ids'] = $this->findSignaturesById($result[0]['question_id']);
+        $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['question_id'], (new QuestionEloquent()->getTable()));
         return $result;
     }
-    public function create(array $data){
-        $question_signature_person_ids = $data['question_signature_person_ids'];
-        unset($data['question_signature_person_ids']);
-        $result =  QuestionEloquent::create($data);
-        foreach ($question_signature_person_ids as $signature_person_id) {
-            QuestionSignatureEloquent::create(
-                [
-                    'question_id' => $result->question_id,
-                    'question_person_id' => $signature_person_id
-                ]
+
+    public function create(array $data)
+    {
+        return DB::transaction(function () use ($data) {
+            $question_signature_person_ids = $data['question_signature_person_ids'];
+            unset($data['question_signature_person_ids']);
+            $attachments = $data['attachments'];
+            unset($data['attachments']);
+            $result = QuestionEloquent::create($data);
+            foreach ($question_signature_person_ids as $signature_person_id) {
+                QuestionSignatureEloquent::create(
+                    [
+                        'question_id' => $result->question_id,
+                        'question_person_id' => $signature_person_id
+                    ]
+                );
+            }
+            (new UploadRepository())->add_attachments($attachments, (new QuestionEloquent()->getTable()), $result->question_id);
+            return $result;
+        });
+
+    }
+
+    public function update(array $data)
+    {
+
+        return DB::transaction(function () use ($data) {
+            $question_signature_person_ids = $data['question_signature_person_ids'];
+            unset($data['question_signature_person_ids']);
+            $attachments = $data['attachments'];
+            unset($data['attachments']);
+
+            $result = QuestionEloquent::where('question_id', $data['question_id'])->update(
+                $data
             );
-        }
-        return $result;
+
+            QuestionSignatureEloquent::where('question_id', $data['question_id'])->delete();
+            foreach ($question_signature_person_ids as $signature_person_id) {
+                QuestionSignatureEloquent::create(
+                    [
+                        'question_id' => $data['question_id'],
+                        'question_person_id' => $signature_person_id
+                    ]
+                );
+            }
+
+            (new UploadRepository())->add_attachments($attachments, (new QuestionEloquent()->getTable()), $data['question_id']);
+            return $result;
+        });
 
     }
-    public function update(array $data){
 
-        $question_signature_person_ids = $data['question_signature_person_ids'];
-        unset($data['question_signature_person_ids']);
-
-        $result = QuestionEloquent::where('question_id',$data['question_id'])->update(
-            $data
-        );
-
-
-        QuestionSignatureEloquent::where('question_id',$data['question_id'])->delete();
-        foreach ($question_signature_person_ids as $signature_person_id) {
-            QuestionSignatureEloquent::create(
-                [
-                    'question_id' => $data['question_id'],
-                    'question_person_id' => $signature_person_id
-                ]
-            );
-        }
-        return $result;
-    }
-    public function delete(int $id){
+    public function delete(int $id)
+    {
         $city = $this->findById($id);
-        if($city){
+        if ($city) {
             return QuestionEloquent::findOrFail($id)->delete();
-        } else{
+        } else {
             return false;
         }
     }
 
-    public function findWorksheetMediaById(int $id){
+    public function findWorksheetMediaById(int $id)
+    {
         return (new UploadRepository())->get_file($id);
     }
 
-    public function findSignaturesById(int $id){
-        return QuestionSignatureEloquent::query()->select('question_person_id as person_id')->where('question_id',$id)->get()->toArray();
+    public function findSignaturesById(int $id)
+    {
+        return QuestionSignatureEloquent::query()->select('question_person_id as person_id')->where('question_id', $id)->get()->toArray();
     }
 }

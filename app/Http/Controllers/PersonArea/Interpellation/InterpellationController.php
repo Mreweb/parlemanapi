@@ -60,10 +60,6 @@ class InterpellationController extends Controller{
      *
      *  interpellation_summary چکیده استیضاح
      *
-     *  interpellation_worksheet_media_id  کاربرگ استیضاح
-     *
-     *  interpellation_correspondence_worksheet_media_id مکاتبات مجلس با دولت
-     *
      *  interpellation_commission_id کمیسیون تخصصی
      *
      *  interpellation_commission_meeting_date مخاطب تذکر
@@ -118,7 +114,7 @@ class InterpellationController extends Controller{
      *
      *  interpellation_refused_count تعداد آرا ممتنع
      *
-     *  interpellation_attachments  آرایه فایل های کاربرگ { "attachment_title":"title_1", "attachment_src":"src_1"}
+     *  attachments آرایه ای از پیوست ها
      *
      * @lrd:end
      */

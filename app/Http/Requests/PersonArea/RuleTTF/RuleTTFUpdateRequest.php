@@ -28,7 +28,8 @@ class RuleTTFUpdateRequest extends FormRequest{
             'rule_ttf_public_parliament_check_result' => ['required'],
             'rule_ttf_ministry_id' => ['required'],
             'rule_ttf_summary_content' => ['required'],
-            'rule_ttf_signatures_person_ids' => ['array']
+            'rule_ttf_signatures_person_ids' => ['array'],
+            'attachments' => ['array']
         ];
     }
     public function messages(): array{

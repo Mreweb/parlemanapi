@@ -21,7 +21,8 @@ class RulesUpdateRequest extends FormRequest{
             'rule_person_id' => ['required'],
             'rule_president_id' => ['required'],
             'rule_gov_period_id' => ['required'],
-            'rule_parliament_period_id' => ['required']
+            'rule_parliament_period_id' => ['required'],
+            'attachments' => ['array']
         ];
     }
     public function messages(): array{

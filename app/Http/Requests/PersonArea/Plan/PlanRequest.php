@@ -41,7 +41,8 @@ class PlanRequest extends FormRequest{
             'workflow_commission' => ['array'],
             'workflow_public_court' => ['array'],
             'silence' => ['array'],
-            'refinement' => ['array']
+            'refinement' => ['array'],
+            'attachments' => ['array']
         ];
     }
     public function messages(): array{

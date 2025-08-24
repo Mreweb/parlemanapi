@@ -1,15 +1,20 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\PersonArea\Projects;
+
 use App\Domain\Interfaces\PersonArea\Projects\IProjectsRepository;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectParticipationEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectRelatedCommissionEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectsEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Project\ProjectSpecialCommissionEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
+use Illuminate\Support\Facades\DB;
 
-class ProjectsRepository implements IProjectsRepository {
+class ProjectsRepository implements IProjectsRepository
+{
 
-    public function list(array $filters){
+    public function list(array $filters)
+    {
         $query = ProjectsEloquent::query();
         $query->select(
             'project_id',
@@ -43,7 +48,7 @@ class ProjectsRepository implements IProjectsRepository {
         }
         $data['count'] = $query->count();
         if (!empty($filters['page_index'])) {
-            $query->skip(--$filters['page_index']*$filters['page_size']);
+            $query->skip(--$filters['page_index'] * $filters['page_size']);
         }
         if (!empty($filters['page_size'])) {
             $query->take($filters['page_size']);
@@ -51,7 +56,9 @@ class ProjectsRepository implements IProjectsRepository {
         $data['list'] = $query->get();
         return $data;
     }
-    public function findById(int $id){
+
+    public function findById(int $id)
+    {
         $query = ProjectsEloquent::query();
         $query->select(
             'person_projects.*',
@@ -62,117 +69,143 @@ class ProjectsRepository implements IProjectsRepository {
         $query->leftJoin('president', 'president.president_id', '=', 'person_projects.project_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_projects.project_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_projects.project_parliament_period_id');
-         $query->where('project_id', $id);
+        $query->where('project_id', $id);
         $result = $query->get()->toArray();
 
         $result[0]['person_projects_participation_ids'] = $this->findParticipationById($result[0]['project_id']);
         $result[0]['person_projects_related_commission_ids'] = $this->findRelatedCommissionById($result[0]['project_id']);
         $result[0]['person_projects_special_commission_ids'] = $this->findSpecialById($result[0]['project_id']);
+        $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['project_id'], (new ProjectsEloquent()->getTable()));
 
         return $result;
     }
-    public function create(array $data){
-        $person_projects_participation_ids = $data['person_projects_participation_ids'];
-        $person_projects_related_commission_ids = $data['person_projects_related_commission_ids'];
-        $person_projects_special_commission_ids  = $data['person_projects_special_commission_ids'];
-        unset($data['person_projects_participation_ids']);
-        unset($data['person_projects_related_commission_ids']);
-        unset($data['person_projects_special_commission_ids']);
-        $result =  ProjectsEloquent::create($data);
 
+    public function create(array $data)
+    {
 
-        foreach ($person_projects_participation_ids as $signature_person_id) {
-            ProjectParticipationEloquent::create(
-                [
-                    'projects_project_id' => $result->project_id,
-                    'projects_participation_person_id' => $signature_person_id
-                ]
-            );
-        }
-        foreach ($person_projects_related_commission_ids as $signature_person_id) {
-            ProjectRelatedCommissionEloquent::create(
-                [
-                    'projects_project_id' => $result->project_id,
-                    'projects_related_commission_id' => $signature_person_id
-                ]
-            );
-        }
-        foreach ($person_projects_special_commission_ids as $signature_person_id) {
-            ProjectSpecialCommissionEloquent::create(
-                [
-                    'projects_project_id' => $result->project_id,
-                    'projects_special_commission_id' => $signature_person_id
-                ]
-            );
-        }
-        return $result;
+        return DB::transaction(function () use ($data) {
 
-    }
-    public function update(array $data){
+            $person_projects_participation_ids = $data['person_projects_participation_ids'];
+            $person_projects_related_commission_ids = $data['person_projects_related_commission_ids'];
+            $person_projects_special_commission_ids = $data['person_projects_special_commission_ids'];
+            $attachments = $data['attachments'];
+            unset($data['person_projects_participation_ids']);
+            unset($data['person_projects_related_commission_ids']);
+            unset($data['person_projects_special_commission_ids']);
+            unset($data['attachments']);
+            $result = ProjectsEloquent::create($data);
 
-        $person_projects_participation_ids = $data['person_projects_participation_ids'];
-        $person_projects_related_commission_ids = $data['person_projects_related_commission_ids'];
-        $person_projects_special_commission_ids  = $data['person_projects_special_commission_ids'];
-        unset($data['person_projects_participation_ids']);
-        unset($data['person_projects_related_commission_ids']);
-        unset($data['person_projects_special_commission_ids']);
+            foreach ($person_projects_participation_ids as $signature_person_id) {
+                ProjectParticipationEloquent::create(
+                    [
+                        'projects_project_id' => $result->project_id,
+                        'projects_participation_person_id' => $signature_person_id
+                    ]
+                );
+            }
+            foreach ($person_projects_related_commission_ids as $signature_person_id) {
+                ProjectRelatedCommissionEloquent::create(
+                    [
+                        'projects_project_id' => $result->project_id,
+                        'projects_related_commission_id' => $signature_person_id
+                    ]
+                );
+            }
+            foreach ($person_projects_special_commission_ids as $signature_person_id) {
+                ProjectSpecialCommissionEloquent::create(
+                    [
+                        'projects_project_id' => $result->project_id,
+                        'projects_special_commission_id' => $signature_person_id
+                    ]
+                );
+            }
+            (new UploadRepository())->add_attachments($attachments, (new ProjectsEloquent()->getTable()), $result->project_id);
 
-        $result = ProjectsEloquent::where('project_id',$data['project_id'])->update(
-            $data
-        );
+            return $result;
 
-
-        ProjectParticipationEloquent::where('projects_project_id',$data['project_id'])->delete();
-        foreach ($person_projects_participation_ids as $signature_person_id) {
-            ProjectParticipationEloquent::create(
-                [
-                    'projects_project_id' =>$data['project_id'],
-                    'projects_participation_person_id' => $signature_person_id
-                ]
-            );
-        }
-        ProjectRelatedCommissionEloquent::where('projects_project_id',$data['project_id'])->delete();
-        foreach ($person_projects_related_commission_ids as $signature_person_id) {
-            ProjectRelatedCommissionEloquent::create(
-                [
-                    'projects_project_id' => $data['project_id'],
-                    'projects_related_commission_id' => $signature_person_id
-                ]
-            );
-        }
-        ProjectSpecialCommissionEloquent::where('projects_project_id',$data['project_id'])->delete();
-        foreach ($person_projects_special_commission_ids as $signature_person_id) {
-            ProjectSpecialCommissionEloquent::create(
-                [
-                    'projects_project_id' => $data['project_id'],
-                    'projects_special_commission_id' => $signature_person_id
-                ]
-            );
-        }
-        return $result;
-
+        });
 
     }
-    public function delete(int $id){
+
+    public function update(array $data)
+    {
+
+        return DB::transaction(function () use ($data) {
+            $person_projects_participation_ids = $data['person_projects_participation_ids'];
+            $person_projects_related_commission_ids = $data['person_projects_related_commission_ids'];
+            $person_projects_special_commission_ids = $data['person_projects_special_commission_ids'];
+            $attachments = $data['attachments'];
+            unset($data['person_projects_participation_ids']);
+            unset($data['person_projects_related_commission_ids']);
+            unset($data['person_projects_special_commission_ids']);
+            unset($data['attachments']);
+
+            $result = ProjectsEloquent::where('project_id', $data['project_id'])->update(
+                $data
+            );
+
+
+            ProjectParticipationEloquent::where('projects_project_id', $data['project_id'])->delete();
+            foreach ($person_projects_participation_ids as $signature_person_id) {
+                ProjectParticipationEloquent::create(
+                    [
+                        'projects_project_id' => $data['project_id'],
+                        'projects_participation_person_id' => $signature_person_id
+                    ]
+                );
+            }
+            ProjectRelatedCommissionEloquent::where('projects_project_id', $data['project_id'])->delete();
+            foreach ($person_projects_related_commission_ids as $signature_person_id) {
+                ProjectRelatedCommissionEloquent::create(
+                    [
+                        'projects_project_id' => $data['project_id'],
+                        'projects_related_commission_id' => $signature_person_id
+                    ]
+                );
+            }
+            ProjectSpecialCommissionEloquent::where('projects_project_id', $data['project_id'])->delete();
+            foreach ($person_projects_special_commission_ids as $signature_person_id) {
+                ProjectSpecialCommissionEloquent::create(
+                    [
+                        'projects_project_id' => $data['project_id'],
+                        'projects_special_commission_id' => $signature_person_id
+                    ]
+                );
+            }
+
+
+            (new UploadRepository())->add_attachments($attachments, (new ProjectsEloquent()->getTable()), $result->enactment_id);
+
+            return $result;
+        });
+
+
+    }
+
+    public function delete(int $id)
+    {
         $city = $this->findById($id);
-        if($city){
+        if ($city) {
             return ProjectsEloquent::findOrFail($id)->delete();
-        } else{
+        } else {
             return false;
         }
     }
 
-    public function findParticipationById(int $id){
-        return ProjectParticipationEloquent::query()->select('projects_participation_person_id as person_id')->where('projects_project_id',$id)->get()->toArray();
+    public function findParticipationById(int $id)
+    {
+        return ProjectParticipationEloquent::query()->select('projects_participation_person_id as person_id')->where('projects_project_id', $id)->get()->toArray();
 
     }
+
     public function findRelatedCommissionById(int $id)
     {
-        return ProjectRelatedCommissionEloquent::query()->select('projects_related_commission_id as commission_id')->where('projects_project_id',$id)->get()->toArray();
+        return ProjectRelatedCommissionEloquent::query()->select('projects_related_commission_id as commission_id')->where('projects_project_id', $id)->get()->toArray();
 
     }
+
     public function findSpecialById(int $id)
     {
-        return ProjectSpecialCommissionEloquent::query()->select('projects_special_commission_id as commission_id')->where('projects_project_id',$id)->get()->toArray();
+        return ProjectSpecialCommissionEloquent::query()->select('projects_special_commission_id as commission_id')->where('projects_project_id', $id)->get()->toArray();
     }
 }

@@ -99,6 +99,8 @@ class QuestionController extends Controller{
      *
      *  question_signature_person_ids آرایه افراد امضا گنندگان سوال
      *
+     *  attachments آرایه ای از پیوست ها
+     *
      * @lrd:end
      */
     public function store(QuestionRequest $request){

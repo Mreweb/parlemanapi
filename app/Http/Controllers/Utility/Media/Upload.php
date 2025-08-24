@@ -21,13 +21,12 @@ class Upload extends Controller {
      * @LRDparam file
      */
     public function save(UploadRequest $request){
-
         $request->validated();
         $path = $request->file('file')->store('uploads', 'public');
-
         $extension = $request->file('file')->getClientOriginalExtension();
         $data = [
             'media_id' => Str::uuid()->toString(),
+            'media_title' => $request->get('title'),
             'path' => $path,
             'base_64' => base64_encode(file_get_contents($request->file('file'))),
             'extension' => $extension
@@ -35,6 +34,7 @@ class Upload extends Controller {
         $result = $this->service->save($data);
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
     }
+
 
     public function get_file($id){
         $result = $this->service->get_file($id);

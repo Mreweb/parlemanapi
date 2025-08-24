@@ -41,6 +41,25 @@ class PersonMeetingController extends Controller{
     /**
      * @lrd:start
      * افزودن ملاقات
+     *
+     * meeting_title عنوان ملاقات
+     *
+     * meeting_description  توضیحات
+     *
+     * meeting_status  وضعیت
+     *
+     * meeting_end_date  ملاقات
+     *
+     * meeting_person_id  ملاقات
+     *
+     * meeting_president_id  ملاقات
+     *
+     * meeting_gov_period_id  ملاقات
+     *
+     * meeting_parliament_period_id  ملاقات
+     *
+     * attachments  آرایه ای از فایل ها
+     *
      * @lrd:end
      */
     public function store(MeetingRequest $request){

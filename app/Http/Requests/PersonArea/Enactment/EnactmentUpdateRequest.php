@@ -35,12 +35,13 @@ class EnactmentUpdateRequest extends FormRequest{
             'sub_commission' => ['array'],
             'suggest_resources' => ['array'],
             'type' => ['array'],
-            'type_bill_85_review' => ['array'],
-            'type_deputy_actions' => ['array'],
-            'type_guardian_council' => ['array'],
-            'type_promote_law' => ['array'],
-            'type_workflow_commission' => ['array'],
-            'type_workflow_public_court' => ['array']
+            'bill_85_review' => ['array'],
+            'deputy_actions' => ['array'],
+            'guardian_council' => ['array'],
+            'promote_law' => ['array'],
+            'workflow_commission' => ['array'],
+            'workflow_public_court' => ['array'],
+            'attachments' => ['array']
         ];
     }
     public function messages(): array{

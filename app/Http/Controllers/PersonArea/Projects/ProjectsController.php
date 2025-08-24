@@ -82,6 +82,8 @@ class ProjectsController extends Controller{
      *
      *  person_projects_special_commission_ids آرایه کمیسیون های تخصصی
      *
+     *  attachments آرایه ای از پیوست ها
+     *
      * @lrd:end
      */
 

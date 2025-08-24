@@ -15,7 +15,6 @@ class UploadRequest extends FormRequest{
 
         $allowedExtensions = config('upload.allowed_extensions');
         $maxSize = config('upload.max_size');
-
         return [
             'file' => [ 'required',  'file',  'mimes:' . implode(',', $allowedExtensions),  'max:' . $maxSize ]
         ];

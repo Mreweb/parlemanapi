@@ -1,15 +1,20 @@
 <?php
 
 namespace App\Infrastructure\Persistence\Repositories\PersonArea\Trip;
+
 use App\Domain\Interfaces\PersonArea\Trip\ITripRepository;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripActionsEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripApprovalsEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripBoardEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
+use Illuminate\Support\Facades\DB;
 
-class TripRepository implements ITripRepository {
+class TripRepository implements ITripRepository
+{
 
-    public function list(array $filters){
+    public function list(array $filters)
+    {
         $query = TripEloquent::query();
         $query->select(
             'trip_id',
@@ -31,7 +36,7 @@ class TripRepository implements ITripRepository {
             $query->where('trip_subject', 'like', '%' . $filters['trip_subject'] . '%');
         }
         if (!empty($filters['trip_president_id'])) {
-            $query->where('trip_president_id', '=',  $filters['trip_president_id']);
+            $query->where('trip_president_id', '=', $filters['trip_president_id']);
         }
         if (!empty($filters['trip_gov_period_id'])) {
             $query->where('trip_gov_period_id', 'like', '%' . $filters['trip_gov_period_id'] . '%');
@@ -41,7 +46,7 @@ class TripRepository implements ITripRepository {
         }
         $data['count'] = $query->count();
         if (!empty($filters['page_index'])) {
-            $query->skip(--$filters['page_index']*$filters['page_size']);
+            $query->skip(--$filters['page_index'] * $filters['page_size']);
         }
         if (!empty($filters['page_size'])) {
             $query->take($filters['page_size']);
@@ -49,7 +54,9 @@ class TripRepository implements ITripRepository {
         $data['list'] = $query->get();
         return $data;
     }
-    public function findById(int $id){
+
+    public function findById(int $id)
+    {
         $query = TripEloquent::query();
         $query->select(
             'person_trip.*',
@@ -66,65 +73,90 @@ class TripRepository implements ITripRepository {
         $result[0]['actions'] = $this->findActionsById($result[0]['trip_id']);
         $result[0]['approvals'] = $this->findApprovalsById($result[0]['trip_id']);
         $result[0]['boards'] = $this->findBoardById($result[0]['trip_id']);
+        $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['trip_id'], (new TripEloquent()->getTable()));
         return $result;
     }
-    public function create(array $data){
-        $person_trip_board_person_ids  = $data['person_trip_board_person_ids'];
-        unset($data['person_trip_board_person_ids']);
-        $result =  TripEloquent::create($data);
-        foreach ($person_trip_board_person_ids as $id) {
-            TripBoardEloquent::create(
-                [
-                    'trip_id' => $result->trip_id,
-                    'board_person_id' => $id
-                ]
+
+    public function create(array $data)
+    {
+
+        return DB::transaction(function () use ($data) {
+
+            $attachments = $data['attachments'];
+            unset($data['attachments']);
+            $person_trip_board_person_ids = $data['person_trip_board_person_ids'];
+            unset($data['person_trip_board_person_ids']);
+            $result = TripEloquent::create($data);
+            foreach ($person_trip_board_person_ids as $id) {
+                TripBoardEloquent::create(
+                    [
+                        'trip_id' => $result->trip_id,
+                        'board_person_id' => $id
+                    ]
+                );
+            }
+
+            (new UploadRepository())->add_attachments($attachments, (new TripEloquent()->getTable()), $result->trip_id);
+            return $result;
+
+        });
+
+    }
+
+    public function update(array $data)
+    {
+
+        return DB::transaction(function () use ($data) {
+            $person_trip_board_person_ids = $data['person_trip_board_person_ids'];
+            unset($data['person_trip_board_person_ids']);
+            $attachments = $data['attachments'];
+            unset($data['attachments']);
+
+            $result = TripEloquent::where('trip_id', $data['trip_id'])->update(
+                $data
             );
-        }
-        return $result;
 
+            TripBoardEloquent::where('trip_id', $data['trip_id'])->delete();
+            foreach ($person_trip_board_person_ids as $id) {
+                TripBoardEloquent::create(
+                    [
+                        'trip_id' => $data['trip_id'],
+                        'board_person_id' => $id
+                    ]
+                );
+            }
+            (new UploadRepository())->add_attachments($attachments, (new TripEloquent()->getTable()), $data['trip_id']);
+
+            return $result;
+
+        });
     }
-    public function update(array $data){
-        $person_trip_board_person_ids  = $data['person_trip_board_person_ids'];
-        unset($data['person_trip_board_person_ids']);
 
-        $result = TripEloquent::where('trip_id',$data['trip_id'])->update(
-            $data
-        );
-
-        TripBoardEloquent::where('trip_id',$data['trip_id'])->delete();
-        foreach ($person_trip_board_person_ids as $id) {
-            TripBoardEloquent::create(
-                [
-                    'trip_id' =>$data['trip_id'],
-                    'board_person_id' => $id
-                ]
-            );
-        }
-
-
-        return $result;
-    }
-    public function delete(int $id){
+    public function delete(int $id)
+    {
         $city = $this->findById($id);
-        if($city){
+        if ($city) {
             return TripBoardEloquent::findOrFail($id)->delete();
-        } else{
+        } else {
             return false;
         }
     }
 
     public function findActionsById(int $id)
-    {        return TripActionsEloquent::query()->select('*')->where('trip_id',$id)->get()->toArray();
+    {
+        return TripActionsEloquent::query()->select('*')->where('trip_id', $id)->get()->toArray();
 
     }
+
     public function findApprovalsById(int $id)
     {
-        return TripApprovalsEloquent::query()->select('*')->where('trip_id',$id)->get()->toArray();
+        return TripApprovalsEloquent::query()->select('*')->where('trip_id', $id)->get()->toArray();
 
     }
+
     public function findBoardById(int $id)
     {
-        return TripBoardEloquent::query()->select('board_person_id as person_id')->where('trip_id',$id)->get()->toArray();
+        return TripBoardEloquent::query()->select('board_person_id as person_id')->where('trip_id', $id)->get()->toArray();
 
     }
 
@@ -138,9 +170,10 @@ class TripRepository implements ITripRepository {
         );
         return $result;
     }
+
     public function update_approval(array $data)
     {
-        $result = TripApprovalsEloquent::where('row_id',$data['row_id'])->update(
+        $result = TripApprovalsEloquent::where('row_id', $data['row_id'])->update(
             $data
         );
         return $result;
@@ -156,9 +189,10 @@ class TripRepository implements ITripRepository {
         );
         return $result;
     }
+
     public function update_action(array $data)
     {
-        $result = TripActionsEloquent::where('row_id',$data['row_id'])->update(
+        $result = TripActionsEloquent::where('row_id', $data['row_id'])->update(
             $data
         );
         return $result;

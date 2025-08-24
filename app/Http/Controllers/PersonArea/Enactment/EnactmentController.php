@@ -100,17 +100,19 @@ class EnactmentController extends Controller{
      *
      *  type نوع درخواست
      *
-     *  type_bill_85_review بررسی لایحه طبق اصل 85 قانون اساسی
+     *  bill_85_review بررسی لایحه طبق اصل 85 قانون اساسی
      *
-     *  type_deputy_actions اقدامات معاونت
+     *  deputy_actions اقدامات معاونت
      *
-     *  type_guardian_council ابلاغ مصوبه به شورای نگهبان
+     *  guardian_council ابلاغ مصوبه به شورای نگهبان
      *
-     *  type_promote_law ابلاغ قانون
+     *  promote_law ابلاغ قانون
      *
-     *  type_workflow_commission فرآیند بررسی در کمیسیون
+     *  workflow_commission فرآیند بررسی در کمیسیون
      *
-     *  type_workflow_public_court فرآیند بررسی در صحن علی مجلس
+     *  workflow_public_court فرآیند بررسی در صحن علی مجلس
+     *
+     *  attachments آرایه ای از پیوست ها
      *
      * @lrd:end
      */

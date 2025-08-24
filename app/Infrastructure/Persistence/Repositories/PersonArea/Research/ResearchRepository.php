@@ -45,8 +45,7 @@ class ResearchRepository implements IResearchRepository
         return $data;
     }
 
-    public function findById(int $id)
-    {
+    public function findById(int $id){
         $query = PersonResearchEloquent::query();
         $query->select('person_research.*');
         $query->leftJoin('president', 'president.president_id', '=', 'person_research.person_research_president_id');
@@ -56,8 +55,7 @@ class ResearchRepository implements IResearchRepository
         $result = $query->get()->toArray();
         $result[0]['signatures_persons'] = $this->findSignaturesById($result[0]['person_research_id']);
         $result[0]['team_persons'] = $this->findTeamById($result[0]['person_research_id']);
-        $result[0]['worksheet'] = $this->findWorkSheetById($result[0]['person_research_worksheet_media_id']);
-        $result[0]['attachment'] = $this->findAttachmentById($result[0]['person_research_worksheet_media_id']);
+        $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['person_research_id'], (new PersonResearchEloquent()->getTable()));
         return $result;
     }
 
@@ -68,8 +66,10 @@ class ResearchRepository implements IResearchRepository
             $person_research_team_person_id = $data['person_research_team_person_ids'];
             $person_research_signatures_person_ids = $data['person_research_signatures_person_ids'];
             $person_research_attachments = $data['person_research_attachments'];
+            $attachments = $data['attachments'];
             unset($data['person_research_team_person_ids']);
             unset($data['person_research_signatures_person_ids']);
+            unset($data['attachments']);
 
             $result = PersonResearchEloquent::create($data);
             foreach ($person_research_team_person_id as $signature_person_id) {
@@ -97,22 +97,24 @@ class ResearchRepository implements IResearchRepository
                     ]
                 );
             }
+
+            (new UploadRepository())->add_attachments($attachments, (new PersonResearchEloquent()->getTable()), $result->person_research_id);
             return $result;
 
         });
 
     }
 
-    public function update(array $data)
-    {
+    public function update(array $data){
 
         return DB::transaction(function () use ($data) {
             $person_research_team_person_id = $data['person_research_team_person_ids'];
             $person_research_signatures_person_ids = $data['person_research_signatures_person_ids'];
             $person_research_attachments = $data['person_research_attachments'];
+            $attachments = $data['attachments'];
             unset($data['person_research_team_person_ids']);
             unset($data['person_research_signatures_person_ids']);
-
+            unset($data['attachments']);
 
             $result = PersonResearchEloquent::where('person_research_id', $data['person_research_id'])->update(
                 $data
@@ -149,6 +151,8 @@ class ResearchRepository implements IResearchRepository
                 );
             }
 
+            (new UploadRepository())->add_attachments($attachments, (new PersonResearchEloquent()->getTable()), $data['person_research_id']);
+
             return $result;
         });
     }
@@ -175,14 +179,4 @@ class ResearchRepository implements IResearchRepository
 
     }
 
-    public function findAttachmentById(int $id)
-    {
-        return PersonResearchAttachmentEloquent::query()->select('*')->where('person_research_id', $id)->get()->toArray();
-
-    }
-
-    public function findWorkSheetById(int $id)
-    {
-        return (new UploadRepository())->get_file($id);
-    }
 }

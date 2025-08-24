@@ -7,6 +7,7 @@ use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfid
 use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceOpposingEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceSupportersEloquent;
+use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
 use Illuminate\Support\Facades\DB;
 
 class VoteConfidenceRepository implements IVoteConfidenceRepository
@@ -55,7 +56,7 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository
 
         $result[0]['opposing_persons'] = $this->findOpposingById($result[0]['vote_confidence_id']);
         $result[0]['supporters_persons'] = $this->findSupportersById($result[0]['vote_confidence_id']);
-        $result[0]['attachments'] = $this->findAttachmentsById($result[0]['vote_confidence_id']);
+        $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['vote_confidence_id'], (new VoteConfidenceEloquent()->getTable()));
 
         return $result;
     }
@@ -65,10 +66,10 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository
         return DB::transaction(function () use ($data) {
             $vote_confidence_opposing_person_ids = $data['vote_confidence_opposing_person_ids'];
             $vote_confidence_supporters_person_ids = $data['vote_confidence_supporters_person_ids'];
-            $vote_confidence_attachments = $data['vote_confidence_attachments'];
+            $attachments = $data['attachments'];
             unset($data['vote_confidence_opposing_person_ids']);
             unset($data['vote_confidence_supporters_person_ids']);
-            unset($data['vote_confidence_attachments']);
+            unset($data['attachments']);
             $result = VoteConfidenceEloquent::create($data);
             foreach ($vote_confidence_opposing_person_ids as $signature_person_id) {
                 VoteConfidenceOpposingEloquent::create(
@@ -86,15 +87,7 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository
                     ]
                 );
             }
-            foreach ($vote_confidence_attachments as $attachment) {
-                VoteConfidenceAttachmentEloquent::create(
-                    [
-                        'vote_confidence_id' => $result->vote_confidence_id,
-                        'vote_confidence_attachment_title' => $attachment['attachment_title'],
-                        'vote_confidence_attachment_src' => $attachment['attachment_src'],
-                    ]
-                );
-            }
+            (new UploadRepository())->add_attachments($attachments, (new VoteConfidenceEloquent()->getTable()), $result->vote_confidence_id);
             return $result;
         });
 
@@ -105,10 +98,10 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository
         return DB::transaction(function () use ($data) {
             $vote_confidence_opposing_person_ids = $data['vote_confidence_opposing_person_ids'];
             $vote_confidence_supporters_person_ids = $data['vote_confidence_supporters_person_ids'];
-            $vote_confidence_attachments = $data['vote_confidence_attachments'];
+            $attachments = $data['attachments'];
             unset($data['vote_confidence_opposing_person_ids']);
             unset($data['vote_confidence_supporters_person_ids']);
-            unset($data['vote_confidence_attachments']);
+            unset($data['attachments']);
 
             $result = VoteConfidenceEloquent::where('vote_confidence_id', $data['vote_confidence_id'])->update(
                 $data
@@ -132,16 +125,9 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository
                     ]
                 );
             }
-            VoteConfidenceAttachmentEloquent::where('vote_confidence_id', $data['vote_confidence_id'])->delete();
-            foreach ($vote_confidence_attachments as $attachment) {
-                VoteConfidenceAttachmentEloquent::create(
-                    [
-                        'vote_confidence_id' => $result->vote_confidence_id,
-                        'vote_confidence_attachment_title' => $attachment['attachment_title'],
-                        'vote_confidence_attachment_src' => $attachment['attachment_src'],
-                    ]
-                );
-            }
+
+            (new UploadRepository())->add_attachments($attachments, (new VoteConfidenceEloquent()->getTable()), $data['vote_confidence_id']);
+
 
             return $result;
         });
