@@ -110,6 +110,8 @@ class InterpellationController extends Controller{
      *
      *  interpellation_signatures_person_ids نمایندگان انصراف دهنده از انصراف
      *
+     *  interpellation_attachments  آرایه فایل های کاربرگ { "attachment_title":"title_1", "attachment_src":"src_1"}
+     *
      * @lrd:end
      */
     public function store(InterpellationRequest $request){

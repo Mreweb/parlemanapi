@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Utility;
-
 use App\Http\Controllers\Controller;
 
-class Enums extends Controller
-{
+class Enums extends Controller{
+
+
 
     public function index()
     {
@@ -94,6 +94,15 @@ class Enums extends Controller
                 '2' => 'دوم',
                 '3' => 'سوم',
                 '4' => 'چهارم'
+            ],
+            'research_commission_result' => [
+                '1' => 'تصویب شد',
+                '2' => 'تصویب نشد'
+            ],
+            'research_team_result' => [
+                '1' => 'طرح استیضاح وزیر',
+                '2' => 'ارجاع به قوه قضائیه',
+                '3' => 'ارجاع به مرجع رسیدگی به تخلفات اداری'
             ],
             'question_area' => [
                 '1' => 'ملی',

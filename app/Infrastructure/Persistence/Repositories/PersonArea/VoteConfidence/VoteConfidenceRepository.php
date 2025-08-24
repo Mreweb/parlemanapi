@@ -62,7 +62,7 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository
 
     public function create(array $data)
     {
-        DB::transaction(function () use ($data) {
+        return DB::transaction(function () use ($data) {
             $vote_confidence_opposing_person_ids = $data['vote_confidence_opposing_person_ids'];
             $vote_confidence_supporters_person_ids = $data['vote_confidence_supporters_person_ids'];
             $vote_confidence_attachments = $data['vote_confidence_attachments'];
@@ -102,7 +102,7 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository
 
     public function update(array $data){
 
-        DB::transaction(function () use ($data) {
+        return DB::transaction(function () use ($data) {
             $vote_confidence_opposing_person_ids = $data['vote_confidence_opposing_person_ids'];
             $vote_confidence_supporters_person_ids = $data['vote_confidence_supporters_person_ids'];
             $vote_confidence_attachments = $data['vote_confidence_attachments'];
