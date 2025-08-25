@@ -71,6 +71,9 @@ class ProjectsRepository implements IProjectsRepository
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_projects.project_parliament_period_id');
         $query->where('project_id', $id);
         $result = $query->get()->toArray();
+        if(!isset($result[0])){
+            return [];
+        }
 
         $result[0]['person_projects_participation_ids'] = $this->findParticipationById($result[0]['project_id']);
         $result[0]['person_projects_related_commission_ids'] = $this->findRelatedCommissionById($result[0]['project_id']);

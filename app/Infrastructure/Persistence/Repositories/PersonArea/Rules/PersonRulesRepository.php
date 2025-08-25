@@ -31,7 +31,10 @@ class PersonRulesRepository implements IRulesRepository
         $query->select('person_rules.*');
         $query->where('rule_id', $id);
         $result = $query->get()->toArray();
-        $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['enactment_id'], (new PersonRulesEloquent()->getTable()));
+        if(!isset($result[0])){
+            return [];
+        }
+        $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['rule_id'], (new PersonRulesEloquent()->getTable()));
         return $result;
     }
 

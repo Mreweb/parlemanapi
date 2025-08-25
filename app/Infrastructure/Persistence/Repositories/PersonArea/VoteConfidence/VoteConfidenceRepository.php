@@ -53,6 +53,9 @@ class VoteConfidenceRepository implements IVoteConfidenceRepository
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_vote_confidence.vote_confidence_parliament_period_id');
         $query->where('vote_confidence_id', $id);
         $result = $query->get()->toArray();
+        if(!isset($result[0])){
+            return [];
+        }
 
         $result[0]['opposing_persons'] = $this->findOpposingById($result[0]['vote_confidence_id']);
         $result[0]['supporters_persons'] = $this->findSupportersById($result[0]['vote_confidence_id']);

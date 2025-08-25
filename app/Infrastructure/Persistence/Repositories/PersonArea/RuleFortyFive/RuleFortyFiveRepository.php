@@ -51,6 +51,9 @@ class RuleFortyFiveRepository implements IRuleFortyFiveRepository
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_rule_forty_five.rule_forty_five_parliament_period_id');
         $query->where('rule_forty_five_id', $id);
         $result = $query->get()->toArray();
+        if(!isset($result[0])){
+            return [];
+        }
         $result[0]['persons'] = $this->findSignaturesById($result[0]['rule_forty_five_id']);
         $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['rule_forty_five_id'], (new RuleFortyFiveEloquent()->getTable()));
         return $result;

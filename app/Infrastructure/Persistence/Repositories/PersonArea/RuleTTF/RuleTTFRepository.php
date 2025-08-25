@@ -51,6 +51,9 @@ class RuleTTFRepository implements IRuleTTFRepository
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_rule_ttf.rule_ttf_parliament_period_id');
         $query->where('rule_ttf_id', $id);
         $result = $query->get()->toArray();
+        if(!isset($result[0])){
+            return [];
+        }
 
         $result[0]['persons'] = $this->findSignaturesById($result[0]['rule_ttf_id']);
 

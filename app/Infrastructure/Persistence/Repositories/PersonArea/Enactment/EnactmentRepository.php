@@ -72,6 +72,10 @@ class EnactmentRepository implements IEnactmentRepository {
          $query->where('enactment_id', $id);
         $result = $query->get()->toArray();
 
+        if(!isset($result[0])){
+            return [];
+        }
+
         $result[0]['main_commission'] = $this->findMainCommissionById($result[0]['enactment_id']);
         $result[0]['sub_commission'] = $this->findSubCommissionById($result[0]['enactment_id']);
         $result[0]['ministry_signatures'] = $this->findMinistrySignaturesById($result[0]['enactment_id']);

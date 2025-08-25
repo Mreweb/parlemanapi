@@ -70,6 +70,9 @@ class TripRepository implements ITripRepository
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_trip.trip_parliament_period_id');
         $query->where('trip_id', $id);
         $result = $query->get()->toArray();
+        if(!isset($result[0])){
+            return [];
+        }
         $result[0]['actions'] = $this->findActionsById($result[0]['trip_id']);
         $result[0]['approvals'] = $this->findApprovalsById($result[0]['trip_id']);
         $result[0]['boards'] = $this->findBoardById($result[0]['trip_id']);

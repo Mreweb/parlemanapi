@@ -68,6 +68,9 @@ class NoticeRepository implements INoticeRepository
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_notice.notice_parliament_period_id');
         $query->where('notice_id', $id);
         $result = $query->get()->toArray();
+        if(!isset($result[0])){
+            return [];
+        }
         $result[0]['person_notice_signature'] = $this->findSinaturesById($result[0]['notice_id']);
         $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['notice_id'], (new NoticeEloquent()->getTable()));
         return $result;

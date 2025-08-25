@@ -45,6 +45,9 @@ class PersonRequestsRepository implements IRequestsRepository
         $query->select('*');
         $query->where('request_id', $id);
         $result = $query->get()->toArray();
+        if(!isset($result[0])){
+            return [];
+        }
         $result[0]['tracks'] = $this->getTracById($id);
         $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['request_id'], (new PersonRequestEloquent()->getTable()));
         return $result;

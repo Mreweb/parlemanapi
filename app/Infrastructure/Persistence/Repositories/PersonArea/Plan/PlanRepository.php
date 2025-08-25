@@ -76,7 +76,9 @@ class PlanRepository implements IPlanRepository{
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_plan.plan_parliament_period_id');
         $query->where('plan_id', $id);
         $result = $query->get()->toArray();
-
+        if(!isset($result[0])){
+            return [];
+        }
         $result[0]['main_commission'] = $this->findMainCommissionById($result[0]['plan_id']);
         $result[0]['sub_commission'] = $this->findSubCommissionById($result[0]['plan_id']);
         $result[0]['signatures'] = $this->findSignaturesById($result[0]['plan_id']);

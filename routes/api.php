@@ -47,7 +47,6 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
     Route::get('/enum', [Enums::class, 'index']);
     Route::post('/file', [Upload::class, 'save']);
     Route::get('/file/{id}', [Upload::class, 'get_file']);
-
     Route::prefix('provinces')->group(function () {
         Route::get('/', [ProvinceController::class, 'index']);
         Route::get('/all', [ProvinceController::class, 'all']);

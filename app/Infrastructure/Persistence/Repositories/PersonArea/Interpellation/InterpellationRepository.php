@@ -70,7 +70,9 @@ class InterpellationRepository implements IInterpellationsRepository{
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_interpellations.interpellation_parliament_period_id');
         $query->where('interpellation_id', $id);
         $result = $query->get()->toArray();
-
+        if(!isset($result[0])){
+            return [];
+        }
 
         $result[0]['worksheet'] = $this->findWorksheetMediaPersonById($result[0]['interpellation_worksheet_media_id']);
         $result[0]['correspondence_worksheet'] = $this->findCorrespondenceWorksheetMediaPersonById($result[0]['interpellation_correspondence_worksheet_media_id']);

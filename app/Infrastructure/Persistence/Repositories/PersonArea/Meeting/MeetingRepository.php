@@ -66,6 +66,9 @@ class MeetingRepository implements IMeetingRepository {
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_meeting.meeting_parliament_period_id');
         $query->where('meeting_id', $id);
         $result = $query->get()->toArray();
+        if(!isset($result[0])){
+            return [];
+        }
         $result[0]['track'] = $this->get_meeting_track($result[0]['meeting_id']);
         $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['meeting_id'], (new PersonMeetingEloquent()->getTable()));
         return $result;

@@ -61,17 +61,16 @@ class QuestionRepository implements IQuestionRepository
             'president_name',
             'gov_period_name',
             'question_check_public_parliament_number',
-            'media_worksheet.path as question_worksheet_media',
             'person_question.created_at',
             'person_question.updated_at');
         $query->leftJoin('president', 'president.president_id', '=', 'person_question.question_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_question.question_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_question.question_parliament_period_id');
-        $query->leftJoin('media as media_worksheet', 'media_worksheet.media_id', '=', 'person_question.question_answer_media_id');
         $query->where('question_id', $id);
         $result = $query->get()->toArray();
-        $result[0]['question_worksheet_media'] = $this->findWorksheetMediaById($result[0]['question_worksheet_media_id']);
-        $result[0]['question_answer_media_id'] = $this->findWorksheetMediaById($result[0]['question_answer_media_id']);
+        if(!isset($result[0])){
+            return [];
+        }
         $result[0]['signature_person_ids'] = $this->findSignaturesById($result[0]['question_id']);
         $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['question_id'], (new QuestionEloquent()->getTable()));
         return $result;
