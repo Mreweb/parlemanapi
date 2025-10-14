@@ -2,16 +2,13 @@
 
 namespace App\Domain\Interfaces\PersonArea\Notice;
 
-interface INoticeRepository {
+use App\Domain\Interfaces\IBaseRepository;
 
-    public function list(array $filters);
-    public function findById(int $id);
+interface INoticeRepository  extends IBaseRepository{
+
     public function findSinaturesById(int $id);
     public function findWorksheetMedia(int $id);
     public function findAnswerWorksheetMedia(int $id);
-    public function create(array $data);
-    public function update(array $data);
-    public function delete(int $id);
 
 }
 

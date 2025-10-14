@@ -22,6 +22,41 @@ use Illuminate\Support\Facades\DB;
 
 class PlanRepository implements IPlanRepository{
 
+    public function all(array $filters)
+    {
+        $query = PlanEloquent::query();
+
+        $query->select(
+            'plan_id',
+            'plan_title',
+            'plan_content',
+            'plan_prev_title',
+            'plan_date',
+            'plan_register_number',
+            'president_name',
+            'gov_period_name',
+            'person_plan.created_at',
+            'person_plan.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_plan.plan_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_plan.plan_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_plan.plan_parliament_period_id');
+        if (!empty($filters['project_title'])) {
+            $query->where('plan_title', 'like', '%' . $filters['plan_title'] . '%');
+        }
+        if (!empty($filters['plan_president_id'])) {
+            $query->where('plan_president_id', 'like', '%' . $filters['plan_president_id'] . '%');
+        }
+        if (!empty($filters['project_gov_period_id'])) {
+            $query->where('plan_gov_period_id', 'like', '%' . $filters['plan_gov_period_id'] . '%');
+        }
+        if (!empty($filters['plan_parliament_period_id'])) {
+            $query->where('plan_parliament_period_id', 'like', '%' . $filters['plan_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
+
     public function list(array $filters)
     {
         $query = PlanEloquent::query();

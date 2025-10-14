@@ -24,7 +24,7 @@ class FractionRepository implements IFractionRepository {
         return $data;
 
     }
-    public function all(){
+    public function all(array $filters=null){
         if(CacheService::has_data('all_fractions')){
             $data = CacheService::get_data('all_fractions');
             $data['from_cache'] = true;

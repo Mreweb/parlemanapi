@@ -5,6 +5,21 @@ use App\Domain\Interfaces\Common\Country\ICityRepository;
 use App\Infrastructure\Persistence\Eloquent\Common\Country\CityEloquent;
 
 class CityRepository implements ICityRepository {
+    public function all(array $filters=null){
+        $query = CityEloquent::query();
+        $query->select('city_id','city_name','province.province_id','province.province_name','city.created_at','city.updated_at');
+        $query->leftJoin('province', 'province.province_id', '=', 'city.city_province_id');
+        if (!empty($filters['province_id'])) {
+            $query->where('province_id',  $filters['province_id']);
+        }
+        if (!empty($filters['city_name'])) {
+            $query->where('city_name', '=', '%' . $filters['city_name'] . '%');
+        }
+
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
     public function list(array $filters){
         $query = CityEloquent::query();
         $query->select('city_id','city_name','province.province_id','province.province_name','city.created_at','city.updated_at');

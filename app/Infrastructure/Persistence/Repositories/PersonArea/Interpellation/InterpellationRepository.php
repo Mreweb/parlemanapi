@@ -16,6 +16,40 @@ use Illuminate\Support\Facades\DB;
 
 class InterpellationRepository implements IInterpellationsRepository{
 
+    public function all(array $filters)
+    {
+        $query = InterpellationsEloquent::query();
+        $query->select(
+            'interpellation_id',
+            'interpellation_axis',
+            'interpellation_president_id',
+            'interpellation_gov_period_id',
+            'interpellation_parliament_period_id',
+            'period_title',
+            'president_name',
+            'gov_period_name',
+            'interpellation_public_parliament_session_number',
+            'person_interpellations.created_at',
+            'person_interpellations.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_interpellations.interpellation_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_interpellations.interpellation_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_interpellations.interpellation_parliament_period_id');
+        if (!empty($filters['interpellation_axis'])) {
+            $query->where('interpellation_axis', 'like', '%' . $filters['interpellation_axis'] . '%');
+        }
+        if (!empty($filters['interpellation_president_id'])) {
+            $query->where('interpellation_president_id', $filters['interpellation_president_id']);
+        }
+        if (!empty($filters['interpellation_gov_period_id'])) {
+            $query->where('interpellation_gov_period_id', 'like', '%' . $filters['interpellation_gov_period_id'] . '%');
+        }
+        if (!empty($filters['interpellation_parliament_period_id'])) {
+            $query->where('interpellation_parliament_period_id', 'like', '%' . $filters['interpellation_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
     public function list(array $filters)
     {
         $query = InterpellationsEloquent::query();
@@ -74,8 +108,8 @@ class InterpellationRepository implements IInterpellationsRepository{
             return [];
         }
 
-        $result[0]['worksheet'] = $this->findWorksheetMediaPersonById($result[0]['interpellation_worksheet_media_id']);
-        $result[0]['correspondence_worksheet'] = $this->findCorrespondenceWorksheetMediaPersonById($result[0]['interpellation_correspondence_worksheet_media_id']);
+        $result[0]['worksheet'] = $this->findWorksheetMediaPersonById(1);
+        $result[0]['correspondence_worksheet'] = $this->findCorrespondenceWorksheetMediaPersonById(1);
         $result[0]['interpellations_opposing_person_ids'] = $this->findOpposingPersonById($result[0]['interpellation_id']);
         $result[0]['interpellation_supporters_person_ids'] = $this->findSupportersPersonById($result[0]['interpellation_id']);
         $result[0]['interpellation_opt_person_ids'] = $this->findOptPersonById($result[0]['interpellation_id']);

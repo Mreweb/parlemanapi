@@ -19,6 +19,38 @@ use Illuminate\Support\Facades\DB;
 
 class EnactmentRepository implements IEnactmentRepository {
 
+    public function all(array $filters){
+        $query = EnactmentEloquent::query();
+        $query->select(
+            'enactment_id',
+            'enactment_title',
+            'enactment_content',
+            'enactment_prev_title',
+            'enactment_date',
+            'enactment_president_letter_number',
+            'president_name',
+            'gov_period_name',
+            'person_enactment.created_at',
+            'person_enactment.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_enactment.enactment_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_enactment.enactment_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_enactment.enactment_parliament_period_id');
+        if (!empty($filters['project_title'])) {
+            $query->where('enactment_title', 'like', '%' . $filters['enactment_title'] . '%');
+        }
+        if (!empty($filters['enactment_president_id'])) {
+            $query->where('enactment_president_id', 'like', '%' . $filters['enactment_president_id'] . '%');
+        }
+        if (!empty($filters['project_gov_period_id'])) {
+            $query->where('enactment_gov_period_id', 'like', '%' . $filters['enactment_gov_period_id'] . '%');
+        }
+        if (!empty($filters['enactment_parliament_period_id'])) {
+            $query->where('enactment_parliament_period_id', 'like', '%' . $filters['enactment_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
     public function list(array $filters){
         $query = EnactmentEloquent::query();
 
@@ -80,13 +112,13 @@ class EnactmentRepository implements IEnactmentRepository {
         $result[0]['sub_commission'] = $this->findSubCommissionById($result[0]['enactment_id']);
         $result[0]['ministry_signatures'] = $this->findMinistrySignaturesById($result[0]['enactment_id']);
         $result[0]['suggest_resources'] = $this->findSuggestResourcesById($result[0]['enactment_id']);
-        $result[0]['enactment_type'] = $this->findTypeById($result[0]['enactment_id']);
-        $result[0]['enactment_bill_85_review'] = $this->find85ById($result[0]['enactment_id']);
-        $result[0]['enactment_deputy_actions'] = $this->findDeputyActionsById($result[0]['enactment_id']);
-        $result[0]['enactment_guardian_council'] = $this->findGuardianCouncilById($result[0]['enactment_id']);
-        $result[0]['enactment_promote_law'] = $this->findPromoteLawById($result[0]['enactment_id']);
-        $result[0]['enactment_workflow_commission'] = $this->findWorkflowCommissionById($result[0]['enactment_id']);
-        $result[0]['enactment_workflow_public_court'] = $this->findPublicCourtById($result[0]['enactment_id']);
+        $result[0]['type'] = $this->findTypeById($result[0]['enactment_id']);
+        $result[0]['bill_85_review'] = $this->find85ById($result[0]['enactment_id']);
+        $result[0]['deputy_actions'] = $this->findDeputyActionsById($result[0]['enactment_id']);
+        $result[0]['guardian_council'] = $this->findGuardianCouncilById($result[0]['enactment_id']);
+        $result[0]['promote_law'] = $this->findPromoteLawById($result[0]['enactment_id']);
+        $result[0]['workflow_commission'] = $this->findWorkflowCommissionById($result[0]['enactment_id']);
+        $result[0]['workflow_public_court'] = $this->findPublicCourtById($result[0]['enactment_id']);
         $result[0]['attachments'] = (new UploadRepository())->get_attachments($result[0]['enactment_id'], (new EnactmentEloquent()->getTable()));
 
         return $result;

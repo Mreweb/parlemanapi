@@ -37,7 +37,7 @@ class ElectionLocationRepository implements IElectionLocationRepository {
         $data['list'] = $query->get();
         return $data;
     }
-    public function all(){
+    public function all(array $filters=null){
         $query = ElectionLocationEloquent::query();
         $query->select(
             'election_location_id',

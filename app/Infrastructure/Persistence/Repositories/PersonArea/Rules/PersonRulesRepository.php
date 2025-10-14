@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class PersonRulesRepository implements IRulesRepository
 {
+    public function all(array $filters)
+    {
+        $query = PersonRulesEloquent::query();
+        $query->select('person_rules.*');
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
 
     public function list(array $filters)
     {

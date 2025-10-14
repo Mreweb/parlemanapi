@@ -12,6 +12,30 @@ use Illuminate\Support\Facades\DB;
 
 class VoteConfidenceRepository implements IVoteConfidenceRepository
 {
+    public function all(array $filters)
+    {
+        $query = VoteConfidenceEloquent::query();
+        $query->select('person_vote_confidence.*',
+            'period_title',
+            'president_name',
+            'gov_period_name');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_vote_confidence.vote_confidence_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_vote_confidence.vote_confidence_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_vote_confidence.vote_confidence_parliament_period_id');
+
+        if (!empty($filters['vote_confidence_president_id'])) {
+            $query->where('vote_confidence_president_id', 'like', '%' . $filters['vote_confidence_president_id'] . '%');
+        }
+        if (!empty($filters['vote_confidence_gov_period_id'])) {
+            $query->where('vote_confidence_gov_period_id', 'like', '%' . $filters['vote_confidence_gov_period_id'] . '%');
+        }
+        if (!empty($filters['vote_confidence_parliament_period_id'])) {
+            $query->where('vote_confidence_parliament_period_id', 'like', '%' . $filters['vote_confidence_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
 
     public function list(array $filters)
     {

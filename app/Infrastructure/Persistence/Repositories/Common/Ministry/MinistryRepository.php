@@ -25,7 +25,7 @@ class MinistryRepository implements IMinistryRepository {
         $data['list'] = $query->get();
         return $data;
     }
-    public function all(){
+    public function all(array $filters=null){
         if(CacheService::has_data('all_ministry')){
             $data = CacheService::get_data('all_ministry');
             $data['from_cache'] = true;

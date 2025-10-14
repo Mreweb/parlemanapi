@@ -2,13 +2,10 @@
 
 namespace App\Domain\Interfaces\PersonArea\Projects;
 
-interface IProjectsRepository {
+use App\Domain\Interfaces\IBaseRepository;
 
-    public function list(array $filters);
-    public function findById(int $id);
-    public function create(array $data);
-    public function update(array $data);
-    public function delete(int $id);
+interface IProjectsRepository  extends IBaseRepository{
+
     public function findParticipationById(int $id);
     public function findRelatedCommissionById(int $id);
     public function findSpecialById(int $id);

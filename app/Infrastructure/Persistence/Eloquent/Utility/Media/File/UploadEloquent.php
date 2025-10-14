@@ -9,9 +9,9 @@ class UploadEloquent extends Model{
     use SoftDeletes;
 
     protected $casts = [
-        'media_id' => 'string'
+        'attachment_id' => 'string'
     ];
-    protected $table = 'media';
-    protected $primaryKey = 'media_id';
-    protected $fillable = ['media_id' , 'path', 'extension','base_64'];
+    protected $table = 'attachments';
+    protected $primaryKey = 'row_id';
+    protected $fillable = ['attachment_id' , 'attachment_title' , 'path', 'extension','base_64'];
 }

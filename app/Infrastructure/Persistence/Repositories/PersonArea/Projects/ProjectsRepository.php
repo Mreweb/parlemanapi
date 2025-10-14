@@ -12,6 +12,43 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectsRepository implements IProjectsRepository
 {
+    public function all(array $filters)
+    {
+        $query = ProjectsEloquent::query();
+        $query->select(
+            'project_id',
+            'project_title',
+            'project_register_number',
+            'project_create_date',
+            'project_priority',
+            'project_handle_way',
+            'project_topic_relevance',
+            'project_government_vote',
+            'project_status',
+            'project_end_date',
+            'president_name',
+            'gov_period_name',
+            'person_projects.created_at',
+            'person_projects.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_projects.project_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_projects.project_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_projects.project_parliament_period_id');
+        if (!empty($filters['project_title'])) {
+            $query->where('project_title', 'like', '%' . $filters['project_title'] . '%');
+        }
+        if (!empty($filters['project_president_id'])) {
+            $query->where('project_president_id', 'like', '%' . $filters['project_president_id'] . '%');
+        }
+        if (!empty($filters['project_gov_period_id'])) {
+            $query->where('project_gov_period_id', 'like', '%' . $filters['project_gov_period_id'] . '%');
+        }
+        if (!empty($filters['project_parliament_period_id'])) {
+            $query->where('project_parliament_period_id', 'like', '%' . $filters['project_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
 
     public function list(array $filters)
     {

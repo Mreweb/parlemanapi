@@ -2,15 +2,12 @@
 
 namespace App\Domain\Interfaces\PersonArea\PersonResearch;
 
-interface IResearchRepository {
+use App\Domain\Interfaces\IBaseRepository;
 
-    public function list(array $filters);
-    public function findById(int $id);
+interface IResearchRepository  extends IBaseRepository{
+
     public function findSignaturesById(int $id);
     public function findTeamById(int $id);
-    public function create(array $data);
-    public function update(array $data);
-    public function delete(int $id);
 
 }
 

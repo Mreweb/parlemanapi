@@ -26,7 +26,7 @@ class PresidentRepository implements IPresidentRepository{
         $data['list'] = $query->get();
         return $data;
     }
-    public function all(){
+    public function all(array $filters=null){
         if(CacheService::has_data('all_presidents')){
             $data = CacheService::get_data('all_presidents');
             $data['from_cache'] = true;

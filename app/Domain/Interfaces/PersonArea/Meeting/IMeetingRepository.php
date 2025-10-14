@@ -1,16 +1,13 @@
 <?php
 
 namespace App\Domain\Interfaces\PersonArea\Meeting;
-interface IMeetingRepository {
+use App\Domain\Interfaces\IBaseRepository;
 
-    public function list(array $filters);
-    public function findById(int $id);
-    public function create(array $data);
-    public function update(array $data);
+interface IMeetingRepository  extends IBaseRepository{
+
     public function add_meeting_track(array $data);
     public function update_meeting_track(array $data);
     public function get_meeting_track(int $id);
-    public function delete(int $id);
 
 }
 

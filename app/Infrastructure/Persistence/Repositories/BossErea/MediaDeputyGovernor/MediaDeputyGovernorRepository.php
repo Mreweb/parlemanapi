@@ -10,6 +10,39 @@ use App\Infrastructure\Persistence\Eloquent\BossErea\MediaDeputyGovernor\MediaDe
 
 class MediaDeputyGovernorRepository implements IMediaDeputyGovernorRepository {
 
+    public function all(array $filters){
+        $query = MediaDeputyGovernorEloquent::query();
+        $query->select(
+            'media_id',
+            'media_subject',
+            'media_description',
+            'media_province_id',
+            'media_end_date',
+            'media_start_date',
+            'period_title',
+            'president_name',
+            'gov_period_name',
+            'person_deputy_governor_media.created_at',
+            'person_deputy_governor_media.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_deputy_governor_media.media_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_deputy_governor_media.media_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_deputy_governor_media.media_parliament_period_id');
+        if (!empty($filters['media_subject'])) {
+            $query->where('media_subject', 'like', '%' . $filters['media_subject'] . '%');
+        }
+        if (!empty($filters['media_president_id'])) {
+            $query->where('media_president_id', '=',  $filters['media_president_id']);
+        }
+        if (!empty($filters['media_gov_period_id'])) {
+            $query->where('media_gov_period_id', 'like', '%' . $filters['media_gov_period_id'] . '%');
+        }
+        if (!empty($filters['media_parliament_period_id'])) {
+            $query->where('media_parliament_period_id', 'like', '%' . $filters['media_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
     public function list(array $filters){
         $query = MediaDeputyGovernorEloquent::query();
         $query->select(

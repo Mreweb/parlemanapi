@@ -13,6 +13,30 @@ use Illuminate\Support\Facades\DB;
 
 class ResearchRepository implements IResearchRepository
 {
+    public function all(array $filters)
+    {
+        $query = PersonResearchEloquent::query();
+        $query->select('person_research.*',
+            'period_title',
+            'president_name',
+            'gov_period_name');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_research.person_research_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_research.person_research_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_research.person_research_parliament_period_id');
+
+        if (!empty($filters['person_research_president_id'])) {
+            $query->where('person_research_president_id', 'like', '%' . $filters['person_research_president_id'] . '%');
+        }
+        if (!empty($filters['person_research_gov_period_id'])) {
+            $query->where('person_research_gov_period_id', 'like', '%' . $filters['person_research_gov_period_id'] . '%');
+        }
+        if (!empty($filters['person_research_parliament_period_id'])) {
+            $query->where('person_research_parliament_period_id', 'like', '%' . $filters['person_research_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
 
     public function list(array $filters)
     {

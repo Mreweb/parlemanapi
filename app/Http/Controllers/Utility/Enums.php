@@ -99,6 +99,12 @@ class Enums extends Controller{
                 '1' => 'تصویب شد',
                 '2' => 'تصویب نشد'
             ],
+            'research_public_commission_result' => [
+                '1' => 'قبل از رسیدگی در صحن نماینده انصراف داد',
+                '2' => 'نماینده از توضیحات وزیر قانع شد',
+                '3' => 'نمایندگان از توضیحات وزیر قانع شدند',
+                '4' => 'نمایندگان از توضیحات وزیر قانع نشدند'
+            ],
             'research_team_result' => [
                 '1' => 'طرح استیضاح وزیر',
                 '2' => 'ارجاع به قوه قضائیه',
@@ -163,6 +169,7 @@ class Enums extends Controller{
                 'editor' => 'کارگزار سامانه',
                 'ministry_admin' => 'ادمین وزارتخانه',
                 'parliament_person' => 'نماینده',
+                'ministry_helper' => 'معاون',
                 'ministry' => 'وزیر'
             ],
             'gov_cabinet' => [

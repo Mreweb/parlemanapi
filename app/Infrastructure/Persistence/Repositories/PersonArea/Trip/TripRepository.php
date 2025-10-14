@@ -12,6 +12,41 @@ use Illuminate\Support\Facades\DB;
 
 class TripRepository implements ITripRepository
 {
+    public function all(array $filters)
+    {
+        $query = TripEloquent::query();
+        $query->select(
+            'trip_id',
+            'trip_subject',
+            'trip_description',
+            'trip_province_id',
+            'trip_end_date',
+            'trip_start_date',
+            'trip_end_date',
+            'period_title',
+            'president_name',
+            'gov_period_name',
+            'person_trip.created_at',
+            'person_trip.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_trip.trip_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_trip.trip_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_trip.trip_parliament_period_id');
+        if (!empty($filters['trip_subject'])) {
+            $query->where('trip_subject', 'like', '%' . $filters['trip_subject'] . '%');
+        }
+        if (!empty($filters['trip_president_id'])) {
+            $query->where('trip_president_id', '=', $filters['trip_president_id']);
+        }
+        if (!empty($filters['trip_gov_period_id'])) {
+            $query->where('trip_gov_period_id', 'like', '%' . $filters['trip_gov_period_id'] . '%');
+        }
+        if (!empty($filters['trip_parliament_period_id'])) {
+            $query->where('trip_parliament_period_id', 'like', '%' . $filters['trip_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
 
     public function list(array $filters)
     {

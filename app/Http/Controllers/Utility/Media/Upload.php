@@ -24,9 +24,10 @@ class Upload extends Controller {
         $request->validated();
         $path = $request->file('file')->store('uploads', 'public');
         $extension = $request->file('file')->getClientOriginalExtension();
+
         $data = [
-            'media_id' => Str::uuid()->toString(),
-            'media_title' => $request->get('title'),
+            'attachment_id' => Str::uuid()->toString(),
+            'attachment_title' => $request->get('title'),
             'path' => $path,
             'base_64' => base64_encode(file_get_contents($request->file('file'))),
             'extension' => $extension

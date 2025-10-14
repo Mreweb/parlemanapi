@@ -9,6 +9,38 @@ use Illuminate\Support\Facades\DB;
 
 class MeetingRepository implements IMeetingRepository {
 
+    public function all(array $filters){
+        $query = PersonMeetingEloquent::query();
+        $query->select(
+            'meeting_id',
+            'meeting_title',
+            'meeting_description',
+            'meeting_status',
+            'meeting_end_date',
+            'meeting_tasks',
+            'president_name',
+            'gov_period_name',
+            'person_meeting.created_at',
+            'person_meeting.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_meeting.meeting_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_meeting.meeting_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_meeting.meeting_parliament_period_id');
+        if (!empty($filters['meeting_title'])) {
+            $query->where('meeting_title', 'like', '%' . $filters['meeting_title'] . '%');
+        }
+        if (!empty($filters['meeting_president_id'])) {
+            $query->where('meeting_president_id', 'like', '%' . $filters['meeting_president_id'] . '%');
+        }
+        if (!empty($filters['meeting_gov_period_id'])) {
+            $query->where('meeting_gov_period_id', 'like', '%' . $filters['meeting_gov_period_id'] . '%');
+        }
+        if (!empty($filters['meeting_parliament_period_id'])) {
+            $query->where('meeting_parliament_period_id', 'like', '%' . $filters['meeting_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
     public function list(array $filters){
         $query = PersonMeetingEloquent::query();
         $query->select(

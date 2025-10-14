@@ -23,7 +23,7 @@ class GovPeriodRepository implements IGovPeriodRepository{
         $data['list'] = $query->get();
         return $data;
     }
-    public function all(){
+    public function all(array $filters=null){
         if(CacheService::has_data('all_gov_period')){
             $data = CacheService::get_data('all_gov_period');
             $data['from_cache'] = true;

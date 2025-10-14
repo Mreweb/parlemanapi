@@ -9,7 +9,6 @@ class PersonEloquent extends Model{
     use SoftDeletes;
     protected $table = 'person';
     protected $primaryKey = 'person_id';
-    //All Filed Are Fillable so there is no fillable array
-    //protected $fillable = [];
     protected $guarded = [];
+
 }

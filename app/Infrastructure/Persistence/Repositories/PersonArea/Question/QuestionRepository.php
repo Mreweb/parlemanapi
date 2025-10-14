@@ -10,6 +10,40 @@ use Illuminate\Support\Facades\DB;
 
 class QuestionRepository implements IQuestionRepository
 {
+    public function all(array $filters)
+    {
+        $query = QuestionEloquent::query();
+        $query->select(
+            'question_id',
+            'question_subject',
+            'question_president_id',
+            'question_gov_period_id',
+            'question_parliament_period_id',
+            'period_title',
+            'president_name',
+            'gov_period_name',
+            'question_check_public_parliament_number',
+            'person_question.created_at',
+            'person_question.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_question.question_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_question.question_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_question.question_parliament_period_id');
+        if (!empty($filters['question_subject'])) {
+            $query->where('question_subject', 'like', '%' . $filters['question_subject'] . '%');
+        }
+        if (!empty($filters['question_president_id'])) {
+            $query->where('question_president_id', 'like', '%' . $filters['question_president_id'] . '%');
+        }
+        if (!empty($filters['question_gov_period_id'])) {
+            $query->where('question_gov_period_id', 'like', '%' . $filters['question_gov_period_id'] . '%');
+        }
+        if (!empty($filters['question_parliament_period_id'])) {
+            $query->where('question_parliament_period_id', 'like', '%' . $filters['question_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
 
     public function list(array $filters)
     {

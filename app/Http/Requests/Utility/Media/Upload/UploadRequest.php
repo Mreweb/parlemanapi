@@ -12,7 +12,6 @@ class UploadRequest extends FormRequest{
     }
 
     public function rules(): array{
-
         $allowedExtensions = config('upload.allowed_extensions');
         $maxSize = config('upload.max_size');
         return [
@@ -29,7 +28,6 @@ class UploadRequest extends FormRequest{
             'file.max' => 'اندازه فایل باید کمتر از '. $maxSize. ' کیلوبایت باشد',
         ];
     }
-
     protected function failedValidation(Validator $validator){
         throw new HttpResponseException(response()->json([
             "class"=> "red",

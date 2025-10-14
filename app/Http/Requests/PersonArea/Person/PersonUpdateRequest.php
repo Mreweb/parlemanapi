@@ -14,7 +14,7 @@ class PersonUpdateRequest extends FormRequest{
 
     public function rules(): array{
         return [
-            'person_id' => ['required'],
+            /*'person_id' => ['required'],
             'person_name' => ['required', 'string'  , 'max:255' , 'min:3'],
             'person_last_name' => ['required', 'string'  , 'max:255' , 'min:3'],
             'person_national_code' => ['required', 'string'  , 'max:10' , 'min:10'],
@@ -24,13 +24,13 @@ class PersonUpdateRequest extends FormRequest{
             'person_image' => [''],
             'person_role' => ['required'],
             'username' => ['required', 'string'  , 'max:50' , 'min:3'],
-            'password' => [ '']
+            'password' => [ '']*/
         ];
     }
 
     public function messages(): array{
         return [
-            'person_name.required' => 'نام الزامی است',
+            /*'person_name.required' => 'نام الزامی است',
             'person_last_name.required' => 'نام خانوادگی الزامی است',
             'person_national_code.required' => 'کد ملی الزامی است',
             'person_phone.required' => 'تلفن همراه الزامی است',
@@ -53,7 +53,7 @@ class PersonUpdateRequest extends FormRequest{
             'username.min' => 'نام کاربری باید بیشتر از 3 کاراکتر باشد',
             'username.max' => 'نام کاربری باید کمتر از 50 کاراکتر باشد',
             'password.min' => 'رمز عبور باید بیشتر از 3 کاراکتر باشد',
-            'password.max' => 'رمز عبور باید کمتر از 50 کاراکتر باشد'
+            'password.max' => 'رمز عبور باید کمتر از 50 کاراکتر باشد'*/
 
         ];
     }

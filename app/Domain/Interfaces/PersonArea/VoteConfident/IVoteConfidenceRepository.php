@@ -2,15 +2,12 @@
 
 namespace App\Domain\Interfaces\PersonArea\VoteConfident;
 
-interface IVoteConfidenceRepository {
+use App\Domain\Interfaces\IBaseRepository;
 
-    public function list(array $filters);
-    public function findById(int $id);
+interface IVoteConfidenceRepository  extends IBaseRepository{
+
     public function findOpposingById(int $id);
     public function findSupportersById(int $id);
-    public function create(array $data);
-    public function update(array $data);
-    public function delete(int $id);
 
 }
 

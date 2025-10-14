@@ -7,6 +7,22 @@ use App\Infrastructure\Persistence\Eloquent\Common\President\PresidentCabinetElo
 
 class PresidentCabinetRepository implements IPresidentCabinetRepository{
 
+    public function all(array $filters){
+        $query = PresidentCabinetEloquent::query();
+        $query->select(
+            'president_cabinet.row_id',
+            'president.president_id',
+            'cabinet',
+            'cabinet_person_id',
+            'cabinet_person_id',
+            'president.president_name',
+            'president_cabinet.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'president_cabinet.president_id');
+        $query->leftJoin('person', 'person.person_id', '=', 'president_cabinet.cabinet_person_id');
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
     public function list(array $filters){
         $query = PresidentCabinetEloquent::query();
         $query->select(

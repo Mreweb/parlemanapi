@@ -2,10 +2,9 @@
 
 namespace App\Domain\Interfaces\PersonArea\Interpellation;
 
-interface IInterpellationsRepository {
+use App\Domain\Interfaces\IBaseRepository;
 
-    public function list(array $filters);
-    public function findById(int $id);
+interface IInterpellationsRepository  extends IBaseRepository{
 
     public function findOpposingPersonById(int $id);
     public function findSupportersPersonById(int $id);
@@ -14,9 +13,6 @@ interface IInterpellationsRepository {
     public function findSignaturesPersonById(int $id);
     public function findWorksheetMediaPersonById(int $id);
     public function findCorrespondenceWorksheetMediaPersonById(int $id);
-    public function create(array $data);
-    public function update(array $data);
-    public function delete(int $id);
 
 }
 

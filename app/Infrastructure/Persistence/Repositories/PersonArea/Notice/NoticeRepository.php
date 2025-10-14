@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Infrastructure\Persistence\Repositories\PersonArea\Notice;
-
 use App\Domain\Interfaces\PersonArea\Notice\INoticeRepository;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Notice\NoticeEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Notice\NoticeSignatureEloquent;
@@ -11,6 +9,40 @@ use Illuminate\Support\Facades\DB;
 class NoticeRepository implements INoticeRepository
 {
 
+    public function all(array $filters)
+    {
+        $query = NoticeEloquent::query();
+        $query->select(
+            'notice_id',
+            'notice_subject',
+            'notice_president_id',
+            'notice_gov_period_id',
+            'notice_parliament_period_id',
+            'period_title',
+            'president_name',
+            'gov_period_name',
+            'notice_session_number',
+            'person_notice.created_at',
+            'person_notice.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_notice.notice_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_notice.notice_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_notice.notice_parliament_period_id');
+        if (!empty($filters['notice_subject'])) {
+            $query->where('notice_subject', 'like', '%' . $filters['notice_subject'] . '%');
+        }
+        if (!empty($filters['notice_president_id'])) {
+            $query->where('notice_president_id', 'like', '%' . $filters['notice_president_id'] . '%');
+        }
+        if (!empty($filters['notice_gov_period_id'])) {
+            $query->where('notice_gov_period_id', 'like', '%' . $filters['notice_gov_period_id'] . '%');
+        }
+        if (!empty($filters['notice_parliament_period_id'])) {
+            $query->where('notice_parliament_period_id', 'like', '%' . $filters['notice_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
     public function list(array $filters)
     {
         $query = NoticeEloquent::query();

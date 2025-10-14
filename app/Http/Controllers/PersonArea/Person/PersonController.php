@@ -64,7 +64,7 @@ class PersonController extends Controller{
      * @lrd:end
      */
     public function store(PersonRequest $request){
-        $result = $this->service->create($request->validated());
+        $result = $this->service->create($request->all());
         if($result){
             return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
         } else{
@@ -77,7 +77,7 @@ class PersonController extends Controller{
      * @lrd:end
      */
     public function update(PersonUpdateRequest $request){
-        $result = $this->service->update($request->validated());
+        $result = $this->service->update($request->all());
         if($result){
             return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
         } else{

@@ -24,7 +24,7 @@ class CommissionRepository implements ICommissionRepository {
         $data['list'] = $query->get();
         return $data;
     }
-    public function all(){
+    public function all(array $filters=null){
         if(CacheService::has_data('all_commissions')){
             $data = CacheService::get_data('all_commissions');
             $data['from_cache'] = true;

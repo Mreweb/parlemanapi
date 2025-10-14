@@ -10,6 +10,40 @@ use App\Infrastructure\Persistence\Eloquent\BossErea\SessionDeputyGovernor\Sessi
 
 class SessionDeputyGovernorRepository implements ISessionDeputyGovernorRepository {
 
+    public function all(array $filters){
+        $query = SessionDeputyGovernorEloquent::query();
+        $query->select(
+            'session_id',
+            'session_subject',
+            'session_description',
+            'session_province_id',
+            'session_end_date',
+            'session_start_date',
+            'session_end_date',
+            'period_title',
+            'president_name',
+            'gov_period_name',
+            'person_deputy_governor_session.created_at',
+            'person_deputy_governor_session.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_deputy_governor_session.session_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_deputy_governor_session.session_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_deputy_governor_session.session_parliament_period_id');
+        if (!empty($filters['session_subject'])) {
+            $query->where('session_subject', 'like', '%' . $filters['session_subject'] . '%');
+        }
+        if (!empty($filters['session_president_id'])) {
+            $query->where('session_president_id', '=',  $filters['session_president_id']);
+        }
+        if (!empty($filters['session_gov_period_id'])) {
+            $query->where('session_gov_period_id', 'like', '%' . $filters['session_gov_period_id'] . '%');
+        }
+        if (!empty($filters['session_parliament_period_id'])) {
+            $query->where('session_parliament_period_id', 'like', '%' . $filters['session_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
     public function list(array $filters){
         $query = SessionDeputyGovernorEloquent::query();
         $query->select(

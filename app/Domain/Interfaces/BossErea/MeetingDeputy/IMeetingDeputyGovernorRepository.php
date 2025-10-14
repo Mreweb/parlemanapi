@@ -2,16 +2,13 @@
 
 namespace App\Domain\Interfaces\BossErea\MeetingDeputy;
 
-interface IMeetingDeputyGovernorRepository {
+use App\Domain\Interfaces\IBaseRepository;
 
-    public function list(array $filters);
-    public function findById(int $id);
+interface IMeetingDeputyGovernorRepository  extends IBaseRepository{
+
     public function findActionsById(int $id);
     public function findApprovalsById(int $id);
     public function findBoardById(int $id);
-    public function create(array $data);
-    public function update(array $data);
-    public function delete(int $id);
     public function add_approval(array $data);
     public function update_approval(array $data);
     public function add_action(array $data);

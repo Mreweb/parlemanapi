@@ -2,12 +2,8 @@
 
 namespace App\Domain\Interfaces\Common\PerlemanPeriod;
 
-interface IParlemanPeriodRepository{
-    public function list(array $filters);
-    public function all();
-    public function findById(int $id);
-    public function create(array $data);
-    public function update(array $data);
-    public function delete(int $id);
+use App\Domain\Interfaces\IBaseRepository;
+
+interface IParlemanPeriodRepository  extends IBaseRepository{
 
 }

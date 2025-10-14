@@ -10,6 +10,30 @@ use Illuminate\Support\Facades\DB;
 
 class RuleFortyFiveRepository implements IRuleFortyFiveRepository
 {
+    public function all(array $filters)
+    {
+        $query = RuleFortyFiveEloquent::query();
+        $query->select('person_rule_forty_five.*',
+            'period_title',
+            'president_name',
+            'gov_period_name');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_rule_forty_five.rule_forty_five_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_rule_forty_five.rule_forty_five_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_rule_forty_five.rule_forty_five_parliament_period_id');
+
+        if (!empty($filters['rule_forty_five_president_id'])) {
+            $query->where('rule_forty_five_president_id', 'like', '%' . $filters['rule_forty_five_president_id'] . '%');
+        }
+        if (!empty($filters['rule_forty_five_gov_period_id'])) {
+            $query->where('rule_forty_five_gov_period_id', 'like', '%' . $filters['rule_forty_five_gov_period_id'] . '%');
+        }
+        if (!empty($filters['rule_forty_five_parliament_period_id'])) {
+            $query->where('rule_forty_five_parliament_period_id', 'like', '%' . $filters['rule_forty_five_parliament_period_id'] . '%');
+        }
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
 
     public function list(array $filters)
     {

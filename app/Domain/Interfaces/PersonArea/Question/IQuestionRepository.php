@@ -2,15 +2,12 @@
 
 namespace App\Domain\Interfaces\PersonArea\Question;
 
-interface IQuestionRepository {
+use App\Domain\Interfaces\IBaseRepository;
 
-    public function list(array $filters);
-    public function findById(int $id);
+interface IQuestionRepository  extends IBaseRepository{
+
     public function findWorksheetMediaById(int $id);
     public function findSignaturesById(int $id);
-    public function create(array $data);
-    public function update(array $data);
-    public function delete(int $id);
 
 }
 

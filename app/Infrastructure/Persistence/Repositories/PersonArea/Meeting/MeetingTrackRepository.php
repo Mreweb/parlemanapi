@@ -7,6 +7,17 @@ use App\Infrastructure\Persistence\Eloquent\PersonArea\Meeting\PersonMeetingTrac
 
 class MeetingTrackRepository implements IMeetingRepository {
 
+    public function all(array $filters){
+        $query = PersonMeetingTrackEloquent::query();
+        $query->select(
+            'meeting_track_meeting_id',
+            'meeting_track_description',
+            'person_meeting_track.created_at',
+            'person_meeting_track.updated_at');
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
     public function list(array $filters){
         $query = PersonMeetingTrackEloquent::query();
         $query->select(
@@ -54,17 +65,14 @@ class MeetingTrackRepository implements IMeetingRepository {
             return false;
         }
     }
-
     public function add_meeting_track(array $data)
     {
         // TODO: Implement add_meeting_track() method.
     }
-
     public function update_meeting_track(array $data)
     {
         // TODO: Implement update_meeting_track() method.
     }
-
     public function get_meeting_track(int $id)
     {
         // Just For Compatible with Meeting Interface

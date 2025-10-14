@@ -2,7 +2,6 @@
 
 namespace App\Infrastructure\Persistence\Repositories\PersonArea\Person;
 
-
 use App\Domain\Interfaces\PersonArea\Person\IPersonRepository;
 use App\Infrastructure\Persistence\Eloquent\Common\Commission\PersonCommissionEloquent;
 use App\Infrastructure\Persistence\Eloquent\Common\Election\PersonElectionEloquent;
@@ -21,14 +20,28 @@ use App\Infrastructure\Persistence\Eloquent\PersonArea\RuleTTF\RuleTTFEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Trip\TripEloquent;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\VoteConfidence\VoteConfidenceEloquent;
 
-class PersonRepository implements IPersonRepository {
+class PersonRepository implements IPersonRepository{
 
-    public function list(array $filters){
+    public function all(array $filters)
+    {
         $query = PersonEloquent::query();
-        $query->select('person_id','person_name','person_last_name',
-            'person_national_code','person_phone','person_email',
-            'person_gender','person_province_id','username','person_image',
-            'created_at','updated_at'
+        $query->select('person_id', 'person_name', 'person_last_name',
+            'person_national_code', 'person_phone', 'person_email',
+            'person_gender', 'person_province_id', 'username', 'person_image',
+            'created_at', 'updated_at'
+        );
+        $query->orderBy('person_id', 'DESC');
+        $data['count'] = $query->count();
+        $data['list'] = $query->get();
+        return $data;
+    }
+    public function list(array $filters)
+    {
+        $query = PersonEloquent::query();
+        $query->select('person_id', 'person_name', 'person_last_name',
+            'person_national_code', 'person_phone', 'person_email',
+            'person_gender', 'person_province_id', 'username', 'person_image',
+            'created_at', 'updated_at'
         );
         if (!empty($filters['person_national_code'])) {
             $query->where('person_national_code', $filters['person_national_code']);
@@ -42,9 +55,10 @@ class PersonRepository implements IPersonRepository {
         if (!empty($filters['person_last_name'])) {
             $query->where('person_last_name', 'like', '%' . $filters['person_last_name'] . '%');
         }
+        $query->orderBy('person_id', 'DESC');
         $data['count'] = $query->count();
         if (!empty($filters['page_index'])) {
-            $query->skip(--$filters['page_index']*$filters['page_size']);
+            $query->skip(--$filters['page_index'] * $filters['page_size']);
         }
         if (!empty($filters['page_size'])) {
             $query->take($filters['page_size']);
@@ -52,34 +66,70 @@ class PersonRepository implements IPersonRepository {
         $data['list'] = $query->get();
         return $data;
     }
-    public function findById(int $id){
+
+    public function findById(int $id)
+    {
         $query = PersonEloquent::query();
         $query->select('person_id'
-            ,'person_name',
+            , 'person_name',
             'person_image',
-            'person_last_name','person_role','person_national_code','person_phone','person_email','person_gender','person_province_id','username');
+            'person_last_name', 'person_role', 'person_national_code', 'person_phone', 'person_email', 'person_gender', 'person_province_id', 'username');
         $query->where('person_id', $id);
-        $data =  $query->get()->toArray()[0];
+        $data = $query->get()->toArray()[0];
         return $data;
     }
-    public function findByField($field, $value){
+
+    public function findByField($field, $value)
+    {
         $query = PersonEloquent::query();
-        $query->select('person_id','person_name','person_last_name','person_national_code','person_phone','person_email','person_gender','person_province_id','username');
+        $query->select('person_id', 'person_name', 'person_last_name', 'person_national_code', 'person_phone', 'person_email', 'person_gender', 'person_province_id', 'username');
         $query->where($field, $value);
         return $query->get()->toArray();
     }
-    public function create(array $data){
-        $person = $this->findByField('person_phone', $data['person_phone']);
+
+    public function create(array $data)
+    {
+        /*$person = $this->findByField('person_phone', $data['person_phone']);
         if($person){
             return [];
-        } else{
-            $data['password'] = md5($data['password']);
-            return PersonEloquent::create($data)['person_id'];
-        }
-    }
-    public function update(array $data){
+        } else{*/
 
-        if(isset($data['password']) &&  $data['password'] != '') {
+        if(!isset($data['password']) || ($data['password'] == "")) {
+            $data['password'] = "12345";
+        }
+        if(!isset($data['person_image']) || ($data['person_image'] == "")) {
+            $data['person_image'] = "-";
+        }
+        if(!isset($data['person_last_name']) || $data['person_last_name']=="" ) {
+            $data['person_last_name'] = "ln";
+        }
+        if(!isset($data['person_name']) || ($data['person_name'] == "")) {
+            $data['person_name'] = "fn";
+        }
+        if(!isset($data['person_national_code']) || ($data['person_national_code'] == "")) {
+            $data['person_national_code'] = "1234567890";
+        }
+        if(!isset($data['person_phone']) || ($data['person_phone'] == "")) {
+            $data['person_phone'] = "12345";
+        }
+        if(!isset($data['person_role']) || ($data['person_role'] == "")) {
+            $data['person_role'] = "parliament_person";
+        }
+        if(!isset($data['username']) || ($data['username'] == "")) {
+            $data['username'] = "username";
+        }
+        if(!isset($data['password']) || ($data['password'] == "")) {
+            $data['password'] = md5("password");
+        }
+
+        return PersonEloquent::create($data)['person_id'];
+        /*}*/
+    }
+
+    public function update(array $data)
+    {
+
+        if (isset($data['password']) && $data['password'] != '') {
             $data['password'] = md5($data['password']);
             $result = PersonEloquent::where('person_id', $data['person_id'])->update(
                 [
@@ -94,7 +144,7 @@ class PersonRepository implements IPersonRepository {
                     'password' => $data['password']
                 ]
             );
-        } else{
+        } else {
             $result = PersonEloquent::where('person_id', $data['person_id'])->update(
                 [
                     'person_name' => $data['person_name'],
@@ -110,78 +160,117 @@ class PersonRepository implements IPersonRepository {
         }
         return $result;
     }
-    public function delete(int $id){
+
+    public function delete(int $id)
+    {
         $province = PersonEloquent::findOrFail($id)->delete();
         return $province;
     }
-    public function update_fraction(array $data){
+
+    public function update_fraction(array $data)
+    {
         PersonFractionEloquent::where('person_id', $data['person_id'])->delete();
         return PersonFractionEloquent::create($data)['person_id'];
     }
-    public function update_election(array $data){
+
+    public function update_election(array $data)
+    {
         PersonElectionEloquent::where('person_id', $data['person_id'])->delete();
         return PersonElectionEloquent::create($data)['person_id'];
     }
-    public function update_commission(array $data){
+
+    public function update_commission(array $data)
+    {
         PersonCommissionEloquent::where('person_id', $data['person_id'])->delete();
         return PersonCommissionEloquent::create($data)['person_id'];
     }
 
-    private function get_person_commission($id){
+    private function get_person_commission($id)
+    {
         return PersonCommissionEloquent::query()
             ->join('commission', 'person_commission.commission_id', '=', 'commission.commission_id')
             ->where('person_commission.person_id', $id)
             ->get()->toArray();
     }
-    private function get_person_election($id){
+
+    private function get_person_election($id)
+    {
         return PersonElectionEloquent::query()
             ->join('election_location', 'person_election.election_id', '=', 'election_location.election_location_id')
             ->where('person_election.person_id', $id)
             ->get()->toArray();
     }
-    private function get_person_fraction($id){
+
+    private function get_person_fraction($id)
+    {
         return PersonFractionEloquent::query()
             ->join('fraction', 'fraction.fraction_id', '=', 'person_fraction.fraction_id')
             ->where('person_fraction.person_id', $id)
             ->get()->toArray();
     }
-    private function get_person_interpellations($id){
+
+    private function get_person_interpellations($id)
+    {
         return InterpellationsEloquent::query()->where('interpellation_person_id', $id)->get()->toArray();
     }
-    private function get_person_meeting($id){
+
+    private function get_person_meeting($id)
+    {
         return PersonMeetingEloquent::query()->where('meeting_person_id', $id)->get()->toArray();
     }
-    private function get_person_notice($id){
+
+    private function get_person_notice($id)
+    {
         return NoticeEloquent::query()->where('notice_person_id', $id)->get()->toArray();
     }
-    private function get_person_projects($id){
+
+    private function get_person_projects($id)
+    {
         return ProjectsEloquent::query()->where('project_person_id', $id)->get()->toArray();
     }
-    private function get_person_question($id){
+
+    private function get_person_question($id)
+    {
         return QuestionEloquent::query()->where('question_person_id', $id)->get()->toArray();
     }
-    private function get_person_requests($id){
+
+    private function get_person_requests($id)
+    {
         return PersonRequestEloquent::query()->where('request_person_id', $id)->get()->toArray();
     }
-    private function get_person_research($id){
+
+    private function get_person_research($id)
+    {
         return PersonResearchEloquent::query()->where('person_research_person_id', $id)->get()->toArray();
     }
-    private function get_person_rules($id){
+
+    private function get_person_rules($id)
+    {
         return PersonRulesEloquent::query()->where('rule_person_id', $id)->get()->toArray();
     }
-    private function get_person_rule_forty_five($id){
+
+    private function get_person_rule_forty_five($id)
+    {
         return RuleFortyFiveEloquent::query()->where('rule_forty_five_person_id', $id)->get()->toArray();
     }
-    private function get_person_rule_ttf($id){
+
+    private function get_person_rule_ttf($id)
+    {
         return RuleTTFEloquent::query()->where('rule_ttf_person_id', $id)->get()->toArray();
     }
-    private function get_person_trip($id){
+
+    private function get_person_trip($id)
+    {
         return TripEloquent::query()->where('trip_person_id', $id)->get()->toArray();
     }
-    private function get_person_vote_confidence($id){
+
+    private function get_person_vote_confidence($id)
+    {
         return VoteConfidenceEloquent::query()->where('vote_confidence_person_id', $id)->get()->toArray();
     }
-    public function get_all_info(int $id){
+
+    public function get_all_info(int $id)
+    {
         $result['person_info'] = $this->findById($id);
         $result['person_commission'] = $this->get_person_commission($id);
         $result['person_election'] = $this->get_person_election($id);
