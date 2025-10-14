@@ -72,13 +72,13 @@ class EnactmentRepository implements IEnactmentRepository {
             $query->where('enactment_title', 'like', '%' . $filters['enactment_title'] . '%');
         }
         if (!empty($filters['enactment_president_id'])) {
-            $query->where('enactment_president_id', 'like', '%' . $filters['enactment_president_id'] . '%');
+            $query->where('enactment_president_id',$filters['enactment_president_id']);
         }
         if (!empty($filters['project_gov_period_id'])) {
-            $query->where('enactment_gov_period_id', 'like', '%' . $filters['enactment_gov_period_id'] . '%');
+            $query->where('enactment_gov_period_id',$filters['enactment_gov_period_id'] );
         }
         if (!empty($filters['enactment_parliament_period_id'])) {
-            $query->where('enactment_parliament_period_id', 'like', '%' . $filters['enactment_parliament_period_id'] . '%');
+            $query->where('enactment_parliament_period_id', $filters['enactment_parliament_period_id']);
         }
         $data['count'] = $query->count();
         if (!empty($filters['page_index'])) {

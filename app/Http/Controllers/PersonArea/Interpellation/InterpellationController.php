@@ -132,6 +132,7 @@ class InterpellationController extends Controller{
      * @lrd:end
      */
     public function update(InterpellationUpdateRequest $request){
+
         $result = $this->service->update($request->validated());
         if($result){
             return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);

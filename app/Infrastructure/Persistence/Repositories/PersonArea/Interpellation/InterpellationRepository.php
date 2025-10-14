@@ -139,7 +139,7 @@ class InterpellationRepository implements IInterpellationsRepository{
             unset($data['attachments']);
             $result = InterpellationsEloquent::create($data);
 
-            foreach ($interpellations_opposing_person_ids as $signature_person_id) {
+            foreach ($interpellations_opposing_person_ids ?? [] as $signature_person_id) {
                 InterpellationOpposingEloquent::create(
                     [
                         'interpellation_id' => $result->interpellation_id,
@@ -147,7 +147,7 @@ class InterpellationRepository implements IInterpellationsRepository{
                     ]
                 );
             }
-            foreach ($interpellation_supporters_person_ids as $signature_person_id) {
+            foreach ($interpellation_supporters_person_ids ?? [] as $signature_person_id) {
                 InterpellationsSupportersEloquent::create(
                     [
                         'interpellation_id' => $result->interpellation_id,
@@ -155,7 +155,7 @@ class InterpellationRepository implements IInterpellationsRepository{
                     ]
                 );
             }
-            foreach ($interpellation_opt_person_ids as $signature_person_id) {
+            foreach ($interpellation_opt_person_ids ?? [] as $signature_person_id) {
                 InterpellationOptEloquent::create(
                     [
                         'interpellation_id' => $result->interpellation_id,
@@ -163,7 +163,7 @@ class InterpellationRepository implements IInterpellationsRepository{
                     ]
                 );
             }
-            foreach ($interpellation_return_opt_person_ids as $signature_person_id) {
+            foreach ($interpellation_return_opt_person_ids ?? [] as $signature_person_id) {
                 InterpellationReturnOptEloquent::create(
                     [
                         'interpellation_id' => $result->interpellation_id,
@@ -171,7 +171,7 @@ class InterpellationRepository implements IInterpellationsRepository{
                     ]
                 );
             }
-            foreach ($interpellation_signatures_person_ids as $signature_person_id) {
+            foreach ($interpellation_signatures_person_ids ?? [] as $signature_person_id) {
                 InterpellationsSignatoriesEloquent::create(
                     [
                         'interpellation_id' => $result->interpellation_id,
@@ -209,7 +209,7 @@ class InterpellationRepository implements IInterpellationsRepository{
             );
 
             InterpellationOpposingEloquent::where('interpellation_id', $data['interpellation_id'])->delete();
-            foreach ($interpellations_opposing_person_ids as $signature_person_id) {
+            foreach ($interpellations_opposing_person_ids ?? [] as $signature_person_id) {
                 InterpellationOpposingEloquent::create(
                     [
                         'interpellation_id' => $data['interpellation_id'],
@@ -219,7 +219,7 @@ class InterpellationRepository implements IInterpellationsRepository{
             }
 
             InterpellationsSupportersEloquent::where('interpellation_id', $data['interpellation_id'])->delete();
-            foreach ($interpellation_supporters_person_ids as $signature_person_id) {
+            foreach ($interpellation_supporters_person_ids ?? [] as $signature_person_id) {
                 InterpellationsSupportersEloquent::create(
                     [
                         'interpellation_id' => $data['interpellation_id'],
@@ -228,7 +228,7 @@ class InterpellationRepository implements IInterpellationsRepository{
                 );
             }
             InterpellationOptEloquent::where('interpellation_id', $data['interpellation_id'])->delete();
-            foreach ($interpellation_opt_person_ids as $signature_person_id) {
+            foreach ($interpellation_opt_person_ids ?? [] as $signature_person_id) {
                 InterpellationOptEloquent::create(
                     [
                         'interpellation_id' => $data['interpellation_id'],
@@ -237,7 +237,7 @@ class InterpellationRepository implements IInterpellationsRepository{
                 );
             }
             InterpellationReturnOptEloquent::where('interpellation_id', $data['interpellation_id'])->delete();
-            foreach ($interpellation_return_opt_person_ids as $signature_person_id) {
+            foreach ($interpellation_return_opt_person_ids ?? [] as $signature_person_id) {
                 InterpellationReturnOptEloquent::create(
                     [
                         'interpellation_id' => $data['interpellation_id'],
@@ -246,7 +246,7 @@ class InterpellationRepository implements IInterpellationsRepository{
                 );
             }
             InterpellationsSignatoriesEloquent::where('interpellation_id', $data['interpellation_id'])->delete();
-            foreach ($interpellation_signatures_person_ids as $signature_person_id) {
+            foreach ($interpellation_signatures_person_ids ?? [] as $signature_person_id) {
                 InterpellationsSignatoriesEloquent::create(
                     [
                         'interpellation_id' => $data['interpellation_id'],
@@ -265,7 +265,7 @@ class InterpellationRepository implements IInterpellationsRepository{
     {
         $city = $this->findById($id);
         if ($city) {
-            return QuestionEloquent::findOrFail($id)->delete();
+            return InterpellationsEloquent::findOrFail($id)->delete();
         } else {
             return false;
         }

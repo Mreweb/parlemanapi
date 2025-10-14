@@ -9,4 +9,5 @@ class CommissionEloquent extends Model{
     protected $table = 'commission';
     protected $primaryKey = 'commission_id';
     protected $fillable = ['commission_name'];
+
 }
