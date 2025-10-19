@@ -11,6 +11,6 @@ class ProvinceEloquent extends Model{
     protected $primaryKey = 'province_id';
     protected $fillable = ['province_name' , 'province_id' ];
     public function cities(){
-        return $this->hasMany(CityEloquent::class);
+        return $this->hasMany(CityEloquent::class , 'city_province_id' , 'province_id');
     }
 }
