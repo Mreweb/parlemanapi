@@ -24,11 +24,9 @@ class NoticeUpdateRequest extends FormRequest{
             'notice_session_number' => ['required'],
             'notice_subject' => ['required'],
             'notice_summary' => ['required'],
-            'notice_worksheet_media_id' => ['required'],
             'notice_to_person_id' => ['required'],
             'notice_ministry_id' => ['required'],
             'notice_designer_person_id' => ['required'],
-            'notice_answer_media_id' => ['required'],
             'notice_to_person_actions' => ['required'],
             'notice_signature_person_ids' => ['array'],
             'attachments' => ['array']

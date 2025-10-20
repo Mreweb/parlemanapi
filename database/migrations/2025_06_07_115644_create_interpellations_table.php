@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('interpellation_register_number')->comment('شماره ثبت');
             $table->string('interpellation_axis')->comment('محور استیضاح:');
             $table->longText('interpellation_summary')->comment('چکیده استیضاح');
-            $table->string('interpellation_worksheet_media_id')->comment('کاربرگ استیضاح');
-            $table->string('interpellation_correspondence_worksheet_media_id')->comment('مکاتبات مجلس با دولت');
             $table->string('interpellation_commission_id')->comment('کمیسیون تخصصی');
             $table->string('interpellation_commission_meeting_date')->comment('تاریج جلسه کمیسیون');
             $table->string('interpellation_commission_result')->comment('نتیجه بررسی در کمیسیون');

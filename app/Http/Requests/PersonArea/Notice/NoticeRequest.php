@@ -27,7 +27,6 @@ class NoticeRequest extends FormRequest{
             'notice_to_person_id' => ['required'],
             'notice_ministry_id' => ['required'],
             'notice_designer_person_id' => ['required'],
-            'notice_answer_media_id' => ['required'],
             'notice_to_person_actions' => ['required'],
             'notice_signature_person_ids' => ['array'],
             'attachments' => ['array']

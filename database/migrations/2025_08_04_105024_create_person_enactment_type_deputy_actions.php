@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('person_enactment_deputy_actions');
+        Schema::dropIfExists('person_enactment_type_deputy_actions');
     }
 };

@@ -21,7 +21,6 @@ class ResearchUpdateRequest extends FormRequest{
             'person_research_register_date' => ['required'],
             'person_research_subject' => ['required'],
             'person_research_summary' => ['required'],
-            'person_research_worksheet_media_id' => ['required'],
             'person_research_commission_id' => ['required'],
             'person_research_commission_result' => ['required'],
             'person_research_commission_number' => ['required'],

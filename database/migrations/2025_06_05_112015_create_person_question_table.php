@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('question_subject', 100)->comment('محور سوال');
             $table->string('question_area', 100)->comment('قلمرو سوال');
             $table->longText('question_summary')->comment('چکیده سوال')->nullable();
-            $table->string('question_worksheet_media_id', 100)->comment('کاربرگ سوال')->nullable();
             $table->integer('question_to_person_id')->comment('مخاطب سوال')->nullable();
             $table->integer('question_commission_id')->comment('کمیسیون تخصصی')->nullable();
             $table->string('question_commission_session_date', 100)->comment('تاریخ جلسه کمیسیون')->nullable();
@@ -33,7 +32,6 @@ return new class extends Migration
             $table->string('question_check_public_parliament_number', 100)->comment('شماره جلسه صحن علنی')->nullable();
             $table->enum('question_check_public_parliament_result',[1,2,3,4])->comment('نتیجه بررسی در صحن علنی')->nullable();
             $table->integer('question_check_public_parliament_ministry_id')->comment('مخاطب سوال')->nullable();
-            $table->string('question_answer_media_id', 100)->comment('پاسخ سوال')->nullable();
             $table->longText('question_to_person_actions')->comment('چکیده اقدامات دستگاه مخاطب سوال')->nullable();
             $table->timestamps();
             $table->softDeletes();

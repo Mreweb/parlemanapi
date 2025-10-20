@@ -21,7 +21,6 @@ class QuestionRequest extends FormRequest{
             'question_subject' => ['required'],
             'question_area' => ['required'],
             'question_summary' => ['required'],
-            'question_worksheet_media_id' => ['required'],
             'question_to_person_id' => ['required'],
             'question_commission_id' => ['required'],
             'question_commission_session_date' => ['required'],
@@ -31,7 +30,6 @@ class QuestionRequest extends FormRequest{
             'question_check_public_parliament_number' => ['required'],
             'question_check_public_parliament_result' => ['required'],
             'question_check_public_parliament_ministry_id' => ['required'],
-            'question_answer_media_id' => ['required'],
             'question_to_person_actions' => ['required'],
             'question_signature_person_ids' => ['array'],
             'attachments' => ['array']

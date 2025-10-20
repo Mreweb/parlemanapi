@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('rule_forty_five_register_number')->comment('شماره ثبت');
             $table->string('rule_forty_five_subject')->comment('موضوع درخواست');
             $table->longText('rule_forty_five_summary')->comment('چکیده موضوع');
-            $table->string('rule_forty_five_worksheet_id')->comment('کاربرگ');
             $table->string('rule_forty_five_commission_id')->comment('کمیسیون تخصصی');
             $table->string('rule_forty_five_commission_result')->comment('نتیجه بررسی در کمیسیون');
             $table->longText('rule_forty_five_commission_content')->comment('چکیده اقدامات در کمیسیون');

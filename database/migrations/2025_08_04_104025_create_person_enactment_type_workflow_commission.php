@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('person_enactment_check_workflow');
+        Schema::dropIfExists('person_enactment_type_workflow_commission');
     }
 };

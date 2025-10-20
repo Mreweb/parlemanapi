@@ -26,11 +26,9 @@ return new class extends Migration
             $table->string('notice_session_number', 100)->comment('شماره جلسه علنی صحن مجلس')->nullable();
             $table->string('notice_subject', 100)->comment('عنوان تذکر');
             $table->longText('notice_summary')->comment('چکیده تذکر')->nullable();
-            $table->string('notice_worksheet_media_id',100)->comment('کاربرگ تذکر')->nullable();
             $table->integer('notice_to_person_id')->comment('مخاطب تذکر')->nullable();
             $table->integer('notice_ministry_id')->comment('دستگاه تذکر')->nullable();
             $table->integer('notice_designer_person_id')->comment('طراح تذکر')->nullable();
-            $table->string('notice_answer_media_id', 100)->comment('پاسخ تذکر')->nullable();
             $table->longText('notice_to_person_actions')->comment('چکیده اقدامات دستگاه مخاطب تذکر')->nullable();
             $table->timestamps();
             $table->softDeletes();

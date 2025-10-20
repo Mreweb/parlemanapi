@@ -20,7 +20,6 @@ class InterpellationUpdateRequest extends FormRequest{
             'interpellation_register_number' => ['required'],
             'interpellation_axis' => ['required'],
             'interpellation_summary' => ['required'],
-            'interpellation_worksheet_media_id' => [],
             'interpellation_correspondence_worksheet_media_id' => [],
             'interpellation_commission_id' => ['required'],
             'interpellation_commission_meeting_date' => ['required'],

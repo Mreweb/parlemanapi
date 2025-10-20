@@ -23,8 +23,7 @@ return new class extends Migration
             $table->string('person_research_register_date')->comment('تاریخ ثبت');
             $table->string('person_research_subject')->comment('موضوع تحقیق');
             $table->longText('person_research_summary')->comment('چکیده تحقیق');
-            $table->string('person_research_worksheet_media_id')->comment('کاربرگ تحقیق');
-            $table->string('person_research_commission_id')->comment('کمیسیون تخصصی');
+             $table->string('person_research_commission_id')->comment('کمیسیون تخصصی');
             $table->longText('person_research_commission_result')->comment('نتیجه در کمیسیون تخصصی');
             $table->string('person_research_commission_number')->comment('شماره جلسه صحن علنی');
             $table->string('person_research_public_court_date')->comment('تاریخ طرح در صحن علنی');
