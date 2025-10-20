@@ -1,34 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\PersonArea\Notice;
-use App\Application\Services\PersonArea\Notice\NoticeService;
+namespace App\Http\Controllers\PersonArea\Statement;
+use App\Application\Services\PersonArea\Statement\StatementService;
 use App\Application\Services\Utility\DBMessageService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PersonArea\Notice\NoticeRequest;
-use App\Http\Requests\PersonArea\Notice\NoticeUpdateRequest;
+use App\Http\Requests\PersonArea\Statement\StatementRequest;
+use App\Http\Requests\PersonArea\Statement\StatementUpdateRequest;
 use Illuminate\Http\Request;
 
-class NoticeController extends Controller{
+class StatementController extends Controller{
 
-    public function __construct(private NoticeService $service) {}
+    public function __construct(private StatementService $service) {}
 
     /**
      * @lrd:start
-     * فهرست تذکر ها
+     * فهرست بیانیه ها
      *
-     * notice_subject موضوع تذکر
+     * statement_subject موضوع بیانیه
      *
-     *  notice_president_id شناسه رئیس جمهور
+     *  statement_president_id شناسه رئیس جمهور
      *
-     *  notice_gov_period_id شماره دولت
+     *  statement_gov_period_id شماره دولت
      *
-     *  notice_parliament_period_id دوره مجلس
+     *  statement_parliament_period_id دوره مجلس
      *
      * @lrd:end
-     * @LRDparam notice_subject string
-     * @LRDparam notice_president_id string
-     * @LRDparam notice_gov_period_id string
-     * @LRDparam notice_parliament_period_id string
+     * @LRDparam statement_subject string
+     * @LRDparam statement_president_id string
+     * @LRDparam statement_gov_period_id string
+     * @LRDparam statement_parliament_period_id string
      * @LRDparam page_index integer
      * @LRDparam page_size integer
      */
@@ -40,7 +40,7 @@ class NoticeController extends Controller{
     }
     /**
      * @lrd:start
-     * نمایش تذکر
+     * نمایش بیانیه
      * @lrd:end
      */
     public function show($id){
@@ -53,47 +53,47 @@ class NoticeController extends Controller{
 
     /**
      * @lrd:start
-     * افزودن تذکر
+     * افزودن بیانیه
      *
-     *  notice_person_id شخصی که تذکر دهنده بوده
+     *  statement_person_id شخصی که بیانیه دهنده بوده
      *
-     *  notice_president_id در کدام شخص ریاست جمهوری تذکر داده شده
+     *  statement_president_id در کدام شخص ریاست جمهوری بیانیه داده شده
      *
-     *  notice_gov_period_id در کدام دوره دولت
+     *  statement_gov_period_id در کدام دوره دولت
      *
-     *  notice_parliament_period_id در کدام دوره مجلس
+     *  statement_parliament_period_id در کدام دوره مجلس
      *
-     *  notice_meeting اجلاسیه
+     *  statement_meeting اجلاسیه
      *
-     *  notice_type نوع تذکر
+     *  statement_type نوع بیانیه
      *
-     *  notice_reading_date تاریخ قرائت
+     *  statement_reading_date تاریخ قرائت
      *
-     *  notice_public_court_reading_date تاریخ قرائت در صحن
+     *  statement_public_court_reading_date تاریخ قرائت در صحن
      *
-     *  notice_register_number شماره ثبت
+     *  statement_register_number شماره ثبت
      *
-     *   notice_session_number شماره جلسه علنی صحن مجلس
+     *   statement_session_number شماره جلسه علنی صحن مجلس
      *
-     *   notice_subject عنوان تذکر
+     *   statement_subject عنوان بیانیه
      *
-     *   notice_summary چکیده تذکر
+     *   statement_summary چکیده بیانیه
      *
-     *   notice_to_person_id مخاطب تذکر
+     *   statement_to_person_id مخاطب بیانیه
      *
-     *   notice_ministry_id دستگاه تذکر
+     *   statement_ministry_id دستگاه بیانیه
      *
-     *   notice_designer_person_id طراح تذکر
+     *   statement_designer_person_id طراح بیانیه
      *
-     *   notice_to_person_actions چکیده اقدامات دستگاه مخاطب تذکر
+     *   statement_to_person_actions چکیده اقدامات دستگاه مخاطب بیانیه
      *
-     *   notice_signature_person_ids آرایه افراد امضا گنندگان تذکر
+     *   statement_signature_person_ids آرایه افراد امضا گنندگان بیانیه
      *
      *   attachments آرایه ای از پیوست ها
      *
      * @lrd:end
      */
-    public function store(NoticeRequest $request){
+    public function store(StatementRequest $request){
         $result = $this->service->create($request->validated());
         if($result){
             return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
@@ -103,10 +103,10 @@ class NoticeController extends Controller{
     }
     /**
      * @lrd:start
-     * ویرایش تذکر
+     * ویرایش بیانیه
      * @lrd:end
      */
-    public function update(NoticeUpdateRequest $request){
+    public function update(StatementUpdateRequest $request){
         $result = $this->service->update($request->validated());
         if($result){
             return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
@@ -116,7 +116,7 @@ class NoticeController extends Controller{
     }
     /**
      * @lrd:start
-     * حذف تذکر
+     * حذف بیانیه
      * @lrd:end
      */
     public function destroy($id){

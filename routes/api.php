@@ -28,6 +28,8 @@ use App\Http\Controllers\PersonArea\Requests\RequestsController;
 use App\Http\Controllers\PersonArea\RuleFortyFive\RuleFortyFiveController;
 use App\Http\Controllers\PersonArea\Rules\RulesController;
 use App\Http\Controllers\PersonArea\RuleTTF\RuleTTFController;
+use App\Http\Controllers\PersonArea\Speech\SpeechController;
+use App\Http\Controllers\PersonArea\Statement\StatementController;
 use App\Http\Controllers\PersonArea\Trip\TripsController;
 use App\Http\Controllers\PersonArea\VoteConfident\VoteConfidenceController;
 use App\Http\Controllers\Utility\Captcha\Captcha;
@@ -143,6 +145,20 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::post('/', [NoticeController::class, 'store']);
         Route::put('/', [NoticeController::class, 'update']);
         Route::delete('/{id}', [NoticeController::class, 'destroy']);
+    });
+    Route::prefix('speech')->group(function () {
+        Route::get('/', [SpeechController::class, 'index']);
+        Route::get('/{id}', [SpeechController::class, 'show']);
+        Route::post('/', [SpeechController::class, 'store']);
+        Route::put('/', [SpeechController::class, 'update']);
+        Route::delete('/{id}', [SpeechController::class, 'destroy']);
+    });
+    Route::prefix('statement')->group(function () {
+        Route::get('/', [StatementController::class, 'index']);
+        Route::get('/{id}', [StatementController::class, 'show']);
+        Route::post('/', [StatementController::class, 'store']);
+        Route::put('/', [StatementController::class, 'update']);
+        Route::delete('/{id}', [StatementController::class, 'destroy']);
     });
     Route::prefix('question')->group(function () {
         Route::get('/', [QuestionController::class, 'index']);

@@ -31,6 +31,8 @@ use App\Domain\Interfaces\PersonArea\Requests\IRequestsRepository;
 use App\Domain\Interfaces\PersonArea\RuleFortyFive\IRuleFortyFiveRepository;
 use App\Domain\Interfaces\PersonArea\Rules\IRulesRepository;
 use App\Domain\Interfaces\PersonArea\RuleTTF\IRuleTTFRepository;
+use App\Domain\Interfaces\PersonArea\Speech\ISpeechRepository;
+use App\Domain\Interfaces\PersonArea\Statement\IStatementRepository;
 use App\Domain\Interfaces\PersonArea\Trip\ITripRepository;
 use App\Domain\Interfaces\PersonArea\VoteConfident\IVoteConfidenceRepository;
 use App\Domain\Interfaces\Utility\Captcha\ICaptchaRepository;
@@ -65,6 +67,8 @@ use App\Infrastructure\Persistence\Repositories\PersonArea\Research\ResearchRepo
 use App\Infrastructure\Persistence\Repositories\PersonArea\RuleFortyFive\RuleFortyFiveRepository;
 use App\Infrastructure\Persistence\Repositories\PersonArea\Rules\PersonRulesRepository;
 use App\Infrastructure\Persistence\Repositories\PersonArea\RuleTTF\RuleTTFRepository;
+use App\Infrastructure\Persistence\Repositories\PersonArea\Speech\SpeechRepository;
+use App\Infrastructure\Persistence\Repositories\PersonArea\Statement\StatementRepository;
 use App\Infrastructure\Persistence\Repositories\PersonArea\Trip\TripRepository;
 use App\Infrastructure\Persistence\Repositories\PersonArea\VoteConfidence\VoteConfidenceRepository;
 use App\Infrastructure\Persistence\Repositories\Utility\Media\File\UploadRepository;
@@ -109,6 +113,8 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->singleton(IReportRepository::class, ReportRepository::class);
         $this->app->singleton(IEnactmentRepository::class, EnactmentRepository::class);
         $this->app->singleton(IPlanRepository::class, PlanRepository::class);
+        $this->app->singleton(ISpeechRepository::class, SpeechRepository::class);
+        $this->app->singleton(IStatementRepository::class, StatementRepository::class);
     }
     public function boot(): void{
         Schema::defaultStringLength(250);

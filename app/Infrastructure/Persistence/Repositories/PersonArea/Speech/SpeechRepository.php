@@ -19,11 +19,11 @@ class SpeechRepository implements ISpeechRepository{
             'president_name',
             'gov_period_name',
             'speech_session_number',
-            'person_notice.created_at',
-            'person_notice.updated_at');
-        $query->leftJoin('president', 'president.president_id', '=', 'person_notice.speech_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_notice.speech_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_notice.speech_parliament_period_id');
+            'person_speech.created_at',
+            'person_speech.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_speech.speech_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_speech.speech_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_speech.speech_parliament_period_id');
         if (!empty($filters['speech_subject'])) {
             $query->where('speech_subject', 'like', '%' . $filters['speech_subject'] . '%');
         }
@@ -53,11 +53,11 @@ class SpeechRepository implements ISpeechRepository{
             'president_name',
             'gov_period_name',
             'speech_session_number',
-            'person_notice.created_at',
-            'person_notice.updated_at');
-        $query->leftJoin('president', 'president.president_id', '=', 'person_notice.speech_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_notice.speech_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_notice.speech_parliament_period_id');
+            'person_speech.created_at',
+            'person_speech.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_speech.speech_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_speech.speech_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_speech.speech_parliament_period_id');
         if (!empty($filters['speech_subject'])) {
             $query->where('speech_subject', 'like', '%' . $filters['speech_subject'] . '%');
         }
@@ -84,16 +84,16 @@ class SpeechRepository implements ISpeechRepository{
     {
         $query = SpeechEloquent::query();
         $query->select(
-            'person_notice.*',
+            'person_speech.*',
             'period_title',
             'president_name',
             'gov_period_name',
             'speech_session_number',
-            'person_notice.created_at',
-            'person_notice.updated_at');
-        $query->leftJoin('president', 'president.president_id', '=', 'person_notice.speech_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_notice.speech_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_notice.speech_parliament_period_id');
+            'person_speech.created_at',
+            'person_speech.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_speech.speech_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_speech.speech_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_speech.speech_parliament_period_id');
         $query->where('speech_id', $id);
         $result = $query->get()->toArray();
         if(!isset($result[0])){

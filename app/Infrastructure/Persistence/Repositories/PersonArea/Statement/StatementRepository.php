@@ -20,11 +20,11 @@ class StatementRepository implements IStatementRepository{
             'president_name',
             'gov_period_name',
             'statement_session_number',
-            'person_notice.created_at',
-            'person_notice.updated_at');
-        $query->leftJoin('president', 'president.president_id', '=', 'person_notice.statement_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_notice.statement_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_notice.statement_parliament_period_id');
+            'person_statement.created_at',
+            'person_statement.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_statement.statement_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_statement.statement_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_statement.statement_parliament_period_id');
         if (!empty($filters['statement_subject'])) {
             $query->where('statement_subject', 'like', '%' . $filters['statement_subject'] . '%');
         }
@@ -54,11 +54,11 @@ class StatementRepository implements IStatementRepository{
             'president_name',
             'gov_period_name',
             'statement_session_number',
-            'person_notice.created_at',
-            'person_notice.updated_at');
-        $query->leftJoin('president', 'president.president_id', '=', 'person_notice.statement_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_notice.statement_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_notice.statement_parliament_period_id');
+            'person_statement.created_at',
+            'person_statement.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_statement.statement_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_statement.statement_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_statement.statement_parliament_period_id');
         if (!empty($filters['statement_subject'])) {
             $query->where('statement_subject', 'like', '%' . $filters['statement_subject'] . '%');
         }
@@ -85,16 +85,16 @@ class StatementRepository implements IStatementRepository{
     {
         $query = StatementEloquent::query();
         $query->select(
-            'person_notice.*',
+            'person_statement.*',
             'period_title',
             'president_name',
             'gov_period_name',
             'statement_session_number',
-            'person_notice.created_at',
-            'person_notice.updated_at');
-        $query->leftJoin('president', 'president.president_id', '=', 'person_notice.statement_president_id');
-        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_notice.statement_gov_period_id');
-        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_notice.statement_parliament_period_id');
+            'person_statement.created_at',
+            'person_statement.updated_at');
+        $query->leftJoin('president', 'president.president_id', '=', 'person_statement.statement_president_id');
+        $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_statement.statement_gov_period_id');
+        $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_statement.statement_parliament_period_id');
         $query->where('statement_id', $id);
         $result = $query->get()->toArray();
         if(!isset($result[0])){

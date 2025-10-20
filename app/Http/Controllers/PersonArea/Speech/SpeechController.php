@@ -1,34 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\PersonArea\Notice;
-use App\Application\Services\PersonArea\Notice\NoticeService;
+namespace App\Http\Controllers\PersonArea\Speech;
+use App\Application\Services\PersonArea\Speech\SpeechService;
 use App\Application\Services\Utility\DBMessageService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PersonArea\Notice\NoticeRequest;
-use App\Http\Requests\PersonArea\Notice\NoticeUpdateRequest;
+use App\Http\Requests\PersonArea\Speech\SpeechRequest;
+use App\Http\Requests\PersonArea\Speech\SpeechUpdateRequest;
 use Illuminate\Http\Request;
 
-class NoticeController extends Controller{
+class SpeechController extends Controller{
 
-    public function __construct(private NoticeService $service) {}
+    public function __construct(private SpeechService $service) {}
 
     /**
      * @lrd:start
-     * فهرست تذکر ها
+     * فهرست نطق_ ها
      *
-     * notice_subject موضوع تذکر
+     * speech_subject موضوع نطق_
      *
-     *  notice_president_id شناسه رئیس جمهور
+     *  speech_president_id شناسه رئیس جمهور
      *
-     *  notice_gov_period_id شماره دولت
+     *  speech_gov_period_id شماره دولت
      *
-     *  notice_parliament_period_id دوره مجلس
+     *  speech_parliament_period_id دوره مجلس
      *
      * @lrd:end
-     * @LRDparam notice_subject string
-     * @LRDparam notice_president_id string
-     * @LRDparam notice_gov_period_id string
-     * @LRDparam notice_parliament_period_id string
+     * @LRDparam speech_subject string
+     * @LRDparam speech_president_id string
+     * @LRDparam speech_gov_period_id string
+     * @LRDparam speech_parliament_period_id string
      * @LRDparam page_index integer
      * @LRDparam page_size integer
      */
@@ -40,7 +40,7 @@ class NoticeController extends Controller{
     }
     /**
      * @lrd:start
-     * نمایش تذکر
+     * نمایش نطق_
      * @lrd:end
      */
     public function show($id){
@@ -53,47 +53,47 @@ class NoticeController extends Controller{
 
     /**
      * @lrd:start
-     * افزودن تذکر
+     * افزودن نطق_
      *
-     *  notice_person_id شخصی که تذکر دهنده بوده
+     *  speech_person_id شخصی که نطق_ دهنده بوده
      *
-     *  notice_president_id در کدام شخص ریاست جمهوری تذکر داده شده
+     *  speech_president_id در کدام شخص ریاست جمهوری نطق_ داده شده
      *
-     *  notice_gov_period_id در کدام دوره دولت
+     *  speech_gov_period_id در کدام دوره دولت
      *
-     *  notice_parliament_period_id در کدام دوره مجلس
+     *  speech_parliament_period_id در کدام دوره مجلس
      *
-     *  notice_meeting اجلاسیه
+     *  speech_meeting اجلاسیه
      *
-     *  notice_type نوع تذکر
+     *  speech_type نوع نطق_
      *
-     *  notice_reading_date تاریخ قرائت
+     *  speech_reading_date تاریخ قرائت
      *
-     *  notice_public_court_reading_date تاریخ قرائت در صحن
+     *  speech_public_court_reading_date تاریخ قرائت در صحن
      *
-     *  notice_register_number شماره ثبت
+     *  speech_register_number شماره ثبت
      *
-     *   notice_session_number شماره جلسه علنی صحن مجلس
+     *   speech_session_number شماره جلسه علنی صحن مجلس
      *
-     *   notice_subject عنوان تذکر
+     *   speech_subject عنوان نطق_
      *
-     *   notice_summary چکیده تذکر
+     *   speech_summary چکیده نطق_
      *
-     *   notice_to_person_id مخاطب تذکر
+     *   speech_to_person_id مخاطب نطق_
      *
-     *   notice_ministry_id دستگاه تذکر
+     *   speech_ministry_id دستگاه نطق_
      *
-     *   notice_designer_person_id طراح تذکر
+     *   speech_designer_person_id طراح نطق_
      *
-     *   notice_to_person_actions چکیده اقدامات دستگاه مخاطب تذکر
+     *   speech_to_person_actions چکیده اقدامات دستگاه مخاطب نطق_
      *
-     *   notice_signature_person_ids آرایه افراد امضا گنندگان تذکر
+     *   speech_signature_person_ids آرایه افراد امضا گنندگان نطق_
      *
      *   attachments آرایه ای از پیوست ها
      *
      * @lrd:end
      */
-    public function store(NoticeRequest $request){
+    public function store(SpeechRequest $request){
         $result = $this->service->create($request->validated());
         if($result){
             return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
@@ -103,10 +103,10 @@ class NoticeController extends Controller{
     }
     /**
      * @lrd:start
-     * ویرایش تذکر
+     * ویرایش نطق_
      * @lrd:end
      */
-    public function update(NoticeUpdateRequest $request){
+    public function update(SpeechUpdateRequest $request){
         $result = $this->service->update($request->validated());
         if($result){
             return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
@@ -116,7 +116,7 @@ class NoticeController extends Controller{
     }
     /**
      * @lrd:start
-     * حذف تذکر
+     * حذف نطق_
      * @lrd:end
      */
     public function destroy($id){
