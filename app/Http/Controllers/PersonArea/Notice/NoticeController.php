@@ -36,6 +36,7 @@ class NoticeController extends Controller{
     public function index(Request $request){
         $filters = $request->all();
         $result = $this->service->list($filters);
+
         return response()->json( DBMessageService::get_message($result) , 201, [], JSON_UNESCAPED_UNICODE);
     }
     /**

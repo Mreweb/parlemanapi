@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('rule_ttf_register_number')->comment('شماره ثبت');
             $table->string('rule_ttf_subject')->comment('موضوع درخواست ماده 234');
             $table->longText('rule_ttf_summary')->comment('چکیده موضوع');
-            $table->string('rule_ttf_worksheet_id')->comment('کاربرگ');
             $table->string('rule_ttf_commission_id')->comment('کمیسیون تخصصی');
             $table->string('rule_ttf_commission_result')->comment('نتیجه در کمیسیون تخصصی');
             $table->string('rule_ttf_public_court_date')->comment('تاریخ بررسی در صحن علنی');

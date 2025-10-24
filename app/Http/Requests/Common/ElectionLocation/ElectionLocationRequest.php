@@ -11,7 +11,7 @@ class ElectionLocationRequest extends FormRequest{
     }
     public function rules(): array{
         return [
-             'election_location_title' => ['required', 'string'  , 'max:255' , 'min:3'],
+            'election_location_title' => ['required', 'string'  , 'max:255' , 'min:3'],
             'election_location_province_id' => ['required' , 'integer'],
             'election_location_cities' => ['required', 'array'],
         ];

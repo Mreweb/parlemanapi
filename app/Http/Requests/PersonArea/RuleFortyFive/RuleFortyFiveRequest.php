@@ -19,7 +19,6 @@ class RuleFortyFiveRequest extends FormRequest{
             'rule_forty_five_register_number' => ['required'],
             'rule_forty_five_subject' => ['required'],
             'rule_forty_five_summary' => ['required'],
-            'rule_forty_five_worksheet_id' => ['required'],
             'rule_forty_five_commission_id' => ['required'],
             'rule_forty_five_commission_result' => ['required'],
             'rule_forty_five_commission_content' => ['required'],

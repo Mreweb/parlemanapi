@@ -61,6 +61,9 @@ class NoticeRepository implements INoticeRepository
         $query->leftJoin('president', 'president.president_id', '=', 'person_notice.notice_president_id');
         $query->leftJoin('gov_period', 'gov_period.gov_period_id', '=', 'person_notice.notice_gov_period_id');
         $query->leftJoin('parleman_period', 'parleman_period.period_id', '=', 'person_notice.notice_parliament_period_id');
+
+        //$query->notice_subject($filters);
+
         if (!empty($filters['notice_subject'])) {
             $query->where('notice_subject', 'like', '%' . $filters['notice_subject'] . '%');
         }

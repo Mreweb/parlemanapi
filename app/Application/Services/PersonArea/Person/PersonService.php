@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Application\Services\PersonArea\Person;
-
 use App\Domain\Interfaces\PersonArea\Person\IPersonRepository;
 
-class PersonService{
+class PersonService {
 
     public function __construct(private IPersonRepository $repository){}
 

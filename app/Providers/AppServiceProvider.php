@@ -49,8 +49,7 @@ use App\Infrastructure\Persistence\Repositories\Common\Country\CityRepository;
 use App\Infrastructure\Persistence\Repositories\Common\Country\ProvinceRepository;
 use App\Infrastructure\Persistence\Repositories\Common\Election\ElectionLocationRepository;
 use App\Infrastructure\Persistence\Repositories\Common\Fraction\FractionRepository;
-use App\Infrastructure\Persistence\Repositories\Common\GovPeriod\GovPeriodRepository;
-use App\Infrastructure\Persistence\Repositories\Common\Ministry\MinistryRepository;
+ use App\Infrastructure\Persistence\Repositories\Common\Ministry\MinistryRepository;
 use App\Infrastructure\Persistence\Repositories\Common\ParlemanPeriod\ParlemanPeriodRepository;
 use App\Infrastructure\Persistence\Repositories\Common\President\PresidentRepository;
 use App\Infrastructure\Persistence\Repositories\Common\PresidentCabinet\PresidentCabinetRepository;
@@ -86,7 +85,6 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->singleton(ICommissionRepository::class, CommissionRepository::class);
         $this->app->singleton(IElectionLocationRepository::class, ElectionLocationRepository::class);
         $this->app->singleton(IFractionRepository::class, FractionRepository::class);
-        $this->app->singleton(IGovPeriodRepository::class, GovPeriodRepository::class);
         $this->app->singleton(IInterpellationsRepository::class, InterpellationRepository::class);
         $this->app->singleton(IMeetingRepository::class, MeetingRepository::class);
         $this->app->singleton(IMinistryRepository::class, MinistryRepository::class);

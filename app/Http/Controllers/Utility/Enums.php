@@ -5,8 +5,6 @@ use App\Http\Controllers\Controller;
 
 class Enums extends Controller{
 
-
-
     public function index()
     {
         return response()->json([
@@ -71,6 +69,20 @@ class Enums extends Controller{
                 '203' => 'سایر موارد'
             ],
             'notice_type' => [
+                '1' => 'کتبی',
+                '2' => 'شفاهی',
+                '3' => 'نطق میان دستور',
+                '4' => 'تذکر آئین نامه ای',
+                '5' => 'اخطار قانون اساسی'
+            ],
+            'statement_type' => [
+                '1' => 'کتبی',
+                '2' => 'شفاهی',
+                '3' => 'نطق میان دستور',
+                '4' => 'تذکر آئین نامه ای',
+                '5' => 'اخطار قانون اساسی'
+            ],
+            'speech_type' => [
                 '1' => 'کتبی',
                 '2' => 'شفاهی',
                 '3' => 'نطق میان دستور',
