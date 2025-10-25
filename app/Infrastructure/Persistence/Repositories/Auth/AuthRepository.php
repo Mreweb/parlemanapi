@@ -5,8 +5,8 @@ use App\Application\Services\Utility\DBMessageService;
 use App\Domain\Interfaces\Auth\IAuthRepository;
 use App\Infrastructure\Persistence\Eloquent\PersonArea\Person\PersonEloquent;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Firebase\JWT\Key;
 use Firebase\JWT\JWT;
 
 class AuthRepository implements IAuthRepository {
@@ -40,18 +40,19 @@ class AuthRepository implements IAuthRepository {
         if($person->count() == 0){
             return response()->json( DBMessageService::get_message(null,'ErrorAction',"اطلاعات نامعتبر است" ) , 400, [], JSON_UNESCAPED_UNICODE);
         } else{
-            $key = "2r0InITOevKfz9jZg7jeaG1tQmf67uTtmSTwqreuxzReDoXgDGgscDTEcmmlLwZT";
+            $key = env("JWT_SECRET");
+
             $payload = $person->toArray()[0];
-            foreach ($payload as $key=>$value) {
+            /*foreach ($payload as $key=>$value) {
                 $payload[$key] = encrypt($payload[$key]);
-            }
+            }*/
             $payload['token_create_date'] = time();
             $payload['token_expire_time'] = time()+env('TOKEN_EXPIRE_TIME');
             $jwt = JWT::encode($payload, $key, 'HS256');
             return response()->json( DBMessageService::get_message(
                 [
-                    'token'=> $jwt
-                    //'decoded'=> JWT::decode($jwt, new Key($key, 'HS256'))
+                    'token'=> $jwt,
+                    'decoded'=> JWT::decode($jwt, new Key($key, 'HS256'))
                 ],
                 'SuccessAction',"ورود با موفقیت انجام شد" ) , 201, [], JSON_UNESCAPED_UNICODE);
         }

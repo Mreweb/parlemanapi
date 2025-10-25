@@ -37,6 +37,7 @@ use App\Http\Controllers\Utility\Enums;
 use App\Http\Controllers\Utility\Media\Upload;
 use App\Http\Controllers\Utility\Report\ReportController;
 use App\Http\Middleware\JWTAuthCheck;
+use App\Http\Middleware\JWTAuthMultiRole;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/captcha', [Captcha::class, 'generate']);
@@ -49,7 +50,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
     Route::get('/enum', [Enums::class, 'index']);
     Route::post('/file', [Upload::class, 'save']);
     Route::get('/file/{id}', [Upload::class, 'get_file']);
-    Route::prefix('provinces')->group(function () {
+    Route::prefix('provinces')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [ProvinceController::class, 'index']);
         Route::get('/all', [ProvinceController::class, 'all']);
         Route::get('/{id}', [ProvinceController::class, 'show']);
@@ -58,14 +59,14 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [ProvinceController::class, 'update']);
         Route::delete('/{id}', [ProvinceController::class, 'destroy']);
     });
-    Route::prefix('city')->group(function () {
+    Route::prefix('city')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [CityController::class, 'index']);
         Route::get('/{id}', [CityController::class, 'show']);
         Route::post('/', [CityController::class, 'store']);
         Route::put('/', [CityController::class, 'update']);
         Route::delete('/{id}', [CityController::class, 'destroy']);
     });
-    Route::prefix('person')->group(function () {
+    Route::prefix('person')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [PersonController::class, 'index']);
         Route::get('/{id}', [PersonController::class, 'show']);
         Route::post('/', [PersonController::class, 'store']);
@@ -76,7 +77,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [PersonController::class, 'update']);
         Route::delete('/{id}', [PersonController::class, 'destroy']);
     });
-    Route::prefix('president')->group(function () {
+    Route::prefix('president')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [PresidentController::class, 'index']);
         Route::get('/all', [PresidentController::class, 'all']);
         Route::get('/{id}', [PresidentController::class, 'show']);
@@ -84,14 +85,14 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [PresidentController::class, 'update']);
         Route::delete('/{id}', [PresidentController::class, 'destroy']);
     });
-    Route::prefix('president_cabinet')->group(function () {
+    Route::prefix('president_cabinet')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [PresidentCabinetController::class, 'index']);
         Route::get('/{id}', [PresidentCabinetController::class, 'show']);
         Route::post('/', [PresidentCabinetController::class, 'store']);
         Route::put('/', [PresidentCabinetController::class, 'update']);
         Route::delete('/{id}', [PresidentCabinetController::class, 'destroy']);
     });
-    Route::prefix('parleman_period')->group(function () {
+    Route::prefix('parleman_period')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [ParlemanPeriodController::class, 'index']);
         Route::get('/all', [ParlemanPeriodController::class, 'all']);
         Route::get('/{id}', [ParlemanPeriodController::class, 'show']);
@@ -99,7 +100,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [ParlemanPeriodController::class, 'update']);
         Route::delete('/{id}', [ParlemanPeriodController::class, 'destroy']);
     });
-    Route::prefix('gov_period')->group(function () {
+    Route::prefix('gov_period')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [GovPeriodController::class, 'index']);
         Route::get('/all', [GovPeriodController::class, 'all']);
         Route::get('/{id}', [GovPeriodController::class, 'show']);
@@ -107,7 +108,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [GovPeriodController::class, 'update']);
         Route::delete('/{id}', [GovPeriodController::class, 'destroy']);
     });
-    Route::prefix('election_location')->group(function () {
+    Route::prefix('election_location')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [ElectionLocationController::class, 'index']);
         Route::get('/all', [ElectionLocationController::class, 'all']);
         Route::get('/{id}', [ElectionLocationController::class, 'show']);
@@ -115,7 +116,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [ElectionLocationController::class, 'update']);
         Route::delete('/{id}', [ElectionLocationController::class, 'destroy']);
     });
-    Route::prefix('commission')->group(function () {
+    Route::prefix('commission')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [CommissionController::class, 'index']);
         Route::get('/all', [CommissionController::class, 'all']);
         Route::get('/{id}', [CommissionController::class, 'show']);
@@ -123,7 +124,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [CommissionController::class, 'update']);
         Route::delete('/{id}', [CommissionController::class, 'destroy']);
     });
-    Route::prefix('fraction')->group(function () {
+    Route::prefix('fraction')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [FractionController::class, 'index']);
         Route::get('/all', [FractionController::class, 'all']);
         Route::get('/{id}', [FractionController::class, 'show']);
@@ -131,7 +132,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [FractionController::class, 'update']);
         Route::delete('/{id}', [FractionController::class, 'destroy']);
     });
-    Route::prefix('ministry')->group(function () {
+    Route::prefix('ministry')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [MinistryController::class, 'index']);
         Route::get('/all', [MinistryController::class, 'all']);
         Route::get('/{id}', [MinistryController::class, 'show']);
@@ -139,42 +140,42 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [MinistryController::class, 'update']);
         Route::delete('/{id}', [MinistryController::class, 'destroy']);
     });
-    Route::prefix('notice')->group(function () {
+    Route::prefix('notice')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [NoticeController::class, 'index']);
         Route::get('/{id}', [NoticeController::class, 'show']);
         Route::post('/', [NoticeController::class, 'store']);
         Route::put('/', [NoticeController::class, 'update']);
         Route::delete('/{id}', [NoticeController::class, 'destroy']);
     });
-    Route::prefix('speech')->group(function () {
+    Route::prefix('speech')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [SpeechController::class, 'index']);
         Route::get('/{id}', [SpeechController::class, 'show']);
         Route::post('/', [SpeechController::class, 'store']);
         Route::put('/', [SpeechController::class, 'update']);
         Route::delete('/{id}', [SpeechController::class, 'destroy']);
     });
-    Route::prefix('statement')->group(function () {
+    Route::prefix('statement')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [StatementController::class, 'index']);
         Route::get('/{id}', [StatementController::class, 'show']);
         Route::post('/', [StatementController::class, 'store']);
         Route::put('/', [StatementController::class, 'update']);
         Route::delete('/{id}', [StatementController::class, 'destroy']);
     });
-    Route::prefix('question')->group(function () {
+    Route::prefix('question')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [QuestionController::class, 'index']);
         Route::get('/{id}', [QuestionController::class, 'show']);
         Route::post('/', [QuestionController::class, 'store']);
         Route::put('/', [QuestionController::class, 'update']);
         Route::delete('/{id}', [QuestionController::class, 'destroy']);
     });
-    Route::prefix('interpellation')->group(function () {
+    Route::prefix('interpellation')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [InterpellationController::class, 'index']);
         Route::get('/{id}', [InterpellationController::class, 'show']);
         Route::post('/', [InterpellationController::class, 'store']);
         Route::put('/', [InterpellationController::class, 'update']);
         Route::delete('/{id}', [InterpellationController::class, 'destroy']);
     });
-    Route::prefix('meeting')->group(function () {
+    Route::prefix('meeting')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [PersonMeetingController::class, 'index']);
         Route::get('/{id}', [PersonMeetingController::class, 'show']);
         Route::post('/', [PersonMeetingController::class, 'store']);
@@ -183,14 +184,14 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/', [PersonMeetingController::class, 'update']);
         Route::delete('/{id}', [PersonMeetingController::class, 'destroy']);
     });
-    Route::prefix('projects')->group(function () {
+    Route::prefix('projects')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [ProjectsController::class, 'index']);
         Route::get('/{id}', [ProjectsController::class, 'show']);
         Route::post('/', [ProjectsController::class, 'store']);
         Route::put('/', [ProjectsController::class, 'update']);
         Route::delete('/{id}', [ProjectsController::class, 'destroy']);
     });
-    Route::prefix('requests')->group(function () {
+    Route::prefix('requests')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [RequestsController::class, 'index']);
         Route::get('/{id}', [RequestsController::class, 'show']);
         Route::post('/', [RequestsController::class, 'store']);
@@ -202,42 +203,42 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::delete('/delete_track/{id}', [RequestsController::class, 'delete_track']);
 
     });
-    Route::prefix('rules')->group(function () {
+    Route::prefix('rules')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [RulesController::class, 'index']);
         Route::get('/{id}', [RulesController::class, 'show']);
         Route::post('/', [RulesController::class, 'store']);
         Route::put('/', [RulesController::class, 'update']);
         Route::delete('/{id}', [RulesController::class, 'destroy']);
     });
-    Route::prefix('vote_confidence')->group(function () {
+    Route::prefix('vote_confidence')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [VoteConfidenceController::class, 'index']);
         Route::get('/{id}', [VoteConfidenceController::class, 'show']);
         Route::post('/', [VoteConfidenceController::class, 'store']);
         Route::put('/', [VoteConfidenceController::class, 'update']);
         Route::delete('/{id}', [VoteConfidenceController::class, 'destroy']);
     });
-    Route::prefix('rule_234')->group(function () {
+    Route::prefix('rule_234')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [RuleTTFController::class, 'index']);
         Route::get('/{id}', [RuleTTFController::class, 'show']);
         Route::post('/', [RuleTTFController::class, 'store']);
         Route::put('/', [RuleTTFController::class, 'update']);
         Route::delete('/{id}', [RuleTTFController::class, 'destroy']);
     });
-    Route::prefix('research')->group(function () {
+    Route::prefix('research')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [ResearchController::class, 'index']);
         Route::get('/{id}', [ResearchController::class, 'show']);
         Route::post('/', [ResearchController::class, 'store']);
         Route::put('/', [ResearchController::class, 'update']);
         Route::delete('/{id}', [ResearchController::class, 'destroy']);
     });
-    Route::prefix('rule_45')->group(function () {
+    Route::prefix('rule_45')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [RuleFortyFiveController::class, 'index']);
         Route::get('/{id}', [RuleFortyFiveController::class, 'show']);
         Route::post('/', [RuleFortyFiveController::class, 'store']);
         Route::put('/', [RuleFortyFiveController::class, 'update']);
         Route::delete('/{id}', [RuleFortyFiveController::class, 'destroy']);
     });
-    Route::prefix('trips')->group(function () {
+    Route::prefix('trips')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [TripsController::class, 'index']);
         Route::get('/{id}', [TripsController::class, 'show']);
         Route::post('/', [TripsController::class, 'store']);
@@ -248,7 +249,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [TripsController::class, 'update_approval']);
         Route::delete('/{id}', [TripsController::class, 'destroy']);
     });
-    Route::prefix('trip_deputy_governor')->group(function () {
+    Route::prefix('trip_deputy_governor')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [TripsDeputyGovernorController::class, 'index']);
         Route::get('/{id}', [TripsDeputyGovernorController::class, 'show']);
         Route::post('/', [TripsDeputyGovernorController::class, 'store']);
@@ -259,7 +260,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [TripsDeputyGovernorController::class, 'update_approval']);
         Route::delete('/{id}', [TripsDeputyGovernorController::class, 'destroy']);
     });
-    Route::prefix('meeting_deputy_governor')->group(function () {
+    Route::prefix('meeting_deputy_governor')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [MeetingDeputyGovernorController::class, 'index']);
         Route::get('/{id}', [MeetingDeputyGovernorController::class, 'show']);
         Route::post('/', [MeetingDeputyGovernorController::class, 'store']);
@@ -270,7 +271,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [MeetingDeputyGovernorController::class, 'update_approval']);
         Route::delete('/{id}', [MeetingDeputyGovernorController::class, 'destroy']);
     });
-    Route::prefix('session_deputy_governor')->group(function () {
+    Route::prefix('session_deputy_governor')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [SessionDeputyGovernorController::class, 'index']);
         Route::get('/{id}', [SessionDeputyGovernorController::class, 'show']);
         Route::post('/', [SessionDeputyGovernorController::class, 'store']);
@@ -281,7 +282,7 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [SessionDeputyGovernorController::class, 'update_approval']);
         Route::delete('/{id}', [SessionDeputyGovernorController::class, 'destroy']);
     });
-    Route::prefix('media_deputy_governor')->group(function () {
+    Route::prefix('media_deputy_governor')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [MediaDeputyGovernorController::class, 'index']);
         Route::get('/{id}', [MediaDeputyGovernorController::class, 'show']);
         Route::post('/', [MediaDeputyGovernorController::class, 'store']);
@@ -292,23 +293,22 @@ Route::middleware(JWTAuthCheck::class)->group(callback: function () {
         Route::put('/update_approval', [MediaDeputyGovernorController::class, 'update_approval']);
         Route::delete('/{id}', [MediaDeputyGovernorController::class, 'destroy']);
     });
-    Route::prefix('enactment')->group(function () {
+    Route::prefix('enactment')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [EnactmentController::class, 'index']);
         Route::get('/{id}', [EnactmentController::class, 'show']);
         Route::post('/', [EnactmentController::class, 'store']);
         Route::put('/', [EnactmentController::class, 'update']);
         Route::delete('/{id}', [EnactmentController::class, 'destroy']);
     });
-    Route::prefix('plan')->group(function () {
+    Route::prefix('plan')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/', [PlanController::class, 'index']);
         Route::get('/{id}', [PlanController::class, 'show']);
         Route::post('/', [PlanController::class, 'store']);
         Route::put('/', [PlanController::class, 'update']);
         Route::delete('/{id}', [PlanController::class, 'destroy']);
     });
-    Route::prefix('report')->group(function () {
+    Route::prefix('report')->middleware(['jwt.multi:admin'])->group(function () {
         Route::get('/data_count', [ReportController::class, 'data_count']);
     });
-
 });
 
